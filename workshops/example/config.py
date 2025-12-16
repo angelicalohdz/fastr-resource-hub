@@ -104,14 +104,33 @@ WORKSHOP_CONFIG = {
     # ═══════════════════════════════════════════════════════════════════════
     # SECTION 5: CUSTOM SLIDES (Your Country-Specific Content)
     # ═══════════════════════════════════════════════════════════════════════
-    # Add your own slides here! These are added after the core sessions.
+    # Place your slides exactly where they belong in the presentation.
     #
-    # Put your custom slide files in your workshop folder, then list them here.
+    # Put your custom slide files in your workshop folder, then list them
+    # in the appropriate position below.
     #
-    # Example:
-    #   'custom_slides': ['country-data.md', 'local-examples.md'],
+    # AVAILABLE POSITIONS:
+    #   'after_agenda'        → Right after the agenda (objectives, overview)
+    #   'after_intro'         → After Background & FASTR Approach
+    #   'after_extraction'    → After Data Extraction
+    #   'after_dq_assessment' → After Data Quality Assessment
+    #   'after_dq_adjustment' → After Data Adjustment
+    #   'after_disruption'    → After Disruption Detection
+    #   'after_coverage'      → After Coverage Analysis
+    #   'after_facility'      → After Facility Assessments
+    #   'before_closing'      → Right before Thank You / Contact slides
 
-    'custom_slides': [],
+    'custom_slides': {
+        'after_agenda': [],           # e.g., ['objectives.md', 'country-overview.md']
+        'after_intro': [],            # e.g., ['health-priorities.md']
+        'after_extraction': [],
+        'after_dq_assessment': [],    # e.g., ['country-dq-findings.md']
+        'after_dq_adjustment': [],
+        'after_disruption': [],       # e.g., ['covid-impact-local.md']
+        'after_coverage': [],         # e.g., ['vaccination-coverage-results.md']
+        'after_facility': [],
+        'before_closing': [],         # e.g., ['next-steps.md', 'action-items.md']
+    },
 
 
     # ═══════════════════════════════════════════════════════════════════════

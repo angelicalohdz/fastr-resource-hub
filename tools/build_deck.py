@@ -526,6 +526,44 @@ We resume tomorrow at **{day_start}**{preview_text}
 """
 
 
+def get_custom_slides_for_position(config, position, workshop_dir):
+    """
+    Get custom slides for a specific position in the deck.
+    Handles both old format (list) and new format (dict).
+    """
+    custom_slides = config.get('custom_slides', {})
+
+    # Old format: just a list (all slides go at end)
+    if isinstance(custom_slides, list):
+        if position == 'before_closing':
+            return custom_slides
+        return []
+
+    # New format: dict with positions
+    if isinstance(custom_slides, dict):
+        return custom_slides.get(position, [])
+
+    return []
+
+
+def add_custom_slides_at_position(position, config, workshop_dir, base_dir):
+    """Add custom slides for a given position, returns content string"""
+    slides = get_custom_slides_for_position(config, position, workshop_dir)
+    if not slides:
+        return ""
+
+    content = ""
+    for custom_file in slides:
+        custom_path = os.path.join(workshop_dir, custom_file)
+        file_content = read_markdown_file(custom_path)
+        if file_content:
+            file_content = strip_frontmatter(file_content)
+            file_content = substitute_variables(file_content, config)
+            content += "\n" + ensure_slide_break(file_content) + "\n"
+            print(f"      + {custom_file}")
+    return content
+
+
 def build_workshop_deck(workshop_id, base_dir, output_file=None, skip_confirmation=False, override_days=None):
     """Build a complete slide deck for a workshop"""
 
@@ -595,6 +633,12 @@ paginate: true
             deck_content += ensure_slide_break(agenda_content) + "\n"
             print(f"   Agenda slide added")
 
+    # Workshop directory for custom slides
+    workshop_dir = os.path.join(base_dir, "workshops", workshop_id)
+
+    # Add custom slides after agenda (objectives, overview, etc.)
+    deck_content += add_custom_slides_at_position('after_agenda', config, workshop_dir, base_dir)
+
     # Add sessions with breaks
     print(f"\nAdding sessions with breaks:")
     core_content_dir = os.path.join(base_dir, "core_content")
@@ -625,6 +669,10 @@ paginate: true
 
         print(f"   {session_info['name']}")
 
+        # Add custom slides after this session
+        position_key = f"after_{session_id}"
+        deck_content += add_custom_slides_at_position(position_key, config, workshop_dir, base_dir)
+
         # Add breaks after session
         if entry.get('tea_after'):
             deck_content += generate_break_slide('tea', config)
@@ -645,20 +693,8 @@ paginate: true
             deck_content += generate_day_end_slide(current_day, next_day_sessions, config)
             print(f"      🌙 End of Day {current_day}")
 
-    # Add custom slides
-    custom_slides = config.get('custom_slides', [])
-    if custom_slides:
-        print(f"\nAdding custom content:")
-        workshop_dir = os.path.join(base_dir, "workshops", workshop_id)
-
-        for custom_file in custom_slides:
-            custom_path = os.path.join(workshop_dir, custom_file)
-            content = read_markdown_file(custom_path)
-            if content:
-                content = strip_frontmatter(content)
-                content = substitute_variables(content, config)
-                deck_content += "\n" + ensure_slide_break(content) + "\n"
-                print(f"   {custom_file}")
+    # Add custom slides before closing (next steps, action items, etc.)
+    deck_content += add_custom_slides_at_position('before_closing', config, workshop_dir, base_dir)
 
     # Add closing slide
     if config.get('include_closing', True):
