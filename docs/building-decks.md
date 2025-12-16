@@ -189,7 +189,7 @@ cp ~/Desktop/agenda.png workshops/2025_01_nigeria/agenda.png
 Run the build script to assemble all content into a single markdown file:
 
 ```bash
-python3 tools/build_deck.py --workshop 2025_01_nigeria
+python3 tools/02_build_deck.py --workshop 2025_01_nigeria
 ```
 
 **What this does:**
@@ -319,7 +319,7 @@ xdg-open outputs/2025_01_nigeria_deck.pdf
 ### Rendering Command
 
 ```bash
-python3 tools/convert_to_pptx.py outputs/2025_01_nigeria_deck.md
+python3 tools/03_convert_to_pptx.py outputs/2025_01_nigeria_deck.md
 ```
 
 **Output:** `outputs/2025_01_nigeria_deck.pptx`
@@ -433,7 +433,7 @@ cp ~/Desktop/nigeria_agenda.png agenda.png
 cd ../..
 
 # Build the deck
-python3 tools/build_deck.py --workshop 2025_01_nigeria
+python3 tools/02_build_deck.py --workshop 2025_01_nigeria
 ```
 
 ### 5. Render to PDF (Primary)
@@ -443,7 +443,7 @@ marp outputs/2025_01_nigeria_deck.md --theme-set fastr-theme.css --pdf
 
 ### 6. Render to PowerPoint (Backup)
 ```bash
-python3 tools/convert_to_pptx.py outputs/2025_01_nigeria_deck.md
+python3 tools/03_convert_to_pptx.py outputs/2025_01_nigeria_deck.md
 ```
 
 ### 7. Review and Share
@@ -547,7 +547,7 @@ cp outputs/2025_01_nigeria_deck.pdf ~/Desktop/
 
 **Build a deck:**
 ```bash
-python3 tools/build_deck.py --workshop WORKSHOP_ID
+python3 tools/02_build_deck.py --workshop WORKSHOP_ID
 ```
 
 **Render to PDF:**
@@ -557,7 +557,7 @@ marp outputs/DECK.md --theme-set fastr-theme.css --pdf
 
 **Render to PowerPoint:**
 ```bash
-python3 tools/convert_to_pptx.py outputs/DECK.md
+python3 tools/03_convert_to_pptx.py outputs/DECK.md
 ```
 
 **Preview in browser:**

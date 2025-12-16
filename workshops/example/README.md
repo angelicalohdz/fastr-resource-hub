@@ -33,7 +33,7 @@ This is a template workshop folder. Copy this folder to create a new workshop.
 
 7. Build your deck:
    ```bash
-   python3 tools/build_deck.py --workshop 2025-01-yourcountry
+   python3 tools/02_build_deck.py --workshop 2025-01-yourcountry
    ```
 
 ## Available custom slide templates:

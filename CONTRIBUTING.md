@@ -178,7 +178,7 @@ GitHub Codespaces gives you a full development environment in your browser - no 
 
 2. **Run the build command:**
    ```bash
-   python3 tools/build_deck.py --workshop example
+   python3 tools/02_build_deck.py --workshop example
    ```
 
 3. **Check the output** in `outputs/example_deck.md`
@@ -262,7 +262,7 @@ GitHub Codespaces gives you a full development environment in your browser - no 
 1. Edit the relevant file in `core_content/`
 2. Test with example workshop (if using local setup or Codespaces):
    ```bash
-   python3 tools/build_deck.py --workshop example
+   python3 tools/02_build_deck.py --workshop example
    marp outputs/example_deck.md --theme-set fastr-theme.css --pdf
    ```
 3. Review the output
@@ -275,7 +275,7 @@ GitHub Codespaces gives you a full development environment in your browser - no 
 code core_content/04_data_quality_assessment.md
 
 # Test
-python3 tools/build_deck.py --workshop example
+python3 tools/02_build_deck.py --workshop example
 
 # Commit
 git add core_content/04_data_quality_assessment.md
@@ -318,7 +318,7 @@ git push
 
 5. Build and test:
    ```bash
-   python3 tools/build_deck.py --workshop 2025_01_yourcountry
+   python3 tools/02_build_deck.py --workshop 2025_01_yourcountry
    ```
 
 6. Commit workshop folder:
@@ -380,7 +380,7 @@ git checkout -b update-dqa-section
 code core_content/04_data_quality_assessment.md
 
 # Test
-python3 tools/build_deck.py --workshop example
+python3 tools/02_build_deck.py --workshop example
 
 # Commit
 git add core_content/04_data_quality_assessment.md
@@ -401,7 +401,7 @@ For small fixes (typos, minor updates):
 code core_content/01_background_rationale.md
 
 # Test
-python3 tools/build_deck.py --workshop example
+python3 tools/02_build_deck.py --workshop example
 
 # Commit and push
 git add core_content/01_background_rationale.md
@@ -418,7 +418,7 @@ git push
 **Always test before committing:**
 ```bash
 # Build example deck
-python3 tools/build_deck.py --workshop example
+python3 tools/02_build_deck.py --workshop example
 
 # Render to PDF
 marp outputs/example_deck.md --theme-set fastr-theme.css --pdf

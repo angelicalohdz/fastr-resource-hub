@@ -11,7 +11,7 @@ HOW TO USE:
 
 2. Edit this config.py with your workshop details
 
-3. Run: python3 tools/build_deck.py
+3. Run: python3 tools/02_build_deck.py
 
 ═══════════════════════════════════════════════════════════════════════════════
 """

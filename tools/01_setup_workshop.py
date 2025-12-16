@@ -137,7 +137,7 @@ Location: {location}
 Date: {date}
 
 To build your deck, run:
-    python3 tools/build_deck.py --workshop {workshop_id}
+    python3 tools/02_build_deck.py --workshop {workshop_id}
 
 ═══════════════════════════════════════════════════════════════════════════════
 """
@@ -284,13 +284,13 @@ WORKSHOP_CONFIG = {{
 ## To build your deck
 
 ```bash
-python3 tools/build_deck.py --workshop {workshop_id}
+python3 tools/02_build_deck.py --workshop {workshop_id}
 ```
 
 ## To convert to PowerPoint
 
 ```bash
-python3 tools/convert_to_pptx.py outputs/{workshop_id}_deck.md
+python3 tools/03_convert_to_pptx.py outputs/{workshop_id}_deck.md
 ```
 '''
 
@@ -309,7 +309,7 @@ python3 tools/convert_to_pptx.py outputs/{workshop_id}_deck.md
     print(f"   2. Replace agenda.png with your agenda image")
     print(f"   3. Comment out any slides you don't need in config.py")
     print(f"   4. Build your deck:")
-    print(f"\n      python3 tools/build_deck.py --workshop {workshop_id}")
+    print(f"\n      python3 tools/02_build_deck.py --workshop {workshop_id}")
     print(f"\n   Tip: Shared images (logos, diagrams) go in assets/")
     print(f"        Reference them as: ![](../../assets/logo.png)")
     print("\n" + "=" * 70 + "\n")

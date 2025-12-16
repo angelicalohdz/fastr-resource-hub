@@ -19,7 +19,7 @@ OPTION 1: Interactive Mode (Easiest!)
 --------------------------------------
 Just run without arguments and follow the prompts:
 
-    python3 tools/build_deck.py
+    python3 tools/02_build_deck.py
 
 The script will:
   - Show you all available workshops
@@ -33,7 +33,7 @@ OPTION 2: Command Line (For Experts)
 -------------------------------------
 Specify the workshop folder name directly:
 
-    python3 tools/build_deck.py --workshop 2025-01-nigeria
+    python3 tools/02_build_deck.py --workshop 2025-01-nigeria
 
 Replace "2025-01-nigeria" with YOUR workshop folder name.
 
@@ -823,7 +823,7 @@ paginate: true
 
     print(f"\n   OPTION 2: Convert to PowerPoint")
     print(f"   " + "-" * 40)
-    print(f"   python3 tools/convert_to_pptx.py {output_path}")
+    print(f"   python3 tools/03_convert_to_pptx.py {output_path}")
     print(f"\n   Note: PowerPoint may need font/layout adjustments")
 
     print("\n" + "=" * 70 + "\n")
@@ -846,8 +846,8 @@ def main():
             formatter_class=argparse.RawDescriptionHelpFormatter,
             epilog="""
 Examples:
-  python3 tools/build_deck.py --workshop 2025-01-nigeria
-  python3 tools/build_deck.py --workshop example --output test.md
+  python3 tools/02_build_deck.py --workshop 2025-01-nigeria
+  python3 tools/02_build_deck.py --workshop example --output test.md
 
 For more help, see: docs/building-decks.md
             """

@@ -149,7 +149,7 @@ Welcome to the documentation for the FASTR slide builder! This directory contain
    - Add agenda image (optional)
 
 3. **Build and render:**
-   - Run `python3 tools/build_deck.py --workshop 2025_XX_country`
+   - Run `python3 tools/02_build_deck.py --workshop 2025_XX_country`
    - Run `marp outputs/deck.md --theme-set fastr-theme.css --pdf`
 
 **Read:** [Building Decks Guide](building-decks.md) for complete instructions
@@ -284,7 +284,7 @@ WORKSHOP_CONFIG = {
 
 1. **Assemble:** Combine content into markdown
    ```bash
-   python3 tools/build_deck.py --workshop 2025_01_nigeria
+   python3 tools/02_build_deck.py --workshop 2025_01_nigeria
    ```
    Output: `outputs/2025_01_nigeria_deck.md`
 

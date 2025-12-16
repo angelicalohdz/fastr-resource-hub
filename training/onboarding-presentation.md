@@ -221,7 +221,7 @@ While you wait, Codespaces is:
 Open the terminal (Ctrl+`) and run:
 
 ```bash
-python3 tools/build_deck.py --workshop example
+python3 tools/02_build_deck.py --workshop example
 ```
 
 **What happens:**
@@ -306,7 +306,7 @@ marp outputs/example_deck.md \
 We also have a PowerPoint converter, but it's more complex:
 
 ```bash
-python3 tools/convert_to_pptx.py \
+python3 tools/03_convert_to_pptx.py \
   outputs/example_deck.md \
   outputs/example_deck.pptx
 ```
@@ -445,7 +445,7 @@ _paginate: false
 
 **Build a deck:**
 ```bash
-python3 tools/build_deck.py --workshop example
+python3 tools/02_build_deck.py --workshop example
 ```
 
 **Generate PDF:**
@@ -503,7 +503,7 @@ https://github.com/FASTR-Analytics/fastr-slide-builder
    - Your name
    - Your role
    - One thing you learned today
-4. Build the deck: `python3 tools/build_deck.py --workshop example`
+4. Build the deck: `python3 tools/02_build_deck.py --workshop example`
 5. Generate PDF: `marp outputs/example_deck.md --theme-set fastr-theme.css --pdf`
 6. Download and view your creation!
 

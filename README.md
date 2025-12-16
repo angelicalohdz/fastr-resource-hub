@@ -26,7 +26,7 @@ Work in your browser without installing anything! GitHub Codespaces provides a c
 
 2. **Build the example deck:**
    ```bash
-   python3 tools/build_deck.py --workshop example
+   python3 tools/02_build_deck.py --workshop example
    marp outputs/example_deck.md --theme-set fastr-theme.css --pdf
    ```
 
@@ -95,7 +95,7 @@ WORKSHOP_CONFIG = {
 
 ```bash
 # Assemble the markdown
-python3 tools/build_deck.py --workshop 2025_01_nigeria
+python3 tools/02_build_deck.py --workshop 2025_01_nigeria
 
 # Output: outputs/2025_01_nigeria_deck.md
 ```
@@ -112,7 +112,7 @@ marp outputs/2025_01_nigeria_deck.md --theme-set fastr-theme.css --pdf
 **Or** convert to editable PowerPoint (alternative):
 
 ```bash
-python3 tools/convert_to_pptx.py outputs/2025_01_nigeria_deck.md
+python3 tools/03_convert_to_pptx.py outputs/2025_01_nigeria_deck.md
 
 # Output: outputs/2025_01_nigeria_deck.pptx
 ```
@@ -181,7 +181,7 @@ Then enable in `config.py`:
 1. Edit files in `core_content/`
 2. Test your changes:
    ```bash
-   python3 tools/build_deck.py --workshop example
+   python3 tools/02_build_deck.py --workshop example
    ```
 3. Commit and push:
    ```bash
@@ -318,13 +318,13 @@ VS Code will wrap lines and provide syntax highlighting automatically.
 
 ```bash
 # Build workshop deck
-python3 tools/build_deck.py --workshop WORKSHOP_ID
+python3 tools/02_build_deck.py --workshop WORKSHOP_ID
 
 # Render to PDF (recommended)
 marp outputs/DECK.md --theme-set fastr-theme.css --pdf
 
 # Convert to PowerPoint
-python3 tools/convert_to_pptx.py outputs/DECK.md
+python3 tools/03_convert_to_pptx.py outputs/DECK.md
 
 # Preview in browser
 marp --preview outputs/DECK.md --theme-set fastr-theme.css
