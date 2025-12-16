@@ -22,12 +22,17 @@
         "[markdown]": {
           "editor.wordWrap": "on",
           "editor.quickSuggestions": false
-        }
+        },
+        "git.autofetch": true,
+        "git.fetchOnPull": true,
+        "git.pullBeforeCheckout": true
       }
     }
   },
 
   "postCreateCommand": "npm install -g @marp-team/marp-cli && pip install --upgrade pip",
+
+  "postStartCommand": "git fetch origin && echo '\n⚡ Codespace started! Run: git pull origin main (to get latest changes)' || true",
 
   "forwardPorts": [],
 
