@@ -2,6 +2,8 @@
 
 Team collaboration system for building FASTR workshop presentations.
 
+**Repository:** https://github.com/FASTR-Analytics/fastr-slide-builder
+
 ## Overview
 
 This repository contains:
@@ -11,6 +13,40 @@ This repository contains:
 - **Build tools** - assemble and convert slide decks
 
 ## Quick Start
+
+### Option 1: GitHub Codespaces (Zero Installation - Recommended)
+
+Work in your browser without installing anything! GitHub Codespaces provides a complete development environment.
+
+1. **Open in Codespaces:**
+   - Go to https://github.com/FASTR-Analytics/fastr-slide-builder
+   - Click green **"Code"** button → **"Codespaces"** tab
+   - Click **"Create codespace on main"**
+   - Wait ~2 minutes for environment setup
+
+2. **Build the example deck:**
+   ```bash
+   python3 tools/build_deck.py --workshop example
+   marp outputs/example_deck.md --theme-set fastr-theme.css --pdf
+   ```
+
+3. **Done!** Download the PDF or commit your changes.
+
+**Pre-installed:** Python, Node.js, Marp CLI, Pandoc, VS Code extensions, FASTR theme
+
+**Free tier:** 60 hours/month • Works on any device • No admin rights needed
+
+[See full Codespaces guide](CONTRIBUTING.md#using-github-codespaces)
+
+---
+
+### Option 2: Local Setup (Requires Installation)
+
+For local development, you'll need to install Git, Python, VS Code, Node.js, and Marp CLI.
+
+[Jump to installation instructions](#requirements)
+
+## Building a Workshop Deck (Local or Codespaces)
 
 ### 1. Create a New Workshop
 

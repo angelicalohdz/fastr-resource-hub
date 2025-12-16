@@ -1,0 +1,35 @@
+{
+  "name": "FASTR Slide Builder",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "20"
+    }
+  },
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "marp-team.marp-vscode",
+        "ms-python.python"
+      ],
+      "settings": {
+        "markdown.marp.enableHtml": true,
+        "markdown.marp.themes": ["./fastr-theme.css"],
+        "markdown.preview.breaks": true,
+        "markdown.preview.typographer": true,
+        "[markdown]": {
+          "editor.wordWrap": "on",
+          "editor.quickSuggestions": false
+        }
+      }
+    }
+  },
+
+  "postCreateCommand": "npm install -g @marp-team/marp-cli && pip install --upgrade pip",
+
+  "forwardPorts": [],
+
+  "remoteUser": "vscode"
+}
