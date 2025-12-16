@@ -55,27 +55,31 @@ WORKSHOP_CONFIG = {
     # │  'coverage'      = Coverage Analysis (~90 min)                       │
     # │  'facility'      = Facility Assessments (~30 min)                    │
     # └──────────────────────────────────────────────────────────────────────┘
+    #
+    # CUSTOM SLIDES:
+    # Copy templates from templates/custom_slides/ to your workshop folder,
+    # customize them, then add them to deck_order where you want them.
 
     'deck_order': [
         # --- Opening ---
         'agenda',
-        'objectives.md',        # ← Add your objectives slide here
-        'country-overview.md',  # ← Add country context here
+        # 'objectives.md',        # ← Copy from templates/custom_slides/
+        # 'country-overview.md',  # ← Copy from templates/custom_slides/
 
         # --- Core Content ---
         'intro',
-        'health-priorities.md', # ← Add country priorities here
+        # 'health-priorities.md', # ← Copy from templates/custom_slides/
         'extraction',
         'dq_assessment',
-        'dq-findings.md',       # ← Add your DQ findings here
+        # 'dq-findings.md',       # ← Copy from templates/custom_slides/
         'dq_adjustment',
         'disruption',
-        'disruption-local.md',  # ← Add local disruption data here
+        # 'disruption-local.md',  # ← Copy from templates/custom_slides/
         'coverage',
-        'coverage-results.md',  # ← Add coverage results here
+        # 'coverage-results.md',  # ← Copy from templates/custom_slides/
 
         # --- Closing ---
-        'next-steps.md',        # ← Add action items here
+        # 'next-steps.md',        # ← Copy from templates/custom_slides/
     ],
 
 
