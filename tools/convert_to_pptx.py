@@ -106,6 +106,56 @@ def check_pandoc_installed():
     return shutil.which('pandoc') is not None
 
 
+def install_pandoc():
+    """
+    Attempt to auto-install Pandoc based on the operating system
+
+    Returns True if installation successful, False otherwise
+    """
+    import platform
+
+    system = platform.system().lower()
+
+    print("\n" + "=" * 70)
+    print("              INSTALLING PANDOC")
+    print("=" * 70)
+
+    try:
+        if system == 'linux':
+            # Linux (including Codespaces)
+            print("\nDetected Linux - installing via apt...")
+            subprocess.run(['sudo', 'apt', 'update', '-y'], check=True, capture_output=True)
+            subprocess.run(['sudo', 'apt', 'install', '-y', 'pandoc'], check=True)
+            print("   Pandoc installed successfully!")
+            return True
+
+        elif system == 'darwin':
+            # macOS
+            if shutil.which('brew'):
+                print("\nDetected macOS - installing via Homebrew...")
+                subprocess.run(['brew', 'install', 'pandoc'], check=True)
+                print("   Pandoc installed successfully!")
+                return True
+            else:
+                print("\nHomebrew not found. Please install pandoc manually:")
+                print("   brew install pandoc")
+                return False
+
+        else:
+            # Windows or other
+            print(f"\nAuto-install not supported on {system}.")
+            print("Please install pandoc manually:")
+            print("   https://pandoc.org/installing.html")
+            return False
+
+    except subprocess.CalledProcessError as e:
+        print(f"\nInstallation failed: {e}")
+        return False
+    except Exception as e:
+        print(f"\nError during installation: {e}")
+        return False
+
+
 def list_available_decks(base_dir):
     """
     Show all available markdown decks in outputs/ folder
@@ -221,30 +271,48 @@ def convert_slide_breaks(content):
 def fix_image_paths(content, base_dir):
     """
     Convert relative image paths to absolute paths for pandoc
+    Removes images that can't be found to prevent conversion errors
 
     Pandoc needs absolute paths to find images correctly
     """
+    missing_images = []
+
     def replace_path(match):
         alt_text = match.group(1)
         img_path = match.group(2)
-        # If path is relative
-        if img_path.startswith('../') or img_path.startswith('./') or not img_path.startswith('/'):
-            # Try to find the file
-            # First try relative to base_dir
-            test_path = os.path.join(base_dir, img_path)
+
+        # Skip URLs
+        if img_path.startswith('http://') or img_path.startswith('https://'):
+            return match.group(0)
+
+        # List of paths to try
+        paths_to_try = [
+            os.path.join(base_dir, img_path),
+            os.path.join(base_dir, img_path.lstrip('../')),
+            os.path.join(base_dir, 'assets', os.path.basename(img_path)),
+            os.path.join(base_dir, 'outputs', img_path),
+            os.path.join(base_dir, 'outputs', img_path.lstrip('../')),
+        ]
+
+        # Also try relative to outputs folder
+        if img_path.startswith('../'):
+            paths_to_try.append(os.path.join(base_dir, img_path.replace('../', '')))
+
+        for test_path in paths_to_try:
             if os.path.exists(test_path):
                 abs_path = os.path.abspath(test_path)
                 return f'![{alt_text}]({abs_path})'
-            # If ../assets/, try just assets/
-            if img_path.startswith('../assets/'):
-                alt_path = img_path.replace('../assets/', 'assets/')
-                test_path = os.path.join(base_dir, alt_path)
-                if os.path.exists(test_path):
-                    abs_path = os.path.abspath(test_path)
-                    return f'![{alt_text}]({abs_path})'
-        return match.group(0)
 
-    return re.sub(r'!\[([^\]]*)\]\(([^)]+)\)', replace_path, content)
+        # Image not found - remove it to prevent pandoc error
+        missing_images.append(img_path)
+        return f'<!-- Image not found: {img_path} -->'
+
+    result = re.sub(r'!\[([^\]]*)\]\(([^)]+)\)', replace_path, content)
+
+    if missing_images:
+        print(f"   Note: {len(missing_images)} image(s) not found and skipped")
+
+    return result
 
 
 def convert_to_pptx(md_file, base_dir, reference_template=None, skip_confirmation=False):
@@ -256,18 +324,39 @@ def convert_to_pptx(md_file, base_dir, reference_template=None, skip_confirmatio
 
     # Check if pandoc is installed
     if not check_pandoc_installed():
-        print("\n" + "═" * 70)
-        print("                  ❌ PANDOC NOT FOUND")
-        print("═" * 70)
+        print("\n" + "=" * 70)
+        print("              PANDOC NOT FOUND")
+        print("=" * 70)
         print("\nPandoc is required to convert to PowerPoint.")
-        print("\n📥 Install Pandoc:")
-        print("   Mac:     brew install pandoc")
-        print("   Windows: https://pandoc.org/installing.html")
-        print("   Linux:   sudo apt install pandoc")
-        print("\n💡 OR use PDF export instead (recommended!):")
-        print("   marp outputs/your-deck.md --theme-set fastr-theme.css --pdf")
-        print("\n" + "═" * 70 + "\n")
-        return False
+
+        # Offer to install automatically
+        try:
+            response = input("\nWould you like me to install it now? [Y/n]: ").strip().lower()
+            if response in ['', 'y', 'yes']:
+                if install_pandoc():
+                    # Check again after installation
+                    if check_pandoc_installed():
+                        print("\nPandoc ready! Continuing with conversion...\n")
+                    else:
+                        print("\nInstallation completed but pandoc not found in PATH.")
+                        print("Please restart your terminal and try again.")
+                        return False
+                else:
+                    print("\n" + "-" * 70)
+                    print("\nManual installation options:")
+                    print("   Mac:     brew install pandoc")
+                    print("   Linux:   sudo apt install pandoc")
+                    print("   Windows: https://pandoc.org/installing.html")
+                    print("\nOR use PDF export instead (recommended!):")
+                    print("   marp outputs/your-deck.md --theme-set fastr-theme.css --pdf")
+                    return False
+            else:
+                print("\nOR use PDF export instead (recommended!):")
+                print("   marp outputs/your-deck.md --theme-set fastr-theme.css --pdf")
+                return False
+        except KeyboardInterrupt:
+            print("\n\nCancelled.")
+            return False
 
     # Get full path to markdown file
     if not md_file.startswith('/'):
