@@ -12,12 +12,14 @@ paginate: true
 
 ## Key Health Indicators
 
-| Indicator | Current | Target |
-|-----------|---------|--------|
-| Maternal mortality ratio | [XXX] | [XXX] |
-| Under-5 mortality rate | [XX] | [XX] |
-| Immunization coverage (Penta3) | [XX%] | [XX%] |
-| Skilled birth attendance | [XX%] | [XX%] |
+| Indicator | Current ({{survey_year}}) | Target |
+|-----------|---------------------------|--------|
+| ANC4 coverage | {{survey_anc4}} | [XX%] |
+| Skilled birth attendance | {{survey_sba}} | [XX%] |
+| Penta3 coverage | {{survey_penta3}} | [XX%] |
+| Measles coverage | {{survey_measles}} | [XX%] |
+
+*Source: {{last_survey}}*
 
 ---
 
@@ -28,6 +30,6 @@ paginate: true
 3. **[Priority 3]** - e.g., Malaria prevention
 
 **Why these priorities?**
-[Brief explanation of why these were selected for the FASTR analysis]
+[Brief explanation of why these were selected]
 
 ---

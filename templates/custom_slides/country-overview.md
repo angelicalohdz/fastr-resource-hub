@@ -12,26 +12,35 @@ paginate: true
 
 ## Health System Structure
 
-**[Describe the health system hierarchy]**
+| Level | Description |
+|-------|-------------|
+| National | [Ministry of Health] |
+| Regional | [X provinces/regions] |
+| District | [X districts] |
+| Facility | {{total_facilities}} health facilities |
 
-- National level
-- Provincial/Regional level
-- District level
-- Facility level
+**Reporting to DHIS2:** {{facilities_reporting}} ({{reporting_rate}})
 
-**Total facilities:** [X,XXX]
-**Reporting to DHIS2:** [X,XXX]
+---
+
+## Population
+
+| Group | Estimate |
+|-------|----------|
+| Total population | {{total_population}} |
+| Women of reproductive age | {{women_reproductive_age}} |
+| Children under 5 | {{under5_population}} |
+| Expected pregnancies/year | {{expected_pregnancies}} |
+| Expected live births/year | {{expected_births}} |
 
 ---
 
 ## Data Sources
 
 **Routine data:**
-- DHIS2 (since [year])
-- [Other systems]
+- DHIS2 (reporting rate: {{reporting_rate}})
 
 **Survey data:**
-- [Most recent DHS/MICS] - [year]
-- [Other surveys]
+- {{last_survey}}
 
 ---

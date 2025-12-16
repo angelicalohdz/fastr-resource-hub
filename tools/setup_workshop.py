@@ -205,6 +205,54 @@ WORKSHOP_CONFIG = {{
     'include_closing': True,
     'agenda_image': 'agenda.png',
 
+
+    # ═══════════════════════════════════════════════════════════════════════
+    # SECTION 4: COUNTRY DATA
+    # ═══════════════════════════════════════════════════════════════════════
+    # Fill in your country stats here. Use {{variable_name}} in your slides.
+    # Example: {{total_facilities}} becomes "2,847" in the slides.
+
+    'country_data': {{
+        # Health system
+        'total_facilities': '[X,XXX]',
+        'facilities_reporting': '[X,XXX]',
+        'reporting_rate': '[XX%]',
+
+        # Population
+        'total_population': '[XX million]',
+        'women_reproductive_age': '[X.X million]',
+        'under5_population': '[X.X million]',
+        'expected_pregnancies': '[XXX,XXX]',
+        'expected_births': '[XXX,XXX]',
+
+        # Survey data
+        'last_survey': '[DHS/MICS YYYY]',
+        'survey_year': '[YYYY]',
+
+        # Coverage - Survey
+        'survey_anc1': '[XX%]',
+        'survey_anc4': '[XX%]',
+        'survey_sba': '[XX%]',
+        'survey_penta1': '[XX%]',
+        'survey_penta3': '[XX%]',
+        'survey_measles': '[XX%]',
+
+        # Coverage - FASTR estimates (fill after analysis)
+        'fastr_anc1': '[XX%]',
+        'fastr_anc4': '[XX%]',
+        'fastr_sba': '[XX%]',
+        'fastr_penta1': '[XX%]',
+        'fastr_penta3': '[XX%]',
+        'fastr_measles': '[XX%]',
+
+        # Data quality
+        'completeness_overall': '[XX%]',
+        'outliers_detected': '[XXX]',
+        'consistency_pass_rate': '[XX%]',
+
+        # Add your own variables as needed...
+    }},
+
 }}
 '''
 

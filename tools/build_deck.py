@@ -420,6 +420,11 @@ def substitute_variables(content, config, extra_vars=None):
         'DAY_START_TIME': config.get('day_start_time', '9:00 AM'),
     }
 
+    # Add country_data variables (all keys become {{key}} variables)
+    country_data = config.get('country_data', {})
+    for key, value in country_data.items():
+        replacements[key] = str(value)
+
     if extra_vars:
         replacements.update(extra_vars)
 

@@ -6,13 +6,13 @@ paginate: true
 
 # Data Quality Findings
 
-## {{LOCATION}} Analysis
+**{{LOCATION}}** | {{DATE}}
 
 ---
 
 ## Reporting Completeness
 
-**Overall completeness:** [XX%]
+**Overall completeness:** {{completeness_overall}}
 
 | Region/Province | Completeness |
 |-----------------|--------------|
@@ -20,30 +20,26 @@ paginate: true
 | [Region 2] | [XX%] |
 | [Region 3] | [XX%] |
 
-**Observations:**
-- [Key finding about completeness]
-- [Areas that need attention]
-
 ---
 
 ## Outliers Detected
 
-**Total outliers flagged:** [XXX] facility-months
+**Total outliers flagged:** {{outliers_detected}} facility-months
 
 **Most common issues:**
 - [Issue 1] - e.g., Decimal point errors
 - [Issue 2] - e.g., Cumulative vs monthly reporting
-- [Issue 3] - e.g., Delayed batch entry
 
 ---
 
 ## Consistency Checks
 
-**ANC1 vs ANC4:** [X%] of districts pass
-**Penta1 vs Penta3:** [X%] of districts pass
+**Pass rate:** {{consistency_pass_rate}} of districts
 
-**Districts with inconsistencies:**
-- [District name] - [issue]
-- [District name] - [issue]
+| Check | Result |
+|-------|--------|
+| ANC1 >= ANC4 | [X%] pass |
+| Penta1 >= Penta3 | [X%] pass |
+| BCG ~ Penta1 | [X%] pass |
 
 ---
