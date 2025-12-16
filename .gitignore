@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Outputs (generated files - don't commit large binaries)
+outputs/*.md
+outputs/*.pdf
+outputs/*.pptx
+!outputs/.gitkeep
+
+# Temp files
+*_temp.md
+*.tmp
+.cache/
+
+# Workshop-specific (optional - team decides)
+# Uncomment to ignore workshop images (if too large)
+# workshops/*/*.png
+# workshops/*/*.jpg
+# workshops/*/*.svg
+
+# System files
+.DS_Store
+Thumbs.db

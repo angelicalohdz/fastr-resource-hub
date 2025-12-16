@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>FASTR Analytical Approach – 4 Modules</title>
+<style>
+  body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #f6f7fb;
+    padding: 40px 20px;
+  }
+
+  .fastr-flow {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  /* Vertical connector from Module 1 to Module 2 */
+  .vertical-line {
+    width: 2px;
+    height: 40px;
+    background: #d0d4e4;
+    margin: 0 auto;
+  }
+
+  .module-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin: 0 auto 32px;
+    width: 80%;
+    box-shadow: 0 6px 14px rgba(15, 23, 42, 0.08);
+    border-left: 5px solid #3b82f6;
+  }
+
+  .module-header {
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #6b7280;
+    margin-bottom: 4px;
+  }
+
+  .module-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 6px;
+  }
+
+  .module-body {
+    font-size: 0.95rem;
+    color: #374151;
+    margin: 0;
+    padding-left: 1.2rem;
+  }
+
+  .connector {
+    text-align: center;
+    margin: -10px 0 16px 0;
+  }
+
+  .connector span {
+    background: #e5e7eb;
+    padding: 3px 12px;
+    font-size: 0.75rem;
+    border-radius: 999px;
+    color: #6b7280;
+  }
+
+  /* Two-column layout for Module 3 and Module 4 */
+  .two-col {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 32px;
+  }
+
+  .two-col .module-card {
+    width: 45%;
+  }
+
+  .branch-line {
+    width: 60%;
+    height: 2px;
+    background: #d0d4e4;
+    margin: 0 auto 16px;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="fastr-flow">
+
+  <!-- Module 1 -->
+  <div class="module-card" style="border-left-color:#3b82f6;">
+    <div class="module-header">Module 1</div>
+    <div class="module-title">Data Quality Assessment</div>
+    <ul class="module-body">
+      <li>Assess completeness in DHIS2 data</li>
+      <li>Identify outliers</li>
+      <li>Check internal consistency</li>
+    </ul>
+  </div>
+
+  <div class="connector"><span>Outputs feed into Module 2</span></div>
+  <div class="vertical-line"></div>
+
+  <!-- Module 2 -->
+  <div class="module-card" style="border-left-color:#6366f1;">
+    <div class="module-header">Module 2</div>
+    <div class="module-title">Data Quality Adjustments</div>
+    <ul class="module-body">
+      <li>Adjust for missing values</li>
+      <li>Replace outliers</li>
+      <li>Apply standardised statistical methods</li>
+    </ul>
+  </div>
+
+  <div class="connector"><span>Outputs flow to Module 3 and Module 4</span></div>
+
+  <!-- Branching line -->
+  <div class="branch-line"></div>
+
+  <!-- Module 3 + Module 4 in two columns -->
+  <div class="two-col">
+
+    <!-- Module 3 -->
+    <div class="module-card" style="border-left-color:#0ea5e9;">
+      <div class="module-header">Module 3</div>
+      <div class="module-title">Service Utilization &amp; Disruption Analysis</div>
+      <ul class="module-body">
+        <li>Detect disruptions in service delivery</li>
+        <li>Quantify impacts over time and place</li>
+      </ul>
+    </div>
+
+    <!-- Module 4 -->
+    <div class="module-card" style="border-left-color:#22c55e;">
+      <div class="module-header">Module 4</div>
+      <div class="module-title">Coverage Estimation</div>
+      <ul class="module-body">
+        <li>Combine DHIS2, survey, and population data</li>
+        <li>Estimate population coverage</li>
+        <li>Produce comparable time series</li>
+      </ul>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
