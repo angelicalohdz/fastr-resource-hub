@@ -93,15 +93,15 @@ git push origin main
 # 1. Pull latest
 git pull origin main
 
-# 2. Create/edit workshop
-# ... edit workshops/2025_XX_country/config.py ...
+# 2. Create workshop (or edit existing)
+python3 tools/01_setup_workshop.py
 
 # 3. Build
-python3 tools/03_build_deck.py --workshop 2025_XX_country
+python3 tools/03_build_deck.py --workshop 2025-country
 
 # 4. Save your config to GitHub
-git add workshops/2025_XX_country/
-git commit -m "Add 2025 XX Country workshop config"
+git add workshops/2025-country/
+git commit -m "Add 2025 country workshop config"
 git push origin main
 
 # Note: Don't commit the generated outputs/*.md or *.pdf files!

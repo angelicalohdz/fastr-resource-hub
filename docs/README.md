@@ -141,17 +141,26 @@ Welcome to the documentation for the FASTR slide builder! This directory contain
 
 ### "I want to create a new workshop deck"
 
-1. **Create workshop folder:**
-   - Copy `workshops/example/` to `workshops/2025_XX_country/`
+1. **Run the setup wizard:**
+   ```bash
+   python3 tools/01_setup_workshop.py
+   ```
+   - Creates workshop folder with all needed files
+   - Pre-fills config with your details
+   - Copies default FASTR visualizations to replace
 
-2. **Configure workshop:**
-   - Edit `config.py` with workshop details
-   - Add custom slides (optional)
-   - Add agenda image (optional)
+2. **Customize your content:**
+   - Edit `config.py` with country data
+   - Edit custom slide `.md` files
+   - Replace `agenda.png` with your agenda
+   - Replace charts in `assets/fastr-outputs/`
 
-3. **Build and render:**
-   - Run `python3 tools/03_build_deck.py --workshop 2025_XX_country`
-   - Run `marp outputs/deck.md --theme-set fastr-theme.css --pdf`
+3. **Check and build:**
+   ```bash
+   python3 tools/02_check_workshop.py --workshop YOUR_WORKSHOP
+   python3 tools/03_build_deck.py --workshop YOUR_WORKSHOP
+   marp outputs/YOUR_WORKSHOP_deck.md --theme-set fastr-theme.css --pdf
+   ```
 
 **Read:** [Building Decks Guide](building-decks.md) for complete instructions
 
@@ -230,17 +239,20 @@ fastr-slide-builder/
 │   └── closing.md                 # Closing slide
 │
 ├── workshops/                     # Workshop configurations
-│   ├── example/                   # Example workshop (start here!)
+│   ├── example/                   # Example workshop (reference)
 │   │   ├── config.py              # Workshop settings
-│   │   ├── custom_slides.md       # Custom content
-│   │   └── agenda.png             # Agenda image
-│   └── 2025_XX_country/           # Your workshops go here
+│   │   ├── objectives.md          # Custom slides
+│   │   ├── country-overview.md
+│   │   ├── agenda.png             # Agenda image
+│   │   └── assets/fastr-outputs/  # Country-specific visualizations
+│   └── 2025-country/              # Your workshops (created by wizard)
 │       └── ...
 │
 ├── tools/                         # Build scripts
-│   ├── build_deck.py              # Assemble markdown deck
-│   ├── convert_to_pptx.py         # Convert to PowerPoint
-│   └── create_fastr_template.py   # Create PowerPoint template
+│   ├── 01_setup_workshop.py       # Create new workshop (interactive wizard)
+│   ├── 02_check_workshop.py       # Validate workshop setup
+│   ├── 03_build_deck.py           # Assemble markdown deck
+│   └── 04_convert_to_pptx.py      # Convert to PowerPoint
 │
 ├── assets/                        # Shared images/logos
 │   └── ...
@@ -264,36 +276,56 @@ fastr-slide-builder/
 
 Every workshop needs a `config.py` file that defines:
 - Basic info (name, date, location, facilitators)
-- Which core sections to include (1-7)
-- Optional components (breaks, agenda, closing)
-- Custom slides to add
+- Deck order (which slides and sessions to include)
+- Country data (values to auto-fill into slides)
+- Schedule settings (break times, number of days)
 
 **Example:**
 ```python
 WORKSHOP_CONFIG = {
-    'workshop_id': '2025_01_nigeria',
+    'workshop_id': '2025-nigeria',
     'name': 'FASTR Workshop - Nigeria',
-    'sections': [1, 2, 3, 4, 5, 6],
-    'include_breaks': True,
-    'custom_slides': ['custom_slides.md'],
+    'date': 'January 15-17, 2025',
+    'location': 'Abuja, Nigeria',
+
+    'deck_order': [
+        'agenda',
+        'objectives.md',
+        'intro',
+        'dq_assessment',
+        'coverage',
+        'next-steps.md',
+    ],
+
+    'country_data': {
+        'total_facilities': '2,847',
+        'reporting_rate': '92%',
+        # ... more country statistics
+    },
 }
 ```
 
 ---
 
-### Two-Step Build Process
+### Three-Step Build Process
 
-1. **Assemble:** Combine content into markdown
+1. **Check:** Validate setup before building
    ```bash
-   python3 tools/03_build_deck.py --workshop 2025_01_nigeria
+   python3 tools/02_check_workshop.py --workshop 2025-nigeria
    ```
-   Output: `outputs/2025_01_nigeria_deck.md`
+   Catches missing files, undefined variables, broken images
 
-2. **Render:** Export to PDF or PowerPoint
+2. **Build:** Combine content into markdown
    ```bash
-   marp outputs/2025_01_nigeria_deck.md --theme-set fastr-theme.css --pdf
+   python3 tools/03_build_deck.py --workshop 2025-nigeria
    ```
-   Output: `outputs/2025_01_nigeria_deck.pdf`
+   Output: `outputs/2025-nigeria_deck.md`
+
+3. **Render:** Export to PDF or PowerPoint
+   ```bash
+   marp outputs/2025-nigeria_deck.md --theme-set fastr-theme.css --pdf
+   ```
+   Output: `outputs/2025-nigeria_deck.pdf`
 
 ---
 
@@ -341,9 +373,10 @@ WORKSHOP_CONFIG = {
 
 ### For Workshop Organizers:
 - [ ] Review [Building Decks Guide](building-decks.md)
-- [ ] Copy `workshops/example/` folder
-- [ ] Edit `config.py` with workshop details
-- [ ] Build and render your deck
+- [ ] Run `python3 tools/01_setup_workshop.py` to create workshop
+- [ ] Edit `config.py` with country data
+- [ ] Replace default visualizations in `assets/fastr-outputs/`
+- [ ] Run check tool, then build and render your deck
 - [ ] Distribute PDF to participants
 
 ### For Local Setup:
