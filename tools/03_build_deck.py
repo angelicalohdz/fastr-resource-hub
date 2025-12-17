@@ -62,55 +62,233 @@ import sys
 import importlib.util
 
 # ═══════════════════════════════════════════════════════════════════════
-# SESSION DEFINITIONS
+# MODULE DEFINITIONS
+# ═══════════════════════════════════════════════════════════════════════
+# Maps module prefixes (m0, m1, etc.) to their folders and topic files
+
+MODULES = {
+    0: {
+        'name': 'Introduction to FASTR',
+        'folder': 'm0_introduction',
+        'topics': [
+            ('m0_1', 'm0_1_introduce_fastr_approach.md'),
+            ('m0_2', 'm0_2_overview_of_resources.md'),
+            ('m0_3', 'm0_3_models_of_implementation.md'),
+        ],
+    },
+    1: {
+        'name': 'Identify Questions & Indicators',
+        'folder': 'm1_identify_questions_indicators',
+        'topics': [
+            ('m1_1', 'm1_1_fastr_gaps_challenges.md'),
+            ('m1_2', 'm1_2_development_of_data_use_case.md'),
+            ('m1_3', 'm1_3_defining_priority_questions.md'),
+            ('m1_4', 'm1_4_preparing_for_data_extraction.md'),
+        ],
+    },
+    2: {
+        'name': 'Data Extraction',
+        'folder': 'm2_data_extraction',
+        'topics': [
+            ('m2_1', 'm2_1_why_extract_data.md'),
+            ('m2_2', 'm2_2_tools_for_data_extraction.md'),
+        ],
+    },
+    3: {
+        'name': 'FASTR Analytics Platform',
+        'folder': 'm3_fastr_analytics_platform',
+        'topics': [
+            ('m3_1', 'm3_1_overview_of_platform.md'),
+            ('m3_2', 'm3_2_accessing_platform.md'),
+            ('m3_3', 'm3_3_setting_up_structure.md'),
+            ('m3_4', 'm3_4_importing_dataset.md'),
+            ('m3_5', 'm3_5_installing_running_modules.md'),
+            ('m3_6', 'm3_6_creating_new_project.md'),
+            ('m3_7', 'm3_7_creating_visualizations.md'),
+            ('m3_8', 'm3_8_creating_reports.md'),
+        ],
+    },
+    4: {
+        'name': 'Data Quality Assessment',
+        'folder': 'm4_data_quality_assessment',
+        'topics': [
+            ('m4_1', 'm4_1_approach_to_dqa.md'),
+            ('m4_2', 'm4_2_indicator_completeness.md'),
+            ('m4_3', 'm4_3_outliers.md'),
+            ('m4_4', 'm4_4_internal_consistency.md'),
+            ('m4_5', 'm4_5_overall_dqa_score.md'),
+            ('m4_6', 'm4_6_assessing_dq_in_platform.md'),
+        ],
+    },
+    5: {
+        'name': 'Data Quality Adjustment',
+        'folder': 'm5_data_quality_adjustment',
+        'topics': [
+            ('m5_1', 'm5_1_approach_to_dq_adjustment.md'),
+            ('m5_2', 'm5_2_adjustment_for_outliers.md'),
+            ('m5_3', 'm5_3_adjustment_for_completeness.md'),
+            ('m5_4', 'm5_4_adjusting_dq_in_platform.md'),
+        ],
+    },
+    6: {
+        'name': 'Data Analysis',
+        'folder': 'm6_data_analysis',
+        'topics': [
+            ('m6_1', 'm6_1_service_utilization.md'),
+            ('m6_2', 'm6_2_surplus_disruption_analyses.md'),
+            ('m6_3', 'm6_3_service_coverage.md'),
+        ],
+    },
+    7: {
+        'name': 'Results Communication',
+        'folder': 'm7_results_communication',
+        'topics': [
+            ('m7_1', 'm7_1_analytical_thinking_interpretation.md'),
+            ('m7_2', 'm7_2_data_visualization_communication.md'),
+            ('m7_3', 'm7_3_using_data_for_decision_making.md'),
+            ('m7_4', 'm7_4_stakeholder_engagement_advocacy.md'),
+            ('m7_5', 'm7_5_practice_quarterly_reporting.md'),
+        ],
+    },
+}
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# SESSION DEFINITIONS (legacy support)
 # ═══════════════════════════════════════════════════════════════════════
 # These are the logical sessions that can be included in a workshop
 
 SESSIONS = {
+    # Module 0: Introduction to the FASTR Approach
     'intro': {
-        'files': ['01_background_rationale.md', '02_fastr_approach.md'],
-        'name': 'Intro (Background + FASTR Approach)',
+        'files': [
+            'm0_introduction/m0_1_introduce_fastr_approach.md',
+            'm0_introduction/m0_2_overview_of_resources.md',
+            'm0_introduction/m0_3_models_of_implementation.md',
+        ],
+        'name': 'Introduction to FASTR',
         'short_name': 'Intro',
         'weight': 'light',
         'duration': '~30 min',
     },
+    # Module 1: Identify Questions & Indicators
+    'questions_indicators': {
+        'files': [
+            'm1_identify_questions_indicators/m1_1_fastr_gaps_challenges.md',
+            'm1_identify_questions_indicators/m1_2_development_of_data_use_case.md',
+            'm1_identify_questions_indicators/m1_3_defining_priority_questions.md',
+            'm1_identify_questions_indicators/m1_4_preparing_for_data_extraction.md',
+        ],
+        'name': 'Identify Questions & Indicators',
+        'short_name': 'Questions',
+        'weight': 'medium',
+        'duration': '~60 min',
+    },
+    # Module 2: Data Extraction
     'extraction': {
-        'files': ['03_data_extraction.md'],
+        'files': [
+            'm2_data_extraction/m2_1_why_extract_data.md',
+            'm2_data_extraction/m2_2_tools_for_data_extraction.md',
+        ],
         'name': 'Data Extraction',
-        'short_name': 'Data Extraction',
+        'short_name': 'Extraction',
         'weight': 'medium',
         'duration': '~45 min',
     },
+    # Module 3: FASTR Analytics Platform
+    'platform': {
+        'files': [
+            'm3_fastr_analytics_platform/m3_1_overview_of_platform.md',
+            'm3_fastr_analytics_platform/m3_2_accessing_platform.md',
+            'm3_fastr_analytics_platform/m3_3_setting_up_structure.md',
+            'm3_fastr_analytics_platform/m3_4_importing_dataset.md',
+            'm3_fastr_analytics_platform/m3_5_installing_running_modules.md',
+            'm3_fastr_analytics_platform/m3_6_creating_new_project.md',
+            'm3_fastr_analytics_platform/m3_7_creating_visualizations.md',
+            'm3_fastr_analytics_platform/m3_8_creating_reports.md',
+        ],
+        'name': 'FASTR Analytics Platform',
+        'short_name': 'Platform',
+        'weight': 'core',
+        'duration': '~120 min',
+    },
+    # Module 4: Data Quality Assessment
     'dq_assessment': {
-        'files': ['04a_data_quality_assessment.md'],
+        'files': [
+            'm4_data_quality_assessment/m4_1_approach_to_dqa.md',
+            'm4_data_quality_assessment/m4_2_indicator_completeness.md',
+            'm4_data_quality_assessment/m4_3_outliers.md',
+            'm4_data_quality_assessment/m4_4_internal_consistency.md',
+            'm4_data_quality_assessment/m4_5_overall_dqa_score.md',
+            'm4_data_quality_assessment/m4_6_assessing_dq_in_platform.md',
+        ],
         'name': 'Data Quality Assessment',
         'short_name': 'DQ Assessment',
         'weight': 'core',
         'duration': '~90 min',
     },
+    # Module 5: Data Quality Adjustment
     'dq_adjustment': {
-        'files': ['04b_data_adjustment.md'],
-        'name': 'Data Adjustment',
+        'files': [
+            'm5_data_quality_adjustment/m5_1_approach_to_dq_adjustment.md',
+            'm5_data_quality_adjustment/m5_2_adjustment_for_outliers.md',
+            'm5_data_quality_adjustment/m5_3_adjustment_for_completeness.md',
+            'm5_data_quality_adjustment/m5_4_adjusting_dq_in_platform.md',
+        ],
+        'name': 'Data Quality Adjustment',
         'short_name': 'DQ Adjustment',
         'weight': 'core',
         'duration': '~60 min',
     },
+    # Module 6: Data Analysis
+    'analysis': {
+        'files': [
+            'm6_data_analysis/m6_1_service_utilization.md',
+            'm6_data_analysis/m6_2_surplus_disruption_analyses.md',
+            'm6_data_analysis/m6_3_service_coverage.md',
+        ],
+        'name': 'Data Analysis',
+        'short_name': 'Analysis',
+        'weight': 'core',
+        'duration': '~120 min',
+    },
+    # Legacy alias for backwards compatibility
     'disruption': {
-        'files': ['05_service_utilization.md'],
-        'name': 'Disruption Detection',
+        'files': [
+            'm6_data_analysis/m6_1_service_utilization.md',
+            'm6_data_analysis/m6_2_surplus_disruption_analyses.md',
+        ],
+        'name': 'Service Utilization & Disruption',
         'short_name': 'Disruption',
         'weight': 'core',
         'duration': '~90 min',
     },
     'coverage': {
-        'files': ['06_coverage_analysis.md'],
+        'files': [
+            'm6_data_analysis/m6_3_service_coverage.md',
+        ],
         'name': 'Coverage Analysis',
         'short_name': 'Coverage',
         'weight': 'core',
+        'duration': '~60 min',
+    },
+    # Module 7: Results Communication and Data Use
+    'communication': {
+        'files': [
+            'm7_results_communication/m7_1_analytical_thinking_interpretation.md',
+            'm7_results_communication/m7_2_data_visualization_communication.md',
+            'm7_results_communication/m7_3_using_data_for_decision_making.md',
+            'm7_results_communication/m7_4_stakeholder_engagement_advocacy.md',
+            'm7_results_communication/m7_5_practice_quarterly_reporting.md',
+        ],
+        'name': 'Results Communication & Data Use',
+        'short_name': 'Communication',
+        'weight': 'medium',
         'duration': '~90 min',
     },
+    # Optional: Facility Assessments (moved to optional folder)
     'facility': {
-        'files': ['07_facility_assessments.md'],
+        'files': ['optional/facility_assessments.md'],
         'name': 'Facility Assessments',
         'short_name': 'Facility',
         'weight': 'light',
@@ -168,6 +346,61 @@ SCHEDULE_PRESETS = {
 # ═══════════════════════════════════════════════════════════════════════
 # HELPER FUNCTIONS
 # ═══════════════════════════════════════════════════════════════════════
+
+def resolve_module_prefix(prefix):
+    """
+    Resolve a module prefix to a list of file paths.
+
+    Examples:
+        'm0'   -> all files in m0_introduction/
+        'm0_1' -> just m0_1_introduce_fastr_approach.md
+        'm4'   -> all files in m4_data_quality_assessment/
+        'm4_2' -> just m4_2_indicator_completeness.md
+
+    Returns: (files, name, is_valid)
+        - files: list of relative file paths within core_content/
+        - name: display name for the module or topic
+        - is_valid: True if prefix was recognized
+    """
+    import re
+
+    # Pattern for module prefix: m0, m1, m2, etc.
+    module_match = re.match(r'^m(\d+)$', prefix)
+    if module_match:
+        module_num = int(module_match.group(1))
+        if module_num in MODULES:
+            module = MODULES[module_num]
+            folder = module['folder']
+            files = [f"{folder}/{topic[1]}" for topic in module['topics']]
+            return (files, module['name'], True)
+        return ([], prefix, False)
+
+    # Pattern for topic prefix: m0_1, m4_2, etc.
+    topic_match = re.match(r'^m(\d+)_(\d+)$', prefix)
+    if topic_match:
+        module_num = int(topic_match.group(1))
+        topic_num = int(topic_match.group(2))
+        if module_num in MODULES:
+            module = MODULES[module_num]
+            folder = module['folder']
+            # Find the topic with matching prefix
+            for topic_prefix, topic_file in module['topics']:
+                if topic_prefix == prefix:
+                    # Extract readable topic name from filename
+                    topic_name = topic_file.replace('.md', '').replace('_', ' ')
+                    # Remove the prefix part (e.g., "m0 1 ")
+                    topic_name = ' '.join(topic_name.split()[2:]).title()
+                    return ([f"{folder}/{topic_file}"], topic_name, True)
+        return ([], prefix, False)
+
+    return ([], prefix, False)
+
+
+def is_module_prefix(item):
+    """Check if an item looks like a module prefix (m0, m0_1, etc.)"""
+    import re
+    return bool(re.match(r'^m\d+(_\d+)?$', item))
+
 
 def list_available_workshops(base_dir):
     """Show all available workshop folders"""
@@ -773,6 +1006,28 @@ paginate: true
                     next_day_sessions = [e['session'] for e in schedule if e['day'] == current_day + 1]
                     deck_content += generate_day_end_slide(current_day, next_day_sessions, config)
                     print(f"      🌙 End of Day {current_day}")
+
+            elif is_module_prefix(item):
+                # Module prefix (m0, m0_1, m4_2, etc.)
+                files, name, is_valid = resolve_module_prefix(item)
+                if is_valid:
+                    # Add all files for this module/topic
+                    module_overrides = []
+                    for filename in files:
+                        filepath = os.path.join(core_content_dir, filename)
+                        content = read_markdown_file(filepath)
+                        if content:
+                            content = strip_frontmatter(content)
+                            content = substitute_variables(content, config)
+                            content, overrides = resolve_asset_overrides(content, workshop_id, base_dir)
+                            module_overrides.extend(overrides)
+                            deck_content += "\n" + ensure_slide_break(content) + "\n"
+
+                    print(f"   [{item}] {name}")
+                    if module_overrides:
+                        print(f"      📊 {len(module_overrides)} custom asset(s)")
+                else:
+                    print(f"   Warning: Unknown module prefix '{item}'")
 
             else:
                 print(f"   Warning: Unknown item '{item}'")

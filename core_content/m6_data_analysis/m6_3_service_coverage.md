@@ -497,12 +497,12 @@ Total Error = Sum of squared errors across all survey years
 
 **FASTR transforms routine facility data into actionable intelligence:**
 
-✓ Systematic data quality assessment
-✓ Statistical adjustments where appropriate
-✓ Disruption detection and quantification
-✓ Population coverage estimation
-✓ Multi-level geographic analysis
-✓ Quarterly monitoring capability
+- Systematic data quality assessment
+- Statistical adjustments where appropriate
+- Disruption detection and quantification
+- Population coverage estimation
+- Multi-level geographic analysis
+- Quarterly monitoring capability
 
 <br>
 

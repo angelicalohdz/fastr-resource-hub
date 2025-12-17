@@ -21,6 +21,106 @@ import shutil
 import re
 
 
+# ═══════════════════════════════════════════════════════════════════════
+# MODULE DEFINITIONS
+# ═══════════════════════════════════════════════════════════════════════
+# These define the available core content modules and their topics
+
+MODULES = {
+    0: {
+        'name': 'Introduction to FASTR',
+        'folder': 'm0_introduction',
+        'topics': [
+            ('m0_1', 'Introduce FASTR approach'),
+            ('m0_2', 'Overview of resources'),
+            ('m0_3', 'Models of implementation'),
+        ],
+        'default': True,
+    },
+    1: {
+        'name': 'Identify Questions & Indicators',
+        'folder': 'm1_identify_questions_indicators',
+        'topics': [
+            ('m1_1', 'FASTR gaps and challenges'),
+            ('m1_2', 'Development of data use case'),
+            ('m1_3', 'Defining priority questions'),
+            ('m1_4', 'Preparing for data extraction'),
+        ],
+        'default': False,
+    },
+    2: {
+        'name': 'Data Extraction',
+        'folder': 'm2_data_extraction',
+        'topics': [
+            ('m2_1', 'Why extract data'),
+            ('m2_2', 'Tools for data extraction'),
+        ],
+        'default': True,
+    },
+    3: {
+        'name': 'FASTR Analytics Platform',
+        'folder': 'm3_fastr_analytics_platform',
+        'topics': [
+            ('m3_1', 'Overview of platform'),
+            ('m3_2', 'Accessing platform'),
+            ('m3_3', 'Setting up structure'),
+            ('m3_4', 'Importing dataset'),
+            ('m3_5', 'Installing and running modules'),
+            ('m3_6', 'Creating new project'),
+            ('m3_7', 'Creating visualizations'),
+            ('m3_8', 'Creating reports'),
+        ],
+        'default': False,
+    },
+    4: {
+        'name': 'Data Quality Assessment',
+        'folder': 'm4_data_quality_assessment',
+        'topics': [
+            ('m4_1', 'Approach to DQA'),
+            ('m4_2', 'Indicator completeness'),
+            ('m4_3', 'Outliers'),
+            ('m4_4', 'Internal consistency'),
+            ('m4_5', 'Overall DQA score'),
+            ('m4_6', 'Assessing DQ in platform'),
+        ],
+        'default': True,
+    },
+    5: {
+        'name': 'Data Quality Adjustment',
+        'folder': 'm5_data_quality_adjustment',
+        'topics': [
+            ('m5_1', 'Approach to DQ adjustment'),
+            ('m5_2', 'Adjustment for outliers'),
+            ('m5_3', 'Adjustment for completeness'),
+            ('m5_4', 'Adjusting DQ in platform'),
+        ],
+        'default': True,
+    },
+    6: {
+        'name': 'Data Analysis',
+        'folder': 'm6_data_analysis',
+        'topics': [
+            ('m6_1', 'Service utilization'),
+            ('m6_2', 'Surplus and disruption analyses'),
+            ('m6_3', 'Service coverage'),
+        ],
+        'default': True,
+    },
+    7: {
+        'name': 'Results Communication & Data Use',
+        'folder': 'm7_results_communication',
+        'topics': [
+            ('m7_1', 'Analytical thinking & interpretation'),
+            ('m7_2', 'Data visualization & communication'),
+            ('m7_3', 'Using data for decision-making'),
+            ('m7_4', 'Stakeholder engagement & advocacy'),
+            ('m7_5', 'Practice: quarterly reporting'),
+        ],
+        'default': False,
+    },
+}
+
+
 def get_input(prompt, default=None):
     """Get user input with optional default"""
     if default:
@@ -48,6 +148,157 @@ def create_workshop_id(name):
     country = re.sub(r'[^a-z0-9]', '', country)
 
     return f"{year}-{country}"
+
+
+def select_modules():
+    """Display modules and let user select which to include"""
+    print("\n4. CORE CONTENT MODULES\n")
+    print("   Select which modules to include in your workshop.")
+    print("   Enter module numbers separated by commas (e.g., 0,2,4,5,6)")
+    print("")
+
+    # Show all modules with defaults marked
+    defaults = []
+    for num, module in MODULES.items():
+        default_mark = "*" if module['default'] else " "
+        topic_count = len(module['topics'])
+        print(f"   [{default_mark}] {num}. {module['name']} ({topic_count} topics)")
+        if module['default']:
+            defaults.append(str(num))
+
+    default_str = ",".join(defaults)
+    print(f"\n   (* = included by default)")
+
+    # Get selection
+    selection = input(f"\n   Enter selection [{default_str}]: ").strip()
+    if not selection:
+        selection = default_str
+
+    # Parse selection
+    selected = []
+    for item in selection.split(","):
+        item = item.strip()
+        if item.isdigit() and int(item) in MODULES:
+            selected.append(int(item))
+
+    if not selected:
+        print("   No valid modules selected, using defaults.")
+        selected = [int(d) for d in defaults]
+
+    return sorted(selected)
+
+
+def select_topics(module_num):
+    """For a given module, let user select specific topics or all"""
+    module = MODULES[module_num]
+    topics = module['topics']
+
+    print(f"\n   Module {module_num}: {module['name']}")
+    print("   Select topics (press Enter for all, or enter numbers):\n")
+
+    for i, (prefix, name) in enumerate(topics, 1):
+        print(f"      {i}. {name} ({prefix})")
+
+    all_nums = ",".join(str(i) for i in range(1, len(topics) + 1))
+    selection = input(f"\n   Enter selection [{all_nums}]: ").strip()
+
+    if not selection:
+        # Return all topics for this module
+        return [prefix for prefix, _ in topics]
+
+    # Parse selection
+    selected_topics = []
+    for item in selection.split(","):
+        item = item.strip()
+        if item.isdigit():
+            idx = int(item) - 1
+            if 0 <= idx < len(topics):
+                selected_topics.append(topics[idx][0])
+
+    if not selected_topics:
+        # Return all if invalid selection
+        return [prefix for prefix, _ in topics]
+
+    return selected_topics
+
+
+def select_content():
+    """Main content selection flow: modules then topics"""
+    selected_modules = select_modules()
+
+    print("\n" + "-" * 70)
+    print("\n5. TOPIC SELECTION (optional)\n")
+    print("   For each module, you can include all topics or select specific ones.")
+
+    # Ask if they want to customize topics
+    customize = input("\n   Customize topics within modules? [y/N]: ").strip().lower()
+
+    deck_items = []
+
+    if customize == 'y':
+        for mod_num in selected_modules:
+            topics = select_topics(mod_num)
+            if len(topics) == len(MODULES[mod_num]['topics']):
+                # All topics selected, use module prefix
+                deck_items.append(f"m{mod_num}")
+            else:
+                # Specific topics selected
+                deck_items.extend(topics)
+    else:
+        # Include all topics for each module
+        for mod_num in selected_modules:
+            deck_items.append(f"m{mod_num}")
+
+    return deck_items
+
+
+def format_deck_order(deck_content):
+    """Format deck_order list for config.py with comments"""
+    lines = []
+    lines.append("        # --- Opening ---")
+    lines.append("        'agenda',")
+    lines.append("        'objectives.md',")
+    lines.append("        'country-overview.md',")
+    lines.append("")
+    lines.append("        # --- Core Content (selected modules) ---")
+
+    # Group items by module number for comments
+    current_module = None
+    for item in deck_content:
+        # Extract module number
+        if item.startswith('m'):
+            parts = item.split('_')
+            mod_num = int(parts[0][1:])  # m0 -> 0, m4_1 -> 4
+
+            # Add module comment if new module
+            if mod_num != current_module:
+                current_module = mod_num
+                mod_name = MODULES[mod_num]['name']
+                lines.append(f"        # M{mod_num}: {mod_name}")
+
+            lines.append(f"        '{item}',")
+
+    # Add custom slides based on modules included
+    lines.append("")
+    lines.append("        # --- Custom slides (edit these) ---")
+
+    # Check what modules are included to suggest relevant custom slides
+    mod_nums = set()
+    for item in deck_content:
+        if item.startswith('m'):
+            mod_nums.add(int(item.split('_')[0][1:]))
+
+    lines.append("        'health-priorities.md',")
+    if 4 in mod_nums or 5 in mod_nums:
+        lines.append("        'dq-findings.md',")
+    if 6 in mod_nums:
+        lines.append("        'disruption-local.md',")
+        lines.append("        'coverage-results.md',")
+    lines.append("")
+    lines.append("        # --- Closing ---")
+    lines.append("        'next-steps.md',")
+
+    return "\n".join(lines)
 
 
 def main():
@@ -103,6 +354,9 @@ def main():
             workshop_days = 2
     except:
         workshop_days = 2
+
+    # Content selection
+    deck_content = select_content()
 
     # Create the workshop folder
     print("\n" + "-" * 70)
@@ -207,31 +461,14 @@ WORKSHOP_CONFIG = {{
     # SECTION 2: YOUR DECK - What slides, in what order
     # ═══════════════════════════════════════════════════════════════════════
     #
-    # Built-in sessions: 'intro', 'extraction', 'dq_assessment', etc.
-    # Your custom slides: 'objectives.md', 'country-overview.md', etc.
+    # Modules use prefix notation: 'm0', 'm1', 'm2', etc.
+    # Individual topics: 'm0_1', 'm4_2', etc.
+    # Custom slides: 'objectives.md', 'country-overview.md', etc.
     #
     # Comment out any slides you don't want to include.
 
     'deck_order': [
-        # --- Opening ---
-        'agenda',
-        'objectives.md',
-        'country-overview.md',
-
-        # --- Core Content ---
-        'intro',
-        'health-priorities.md',
-        'extraction',
-        'dq_assessment',
-        'dq-findings.md',
-        'dq_adjustment',
-        'disruption',
-        'disruption-local.md',
-        'coverage',
-        'coverage-results.md',
-
-        # --- Closing ---
-        'next-steps.md',
+{format_deck_order(deck_content)}
     ],
 
 
