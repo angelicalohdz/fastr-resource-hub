@@ -96,17 +96,18 @@ Coverage = (Services Delivered / Target Population) × 100%
 
 **FASTR uses two approaches:**
 
-**Approach 1: Work backwards from surveys**
+**Approach 1: Survey-derived denominator**
 - Survey says 80% of pregnant women got ANC1
-- DHIS2 says 10,000 women got ANC1
-- Math: If 10,000 = 80%, then total pregnancies = 10,000 ÷ 0.80 = 12,500
+- DHIS2 says 8,000 women got ANC1
+- Math: If 8,000 = 80%, then total pregnancies = 8,000 ÷ 0.80 = **10,000**
 
-**Approach 2: Use population projections**
-- UN says 15,000 women of childbearing age in district
-- Birth rate is 3%
-- Expected pregnancies ≈ 15,000 × 0.03 = 450 per year
+**Approach 2: Population projections (UN estimates)**
+- District population: 300,000
+- Crude birth rate: 3.2%
+- Expected births: 300,000 × 0.032 = 9,600
+- Add ~5% for pregnancy losses = **~10,000 pregnancies**
 
-**FASTR compares both methods and chooses the one that matches surveys best.**
+**Both approaches should give similar results.** FASTR tests multiple denominators and selects the one closest to survey values (see Step 3).
 
 ---
 
