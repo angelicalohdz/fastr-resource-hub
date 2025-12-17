@@ -11,7 +11,7 @@ paginate: true
 
 *Dr. Smith, Dr. Jones*
 
-<img src="../assets/logos/FASTR_Primary_01_FullName.png" style="position: absolute; bottom: 40px; right: 40px; width: 180px;">
+<img src="../shared assets/logos/FASTR_Primary_01_FullName.png" style="position: absolute; bottom: 40px; right: 40px; width: 180px;">
 
 ---
 
@@ -93,7 +93,7 @@ A data-driven framework developed by the GFF to help countries monitor and impro
 
 FASTR strengthens the use of routine health facility data by applying standardized methods for data quality assessment, trend analysis, coverage estimation, and decision-focused interpretation.
 
-![FASTR Approach](../../assets/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
+![FASTR Approach](../../shared assets/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
 
 ---
 ### FASTR supports governments to:
@@ -329,7 +329,7 @@ When data are prepared using the Downloader, API script, or DHIS2 exports, the C
 ## Data format and granularity
 <br>
 
-![hmis_data_raw](../../assets/screenshots/hmis-csv-required-fields.png)
+![hmis_data_raw](../../shared assets/screenshots/hmis-csv-required-fields.png)
 
 ---
 ## How Much Data?
@@ -403,14 +403,6 @@ Both tools produce CSVs that are compatible with the FASTR platform when correct
 ---
 
 
-# Lunch Break
-
-**60 minutes**
-
-We'll resume at 1:00 PM
-
----
-
 # Data Quality Assessment
 
 Understanding the reliability of routine health data
@@ -483,7 +475,7 @@ Each month, are facilities sending in their reports?
 
 ## Completeness: FASTR Output
 
-![Indicator Completeness](../../assets/fastr-outputs/m1_Proportion_of_completed_records.png)
+![Indicator Completeness](../../shared assets/fastr-outputs/m1_Proportion_of_completed_records.png)
 
 ---
 
@@ -544,7 +536,7 @@ Are there any values that seem way too high compared to what that facility norma
 
 ## Outliers: FASTR Output
 
-![Outliers](../../assets/fastr-outputs/m1_Proportion_of_outliers.png)
+![Outliers](../../shared assets/fastr-outputs/m1_Proportion_of_outliers.png)
 
 ---
 
@@ -606,7 +598,7 @@ This accounts for patients visiting different facilities for different services.
 
 ## Consistency: FASTR Output
 
-![Internal Consistency](../../assets/fastr-outputs/m1_Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
+![Internal Consistency](../../shared assets/fastr-outputs/m1_Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
 
 ---
 
@@ -636,13 +628,13 @@ This accounts for patients visiting different facilities for different services.
 
 ## Overall DQA Score: FASTR Output
 
-![Overall DQA Score](../../assets/fastr-outputs/m1_Overall_DQA_score.png)
+![Overall DQA Score](../../shared assets/fastr-outputs/m1_Overall_DQA_score.png)
 
 ---
 
 ## Mean DQA Score: FASTR Output
 
-![Mean DQA Score](../../assets/fastr-outputs/m1_Mean_DQA_score.png)
+![Mean DQA Score](../../shared assets/fastr-outputs/m1_Mean_DQA_score.png)
 
 ---
 
@@ -662,11 +654,11 @@ This section will cover:
 ---
 
 
-# Afternoon Break
+# Lunch Break
 
-**15 minutes**
+**60 minutes**
 
-We'll resume at 3:30 PM
+We'll resume at 1:00 PM
 
 ---
 
@@ -773,13 +765,13 @@ Fixing data quality issues to enable reliable analysis
 
 ## Volume Change: FASTR Output
 
-![Volume Change Due to DQ Adjustments](../../assets/fastr-outputs/m2_Volume_change_due_to_data_quality_adjustments.png)
+![Volume Change Due to DQ Adjustments](../../shared assets/fastr-outputs/m2_Volume_change_due_to_data_quality_adjustments.png)
 
 ---
 
 ## Service Volume Trends: FASTR Output
 
-![Service Volume by Year](../../assets/fastr-outputs/m2_Change_in_service_volume_(Admin_area_2).png)
+![Service Volume by Year](../../shared assets/fastr-outputs/m2_Change_in_service_volume_(Admin_area_2).png)
 
 ---
 
@@ -1000,13 +992,11 @@ This section will cover:
 ---
 
 
-# See You Tomorrow!
+# Afternoon Break
 
-**Day 1 Complete**
+**15 minutes**
 
-We resume tomorrow at **9:00 AM**
-
-**Tomorrow:** Data Analysis
+We'll resume at 3:30 PM
 
 ---
 
@@ -1903,14 +1893,6 @@ Total Error = Sum of squared errors across all survey years
 
 ---
 
-
-# Tea Break
-
-**15 minutes**
-
-We'll resume at 10:45 AM
-
----
 
 
 # Coverage Analysis Results

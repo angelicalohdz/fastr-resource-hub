@@ -16,15 +16,15 @@ assets/
 
 From a workshop folder (workshops/*/):
 ```markdown
-![FASTR Logo](../../assets/logos/fastr_logo.png)
-![FASTR Approach](../../assets/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
-![HMIS Screenshot](../../assets/screenshots/hmis-csv-required-fields.png)
+![FASTR Logo](../../shared assets/logos/fastr_logo.png)
+![FASTR Approach](../../shared assets/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
+![HMIS Screenshot](../../shared assets/screenshots/hmis-csv-required-fields.png)
 ```
 
 From core_content/ or templates/:
 ```markdown
-![FASTR Approach](../assets/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
-![HMIS Screenshot](../assets/screenshots/hmis-csv-required-fields.png)
+![FASTR Approach](../shared assets/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
+![HMIS Screenshot](../shared assets/screenshots/hmis-csv-required-fields.png)
 ```
 
 Note: Currently available assets:

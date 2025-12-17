@@ -198,15 +198,15 @@ marp outputs/nigeria_deck.md --theme-set fastr-theme.css --pdf
 
 **Example:**
 ```markdown
-![FASTR Approach](../assets/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
-![HMIS Data](../assets/screenshots/hmis-csv-required-fields.png)
+![FASTR Approach](../shared assets/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
+![HMIS Data](../shared assets/screenshots/hmis-csv-required-fields.png)
 ```
 
 ### Image Paths
 
 **For images in `assets/` folder:**
 ```markdown
-![FASTR Approach](../assets/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
+![FASTR Approach](../shared assets/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
 ```
 
 **For images in workshop folder:**
@@ -216,7 +216,7 @@ marp outputs/nigeria_deck.md --theme-set fastr-theme.css --pdf
 ```
 
 **Tips:**
-- Use `../assets/` when referencing shared images
+- Use `../shared assets/` when referencing shared images
 - Use `./` or just filename for workshop-specific images
 - Use descriptive alt text (the part in `[]`)
 - Supported formats: PNG, JPG, SVG, GIF
@@ -364,7 +364,7 @@ paginate: true
 **Location:** Abuja, Nigeria
 **Facilitators:** Dr. Smith, Dr. Jones
 
-<!-- ![FASTR Logo](../assets/logos/fastr_logo.png) -->
+<!-- ![FASTR Logo](../shared assets/logos/fastr_logo.png) -->
 <!-- Note: Add logo to assets/logos/ folder -->
 ```
 
@@ -395,7 +395,7 @@ paginate: true
 
 # FASTR Workflow
 
-![FASTR Process](../assets/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
+![FASTR Process](../shared assets/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
 
 **Four main stages:** Data Extraction → Quality Assessment → Analysis → Insights
 ```
@@ -463,13 +463,13 @@ paginate: true
 **Wrong:**
 ```markdown
 ![Logo](assets/logo.png)  <!-- Missing ../ -->
-![Diagram](../assets/old_file.png)  <!-- File moved to subfolder -->
+![Diagram](../shared assets/old_file.png)  <!-- File moved to subfolder -->
 ```
 
 **Right:**
 ```markdown
-![Logo](../assets/logos/logo.png)  <!-- Use subfolder structure -->
-![Diagram](../assets/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
+![Logo](../shared assets/logos/logo.png)  <!-- Use subfolder structure -->
+![Diagram](../shared assets/diagrams/FASTR_rapid_cycle_analytics_approach.svg)
 ```
 
 ### 4. Too Much Content on One Slide

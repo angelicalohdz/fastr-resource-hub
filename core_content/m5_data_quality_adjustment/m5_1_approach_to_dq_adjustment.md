@@ -64,12 +64,12 @@ Fixing data quality issues to enable reliable analysis
 
 ## Volume Change: FASTR Output
 
-![Volume Change Due to DQ Adjustments](../../assets/fastr-outputs/m2_Volume_change_due_to_data_quality_adjustments.png)
+![Volume Change Due to DQ Adjustments](../../shared assets/fastr-outputs/m2_Volume_change_due_to_data_quality_adjustments.png)
 
 ---
 
 ## Service Volume Trends: FASTR Output
 
-![Service Volume by Year](../../assets/fastr-outputs/m2_Change_in_service_volume_(Admin_area_2).png)
+![Service Volume by Year](../../shared assets/fastr-outputs/m2_Change_in_service_volume_(Admin_area_2).png)
 
 ---
