@@ -65,31 +65,31 @@ section {
    HEADERS
    ======================================== */
 h1 {
-  color: var(--fastr-primary);
+  color: var(--fastr-deep-green);
   font-weight: 700;
   font-size: 2.5em;
   margin-bottom: 0.5em;
-  border-bottom: 4px solid var(--fastr-primary);
+  border-bottom: 4px solid var(--fastr-lime);
   padding-bottom: 0.3em;
 }
 
 h2 {
-  color: var(--fastr-primary);
+  color: var(--fastr-navy);
   font-weight: 600;
   font-size: 1.8em;
   margin-top: 0.8em;
   margin-bottom: 0.5em;
-  border-bottom: 3px solid var(--fastr-primary);
+  border-bottom: 3px solid var(--fastr-blue);
   padding-bottom: 0.2em;
 }
 
 h3 {
-  color: var(--text-dark);
+  color: var(--fastr-purple);
   font-weight: 600;
   font-size: 1.3em;
   margin-top: 0.8em;
   margin-bottom: 0.4em;
-  border-left: 4px solid var(--fastr-primary);
+  border-left: 4px solid var(--fastr-orchid);
   padding-left: 0.5em;
 }
 
@@ -102,12 +102,13 @@ h4, h5, h6 {
    EMPHASIS
    ======================================== */
 strong, b {
-  color: var(--fastr-primary);
+  color: var(--fastr-navy);
   font-weight: 600;
 }
 
 em, i {
-  color: var(--text-medium);
+  color: var(--fastr-green);
+  font-style: italic;
 }
 
 /* ========================================
@@ -123,7 +124,12 @@ li {
 }
 
 ul > li::marker {
-  color: var(--fastr-primary);
+  color: var(--fastr-lime);
+}
+
+ol > li::marker {
+  color: var(--fastr-blue);
+  font-weight: 600;
 }
 
 /* ========================================
@@ -156,7 +162,7 @@ pre {
   background: var(--bg-light);
   padding: 1em;
   border-radius: 6px;
-  border-left: 4px solid var(--fastr-primary);
+  border-left: 4px solid var(--fastr-navy);
   overflow-x: auto;
 }
 
@@ -176,9 +182,9 @@ table {
 
 th {
   background: var(--fastr-light-blue);
-  color: var(--fastr-deep-green);
+  color: var(--fastr-navy);
   font-weight: 600;
-  border-bottom: 2px solid var(--fastr-primary);
+  border-bottom: 2px solid var(--fastr-blue);
   padding: 0.6em;
   text-align: left;
 }
@@ -196,12 +202,12 @@ tr:hover {
    BLOCKQUOTES
    ======================================== */
 blockquote {
-  border-left: 4px solid var(--fastr-primary);
+  border-left: 4px solid var(--fastr-gold);
   padding-left: 1em;
   margin-left: 0;
-  color: var(--text-medium);
+  color: var(--text-dark);
   font-style: italic;
-  background: var(--fastr-light-blue);
+  background: rgba(216, 168, 34, 0.1);
   padding: 1em 1em 1em 1.5em;
   border-radius: 0 6px 6px 0;
 }
@@ -220,11 +226,11 @@ footer {
    HEADER - CUSTOM POSITIONING
    ======================================== */
 header {
-  color: var(--fastr-primary);
+  color: var(--fastr-deep-green);
   font-size: 0.7em;
   font-weight: 600;
   text-align: left;
-  border-bottom: 2px solid var(--fastr-primary);
+  border-bottom: 2px solid var(--fastr-lime);
   padding-bottom: 0.5em;
   margin-bottom: 1em;
 }
@@ -276,8 +282,8 @@ img {
 /* Highlight box - uses light blue */
 .highlight {
   background: var(--fastr-light-blue);
-  border: 1px solid var(--fastr-primary);
-  border-left: 4px solid var(--fastr-primary);
+  border: 1px solid var(--fastr-green);
+  border-left: 4px solid var(--fastr-green);
   padding: 1em;
   border-radius: 6px;
   margin: 1em 0;
@@ -337,26 +343,70 @@ img {
 }
 
 /* ========================================
-   ACCENT COLORS FOR VARIETY
+   ACCENT COLOR THEMES
    ======================================== */
+/* Use these classes on slides: <!-- _class: purple --> */
 
-/* Purple accent header */
-section.purple h1,
-section.purple h2 {
-  color: var(--fastr-purple);
-  border-color: var(--fastr-purple);
-}
+/* Purple theme */
+section.purple h1 { color: var(--fastr-purple); border-color: var(--fastr-orchid); }
+section.purple h2 { color: var(--fastr-purple); border-color: var(--fastr-orchid); }
+section.purple h3 { color: var(--fastr-purple); border-color: var(--fastr-orchid); }
+section.purple strong { color: var(--fastr-purple); }
+section.purple ul > li::marker { color: var(--fastr-orchid); }
 
-/* Blue accent header */
-section.blue h1,
-section.blue h2 {
-  color: var(--fastr-navy);
-  border-color: var(--fastr-navy);
-}
+/* Navy/Blue theme */
+section.navy h1 { color: var(--fastr-navy); border-color: var(--fastr-blue); }
+section.navy h2 { color: var(--fastr-navy); border-color: var(--fastr-blue); }
+section.navy h3 { color: var(--fastr-navy); border-color: var(--fastr-blue); }
+section.navy strong { color: var(--fastr-navy); }
+section.navy ul > li::marker { color: var(--fastr-blue); }
 
-/* Coral accent header */
-section.coral h1,
-section.coral h2 {
-  color: var(--fastr-coral);
-  border-color: var(--fastr-coral);
+/* Coral/Warm theme */
+section.coral h1 { color: var(--fastr-coral); border-color: var(--fastr-gold); }
+section.coral h2 { color: var(--fastr-coral); border-color: var(--fastr-gold); }
+section.coral h3 { color: var(--fastr-coral); border-color: var(--fastr-gold); }
+section.coral strong { color: var(--fastr-coral); }
+section.coral ul > li::marker { color: var(--fastr-gold); }
+
+/* Gold theme */
+section.gold h1 { color: var(--fastr-deep-green); border-color: var(--fastr-gold); }
+section.gold h2 { color: var(--fastr-deep-green); border-color: var(--fastr-gold); }
+section.gold h3 { color: var(--fastr-deep-green); border-color: var(--fastr-gold); }
+section.gold strong { color: var(--fastr-deep-green); }
+section.gold ul > li::marker { color: var(--fastr-gold); }
+
+/* Orchid/Pink theme */
+section.orchid h1 { color: var(--fastr-orchid); border-color: var(--fastr-purple); }
+section.orchid h2 { color: var(--fastr-orchid); border-color: var(--fastr-purple); }
+section.orchid h3 { color: var(--fastr-orchid); border-color: var(--fastr-purple); }
+section.orchid strong { color: var(--fastr-orchid); }
+section.orchid ul > li::marker { color: var(--fastr-purple); }
+
+/* ========================================
+   DARK SECTION BACKGROUNDS
+   ======================================== */
+/* Use these for section divider slides */
+
+section.bg-green {
+  background: linear-gradient(135deg, var(--fastr-deep-green) 0%, var(--fastr-dark-green) 100%);
+  color: var(--bg-white);
 }
+section.bg-green h1, section.bg-green h2, section.bg-green h3 { color: var(--bg-white); border-color: var(--fastr-lime); }
+section.bg-green strong { color: var(--fastr-lime); }
+section.bg-green ul > li::marker { color: var(--fastr-lime); }
+
+section.bg-navy {
+  background: linear-gradient(135deg, var(--fastr-navy) 0%, var(--fastr-blue) 100%);
+  color: var(--bg-white);
+}
+section.bg-navy h1, section.bg-navy h2, section.bg-navy h3 { color: var(--bg-white); border-color: var(--fastr-light-blue); }
+section.bg-navy strong { color: var(--fastr-light-blue); }
+section.bg-navy ul > li::marker { color: var(--fastr-light-blue); }
+
+section.bg-purple {
+  background: linear-gradient(135deg, var(--fastr-purple) 0%, var(--fastr-orchid) 100%);
+  color: var(--bg-white);
+}
+section.bg-purple h1, section.bg-purple h2, section.bg-purple h3 { color: var(--bg-white); border-color: var(--fastr-lime); }
+section.bg-purple strong { color: var(--fastr-lime); }
+section.bg-purple ul > li::marker { color: var(--fastr-lime); }
