@@ -71,6 +71,12 @@ Each month, are facilities sending in their reports?
 
 ---
 
+## Completeness: FASTR Output
+
+![Indicator Completeness](../assets/fastr-outputs/m1_Proportion_of_completed_records.png)
+
+---
+
 ## Question 2: Are Numbers Reasonable?
 
 ---
@@ -121,6 +127,12 @@ Are there any values that seem way too high compared to what that facility norma
 **What happened?** Probably someone entered "2890" instead of "289" (extra zero)
 
 **Impact if we don't fix it:** March would show a huge "spike" in malaria that didn't really happen.
+
+---
+
+## Outliers: FASTR Output
+
+![Outliers](../assets/fastr-outputs/m1_Proportion_of_outliers.png)
 
 ---
 
@@ -178,6 +190,12 @@ This accounts for patients visiting different facilities for different services.
 
 ---
 
+## Consistency: FASTR Output
+
+![Internal Consistency](../assets/fastr-outputs/m1_Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
+
+---
+
 ## Putting It All Together: Overall Data Quality
 
 ---
@@ -197,5 +215,17 @@ This accounts for patients visiting different facilities for different services.
 - Decide which data to use for analysis
 - Identify facilities that need support
 - Track if data quality is improving over time
+
+---
+
+## Overall DQA Score: FASTR Output
+
+![Overall DQA Score](../assets/fastr-outputs/m1_Overall_DQA_score.png)
+
+---
+
+## Mean DQA Score: FASTR Output
+
+![Mean DQA Score](../assets/fastr-outputs/m1_Mean_DQA_score.png)
 
 ---
