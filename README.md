@@ -109,10 +109,10 @@ fastr-slide-builder/
 │       └── agenda.png          # Agenda image
 │
 ├── assets/                 # Shared images (organized by type)
-│   ├── logos/
-│   ├── diagrams/
-│   ├── screenshots/
-│   └── charts/
+│   ├── logos/              # FASTR logo, partner logos
+│   ├── diagrams/           # Methodology flowcharts
+│   ├── screenshots/        # DHIS2, platform UI
+│   └── fastr-outputs/      # Default FASTR visualizations
 │
 ├── outputs/                # Generated decks (gitignored)
 ├── fastr-theme.css         # Marp theme for PDF export
