@@ -130,6 +130,39 @@ def main():
     os.makedirs(assets_dir, exist_ok=True)
     print("   + assets/fastr-outputs/ (for your country visualizations)")
 
+    # Create README listing replaceable files
+    assets_readme = '''# Country-Specific FASTR Outputs
+
+Drop your country's FASTR visualization PNGs here. They will automatically
+replace the default charts in your slides.
+
+## Files you can replace
+
+### Data Quality Assessment (Module 1)
+- `m1_Proportion_of_completed_records.png` - Completeness by indicator
+- `m1_Proportion_of_outliers.png` - Outlier detection results
+- `m1_Proportion_of_sub-national_areas_meeting_consistency_criteria.png` - Consistency checks
+- `m1_Overall_DQA_score.png` - Combined DQ score
+- `m1_Mean_DQA_score.png` - Mean DQ score over time
+
+### Data Adjustment (Module 2)
+- `m2_Volume_change_due_to_data_quality_adjustments.png` - Impact of adjustments
+- `m2_Change_in_service_volume_(Admin_area_2).png` - Service volume trends
+
+## How it works
+
+1. Export your visualizations from FASTR with the **exact same filenames**
+2. Drop them in this folder
+3. Run the build script - your charts will appear instead of the defaults
+
+The build script checks this folder first. If a file exists here, it uses yours.
+If not, it falls back to the shared defaults in `assets/fastr-outputs/`.
+'''
+    assets_readme_path = os.path.join(assets_dir, "README.md")
+    with open(assets_readme_path, 'w') as f:
+        f.write(assets_readme)
+    print("   + assets/fastr-outputs/README.md (lists replaceable files)")
+
     # Generate config.py
     config_content = f'''"""
 ═══════════════════════════════════════════════════════════════════════════════
