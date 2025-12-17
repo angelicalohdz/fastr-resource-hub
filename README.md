@@ -1,385 +1,215 @@
 # FASTR Slide Builder
 
-Team collaboration system for building FASTR workshop presentations.
+Build customized FASTR workshop presentations from reusable content modules.
 
 **Repository:** https://github.com/FASTR-Analytics/fastr-slide-builder
 
-## Overview
+## What This Tool Does
 
-This repository contains:
-- **Core content modules** (7 sections) - shared FASTR methodology content
-- **Slide templates** - reusable title, break, agenda, and closing slides
-- **Workshop configs** - customizable settings for each workshop
-- **Build tools** - assemble and convert slide decks
+The FASTR Slide Builder helps you create country-specific workshop presentations by:
+- Combining core FASTR methodology content with your custom slides
+- Auto-filling workshop details and country statistics using `{{variables}}`
+- Intelligently placing breaks and structuring multi-day workshops
+- Exporting to PDF or PowerPoint with FASTR branding
 
 ## Quick Start
 
-### Option 1: GitHub Codespaces (Zero Installation - Recommended)
-
-Work in your browser without installing anything! GitHub Codespaces provides a complete development environment.
-
-1. **Open in Codespaces:**
-   - Go to https://github.com/FASTR-Analytics/fastr-slide-builder
-   - Click green **"Code"** button → **"Codespaces"** tab
-   - Click **"Create codespace on main"**
-   - Wait ~2 minutes for environment setup
-
-2. **Build the example deck:**
-   ```bash
-   python3 tools/02_build_deck.py --workshop example
-   marp outputs/example_deck.md --theme-set fastr-theme.css --pdf
-   ```
-
-3. **Done!** Download the PDF or commit your changes.
-
-**Pre-installed:** Python, Node.js, Marp CLI, Pandoc, VS Code extensions, FASTR theme
-
-**Free tier:** 60 hours/month • Works on any device • No admin rights needed
-
-[See full Codespaces guide](CONTRIBUTING.md#using-github-codespaces)
-
----
-
-### Option 2: Local Setup (Requires Installation)
-
-For local development, you'll need to install Git, Python, VS Code, Node.js, and Marp CLI.
-
-**[See Local Setup Guide](docs/local-setup.md)** for step-by-step installation instructions.
-
----
-
-## Documentation
-
-Comprehensive guides for using the FASTR slide builder:
-
-- **[Full Documentation](docs/)** - All guides and references
-- **[Markdown Guide](docs/markdown-guide.md)** - Cheat sheet for writing Marp slides
-- **[Building Decks](docs/building-decks.md)** - How to assemble and render presentations
-- **[Local Setup](docs/local-setup.md)** - Installation guide for local development
-
-**New to Marp markdown?** Start with the [Markdown Guide](docs/markdown-guide.md) - it's designed to be scannable with lots of examples!
-
-## Building a Workshop Deck (Local or Codespaces)
-
-### 1. Create a New Workshop
+### 3-Step Workflow
 
 ```bash
-# Copy the example workshop folder
-cp -r workshops/example workshops/2025_01_nigeria
+# 1. Set up a new workshop (interactive)
+python3 tools/01_setup_workshop.py
 
-# Edit the configuration
-code workshops/2025_01_nigeria/config.py
+# 2. Build the slide deck
+python3 tools/02_build_deck.py
+
+# 3. Export to PDF (recommended)
+marp outputs/YOUR-WORKSHOP_deck.md --theme-set fastr-theme.css --pdf
 ```
 
-### 2. Configure Your Workshop
+That's it! Your presentation is ready.
 
-Edit `workshops/2025_01_nigeria/config.py`:
+## Key Features
+
+### Flexible Slide Ordering
+Use `deck_order` in `config.py` to control exactly which slides appear and in what order:
 
 ```python
-WORKSHOP_CONFIG = {
-    'workshop_id': '2025_01_nigeria',
-    'name': 'FASTR Workshop - Nigeria',
-    'date': 'January 15-17, 2025',
-    'location': 'Abuja, Nigeria',
-    'facilitators': 'Dr. Smith, Dr. Jones',
-    'contact_email': 'fastr@example.org',
-    'website': 'https://fastr.org',
-    'sections': [1, 2, 3, 4, 5, 6],  # Choose which core sections
-    'include_breaks': True,
-    'include_agenda': True,
-    'include_closing': True,
+'deck_order': [
+    'agenda',                    # Built-in agenda slide
+    'objectives.md',             # Your custom slide
+    'intro',                     # Built-in FASTR intro session
+    'dq_assessment',             # Built-in data quality session
+    'dq-findings.md',            # Your country-specific findings
+    'coverage',                  # Built-in coverage session
+    'next-steps.md',             # Your action items
+]
+```
+
+### Smart Variable Substitution
+Define country data once in `config.py`, use everywhere with `{{variable}}`:
+
+```python
+'country_data': {
+    'total_facilities': '2,847',
+    'reporting_rate': '92%',
+    'survey_anc1': '87%',
 }
 ```
 
-### 3. Build Your Deck
+Then in any slide: "Coverage: {{survey_anc1}}" becomes "Coverage: 87%"
 
-```bash
-# Assemble the markdown
-python3 tools/02_build_deck.py --workshop 2025_01_nigeria
+### Automatic Break Placement
+The builder intelligently adds tea, lunch, and afternoon breaks based on your workshop duration (1, 2, or 3 days).
 
-# Output: outputs/2025_01_nigeria_deck.md
-```
+## Installation Options
 
-### 4. Render to PDF (Recommended)
+### Option 1: GitHub Codespaces (Zero Setup)
+1. Open https://github.com/FASTR-Analytics/fastr-slide-builder
+2. Click **Code** → **Codespaces** → **Create codespace on main**
+3. Everything is pre-installed and ready to use
 
-```bash
-# Render with FASTR styling
-marp outputs/2025_01_nigeria_deck.md --theme-set fastr-theme.css --pdf
+Free tier: 60 hours/month. [Full guide](CONTRIBUTING.md#using-github-codespaces)
 
-# Output: outputs/2025_01_nigeria_deck.pdf
-```
-
-**Or** convert to editable PowerPoint (alternative):
-
-```bash
-python3 tools/03_convert_to_pptx.py outputs/2025_01_nigeria_deck.md
-
-# Output: outputs/2025_01_nigeria_deck.pptx
-```
-
-## Two-Step Workflow
-
-### Step 1: Assemble
-Combine core content + templates + custom slides into markdown.
-
-### Step 2: Render
-Export to PDF (preferred) or PowerPoint.
-
-**Why PDF?**
-- Perfect CSS styling from `fastr-theme.css`
-- Consistent across platforms
-- Smaller file size
-- No font/layout issues
-
-**When to use PowerPoint?**
-- Need to edit slides after export
-- Collaborators prefer PowerPoint
-- Last-minute changes required
-
-## Core Sections
-
-1. **Background & Rationale** - What is FASTR?
-2. **FASTR Approach** - Overview of methodology
-3. **Data Extraction** - DHIS2 integration
-4. **Data Quality Assessment** - Validation and adjustment
-5. **Service Utilization** - Detecting disruptions
-6. **Coverage Analysis** - Population reach estimation
-7. **Facility Assessments** - Phone survey methods
-
-## Customization
-
-### Title Slide
-Automatically uses:
-- Workshop name
-- Date
-- Location
-- Facilitators
-
-### Break Slides
-Tea and lunch breaks with resume times from config.
-
-### Agenda Slide
-Place `agenda.png` in your workshop folder.
-
-### Custom Slides
-Add country-specific content:
-
-```bash
-# Edit custom slides
-code workshops/2025_01_nigeria/custom_slides.md
-```
-
-Then enable in `config.py`:
-```python
-'custom_slides': ['custom_slides.md'],
-```
-
-## Team Workflow
-
-### Contributing Core Content
-
-1. Edit files in `core_content/`
-2. Test your changes:
-   ```bash
-   python3 tools/02_build_deck.py --workshop example
-   ```
-3. Commit and push:
-   ```bash
-   git add core_content/
-   git commit -m "Update data quality section"
-   git push
-   ```
-
-### Creating Workshop-Specific Content
-
-1. Create workshop folder
-2. Add config.py
-3. Add custom slides (optional)
-4. Add agenda image (optional)
-5. Build and test
-6. Commit workshop folder
-
-### Sharing Decks
-
-**Option 1: Commit the markdown to Git**
-```bash
-git add outputs/nigeria_deck.md
-git commit -m "Add Nigeria workshop deck"
-```
-
-**Option 2: Share the PDF/PowerPoint**
-- Export the rendered file
-- Share via email/cloud storage
-- Don't commit large binary files to Git
+### Option 2: Local Development
+Requires: Python 3.7+, Node.js, Marp CLI. [Installation guide](docs/local-setup.md)
 
 ## Folder Structure
 
 ```
 fastr-slide-builder/
-├── core_content/           # Shared FASTR modules
-│   ├── 01_background_rationale.md
-│   ├── 02_fastr_approach.md
-│   ├── ...
-│   └── 07_facility_assessments.md
+├── tools/                  # Build scripts
+│   ├── 01_setup_workshop.py    # Create new workshop (interactive)
+│   ├── 02_build_deck.py        # Assemble markdown deck
+│   └── 03_convert_to_pptx.py   # Export to PowerPoint (optional)
+│
 ├── templates/              # Reusable slide templates
 │   ├── title_slide.md
-│   ├── breaks.md
 │   ├── agenda.md
-│   └── closing.md
-├── workshops/              # Workshop configurations
-│   ├── example/
-│   │   ├── config.py
-│   │   ├── custom_slides.md
-│   │   └── agenda.png
-│   └── 2025_01_nigeria/
-│       └── ...
-├── tools/                  # Build scripts
-│   ├── build_deck.py
-│   ├── convert_to_pptx.py
-│   └── create_fastr_template.py
-├── assets/                 # Shared images/logos
-│   └── ...
+│   ├── closing.md
+│   └── custom_slides/          # Template custom slides
+│
+├── core_content/           # Shared FASTR methodology (7 sections)
+│   ├── 01_background_rationale.md
+│   ├── 02_fastr_approach.md
+│   ├── 03_data_extraction.md
+│   ├── 04a_data_quality_assessment.md
+│   ├── 04b_data_adjustment.md
+│   ├── 05_service_utilization.md
+│   ├── 06_coverage_analysis.md
+│   └── 07_facility_assessments.md
+│
+├── workshops/              # Workshop-specific content
+│   ├── example/                # Reference implementation
+│   └── YOUR-WORKSHOP/
+│       ├── config.py           # Workshop settings & country data
+│       ├── objectives.md       # Custom slide: workshop goals
+│       ├── country-overview.md # Custom slide: country context
+│       ├── dq-findings.md      # Custom slide: DQ results
+│       └── agenda.png          # Agenda image
+│
+├── assets/                 # Shared images (organized by type)
+│   ├── logos/
+│   ├── diagrams/
+│   ├── screenshots/
+│   └── charts/
+│
 ├── outputs/                # Generated decks (gitignored)
-│   └── .gitkeep
-├── fastr-theme.css         # Marp theme (for PDF export)
-├── fastr-reference.pptx    # PowerPoint template
-└── README.md               # This file
+├── fastr-theme.css         # Marp theme for PDF export
+└── fastr-reference.pptx    # PowerPoint template
 ```
 
-## Requirements
+## Built-in Sessions
 
-### Required
-- Python 3.7+
-- Git
+Use these session IDs in your `deck_order`:
 
-### Optional (for rendering)
-- **For PDF export (recommended):**
-  - Marp CLI: `npm install -g @marp-team/marp-cli`
+- `intro` - Background & FASTR approach (~30 min)
+- `extraction` - Data extraction from DHIS2 (~45 min)
+- `dq_assessment` - Data quality assessment (~90 min)
+- `dq_adjustment` - Data adjustment methods (~60 min)
+- `disruption` - Service disruption detection (~90 min)
+- `coverage` - Coverage analysis (~90 min)
+- `facility` - Facility assessments (~30 min)
 
-- **For PowerPoint export:**
-  - Pandoc: `brew install pandoc` (Mac) or see [pandoc.org](https://pandoc.org/installing.html)
+## Customizing Your Workshop
 
-### Installing Marp (Recommended)
-
-```bash
-# Install Node.js first (if not installed)
-# Then install Marp CLI
-npm install -g @marp-team/marp-cli
-
-# Verify installation
-marp --version
-```
-
-## VS Code Setup (Recommended)
-
-### First Time Setup
-
-1. **Install VS Code:** https://code.visualstudio.com/
-
-2. **Open the repository:**
+1. **Run the setup wizard:**
    ```bash
-   cd fastr-slide-builder
-   code .
+   python3 tools/01_setup_workshop.py
    ```
 
-3. **Install recommended extensions:**
-   - VS Code will prompt: "This workspace has extension recommendations"
-   - Click **Install All** to add Marp and Python extensions
-   - Or manually: Extensions → Search "Marp" → Install "Marp for VS Code"
+2. **Edit generated files:**
+   - `config.py` - Workshop details, session order, country statistics
+   - `*.md` files - Custom slides with your content
+   - `agenda.png` - Your workshop agenda image
 
-4. **Verify FASTR theme is working:**
-   - Open any `.md` file (e.g., `workshops/example/custom_slides.md`)
-   - Click the Marp icon in top-right corner (or press `Cmd/Ctrl+K V`)
-   - Preview should show **FASTR teal styling** (not default gray)
-
-**Note:** Settings are pre-configured in `.vscode/settings.json` - no manual configuration needed!
-
-### Previewing Slides in VS Code
-
-- **Open preview:** Click Marp icon in top-right, or `Cmd+K V` (Mac) / `Ctrl+K V` (Windows)
-- **Side-by-side editing:** Preview opens alongside your markdown editor
-- **Live updates:** Preview refreshes as you type
-
-**The preview automatically uses the FASTR theme:**
-- Teal headers (#0f706d)
-- White background
-- Proper FASTR branding
-
-### Editing Markdown
-
-- Headers: Use `#` for slide titles, `##` for sections
-- Slide breaks: `---` on its own line
-- Images: `![Description](path/to/image.png)`
-- Bullets: `-` for lists
-
-VS Code will wrap lines and provide syntax highlighting automatically.
+3. **Build and export:**
+   ```bash
+   python3 tools/02_build_deck.py
+   marp outputs/YOUR-WORKSHOP_deck.md --theme-set fastr-theme.css --pdf
+   ```
 
 ## Common Commands
 
 ```bash
-# Build workshop deck
-python3 tools/02_build_deck.py --workshop WORKSHOP_ID
+# Create new workshop (interactive wizard)
+python3 tools/01_setup_workshop.py
 
-# Render to PDF (recommended)
-marp outputs/DECK.md --theme-set fastr-theme.css --pdf
+# Build deck (interactive - shows all workshops)
+python3 tools/02_build_deck.py
 
-# Convert to PowerPoint
-python3 tools/03_convert_to_pptx.py outputs/DECK.md
+# Build specific workshop (non-interactive)
+python3 tools/02_build_deck.py --workshop 2025-nigeria
 
-# Preview in browser
-marp --preview outputs/DECK.md --theme-set fastr-theme.css
+# Export to PDF (recommended)
+marp outputs/2025-nigeria_deck.md --theme-set fastr-theme.css --pdf
 
-# Create custom PowerPoint template
-python3 tools/create_fastr_template.py
+# Export to PowerPoint (alternative)
+python3 tools/03_convert_to_pptx.py outputs/2025-nigeria_deck.md
 ```
 
-## Troubleshooting
+## PDF vs PowerPoint
 
-### "Workshop config not found"
-- Make sure you created the workshop folder
-- Check that `config.py` exists
-- Verify the workshop ID matches the folder name
+**PDF (Recommended):**
+- Perfect FASTR styling out-of-the-box
+- Consistent across all platforms
+- Smaller file size
+- Ready to present immediately
 
-### "File not found" for images
-- Place images in workshop folder or `assets/`
-- Use relative paths: `../assets/image.png`
-- For agenda: place as `workshops/{id}/agenda.png`
+**PowerPoint:**
+- Allows post-export editing
+- Useful for last-minute changes
+- May require font/layout adjustments
 
-### PDF export has no styling
-- Make sure you use `--theme-set fastr-theme.css`
-- Run from repository root directory
-- Check that `fastr-theme.css` exists
+## Documentation
 
-### PowerPoint export has no styling
-- Check that `fastr-reference.pptx` exists
-- Recreate template: `python3 tools/create_fastr_template.py`
-- Or manually edit Slide Master in PowerPoint
+- **[Full Documentation](docs/)** - Comprehensive guides
+- **[Markdown Guide](docs/markdown-guide.md)** - Marp syntax reference
+- **[Building Decks](docs/building-decks.md)** - Detailed workflow
+- **[Local Setup](docs/local-setup.md)** - Installation instructions
 
-### Content overflows in slides
-- Reduce content in markdown
-- For PowerPoint: edit `fastr-reference.pptx` Slide Master to use smaller fonts
-- For PDF: edit `fastr-theme.css` font sizes
+## Contributing
 
-## Tips for VS Code Users
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on:
+- Contributing to core content
+- Creating workshop-specific content
+- Using GitHub Codespaces
+- Git workflow best practices
 
-1. **Install Marp extension:**
-   - Search for "Marp for VS Code"
-   - Preview slides while editing
+## Requirements
 
-2. **Set up Python:**
-   - Use Python extension
-   - Right-click scripts → "Run Python File in Terminal"
+**Required:**
+- Python 3.7+
 
-3. **Git integration:**
-   - Use Source Control panel
-   - Commit frequently with clear messages
+**Optional (for rendering):**
+- Marp CLI: `npm install -g @marp-team/marp-cli` (for PDF export)
+- Pandoc: `brew install pandoc` (for PowerPoint export)
 
 ## Support
 
-For questions or issues:
-1. Check this README
-2. See `CONTRIBUTING.md` for contribution guidelines
-3. Review example workshop in `workshops/example/`
+1. Check this README and docs/ folder
+2. Review the example workshop: `workshops/example/`
+3. See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guides
 4. Contact the FASTR team
 
 ## License
