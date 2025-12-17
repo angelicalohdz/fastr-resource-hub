@@ -148,20 +148,21 @@ Coverage = (Services Delivered / Target Population) × 100%
 
 **Solution:** Compare each denominator's estimates against survey reference values
 
-**How it works:**
-1. Calculate coverage using each available denominator
-2. Compare each estimate to survey values (where available)
-3. Select the denominator with the **smallest error** (closest to surveys)
+**Error formula:**
+```
+Squared Error = (HMIS Estimate − Survey Value)²
+Total Error = Sum of squared errors across all survey years
+```
 
-**Example - Penta3 Coverage:**
+**Example - Penta3 Coverage (surveys in 2018 and 2021):**
 
-| Denominator | 2019 Estimate | Survey (78%) | Error |
-|-------------|---------------|--------------|-------|
-| Live births (UN) | 82% | 78% | 4% |
-| **Surviving infants** | **76%** | 78% | **2%** ← Best |
-| DTP1-derived | 71% | 78% | 7% |
+| Denominator | 2018 Est | Survey | Error² | 2021 Est | Survey | Error² | Total |
+|-------------|----------|--------|--------|----------|--------|--------|-------|
+| Live births | 82% | 78% | 16 | 85% | 81% | 16 | **32** |
+| **Surv. infants** | **76%** | 78% | 4 | **80%** | 81% | 1 | **5** ← Best |
+| DTP1-derived | 71% | 78% | 49 | 75% | 81% | 36 | **85** |
 
-**FASTR automatically selects the denominator that produces estimates closest to validated survey data.**
+**FASTR selects the denominator with the lowest total squared error.**
 
 ---
 
