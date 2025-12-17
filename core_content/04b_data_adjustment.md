@@ -104,6 +104,12 @@ This prevents gaps from creating false "drops" in service delivery.
 
 ---
 
+## Service Volume Trends: FASTR Output
+
+![Service Volume by Year](../assets/fastr-outputs/m2_Change_in_service_volume_(Admin_area_2).png)
+
+---
+
 ## How to Use Data Quality Information
 
 ---
