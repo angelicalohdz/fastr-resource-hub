@@ -567,9 +567,9 @@ def resolve_asset_overrides(content, workshop_id, base_dir):
     Check for workshop-specific asset overrides and rewrite paths.
 
     If a workshop has assets/fastr-outputs/m1_completeness.png,
-    it will override the default assets/fastr-outputs/m1_completeness.png.
+    it will override the default shared assets/fastr-outputs/m1_completeness.png.
 
-    Paths in content like ../assets/X are rewritten to ../workshops/{id}/assets/X
+    Paths in content like "../shared assets/X" are rewritten to "../workshops/{id}/assets/X"
     if the override exists.
     """
     import re
@@ -588,14 +588,14 @@ def resolve_asset_overrides(content, workshop_id, base_dir):
         original_path = match.group(2)
 
         # Only process paths that reference shared assets
-        if '../assets/' not in original_path and 'assets/' not in original_path:
+        if '../shared assets/' not in original_path and 'shared assets/' not in original_path:
             return full_match
 
-        # Extract the relative path within assets/
-        if '../assets/' in original_path:
-            assets_rel = original_path.split('../assets/', 1)[1]
-        elif original_path.startswith('assets/'):
-            assets_rel = original_path[7:]  # Remove 'assets/'
+        # Extract the relative path within shared assets/
+        if '../shared assets/' in original_path:
+            assets_rel = original_path.split('../shared assets/', 1)[1]
+        elif original_path.startswith('shared assets/'):
+            assets_rel = original_path[14:]  # Remove 'shared assets/'
         else:
             return full_match
 
