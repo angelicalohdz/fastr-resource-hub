@@ -154,175 +154,6 @@ MODULES = {
 
 
 # ═══════════════════════════════════════════════════════════════════════
-# SESSION DEFINITIONS (legacy support)
-# ═══════════════════════════════════════════════════════════════════════
-# These are the logical sessions that can be included in a workshop
-
-SESSIONS = {
-    # Module 0: Introduction to the FASTR Approach
-    'intro': {
-        'files': [
-            'm0_introduction/m0_1_introduce_fastr_approach.md',
-            'm0_introduction/m0_2_overview_of_resources.md',
-            'm0_introduction/m0_3_models_of_implementation.md',
-        ],
-        'name': 'Introduction to FASTR',
-        'short_name': 'Intro',
-        'weight': 'light',
-        'duration': '~30 min',
-    },
-    # Module 1: Identify Questions & Indicators
-    'questions_indicators': {
-        'files': [
-            'm1_identify_questions_indicators/m1_1_fastr_gaps_challenges.md',
-            'm1_identify_questions_indicators/m1_2_development_of_data_use_case.md',
-            'm1_identify_questions_indicators/m1_3_defining_priority_questions.md',
-            'm1_identify_questions_indicators/m1_4_preparing_for_data_extraction.md',
-        ],
-        'name': 'Identify Questions & Indicators',
-        'short_name': 'Questions',
-        'weight': 'medium',
-        'duration': '~60 min',
-    },
-    # Module 2: Data Extraction
-    'extraction': {
-        'files': [
-            'm2_data_extraction/m2_1_why_extract_data.md',
-            'm2_data_extraction/m2_2_tools_for_data_extraction.md',
-        ],
-        'name': 'Data Extraction',
-        'short_name': 'Extraction',
-        'weight': 'medium',
-        'duration': '~45 min',
-    },
-    # Module 3: FASTR Analytics Platform
-    'platform': {
-        'files': [
-            'm3_fastr_analytics_platform/m3_1_overview_of_platform.md',
-            'm3_fastr_analytics_platform/m3_2_accessing_platform.md',
-            'm3_fastr_analytics_platform/m3_3_setting_up_structure.md',
-            'm3_fastr_analytics_platform/m3_4_importing_dataset.md',
-            'm3_fastr_analytics_platform/m3_5_installing_running_modules.md',
-            'm3_fastr_analytics_platform/m3_6_creating_new_project.md',
-            'm3_fastr_analytics_platform/m3_7_creating_visualizations.md',
-            'm3_fastr_analytics_platform/m3_8_creating_reports.md',
-        ],
-        'name': 'FASTR Analytics Platform',
-        'short_name': 'Platform',
-        'weight': 'core',
-        'duration': '~120 min',
-    },
-    # Module 4: Data Quality Assessment
-    'dq_assessment': {
-        'files': [
-            'm4_data_quality_assessment/m4_1_approach_to_dqa.md',
-            'm4_data_quality_assessment/m4_2_indicator_completeness.md',
-            'm4_data_quality_assessment/m4_3_outliers.md',
-            'm4_data_quality_assessment/m4_4_internal_consistency.md',
-            'm4_data_quality_assessment/m4_5_overall_dqa_score.md',
-            'm4_data_quality_assessment/m4_6_assessing_dq_in_platform.md',
-        ],
-        'name': 'Data Quality Assessment',
-        'short_name': 'DQ Assessment',
-        'weight': 'core',
-        'duration': '~90 min',
-    },
-    # Module 5: Data Quality Adjustment
-    'dq_adjustment': {
-        'files': [
-            'm5_data_quality_adjustment/m5_1_approach_to_dq_adjustment.md',
-            'm5_data_quality_adjustment/m5_2_adjustment_for_outliers.md',
-            'm5_data_quality_adjustment/m5_3_adjustment_for_completeness.md',
-            'm5_data_quality_adjustment/m5_4_adjusting_dq_in_platform.md',
-        ],
-        'name': 'Data Quality Adjustment',
-        'short_name': 'DQ Adjustment',
-        'weight': 'core',
-        'duration': '~60 min',
-    },
-    # Module 6: Data Analysis
-    'analysis': {
-        'files': [
-            'm6_data_analysis/m6_1_service_utilization.md',
-            'm6_data_analysis/m6_2_surplus_disruption_analyses.md',
-            'm6_data_analysis/m6_3_service_coverage.md',
-        ],
-        'name': 'Data Analysis',
-        'short_name': 'Analysis',
-        'weight': 'core',
-        'duration': '~120 min',
-    },
-    # Legacy alias for backwards compatibility
-    'disruption': {
-        'files': [
-            'm6_data_analysis/m6_1_service_utilization.md',
-            'm6_data_analysis/m6_2_surplus_disruption_analyses.md',
-        ],
-        'name': 'Service Utilization & Disruption',
-        'short_name': 'Disruption',
-        'weight': 'core',
-        'duration': '~90 min',
-    },
-    'coverage': {
-        'files': [
-            'm6_data_analysis/m6_3_service_coverage.md',
-        ],
-        'name': 'Coverage Analysis',
-        'short_name': 'Coverage',
-        'weight': 'core',
-        'duration': '~60 min',
-    },
-    # Module 7: Results Communication and Data Use
-    'communication': {
-        'files': [
-            'm7_results_communication/m7_1_analytical_thinking_interpretation.md',
-            'm7_results_communication/m7_2_data_visualization_communication.md',
-            'm7_results_communication/m7_3_using_data_for_decision_making.md',
-            'm7_results_communication/m7_4_stakeholder_engagement_advocacy.md',
-            'm7_results_communication/m7_5_practice_quarterly_reporting.md',
-        ],
-        'name': 'Results Communication & Data Use',
-        'short_name': 'Communication',
-        'weight': 'medium',
-        'duration': '~90 min',
-    },
-    # Optional: Facility Assessments (moved to optional folder)
-    'facility': {
-        'files': ['optional/facility_assessments.md'],
-        'name': 'Facility Assessments',
-        'short_name': 'Facility',
-        'weight': 'light',
-        'duration': '~30 min',
-    },
-}
-
-# Mapping from old numeric sections to new session names (for backwards compatibility)
-LEGACY_SECTION_MAP = {
-    1: ['intro'],  # Background becomes part of intro
-    2: ['intro'],  # FASTR Approach becomes part of intro (handled specially)
-    3: ['extraction'],
-    4: ['dq_assessment', 'dq_adjustment'],  # Old section 4 splits into two
-    5: ['disruption'],
-    6: ['coverage'],
-    7: ['facility'],
-}
-
-# Mapping from legacy session names to module prefixes
-SESSION_TO_MODULE = {
-    'intro': 'm0',
-    'questions_indicators': 'm1',
-    'extraction': 'm2',
-    'platform': 'm3',
-    'dq_assessment': 'm4',
-    'dq_adjustment': 'm5',
-    'analysis': 'm6',
-    'disruption': 'm6',  # Part of m6
-    'coverage': 'm6',    # Part of m6
-    'communication': 'm7',
-    'facility': 'm7',    # Optional, but maps to m7 area
-}
-
-# ═══════════════════════════════════════════════════════════════════════
 # SCHEDULE PRESETS
 # ═══════════════════════════════════════════════════════════════════════
 # These define where breaks and day-ends go for 1-5 day workshops
@@ -387,7 +218,7 @@ SCHEDULE_PRESETS = {
 # HELPER FUNCTIONS
 # ═══════════════════════════════════════════════════════════════════════
 
-def resolve_module_prefix(prefix):
+def resolve_module_prefix(prefix, exclude=None):
     """
     Resolve a module prefix to a list of file paths.
 
@@ -397,12 +228,17 @@ def resolve_module_prefix(prefix):
         'm4'   -> all files in m4_data_quality_assessment/
         'm4_2' -> just m4_2_indicator_completeness.md
 
+    Args:
+        prefix: Module prefix like 'm0' or 'm4_2'
+        exclude: Optional list of topic prefixes to exclude (e.g., ['m4_3', 'm4_6'])
+
     Returns: (files, name, is_valid)
         - files: list of relative file paths within core_content/
         - name: display name for the module or topic
         - is_valid: True if prefix was recognized
     """
     import re
+    exclude = exclude or []
 
     # Pattern for module prefix: m0, m1, m2, etc.
     module_match = re.match(r'^m(\d+)$', prefix)
@@ -411,7 +247,11 @@ def resolve_module_prefix(prefix):
         if module_num in MODULES:
             module = MODULES[module_num]
             folder = module['folder']
-            files = [f"{folder}/{topic[1]}" for topic in module['topics']]
+            # Include all topics except those in exclude list
+            files = []
+            for topic_prefix, topic_file in module['topics']:
+                if topic_prefix not in exclude:
+                    files.append(f"{folder}/{topic_file}")
             return (files, module['name'], True)
         return ([], prefix, False)
 
@@ -426,6 +266,9 @@ def resolve_module_prefix(prefix):
             # Find the topic with matching prefix
             for topic_prefix, topic_file in module['topics']:
                 if topic_prefix == prefix:
+                    # Skip if in exclude list
+                    if topic_prefix in exclude:
+                        return ([], prefix, True)  # Valid but excluded
                     # Extract readable topic name from filename
                     topic_name = topic_file.replace('.md', '').replace('_', ' ')
                     # Remove the prefix part (e.g., "m0 1 ")
@@ -524,27 +367,6 @@ def load_workshop_config(workshop_id, base_dir):
     return config_module.WORKSHOP_CONFIG
 
 
-def convert_legacy_sections(config):
-    """Convert old numeric sections to new session names"""
-    if 'sections' in config and isinstance(config.get('sections', []), list):
-        sections = config['sections']
-        if sections and isinstance(sections[0], int):
-            # This is an old-style config with numeric sections
-            new_sessions = []
-            seen = set()
-            for num in sections:
-                if num in LEGACY_SECTION_MAP:
-                    for session in LEGACY_SECTION_MAP[num]:
-                        if session not in seen:
-                            new_sessions.append(session)
-                            seen.add(session)
-            return new_sessions
-
-    # New-style config with session names
-    return config.get('sessions', ['intro', 'extraction', 'dq_assessment',
-                                    'dq_adjustment', 'disruption', 'coverage'])
-
-
 def prompt_for_days(config):
     """Ask user how many days the workshop is"""
     print("\n" + "=" * 70)
@@ -571,16 +393,15 @@ def prompt_for_days(config):
             sys.exit(0)
 
 
-def normalize_to_module(session_id):
-    """Convert a session ID to its module prefix for schedule matching"""
-    # Already a module prefix
-    if is_module_prefix(session_id):
+def normalize_to_module(item):
+    """Convert a deck_order item to its module prefix for schedule matching"""
+    if is_module_prefix(item):
         # For specific topics like m4_2, return the module (m4)
-        if '_' in session_id:
-            return session_id.split('_')[0]
-        return session_id
-    # Legacy session name - look up mapping
-    return SESSION_TO_MODULE.get(session_id, session_id)
+        if '_' in item:
+            return item.split('_')[0]
+        return item
+    # Non-module items (custom .md files, etc.) don't map to modules
+    return None
 
 
 def generate_schedule(sessions, num_days, config):
@@ -639,6 +460,19 @@ def generate_schedule(sessions, num_days, config):
     return schedule
 
 
+def get_module_info(item):
+    """Get display info for a module prefix or custom item"""
+    import re
+    # Check if it's a module prefix (m0, m1, m4_2, etc.)
+    module_match = re.match(r'^m(\d+)(_\d+)?$', item)
+    if module_match:
+        module_num = int(module_match.group(1))
+        if module_num in MODULES:
+            return {'name': MODULES[module_num]['name'], 'duration': ''}
+    # For custom items, just return the item name
+    return {'name': item, 'duration': ''}
+
+
 def preview_schedule(schedule, config):
     """Display a visual preview of the schedule"""
     print("\n" + "-" * 70)
@@ -649,7 +483,7 @@ def preview_schedule(schedule, config):
 
     for i, entry in enumerate(schedule):
         session_id = entry['session']
-        session_info = SESSIONS.get(session_id, {'name': session_id, 'duration': ''})
+        session_info = get_module_info(session_id)
 
         # Day header
         if entry['day'] != current_day:
@@ -859,8 +693,9 @@ def generate_day_end_slide(day_number, next_day_sessions, config):
     # Build preview of next day
     preview_items = []
     for session_id in next_day_sessions[:3]:  # Show up to 3 sessions
-        if session_id in SESSIONS:
-            preview_items.append(SESSIONS[session_id]['short_name'])
+        info = get_module_info(session_id)
+        if info['name'] != session_id:  # It's a module, not a custom file
+            preview_items.append(info['name'])
 
     preview_text = ""
     if preview_items:
@@ -929,6 +764,7 @@ def build_workshop_deck(workshop_id, base_dir, output_file=None, skip_confirmati
 
     # Check if using new deck_order format
     deck_order = config.get('deck_order')
+    exclude_list = config.get('exclude', [])
 
     # Step 2: Determine number of days
     if override_days:
@@ -941,12 +777,14 @@ def build_workshop_deck(workshop_id, base_dir, output_file=None, skip_confirmati
             num_days = 2  # Default for non-interactive mode
 
     # Step 3: Get sessions list for schedule generation
-    if deck_order:
-        # Extract session names from deck_order (non-.md items except 'agenda')
-        sessions = [item for item in deck_order if not item.endswith('.md') and item != 'agenda']
-    else:
-        # Old format
-        sessions = convert_legacy_sections(config)
+    if not deck_order:
+        print("\nError: 'deck_order' is required in config.py")
+        print("   Please define which modules to include using module prefixes (m0, m1, etc.)")
+        print("   Example: 'deck_order': ['agenda', 'm0', 'm2', 'm4', 'm5', 'm6']")
+        sys.exit(1)
+
+    # Extract module items from deck_order (non-.md items except 'agenda')
+    sessions = [item for item in deck_order if not item.endswith('.md') and item != 'agenda']
 
     # Step 4: Generate schedule (for break placement)
     schedule = generate_schedule(sessions, num_days, config)
@@ -992,62 +830,62 @@ paginate: true
     core_content_dir = os.path.join(base_dir, "core_content")
 
     # ═══════════════════════════════════════════════════════════════════════
-    # NEW FORMAT: deck_order list
+    # BUILD DECK FROM deck_order
     # ═══════════════════════════════════════════════════════════════════════
-    if deck_order:
-        print(f"\nAdding slides in order:")
-        current_day = 0
+    print(f"\nAdding slides in order:")
+    current_day = 0
 
-        for item in deck_order:
-            # Check what type of item this is
-            if item == 'agenda':
-                # Agenda slide
-                agenda_path = os.path.join(base_dir, "templates", "agenda.md")
-                agenda_content = read_markdown_file(agenda_path)
-                if agenda_content:
-                    agenda_content = strip_frontmatter(agenda_content)
-                    agenda_content = substitute_variables(agenda_content, config)
-                    deck_content += ensure_slide_break(agenda_content) + "\n"
-                    print(f"   Agenda")
+    for item in deck_order:
+        # Check what type of item this is
+        if item == 'agenda':
+            # Agenda slide
+            agenda_path = os.path.join(base_dir, "templates", "agenda.md")
+            agenda_content = read_markdown_file(agenda_path)
+            if agenda_content:
+                agenda_content = strip_frontmatter(agenda_content)
+                agenda_content = substitute_variables(agenda_content, config)
+                deck_content += ensure_slide_break(agenda_content) + "\n"
+                print(f"   Agenda")
 
-            elif item.endswith('.md'):
-                # Custom slide from workshop folder
-                custom_path = os.path.join(workshop_dir, item)
-                content = read_markdown_file(custom_path)
-                if content:
-                    content = strip_frontmatter(content)
-                    content = substitute_variables(content, config)
-                    deck_content += "\n" + ensure_slide_break(content) + "\n"
-                    print(f"   {item} (custom)")
+        elif item.endswith('.md'):
+            # Custom slide from workshop folder
+            custom_path = os.path.join(workshop_dir, item)
+            content = read_markdown_file(custom_path)
+            if content:
+                content = strip_frontmatter(content)
+                content = substitute_variables(content, config)
+                deck_content += "\n" + ensure_slide_break(content) + "\n"
+                print(f"   {item} (custom)")
 
-            elif item in SESSIONS:
-                # Built-in session
-                session_info = SESSIONS[item]
-                entry = break_info.get(item, {})
+        elif is_module_prefix(item):
+            # Module prefix (m0, m0_1, m4_2, etc.)
+            files, name, is_valid = resolve_module_prefix(item, exclude=exclude_list)
+            entry = break_info.get(item, {})
 
-                # Day separator (for multi-day)
-                if entry.get('day', 1) != current_day:
-                    current_day = entry.get('day', 1)
-                    if num_days > 1:
-                        print(f"\n   DAY {current_day}:")
+            # Day separator (for multi-day)
+            if entry.get('day', 1) != current_day:
+                current_day = entry.get('day', 1)
+                if num_days > 1:
+                    print(f"\n   DAY {current_day}:")
 
-                # Add session content
-                session_overrides = []
-                for filename in session_info['files']:
+            if is_valid and files:
+                # Add all files for this module/topic
+                module_overrides = []
+                for filename in files:
                     filepath = os.path.join(core_content_dir, filename)
                     content = read_markdown_file(filepath)
                     if content:
                         content = strip_frontmatter(content)
                         content = substitute_variables(content, config)
                         content, overrides = resolve_asset_overrides(content, workshop_id, base_dir)
-                        session_overrides.extend(overrides)
+                        module_overrides.extend(overrides)
                         deck_content += "\n" + ensure_slide_break(content) + "\n"
 
-                print(f"   {session_info['name']}")
-                if session_overrides:
-                    print(f"      📊 {len(session_overrides)} custom asset(s)")
+                print(f"   [{item}] {name}")
+                if module_overrides:
+                    print(f"      📊 {len(module_overrides)} custom asset(s)")
 
-                # Add breaks after session
+                # Add breaks after module
                 if entry.get('tea_after'):
                     deck_content += generate_break_slide('tea', config)
                     print(f"      ☕ Tea break")
@@ -1065,108 +903,11 @@ paginate: true
                     next_day_sessions = [e['session'] for e in schedule if e['day'] == current_day + 1]
                     deck_content += generate_day_end_slide(current_day, next_day_sessions, config)
                     print(f"      🌙 End of Day {current_day}")
-
-            elif is_module_prefix(item):
-                # Module prefix (m0, m0_1, m4_2, etc.)
-                files, name, is_valid = resolve_module_prefix(item)
-                if is_valid:
-                    # Add all files for this module/topic
-                    module_overrides = []
-                    for filename in files:
-                        filepath = os.path.join(core_content_dir, filename)
-                        content = read_markdown_file(filepath)
-                        if content:
-                            content = strip_frontmatter(content)
-                            content = substitute_variables(content, config)
-                            content, overrides = resolve_asset_overrides(content, workshop_id, base_dir)
-                            module_overrides.extend(overrides)
-                            deck_content += "\n" + ensure_slide_break(content) + "\n"
-
-                    print(f"   [{item}] {name}")
-                    if module_overrides:
-                        print(f"      📊 {len(module_overrides)} custom asset(s)")
-                else:
-                    print(f"   Warning: Unknown module prefix '{item}'")
-
             else:
-                print(f"   Warning: Unknown item '{item}'")
+                print(f"   Warning: Unknown module prefix '{item}'")
 
-    # ═══════════════════════════════════════════════════════════════════════
-    # OLD FORMAT: sessions + custom_slides
-    # ═══════════════════════════════════════════════════════════════════════
-    else:
-        # Add agenda if enabled
-        if config.get('include_agenda', False):
-            agenda_path = os.path.join(base_dir, "templates", "agenda.md")
-            agenda_content = read_markdown_file(agenda_path)
-            if agenda_content:
-                agenda_content = strip_frontmatter(agenda_content)
-                agenda_content = substitute_variables(agenda_content, config)
-                deck_content += ensure_slide_break(agenda_content) + "\n"
-                print(f"   Agenda slide added")
-
-        # Add custom slides after agenda
-        deck_content += add_custom_slides_at_position('after_agenda', config, workshop_dir, base_dir)
-
-        # Add sessions with breaks
-        print(f"\nAdding sessions with breaks:")
-
-        current_day = 0
-        for i, entry in enumerate(schedule):
-            session_id = entry['session']
-            session_info = SESSIONS.get(session_id)
-
-            if not session_info:
-                print(f"   Warning: Unknown session '{session_id}'")
-                continue
-
-            # Day separator
-            if entry['day'] != current_day:
-                current_day = entry['day']
-                if num_days > 1:
-                    print(f"\n   DAY {current_day}:")
-
-            # Add session content
-            session_overrides = []
-            for filename in session_info['files']:
-                filepath = os.path.join(core_content_dir, filename)
-                content = read_markdown_file(filepath)
-                if content:
-                    content = strip_frontmatter(content)
-                    content = substitute_variables(content, config)
-                    content, overrides = resolve_asset_overrides(content, workshop_id, base_dir)
-                    session_overrides.extend(overrides)
-                    deck_content += "\n" + ensure_slide_break(content) + "\n"
-
-            print(f"   {session_info['name']}")
-            if session_overrides:
-                print(f"      📊 {len(session_overrides)} custom asset(s)")
-
-            # Add custom slides after this session
-            position_key = f"after_{session_id}"
-            deck_content += add_custom_slides_at_position(position_key, config, workshop_dir, base_dir)
-
-            # Add breaks
-            if entry.get('tea_after'):
-                deck_content += generate_break_slide('tea', config)
-                print(f"      ☕ Tea break")
-
-            if entry.get('lunch_after'):
-                deck_content += generate_break_slide('lunch', config)
-                print(f"      🍽️  Lunch break")
-
-            if entry.get('afternoon_tea_after'):
-                deck_content += generate_break_slide('afternoon_tea', config)
-                print(f"      ☕ Afternoon break")
-
-            # End-of-day slide
-            if entry.get('end_of_day') and config.get('include_day_end_slides', True):
-                next_day_sessions = [e['session'] for e in schedule if e['day'] == current_day + 1]
-                deck_content += generate_day_end_slide(current_day, next_day_sessions, config)
-                print(f"      🌙 End of Day {current_day}")
-
-        # Add custom slides before closing
-        deck_content += add_custom_slides_at_position('before_closing', config, workshop_dir, base_dir)
+        else:
+            print(f"   Warning: Unknown item '{item}'")
 
     # Add closing slide
     if config.get('include_closing', True):

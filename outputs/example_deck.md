@@ -670,16 +670,6 @@ We'll resume at 3:30 PM
 
 ---
 
-# See You Tomorrow!
-
-**Day 1 Complete**
-
-We resume tomorrow at **9:00 AM**
-
-**Tomorrow:** DQ Adjustment, Disruption, Coverage
-
----
-
 
 # Data Quality Findings
 
@@ -1010,11 +1000,13 @@ This section will cover:
 ---
 
 
-# Tea Break
+# See You Tomorrow!
 
-**15 minutes**
+**Day 1 Complete**
 
-We'll resume at 10:45 AM
+We resume tomorrow at **9:00 AM**
+
+**Tomorrow:** Data Analysis
 
 ---
 
@@ -1399,56 +1391,6 @@ Detecting when health services are disrupted and measuring the impact
 - Identify areas needing support
 - Quantify catch-up service needs
 - Monitor impact of interventions
-
----
-
-
-# Lunch Break
-
-**60 minutes**
-
-We'll resume at 1:00 PM
-
----
-
-
-# Service Disruption Analysis
-
-## Capital City, Country Findings
-
----
-
-## National Trends
-
-**Analysis period:** [Start year] - [End year]
-
-[Insert chart or describe trend]
-
-**Key observations:**
-- [Observation about COVID-19 period]
-- [Observation about recovery]
-- [Other notable disruptions]
-
----
-
-## Regional Variations
-
-| Region | Disruption Level | Recovery Status |
-|--------|------------------|-----------------|
-| [Region 1] | [Mild/Moderate/Severe] | [Recovered/Recovering] |
-| [Region 2] | [Mild/Moderate/Severe] | [Recovered/Recovering] |
-| [Region 3] | [Mild/Moderate/Severe] | [Recovered/Recovering] |
-
----
-
-## Indicators Most Affected
-
-1. **[Indicator 1]** - [% change during disruption]
-2. **[Indicator 2]** - [% change during disruption]
-3. **[Indicator 3]** - [% change during disruption]
-
-**Least affected:**
-- [Indicator] - remained stable because [reason]
 
 ---
 
@@ -1962,11 +1904,11 @@ Total Error = Sum of squared errors across all survey years
 ---
 
 
-# Lunch Break
+# Tea Break
 
-**60 minutes**
+**15 minutes**
 
-We'll resume at 1:00 PM
+We'll resume at 10:45 AM
 
 ---
 

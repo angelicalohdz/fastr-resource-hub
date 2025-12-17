@@ -33,10 +33,19 @@ WORKSHOP_CONFIG = {
     # SECTION 2: YOUR DECK - What slides, in what order
     # ═══════════════════════════════════════════════════════════════════════
     #
-    # Built-in sessions: 'intro', 'extraction', 'dq_assessment', etc.
-    # Your custom slides: 'objectives.md', 'country-overview.md', etc.
+    # Use module prefixes: m0, m1, m2, m3, m4, m5, m6, m7
+    # Or specific topics: m4_1, m4_2, etc.
+    # Custom slides: 'objectives.md', 'country-overview.md', etc.
     #
-    # Comment out any slides you don't want to include.
+    # Modules:
+    #   m0 = Introduction to FASTR
+    #   m1 = Identify Questions & Indicators
+    #   m2 = Data Extraction
+    #   m3 = FASTR Analytics Platform
+    #   m4 = Data Quality Assessment
+    #   m5 = Data Quality Adjustment
+    #   m6 = Data Analysis
+    #   m7 = Results Communication
 
     'deck_order': [
         # --- Opening ---
@@ -44,21 +53,22 @@ WORKSHOP_CONFIG = {
         'objectives.md',
         'country-overview.md',
 
-        # --- Core Content ---
-        'intro',
+        # --- Core Modules ---
+        'm0',                    # Introduction to FASTR
         'health-priorities.md',
-        'extraction',
-        'dq_assessment',
+        'm2',                    # Data Extraction
+        'm4',                    # Data Quality Assessment
         'dq-findings.md',
-        'dq_adjustment',
-        'disruption',
-        'disruption-local.md',
-        'coverage',
+        'm5',                    # Data Quality Adjustment
+        'm6',                    # Data Analysis
         'coverage-results.md',
 
         # --- Closing ---
         'next-steps.md',
     ],
+
+    # Topics to exclude (optional)
+    # 'exclude': ['m4_6'],     # Example: skip "Assessing DQ in Platform"
 
 
     # ═══════════════════════════════════════════════════════════════════════
