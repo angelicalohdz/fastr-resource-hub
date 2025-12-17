@@ -1,23 +1,26 @@
 # Shared Assets
 
-This folder contains images and assets used across ALL workshop decks.
+Images and assets used across workshop decks.
 
-## Usage
+## Folder Structure
 
-Reference these in any slide using:
-```markdown
-![Logo](../assets/fastr-logo.png)
+```
+assets/
+  logos/        ← FASTR logo, WHO logo, partner logos
+  diagrams/     ← Methodology flowcharts, data flow diagrams
+  screenshots/  ← DHIS2 screenshots, platform UI
+  charts/       ← Example charts, visualizations
 ```
 
-Or from a workshop folder:
+## Usage in Slides
+
+From a workshop folder:
 ```markdown
-![Diagram](../../assets/data-flow-diagram.png)
+![FASTR Logo](../../assets/logos/fastr-logo.png)
+![Data Flow](../../assets/diagrams/data-flow.png)
 ```
 
-## Suggested contents
-
-- `fastr-logo.png` - FASTR logo
-- `who-logo.png` - WHO logo (if applicable)
-- `data-flow-diagram.png` - FASTR data flow
-- `methodology-overview.png` - Methodology diagram
-- Common charts/visualizations used in training
+From core_content:
+```markdown
+![Diagram](../assets/diagrams/input_data.png)
+```
