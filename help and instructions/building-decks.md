@@ -291,7 +291,7 @@ Use these IDs in your `deck_order`:
 |-------|----------|
 | Command not found: marp | Install: `npm install -g @marp-team/marp-cli` |
 | No styling | Include `--theme-set fastr-theme.css` |
-| Images missing | Check paths start with `../shared assets/` |
+| Images missing | Check paths start with `../assets/` |
 
 ---
 

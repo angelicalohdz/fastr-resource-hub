@@ -132,8 +132,8 @@ fastr-slide-builder/
 
 Reference in slides:
 ```markdown
-![](../../shared assets/logos/fastr-logo.png)        # from workshops/
-![](../shared assets/diagrams/data-flow.svg)         # from core_content/
+![](../../assets/logos/fastr-logo.png)        # from workshops/
+![](../assets/diagrams/data-flow.svg)         # from core_content/
 ```
 
 ### Country-Specific Asset Overrides

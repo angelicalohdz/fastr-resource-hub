@@ -39,6 +39,6 @@ Each month, are facilities sending in their reports?
 
 ## Completeness: FASTR Output
 
-![Indicator Completeness](../../shared assets/fastr-outputs/m1_Proportion_of_completed_records.png)
+![Indicator Completeness](../../assets/fastr-outputs/m1_Proportion_of_completed_records.png)
 
 ---

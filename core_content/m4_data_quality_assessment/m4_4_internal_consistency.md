@@ -60,6 +60,6 @@ This accounts for patients visiting different facilities for different services.
 
 ## Consistency: FASTR Output
 
-![Internal Consistency](../../shared assets/fastr-outputs/m1_Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
+![Internal Consistency](../../assets/fastr-outputs/m1_Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
 
 ---

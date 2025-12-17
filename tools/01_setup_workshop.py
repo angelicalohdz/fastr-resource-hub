@@ -380,7 +380,7 @@ def main():
     print("   + agenda.png (placeholder - replace with yours)")
 
     # Copy default FASTR outputs to workshop assets folder
-    default_outputs_dir = os.path.join(base_dir, "shared assets", "fastr-outputs")
+    default_outputs_dir = os.path.join(base_dir, "assets", "fastr-outputs")
     workshop_outputs_dir = os.path.join(workshop_dir, "assets", "fastr-outputs")
 
     if os.path.exists(default_outputs_dir):

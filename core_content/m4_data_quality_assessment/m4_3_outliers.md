@@ -59,6 +59,6 @@ Are there any values that seem way too high compared to what that facility norma
 
 ## Outliers: FASTR Output
 
-![Outliers](../../shared assets/fastr-outputs/m1_Proportion_of_outliers.png)
+![Outliers](../../assets/fastr-outputs/m1_Proportion_of_outliers.png)
 
 ---
