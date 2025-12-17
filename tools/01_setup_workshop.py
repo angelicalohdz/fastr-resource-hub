@@ -125,18 +125,35 @@ def main():
     open(agenda_path, 'w').close()  # Create empty file
     print("   + agenda.png (placeholder - replace with yours)")
 
-    # Create assets folder for country-specific outputs
-    assets_dir = os.path.join(workshop_dir, "assets", "fastr-outputs")
-    os.makedirs(assets_dir, exist_ok=True)
-    print("   + assets/fastr-outputs/ (for your country visualizations)")
+    # Copy default FASTR outputs to workshop assets folder
+    default_outputs_dir = os.path.join(base_dir, "assets", "fastr-outputs")
+    workshop_outputs_dir = os.path.join(workshop_dir, "assets", "fastr-outputs")
 
-    # Create README listing replaceable files
-    assets_readme = '''# Country-Specific FASTR Outputs
+    if os.path.exists(default_outputs_dir):
+        os.makedirs(workshop_outputs_dir, exist_ok=True)
+        copied_count = 0
+        for filename in os.listdir(default_outputs_dir):
+            if filename.endswith('.png'):
+                src = os.path.join(default_outputs_dir, filename)
+                dst = os.path.join(workshop_outputs_dir, filename)
+                shutil.copy2(src, dst)
+                copied_count += 1
+        print(f"   + assets/fastr-outputs/ ({copied_count} default visualizations)")
 
-Drop your country's FASTR visualization PNGs here. They will automatically
-replace the default charts in your slides.
+        # Create README explaining these are defaults to replace
+        assets_readme = '''# FASTR Visualizations
 
-## Files you can replace
+These are **default placeholder charts**. Replace them with your country's
+actual FASTR outputs.
+
+## How to update
+
+1. Run your FASTR analysis for this country
+2. Export the visualizations with the **same filenames**
+3. Replace the files in this folder
+4. Rebuild your deck - your charts will appear in the slides
+
+## Files included
 
 ### Data Quality Assessment (Module 1)
 - `m1_Proportion_of_completed_records.png` - Completeness by indicator
@@ -148,20 +165,11 @@ replace the default charts in your slides.
 ### Data Adjustment (Module 2)
 - `m2_Volume_change_due_to_data_quality_adjustments.png` - Impact of adjustments
 - `m2_Change_in_service_volume_(Admin_area_2).png` - Service volume trends
-
-## How it works
-
-1. Export your visualizations from FASTR with the **exact same filenames**
-2. Drop them in this folder
-3. Run the build script - your charts will appear instead of the defaults
-
-The build script checks this folder first. If a file exists here, it uses yours.
-If not, it falls back to the shared defaults in `assets/fastr-outputs/`.
 '''
-    assets_readme_path = os.path.join(assets_dir, "README.md")
-    with open(assets_readme_path, 'w') as f:
-        f.write(assets_readme)
-    print("   + assets/fastr-outputs/README.md (lists replaceable files)")
+        assets_readme_path = os.path.join(workshop_outputs_dir, "README.md")
+        with open(assets_readme_path, 'w') as f:
+            f.write(assets_readme)
+        print("   + assets/fastr-outputs/README.md")
 
     # Generate config.py
     config_content = f'''"""
@@ -361,8 +369,8 @@ To use your own FASTR outputs instead of defaults:
     print(f"      python3 tools/03_build_deck.py --workshop {workshop_id}")
 
     print(f"\n   Country visualizations:")
-    print(f"   Add your FASTR outputs to assets/fastr-outputs/")
-    print(f"   They'll automatically replace the default charts in slides.")
+    print(f"   Default charts are in assets/fastr-outputs/")
+    print(f"   Replace them with your country's FASTR outputs.")
 
     print("\n" + "=" * 70 + "\n")
 
