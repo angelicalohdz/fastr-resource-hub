@@ -347,10 +347,10 @@ def main():
 
     # Workshop days
     print("\n3. WORKSHOP SCHEDULE\n")
-    days_input = get_input("   How many days? (1, 2, or 3)", "2")
+    days_input = get_input("   How many days? (1-5)", "2")
     try:
         workshop_days = int(days_input)
-        if workshop_days not in [1, 2, 3]:
+        if workshop_days < 1 or workshop_days > 5:
             workshop_days = 2
     except:
         workshop_days = 2

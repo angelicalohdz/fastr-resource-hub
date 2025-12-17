@@ -310,7 +310,7 @@ LEGACY_SECTION_MAP = {
 # ═══════════════════════════════════════════════════════════════════════
 # SCHEDULE PRESETS
 # ═══════════════════════════════════════════════════════════════════════
-# These define where breaks and day-ends go for 1, 2, or 3-day workshops
+# These define where breaks and day-ends go for 1-5 day workshops
 
 SCHEDULE_PRESETS = {
     1: {  # One-day (condensed)
@@ -339,6 +339,29 @@ SCHEDULE_PRESETS = {
         'tea_after': ['intro', 'dq_adjustment', 'coverage'],
         'lunch_after': ['extraction', 'disruption'],
         'afternoon_tea_after': ['dq_assessment'],
+    },
+    4: {  # Four-day (extended)
+        'days': {
+            1: ['intro', 'questions_indicators'],
+            2: ['extraction', 'dq_assessment'],
+            3: ['dq_adjustment', 'disruption'],
+            4: ['coverage', 'communication'],
+        },
+        'tea_after': ['intro', 'extraction', 'dq_adjustment', 'coverage'],
+        'lunch_after': ['questions_indicators', 'dq_assessment', 'disruption'],
+        'afternoon_tea_after': [],
+    },
+    5: {  # Five-day (full curriculum)
+        'days': {
+            1: ['intro', 'questions_indicators'],
+            2: ['extraction', 'platform'],
+            3: ['dq_assessment', 'dq_adjustment'],
+            4: ['analysis', 'disruption'],
+            5: ['coverage', 'communication', 'facility'],
+        },
+        'tea_after': ['intro', 'extraction', 'dq_assessment', 'analysis', 'coverage'],
+        'lunch_after': ['questions_indicators', 'platform', 'dq_adjustment', 'disruption', 'communication'],
+        'afternoon_tea_after': [],
     },
 }
 
@@ -515,15 +538,17 @@ def prompt_for_days(config):
     print("  1. One day (condensed)")
     print("  2. Two days (standard)")
     print("  3. Three days (comprehensive)")
+    print("  4. Four days (extended)")
+    print("  5. Five days (full curriculum)")
 
     while True:
         try:
             choice = input("\nEnter choice [2]: ").strip()
             if choice == "":
                 return 2
-            if choice in ["1", "2", "3"]:
+            if choice in ["1", "2", "3", "4", "5"]:
                 return int(choice)
-            print("Please enter 1, 2, or 3")
+            print("Please enter 1-5")
         except KeyboardInterrupt:
             print("\n\nCancelled by user")
             sys.exit(0)
@@ -1188,7 +1213,7 @@ For more help, see: docs/building-decks.md
         parser.add_argument(
             '--days',
             type=int,
-            choices=[1, 2, 3],
+            choices=[1, 2, 3, 4, 5],
             help='Number of workshop days (default: 2)'
         )
 
