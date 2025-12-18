@@ -415,14 +415,19 @@ def main():
 
     default_str = ",".join(defaults)
     print(f"\n   (* = recommended for standard workshop)")
+    print(f"   (or type 'all' for all modules)")
 
     modules_input = get_input(f"\n   Enter module numbers (comma-separated)", default_str)
 
-    selected_modules = []
-    for m in modules_input.split(','):
-        m = m.strip()
-        if m.isdigit() and int(m) in MODULES:
-            selected_modules.append(int(m))
+    # Handle "all" shortcut
+    if modules_input.lower().strip() in ('all', '*'):
+        selected_modules = list(MODULES.keys())
+    else:
+        selected_modules = []
+        for m in modules_input.split(','):
+            m = m.strip()
+            if m.isdigit() and int(m) in MODULES:
+                selected_modules.append(int(m))
 
     if not selected_modules:
         selected_modules = [int(d) for d in defaults]
