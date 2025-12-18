@@ -501,6 +501,19 @@ def main():
                 'health-priorities.md',
                 'next-steps.md',
             ]
+        },
+        # Country-specific data for {{variable}} substitution in slides
+        # Edit these values to customize your workshop
+        'country_data': {
+            'total_facilities': '[number of facilities]',
+            'facilities_reporting': '[facilities reporting to DHIS2]',
+            'reporting_rate': '[XX%]',
+            'total_population': '[X million]',
+            'women_reproductive_age': '[X million]',
+            'under5_population': '[X million]',
+            'expected_pregnancies': '[X per year]',
+            'expected_births': '[X per year]',
+            'last_survey': '[DHS YYYY or MICS YYYY]',
         }
     }
 

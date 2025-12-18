@@ -438,9 +438,6 @@ def convert_to_pptx(md_file, base_dir, reference_template=None, skip_confirmatio
     if reference_template and os.path.exists(reference_template):
         reference_doc = reference_template
         reference_msg = f"custom template: {os.path.basename(reference_template)}"
-    elif os.path.exists(os.path.join(base_dir, 'fastr-reference.pptx')):
-        reference_doc = os.path.join(base_dir, 'fastr-reference.pptx')
-        reference_msg = "FASTR template (fastr-reference.pptx)"
     else:
         reference_doc = None
         reference_msg = "default Pandoc styling"

@@ -42,16 +42,17 @@ Replace "2025-01-nigeria" with YOUR workshop folder name.
                       BEFORE YOU START
 ═══════════════════════════════════════════════════════════════════════
 
-1. Make sure you have a workshop folder:
-   workshops/YOUR-WORKSHOP-NAME/
+1. Create a workshop using the wizard:
+   python3 tools/01_new_workshop.py
 
-2. Your folder must contain:
-   config.py (workshop settings)
-   custom-slides.md (optional - your content)
-   agenda.png (optional - agenda image)
+2. This creates a folder with:
+   workshop.yaml (settings, schedule, modules)
+   *.md files (customizable slides)
+   media/ folder (for country outputs)
 
-3. Not sure? Look at the example:
-   workshops/example/
+3. Edit workshop.yaml to customize:
+   - country_data section for {{variable}} substitution
+   - deck_order to add/remove slides
 
 ═══════════════════════════════════════════════════════════════════════
 """
