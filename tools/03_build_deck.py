@@ -321,9 +321,10 @@ def list_available_workshops(base_dir):
     workshops = []
     for item in os.listdir(workshops_dir):
         item_path = os.path.join(workshops_dir, item)
-        config_path = os.path.join(item_path, "config.py")
+        config_py = os.path.join(item_path, "config.py")
+        config_yaml = os.path.join(item_path, "workshop.yaml")
 
-        if os.path.isdir(item_path) and os.path.exists(config_path):
+        if os.path.isdir(item_path) and (os.path.exists(config_py) or os.path.exists(config_yaml)):
             workshops.append(item)
 
     return sorted(workshops)
@@ -340,9 +341,8 @@ def prompt_for_workshop(base_dir):
     if not workshops:
         print("No workshops found!")
         print("\nTo create a workshop:")
-        print("   1. Copy workshops/example/ to workshops/YOUR-NAME/")
-        print("   2. Edit workshops/YOUR-NAME/config.py")
-        print("   3. Run this script again")
+        print("   python3 tools/01_new_workshop.py")
+        print("\nThen run this script again.")
         sys.exit(1)
 
     for i, workshop in enumerate(workshops, 1):

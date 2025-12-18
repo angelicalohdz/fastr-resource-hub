@@ -1,0 +1,101 @@
+workshop:
+  id: 2025-nigeria
+  name: FASTR Workshop - Nigeria
+  country: Nigeria
+  location: Lagos
+  date: January 10-15, 2026
+  facilitators: TBD
+  contact_email: fastr@worldbank.org
+schedule:
+  days: 5
+  start_time: 9:00 AM
+  tea_time: 10:30 AM
+  lunch_time: 12:30 PM
+  afternoon_tea: 3:30 PM
+  agenda:
+    day1:
+    - time: 9:00 AM
+      session: Welcome & Introductions
+      duration: 15
+    - time: 9:15 AM
+      session: Identify Questions & Indicators
+      module: m1
+      duration: 60
+    - time: 10:30 AM
+      session: Tea Break
+      type: break
+      duration: 15
+    - time: 10:45 AM
+      session: Data Extraction
+      module: m2
+      duration: 30
+    day2:
+    - time: 9:00 AM
+      session: Welcome & Introductions
+      duration: 15
+    - time: 9:15 AM
+      session: The FASTR Data Analytics Platform
+      module: m3
+      duration: 120
+    - time: 10:30 AM
+      session: Tea Break
+      type: break
+      duration: 15
+    day3:
+    - time: 9:00 AM
+      session: Welcome & Introductions
+      duration: 15
+    - time: 9:15 AM
+      session: Data Quality Assessment
+      module: m4
+      duration: 75
+    - time: 10:30 AM
+      session: Tea Break
+      type: break
+      duration: 15
+    day4:
+    - time: 9:00 AM
+      session: Welcome & Introductions
+      duration: 15
+    - time: 9:15 AM
+      session: Data Quality Adjustment
+      module: m5
+      duration: 60
+    - time: 10:30 AM
+      session: Tea Break
+      type: break
+      duration: 15
+    day5:
+    - time: 9:00 AM
+      session: Welcome & Introductions
+      duration: 15
+    - time: 9:15 AM
+      session: Data Analysis
+      module: m6
+      duration: 90
+    - time: 10:30 AM
+      session: Tea Break
+      type: break
+      duration: 15
+content:
+  modules:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  deck_order:
+  - agenda
+  - m1
+  - m2
+  - m3
+  - m4
+  - m5
+  - m6
+  - next-steps.md
+  custom_slides:
+  - objectives.md
+  - country-overview.md
+  - health-priorities.md
+  - next-steps.md
