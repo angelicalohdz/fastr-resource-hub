@@ -1,6 +1,6 @@
-# Markdown Reference Guide
+# Editing Methodology Content
 
-A scannable cheat sheet for writing FASTR content and slides.
+How to write and edit FASTR methodology files using Markdown.
 
 ---
 

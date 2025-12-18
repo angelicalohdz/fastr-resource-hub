@@ -103,10 +103,10 @@ This text is documentation only again.
 
 | Guide | When to read it |
 |-------|-----------------|
-| [01 Local Setup](01_local_setup.md) | Setting up your computer |
-| [02 Codespaces Setup](02_codespaces_setup.md) | Working in browser (no install needed) |
-| [03 Building Workshops](03_building_workshops.md) | Creating workshop presentations |
-| [04 Markdown Reference](04_markdown_reference.md) | Syntax for formatting slides |
+| [01 Editing Content](01_editing_content.md) | Markdown syntax & SLIDE markers |
+| [02 Building Workshops](02_building_workshops.md) | Creating workshop presentations |
+| [03 Local Setup](03_local_setup.md) | Setting up your computer |
+| [04 Codespaces Setup](04_codespaces_setup.md) | Working in browser (no install needed) |
 
 ---
 

@@ -17,10 +17,10 @@ New to this project? **[Read the Start Here guide](help%20and%20instructions/00_
 | Guide | What it covers |
 |-------|----------------|
 | [00 Start Here](help%20and%20instructions/00_start_here.md) | Overview and key concepts |
-| [01 Local Setup](help%20and%20instructions/01_local_setup.md) | Install on your computer |
-| [02 Codespaces](help%20and%20instructions/02_codespaces_setup.md) | Work in browser (no install) |
-| [03 Building Workshops](help%20and%20instructions/03_building_workshops.md) | Create presentations |
-| [04 Markdown Reference](help%20and%20instructions/04_markdown_reference.md) | Syntax guide |
+| [01 Editing Content](help%20and%20instructions/01_editing_content.md) | Write & edit methodology files |
+| [02 Building Workshops](help%20and%20instructions/02_building_workshops.md) | Create presentations |
+| [03 Local Setup](help%20and%20instructions/03_local_setup.md) | Install on your computer |
+| [04 Codespaces](help%20and%20instructions/04_codespaces_setup.md) | Work in browser (no install) |
 
 ---
 

@@ -706,8 +706,8 @@ Congratulations! You now have a complete local development environment for the F
 
 ### Next Steps
 
-- **Learn markdown:** See [Markdown Guide](04_markdown_reference.md)
-- **Build your first deck:** See [Building Decks Guide](03_building_workshops.md)
+- **Learn markdown:** See [Editing Content](01_editing_content.md)
+- **Build your first deck:** See [Building Workshops](02_building_workshops.md)
 - **Contribute content:** See [CONTRIBUTING.md](../CONTRIBUTING.md)
 - **Explore examples:** Check `workshops/example/`
 - **View methodology docs:** https://fastr-analytics.github.io/fastr-slide-builder/
