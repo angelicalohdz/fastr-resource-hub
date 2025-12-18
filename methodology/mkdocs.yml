@@ -61,14 +61,14 @@ theme:
     # - navigation.tabs           # Disabled: use sidebar instead of horizontal tabs
     # - navigation.tabs.sticky    # Disabled: use sidebar instead
     - navigation.sections         # Navigation sections
-    - navigation.expand           # Expand navigation by default
+    # - navigation.expand         # Disabled: let users expand/collapse
     - navigation.indexes          # Section index pages
     - navigation.top              # Back to top button
     - navigation.footer           # Footer navigation
 
     # Table of Contents
     - toc.follow                  # TOC follows scrolling
-    - toc.integrate               # TOC integrated into navigation
+    # - toc.integrate             # Disabled: keep TOC on right, modules on left
 
     # Search
     - search.suggest              # Search suggestions
