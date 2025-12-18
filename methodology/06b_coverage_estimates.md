@@ -1525,7 +1525,7 @@ Same as national, plus:
 ////////////////////////////////////////////////////////////////////
 -->
 
-<!-- SLIDE:m6b_1 -->
+<!-- SLIDE:m6_4 -->
 ## Service Coverage Estimates
 
 The Coverage Estimates module (Module 4 in the FASTR analytics platform) estimates health service coverage by answering: **"What percentage of the target population received this health service?"**
@@ -1550,7 +1550,7 @@ The Coverage Estimates module (Module 4 in the FASTR analytics platform) estimat
 - Generate final coverage estimates
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6b_2 -->
+<!-- SLIDE:m6_5 -->
 ## Coverage Estimates: FASTR Outputs
 
 The FASTR analysis generates coverage estimate visualizations at multiple geographic levels:

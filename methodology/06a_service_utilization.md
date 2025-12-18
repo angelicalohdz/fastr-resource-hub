@@ -923,7 +923,7 @@ The control chart level determines where the statistical modeling occurs (trend 
 ////////////////////////////////////////////////////////////////////
 -->
 
-<!-- SLIDE:m6a_1 -->
+<!-- SLIDE:m6_1 -->
 ## Service Utilization Analysis
 
 The Service Utilization module (Module 3 in the FASTR analytics platform) analyzes health service delivery patterns to detect and quantify disruptions in service volumes over time.
@@ -947,7 +947,7 @@ The Service Utilization module (Module 3 in the FASTR analytics platform) analyz
 - Calculate shortfalls and surpluses in absolute numbers
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6a_2 -->
+<!-- SLIDE:m6_2 -->
 ## Surplus and Disruption Analyses
 
 The module detects multiple types of service disruptions:
@@ -971,7 +971,7 @@ Disruption analysis quantifies shortfalls and surpluses by comparing:
 Results are reported in absolute numbers and percentages at each geographic level.
 <!-- /SLIDE -->
 
-<!-- SLIDE:m6a_3 -->
+<!-- SLIDE:m6_3 -->
 ## Service Utilization: FASTR Outputs
 
 The FASTR analysis generates four main visual outputs for disruption analysis:

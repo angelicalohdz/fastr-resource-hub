@@ -115,7 +115,9 @@ TOPIC_NAMES = {
     # m6 - Data Analysis (from 06a_service_utilization.md, 06b_coverage_estimates.md)
     'm6_1': 'service_utilization',
     'm6_2': 'surplus_disruption_analyses',
-    'm6_3': 'service_coverage',
+    'm6_3': 'service_utilization_outputs',
+    'm6_4': 'service_coverage',
+    'm6_5': 'coverage_outputs',
 
     # m7 - Results Communication (from 07_results_communication.md)
     'm7_1': 'analytical_thinking_interpretation',
