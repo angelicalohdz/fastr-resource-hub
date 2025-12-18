@@ -1,8 +1,20 @@
-# Content Action Plan: Methodology Slides
+# Content Action Plan: Methodology Modules
 
-Audit of slide content status across all methodology modules.
+Audit of content status across all methodology modules.
 
-> **Note:** This is a suggested action plan for team discussion. The content needs and priorities listed here are initial recommendations - the team should review together and adjust based on actual requirements and expertise.
+> **Note:** This is a suggested action plan for team discussion. The content needs and priorities listed here are initial recommendations - the team should review together and adjust based on actual requirements.
+
+---
+
+## Content Creation Strategy
+
+**Approach:** Use AI to extract and adapt content from existing FASTR workshop decks and training materials.
+
+1. Gather existing PowerPoint/PDF decks for each module
+2. Use AI to extract relevant content into markdown format
+3. Adapt content to fit the methodology documentation structure
+4. Add SLIDE markers for workshop presentation extraction
+5. Review and refine with subject matter experts
 
 ---
 
@@ -12,26 +24,27 @@ Audit of slide content status across all methodology modules.
 |--------|---------|
 | **DRAFTED** | Content exists, needs review and sign-off |
 | **PARTIAL** | Some content exists, more needed |
-| **PLACEHOLDER** | Just headers, no real content yet |
+| **PLACEHOLDER** | Module structure exists but no real content - needs full creation |
 
 ---
 
 ## Summary
 
-| Module | Status | Slides | Action Needed |
-|--------|--------|--------|---------------|
-| M0 Introduction | DRAFTED | 5 | Review needed |
-| M1 Questions & Indicators | PLACEHOLDER | 4 | Create all content |
-| M2 Data Extraction | PARTIAL | 2 | Complete 1 slide |
-| M3 FASTR Platform | PLACEHOLDER | 8 | Create all content |
-| M4 DQ Assessment | DRAFTED | 5 | Review needed |
-| M5 DQ Adjustment | DRAFTED | 3 | Review needed |
-| M6a Service Utilization | PARTIAL | 2 | Review + consider expansion |
-| M6b Coverage Estimates | PARTIAL | 1 | Review + consider expansion |
-| M7 Results Communication | PLACEHOLDER | 5 | Create all content |
+| Module | Status | Action Needed |
+|--------|--------|---------------|
+| M0 Introduction | DRAFTED | Review needed |
+| M1 Questions & Indicators | PLACEHOLDER | **Create entire module content** |
+| M2 Data Extraction | PARTIAL | Complete missing content |
+| M3 FASTR Platform | PLACEHOLDER | **Create entire module content** |
+| M4 DQ Assessment | DRAFTED | Review needed |
+| M5 DQ Adjustment | DRAFTED | Review needed |
+| M6a Service Utilization | PARTIAL | Review + consider expansion |
+| M6b Coverage Estimates | PARTIAL | Review + consider expansion |
+| M7 Results Communication | PLACEHOLDER | **Create entire module content** |
 
-**Total slides needing content: 17 placeholder + 1 partial = 18 slides**
-**Total slides needing review: 13 drafted slides**
+**Modules needing full content creation: M1, M3, M7**
+**Modules needing review: M0, M4, M5**
+**Modules needing completion: M2, M6a, M6b**
 
 ---
 
@@ -51,14 +64,16 @@ Audit of slide content status across all methodology modules.
 ---
 
 ### Module 1: Identify Questions & Indicators (01_identify_questions_indicators.md)
-**Status: PLACEHOLDER - ALL SLIDES NEED CONTENT**
+**Status: PLACEHOLDER - NEEDS FULL MODULE CREATION**
 
-| Slide ID | Title | Status | Content Needed |
-|----------|-------|--------|----------------|
-| m1_1 | 1.1 Introduction to FASTR: Gaps and Challenges | Placeholder | Gaps/challenges FASTR addresses with examples |
-| m1_2 | 1.2 Development of a Data Use Case | Placeholder | Co-creation workshop template and guidance |
-| m1_3 | 1.3 Defining Priority Questions and Selecting Indicators | Placeholder | Indicator selection framework with decision trees |
-| m1_4 | 1.4 Preparing for Data Extraction | Placeholder | Pre-extraction checklist and DHIS2 mapping guide |
+**Source material needed:** Existing workshop decks covering indicator selection, data use cases, stakeholder engagement.
+
+| Slide ID | Title | Status |
+|----------|-------|--------|
+| m1_1 | 1.1 Introduction to FASTR: Gaps and Challenges | Placeholder |
+| m1_2 | 1.2 Development of a Data Use Case | Placeholder |
+| m1_3 | 1.3 Defining Priority Questions and Selecting Indicators | Placeholder |
+| m1_4 | 1.4 Preparing for Data Extraction | Placeholder |
 
 ---
 
@@ -73,18 +88,20 @@ Audit of slide content status across all methodology modules.
 ---
 
 ### Module 3: FASTR Analytics Platform (03_fastr_analytics_platform.md)
-**Status: PLACEHOLDER - ALL SLIDES NEED CONTENT**
+**Status: PLACEHOLDER - NEEDS FULL MODULE CREATION**
 
-| Slide ID | Title | Status | Content Needed |
-|----------|-------|--------|----------------|
-| m3_1 | 3.1 Overview of the Platform | Placeholder | Platform architecture overview with screenshots |
-| m3_2 | 3.2 Accessing the Platform | Placeholder | Access instructions, credential management |
-| m3_3 | 3.3 Setting Up the Structure | Placeholder | Configuration step-by-step with examples |
-| m3_4 | 3.4 Importing a Dataset | Placeholder | Data import workflow with validation screenshots |
-| m3_5 | 3.5 Installing and Running Modules | Placeholder | Module installation procedures |
-| m3_6 | 3.6 Creating a New Project | Placeholder | Project setup wizard walkthrough |
-| m3_7 | 3.7 Creating Visualizations | Placeholder | Visualization builder guide |
-| m3_8 | 3.8 Creating Reports | Placeholder | Report generation templates and examples |
+**Source material needed:** Platform user guides, training decks, screenshots from the FASTR analytics platform.
+
+| Slide ID | Title | Status |
+|----------|-------|--------|
+| m3_1 | 3.1 Overview of the Platform | Placeholder |
+| m3_2 | 3.2 Accessing the Platform | Placeholder |
+| m3_3 | 3.3 Setting Up the Structure | Placeholder |
+| m3_4 | 3.4 Importing a Dataset | Placeholder |
+| m3_5 | 3.5 Installing and Running Modules | Placeholder |
+| m3_6 | 3.6 Creating a New Project | Placeholder |
+| m3_7 | 3.7 Creating Visualizations | Placeholder |
+| m3_8 | 3.8 Creating Reports | Placeholder |
 
 ---
 
@@ -134,55 +151,54 @@ Audit of slide content status across all methodology modules.
 ---
 
 ### Module 7: Results Communication (07_results_communication.md)
-**Status: PLACEHOLDER - ALL SLIDES NEED CONTENT**
+**Status: PLACEHOLDER - NEEDS FULL MODULE CREATION**
 
-| Slide ID | Title | Status | Content Needed |
-|----------|-------|--------|----------------|
-| m7_1 | 7.1 Analytical Thinking & Interpretation | Placeholder | Interpretation framework with case studies |
-| m7_2 | 7.2 Data Visualization, Communication & Message Development | Placeholder | Visualization best practices with examples |
-| m7_3 | 7.3 Using Data for Decision-Making | Placeholder | Decision-making frameworks with templates |
-| m7_4 | 7.4 Stakeholder Engagement & Advocacy | Placeholder | Stakeholder mapping and engagement strategies |
-| m7_5 | 7.5 Practice: Generating Quarterly Reporting Products | Placeholder | Quarterly reporting workflow and QA checklist |
+**Source material needed:** Data use and communication training decks, stakeholder engagement guides, reporting templates.
+
+| Slide ID | Title | Status |
+|----------|-------|--------|
+| m7_1 | 7.1 Analytical Thinking & Interpretation | Placeholder |
+| m7_2 | 7.2 Data Visualization, Communication & Message Development | Placeholder |
+| m7_3 | 7.3 Using Data for Decision-Making | Placeholder |
+| m7_4 | 7.4 Stakeholder Engagement & Advocacy | Placeholder |
+| m7_5 | 7.5 Practice: Generating Quarterly Reporting Products | Placeholder |
 
 ---
 
 ## Priority Action Items
 
-> **These are suggestions** - the team should discuss and confirm what content is actually needed for each slide.
+> **These are suggestions** - the team should discuss and confirm what's actually needed.
 
-### HIGH PRIORITY (Placeholder modules)
+### HIGH PRIORITY: Full Module Creation
 
-**Module 1: Identify Questions & Indicators** (4 slides)
-- [ ] m1_1: Gaps and challenges content
-- [ ] m1_2: Data use case development
-- [ ] m1_3: Indicator selection framework
-- [ ] m1_4: Pre-extraction preparation
+These modules need complete content - use AI to extract from existing decks:
 
-**Module 3: FASTR Analytics Platform** (8 slides)
-- [ ] m3_1: Platform overview
-- [ ] m3_2: Access instructions
-- [ ] m3_3: Structure setup
-- [ ] m3_4: Dataset import
-- [ ] m3_5: Module installation
-- [ ] m3_6: Project creation
-- [ ] m3_7: Visualization creation
-- [ ] m3_8: Report generation
+**Module 1: Identify Questions & Indicators**
+- [ ] Gather existing workshop decks on indicator selection
+- [ ] Extract content using AI
+- [ ] Adapt to methodology format with SLIDE markers
 
-**Module 7: Results Communication** (5 slides)
-- [ ] m7_1: Analytical thinking
-- [ ] m7_2: Data visualization
-- [ ] m7_3: Decision-making
-- [ ] m7_4: Stakeholder engagement
-- [ ] m7_5: Quarterly reporting practice
+**Module 3: FASTR Analytics Platform**
+- [ ] Gather platform training materials and screenshots
+- [ ] Extract content using AI
+- [ ] Adapt to methodology format with SLIDE markers
 
-### MEDIUM PRIORITY (Partial modules)
+**Module 7: Results Communication**
+- [ ] Gather data use and communication training decks
+- [ ] Extract content using AI
+- [ ] Adapt to methodology format with SLIDE markers
 
-**Module 2: Data Extraction** (1 slide)
-- [ ] m2_2: Tools for data extraction
+### MEDIUM PRIORITY: Review & Completion
 
-**Modules 6a/6b: Consider Expansion**
-- [ ] Add visualization-specific slides for service utilization
-- [ ] Add visualization-specific slides for coverage estimates
+**Drafted modules (need review):**
+- [ ] M0 Introduction - review content
+- [ ] M4 DQ Assessment - review content
+- [ ] M5 DQ Adjustment - review content
+
+**Partial modules (need completion):**
+- [ ] M2 Data Extraction - complete m2_2
+- [ ] M6a Service Utilization - review + consider expansion
+- [ ] M6b Coverage Estimates - review + consider expansion
 
 ---
 
