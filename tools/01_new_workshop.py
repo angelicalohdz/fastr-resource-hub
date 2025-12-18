@@ -756,28 +756,53 @@ schedule:
 # CONTENT - What slides appear in the deck
 # ───────────────────────────────────────────────────────────────────────
 # deck_order controls what appears and in what order:
-#   - 'agenda'     → Generated agenda slide(s)
-#   - 'm0', 'm1'   → All slides from that module
-#   - 'm3_1'       → Single topic from module 3 (for splitting long modules)
-#   - 'file.md'    → Custom slide from this workshop folder
+#   - 'agenda'          → Generated agenda slide(s)
+#   - 'm0', 'm1'        → All slides from that module
+#   - 'm3_1'            → Single topic (for splitting long modules)
+#   - '01_objectives.md' → Custom slide from this workshop folder
 #
-# TO CHANGE ORDER: Rearrange items in deck_order
-# TO REMOVE MODULE: Delete it from deck_order
-# TO ADD CUSTOM SLIDE: Add filename.md and list it in deck_order
+# CUSTOM SLIDES (edit these in your workshop folder):
+#   01_objectives.md       - Workshop objectives (after agenda)
+#   02_country-overview.md - Country context (before data modules)
+#   03_health-priorities.md - Health priorities to focus on
+#   04_coverage-results.md - Coverage analysis results
+#   05_disruption-local.md - Local disruption analysis
+#   06_dq-findings.md      - Data quality findings
+#   99_next-steps.md       - Action items (at end)
+#
+# TO MOVE A SLIDE: Cut and paste it to a new position in deck_order
+# TO REMOVE: Delete the line from deck_order (file stays for later use)
+# TO ADD NEW: Create a .md file and add it to deck_order
 # ───────────────────────────────────────────────────────────────────────
 
 content:
   modules: {selected_modules}
   deck_order:
+    - agenda
+    - 01_objectives.md        # Workshop goals
 """)
-        for item in deck_order_items:
-            f.write(f"    - {item}\n")
+        # Add country overview after intro if m0 is included
+        if 0 in selected_modules:
+            f.write(f"    - m0\n")
+        f.write(f"    - 02_country-overview.md  # Country context\n")
+        f.write(f"    - 03_health-priorities.md # Focus areas\n")
 
-        f.write(f"""  custom_slides:
-    - objectives.md
-    - country-overview.md
-    - health-priorities.md
-    - next-steps.md
+        # Add remaining modules
+        for item in deck_order_items:
+            if item not in ['agenda', 'm0', 'next-steps.md']:
+                f.write(f"    - {item}\n")
+
+        f.write(f"    - 99_next-steps.md        # Action items\n")
+
+        f.write(f"""
+  custom_slides:
+    - 01_objectives.md
+    - 02_country-overview.md
+    - 03_health-priorities.md
+    - 04_coverage-results.md
+    - 05_disruption-local.md
+    - 06_dq-findings.md
+    - 99_next-steps.md
 
 # ───────────────────────────────────────────────────────────────────────
 # COUNTRY DATA - Variables for {{{{placeholder}}}} substitution
