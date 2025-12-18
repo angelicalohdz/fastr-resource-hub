@@ -561,13 +561,17 @@ def generate_schedule(sessions, num_days, config):
         for module_id in day_modules:
             # Find sessions that map to this module
             matching_sessions = [s for s, m in session_modules.items() if m == module_id]
-            for session_id in matching_sessions:
+            # Sort to ensure consistent order (m3_1, m3_2, m3_3, etc.)
+            matching_sessions = sorted(matching_sessions)
+            for idx, session_id in enumerate(matching_sessions):
+                is_last_in_module = (idx == len(matching_sessions) - 1)
                 entry = {
                     'session': session_id,
                     'day': day_num,
-                    'tea_after': module_id in preset.get('tea_after', []),
-                    'lunch_after': module_id in preset.get('lunch_after', []),
-                    'afternoon_tea_after': module_id in preset.get('afternoon_tea_after', []),
+                    # Only add breaks after the LAST topic in a module
+                    'tea_after': is_last_in_module and module_id in preset.get('tea_after', []),
+                    'lunch_after': is_last_in_module and module_id in preset.get('lunch_after', []),
+                    'afternoon_tea_after': is_last_in_module and module_id in preset.get('afternoon_tea_after', []),
                 }
                 schedule.append(entry)
 
