@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## 7.2 Data Visualization, Communication & Message Development
+## Data Visualization, Communication & Message Development
 
 *Content to be developed*
 

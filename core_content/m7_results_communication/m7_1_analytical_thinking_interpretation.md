@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## 7.1 Analytical Thinking & Interpretation
+## Analytical Thinking & Interpretation
 
 *Content to be developed*
 

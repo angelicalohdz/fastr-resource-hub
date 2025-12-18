@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## 7.5 Practice: Generating Quarterly Reporting Products
+## Generating Quarterly Reporting Products
 
 *Content to be developed*
 

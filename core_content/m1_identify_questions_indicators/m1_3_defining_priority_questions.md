@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## 1.3 Defining Priority Questions and Selecting Indicators
+## Defining Priority Questions and Selecting Indicators
 
 *Content to be developed*
 

@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## 2.1 Why Extract Data?
+## Why Extract Data?
 
 ### Why Extract Data from DHIS2? Why not analyse directly inside DHIS2?
 

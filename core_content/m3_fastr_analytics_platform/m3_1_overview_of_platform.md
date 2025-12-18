@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## 3.1 Overview of the Platform
+## Overview of the Platform
 
 *Content to be developed*
 

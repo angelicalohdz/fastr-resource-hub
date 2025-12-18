@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## 1.2 Development of a Data Use Case
+## Development of a Data Use Case
 
 *Content to be developed*
 

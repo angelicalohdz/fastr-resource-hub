@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-### Technical Approaches
+## Technical Approaches
 
 FASTR's four technical approaches, underpinned by capacity strengthening and data use support, enable countries to use rapid-cycle analytics for strengthening PHC systems and improving RMNCAH-N outcomes through the timely and high-frequency analysis and use of data.
 
@@ -16,6 +16,8 @@ FASTR's four technical approaches, underpinned by capacity strengthening and dat
 
 4. **Follow-on analyses** employ root cause analysis and implementation research approaches to provide deeper understanding of issues uncovered by rapid-cycle analytics (e.g., explaining district-level performance variation, contextualizing the impact of health systems reforms, or investigating underlying causes of data quality issues and service delivery disruptions).
 
----
+Illustrative capacity-building activities include support to automate the extraction, cleaning, and analysis of routine data and support to institutionalize rapid phone survey data collection and analysis approaches. Data use support prioritizes the integration of rapid-cycle analytics into existing data review and feedback mechanisms at national and subnational levels to strengthen the systematic use of data for decision making.
 
-![Rapid-cycle analytics under the Frequent Assessments and System Tools for Resilience (FASTR) initiative.](../../resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
+![Rapid-cycle analytics under the Frequent Assessments and System Tools for Resilience (FASTR) initiative.](../../resources/default_outputs/Technical-Rapid-cycle-analytics--V3.svg)
+
+*Figure 3. Rapid-cycle analytics under the Frequent Assessments and System Tools for Resilience (FASTR) initiative*

@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## 7.4 Stakeholder Engagement & Advocacy
+## Stakeholder Engagement & Advocacy
 
 *Content to be developed*
 

@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## 3.8 Creating Reports
+## Creating Reports
 
 *Content to be developed*
 

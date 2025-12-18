@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-# Data Quality Assessment
+## Data Quality Assessment
 
 Understanding the reliability of routine health data
 

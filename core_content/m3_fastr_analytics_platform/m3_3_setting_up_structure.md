@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## 3.3 Setting Up the Structure
+## Setting Up the Structure
 
 *Content to be developed*
 

@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## 7.3 Using Data for Decision-Making
+## Using Data for Decision-Making
 
 *Content to be developed*
 

@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## 3.5 Installing and Running Modules
+## Installing and Running Modules
 
 *Content to be developed*
 
