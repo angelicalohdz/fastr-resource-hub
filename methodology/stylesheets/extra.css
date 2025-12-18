@@ -1,34 +1,111 @@
-/* Custom Styles for FASTR Methodology Documentation */
+/* ========================================
+   FASTR MkDocs Theme
+   ========================================
+   Official FASTR brand colors and styling
+   Based on FASTR brand guidelines
+*/
 
-/* Right sidebar (TOC) styling - shows page sections */
-/* Remove "display: none" to show the table of contents on the right */
-
-/* FASTR Brand Colors */
 :root {
-  --md-primary-fg-color: #025b61;
-  --md-primary-fg-color--light: #037278;
-  --md-primary-fg-color--dark: #014449;
+  /* ========================================
+     FASTR PRIMARY COLORS
+     ======================================== */
+  --fastr-deep-green: #09544F;
+  --fastr-dark-green: #0C716B;
+  --fastr-green: #1F9A9C;
+  --fastr-lime: #D0CB17;
+  --fastr-navy: #21568C;
+  --fastr-blue: #1A90C0;
+  --fastr-light-blue: #CAE6E9;
+
+  /* ========================================
+     FASTR SECONDARY COLORS
+     ======================================== */
+  --fastr-gold: #D8A822;
+  --fastr-purple: #7A1F6E;
+  --fastr-orchid: #BD5091;
+  --fastr-coral: #FF6462;
+
+  /* ========================================
+     MKDOCS MATERIAL OVERRIDES (Light Mode)
+     ======================================== */
+  --md-primary-fg-color: var(--fastr-dark-green);
+  --md-primary-fg-color--light: var(--fastr-green);
+  --md-primary-fg-color--dark: var(--fastr-deep-green);
+  --md-accent-fg-color: var(--fastr-blue);
+  --md-accent-fg-color--transparent: rgba(26, 144, 192, 0.1);
 }
 
+/* Dark Mode Overrides */
 [data-md-color-scheme="slate"] {
-  --md-primary-fg-color: #037278;
-  --md-primary-fg-color--light: #048a92;
-  --md-primary-fg-color--dark: #025b61;
+  --md-primary-fg-color: var(--fastr-green);
+  --md-primary-fg-color--light: var(--fastr-light-blue);
+  --md-primary-fg-color--dark: var(--fastr-dark-green);
+  --md-accent-fg-color: var(--fastr-blue);
 }
 
-/* Improve code block appearance */
-.highlight pre {
-  border-radius: 0.4rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+/* ========================================
+   HEADERS
+   ======================================== */
+h1 {
+  color: var(--fastr-deep-green) !important;
+  border-bottom: 3px solid var(--fastr-lime);
+  padding-bottom: 0.3em;
+  margin-top: 1.5em;
+  margin-bottom: 0.75em;
 }
 
-/* Enhanced admonition styling */
-.admonition {
-  border-radius: 0.4rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+h2 {
+  color: var(--fastr-navy) !important;
+  border-bottom: 2px solid var(--fastr-blue);
+  padding-bottom: 0.2em;
+  margin-top: 1.5em;
+  margin-bottom: 0.75em;
 }
 
-/* Better table styling */
+h3 {
+  color: var(--fastr-purple) !important;
+  border-left: 4px solid var(--fastr-orchid);
+  padding-left: 0.5em;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+}
+
+h4, h5, h6 {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+/* Dark mode header adjustments */
+[data-md-color-scheme="slate"] h1 {
+  color: var(--fastr-light-blue) !important;
+}
+
+[data-md-color-scheme="slate"] h2 {
+  color: var(--fastr-blue) !important;
+}
+
+[data-md-color-scheme="slate"] h3 {
+  color: var(--fastr-orchid) !important;
+}
+
+/* ========================================
+   LINKS
+   ======================================== */
+a {
+  color: var(--fastr-blue);
+  text-decoration: none;
+  border-bottom: 1px dotted transparent;
+  transition: border-bottom-color 0.2s;
+}
+
+a:hover {
+  color: var(--fastr-navy);
+  border-bottom-color: var(--fastr-blue);
+}
+
+/* ========================================
+   TABLES
+   ======================================== */
 table {
   border-radius: 0.4rem;
   overflow: hidden;
@@ -37,58 +114,134 @@ table {
 
 table th {
   font-weight: 600;
-  background-color: var(--md-primary-fg-color--light);
+  background-color: var(--fastr-light-blue) !important;
+  color: var(--fastr-navy) !important;
+  border-bottom: 2px solid var(--fastr-blue);
 }
 
 table tr:hover {
-  background-color: rgba(0, 0, 0, 0.02);
+  background-color: rgba(202, 230, 233, 0.3);
 }
 
-/* Improve heading spacing */
-h1, h2, h3, h4, h5, h6 {
-  margin-top: 1.5em;
-  margin-bottom: 0.75em;
+[data-md-color-scheme="slate"] table th {
+  background-color: var(--fastr-deep-green) !important;
+  color: var(--fastr-light-blue) !important;
 }
 
-h1 {
-  border-bottom: 2px solid var(--md-primary-fg-color);
-  padding-bottom: 0.3em;
+[data-md-color-scheme="slate"] table tr:hover {
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
-/* Enhanced blockquote styling */
+/* ========================================
+   CODE BLOCKS
+   ======================================== */
+.highlight pre {
+  border-radius: 0.4rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-left: 4px solid var(--fastr-navy);
+}
+
+code {
+  background: rgba(202, 230, 233, 0.3);
+  color: var(--fastr-navy);
+  border-radius: 4px;
+}
+
+[data-md-color-scheme="slate"] code {
+  background: rgba(9, 84, 79, 0.3);
+}
+
+/* ========================================
+   BLOCKQUOTES
+   ======================================== */
 blockquote {
-  border-left: 4px solid var(--md-accent-fg-color);
-  padding-left: 1em;
+  border-left: 4px solid var(--fastr-gold) !important;
+  padding: 0.5em 1em;
   margin-left: 0;
   font-style: italic;
-  background-color: rgba(0, 0, 0, 0.02);
-  padding: 0.5em 1em;
+  background-color: rgba(216, 168, 34, 0.1);
   border-radius: 0 0.4rem 0.4rem 0;
 }
 
-/* Better link styling */
-a {
-  text-decoration: none;
-  border-bottom: 1px dotted transparent;
-  transition: border-bottom-color 0.2s;
+/* ========================================
+   ADMONITIONS (Custom Colors)
+   ======================================== */
+.admonition {
+  border-radius: 0.4rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-a:hover {
-  border-bottom-color: var(--md-accent-fg-color);
+/* Note - FASTR Blue */
+.admonition.note {
+  border-color: var(--fastr-blue);
+}
+.admonition.note > .admonition-title {
+  background-color: rgba(26, 144, 192, 0.1);
+}
+.admonition.note > .admonition-title::before {
+  background-color: var(--fastr-blue);
 }
 
-/* Improve footnote appearance */
-.footnote {
-  font-size: 0.875em;
-  line-height: 1.6;
+/* Tip - FASTR Lime */
+.admonition.tip {
+  border-color: var(--fastr-lime);
+}
+.admonition.tip > .admonition-title {
+  background-color: rgba(208, 203, 23, 0.1);
+}
+.admonition.tip > .admonition-title::before {
+  background-color: var(--fastr-lime);
 }
 
-/* Enhanced navigation tabs */
-.md-tabs {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+/* Warning - FASTR Gold */
+.admonition.warning {
+  border-color: var(--fastr-gold);
+}
+.admonition.warning > .admonition-title {
+  background-color: rgba(216, 168, 34, 0.1);
+}
+.admonition.warning > .admonition-title::before {
+  background-color: var(--fastr-gold);
 }
 
-/* Better image styling */
+/* Info - FASTR Green */
+.admonition.info {
+  border-color: var(--fastr-green);
+}
+.admonition.info > .admonition-title {
+  background-color: rgba(31, 154, 156, 0.1);
+}
+.admonition.info > .admonition-title::before {
+  background-color: var(--fastr-green);
+}
+
+/* Example - FASTR Purple */
+.admonition.example {
+  border-color: var(--fastr-purple);
+}
+.admonition.example > .admonition-title {
+  background-color: rgba(122, 31, 110, 0.1);
+}
+.admonition.example > .admonition-title::before {
+  background-color: var(--fastr-purple);
+}
+
+/* Danger/Error - FASTR Coral */
+.admonition.danger, .admonition.error {
+  border-color: var(--fastr-coral);
+}
+.admonition.danger > .admonition-title,
+.admonition.error > .admonition-title {
+  background-color: rgba(255, 100, 98, 0.1);
+}
+.admonition.danger > .admonition-title::before,
+.admonition.error > .admonition-title::before {
+  background-color: var(--fastr-coral);
+}
+
+/* ========================================
+   IMAGES
+   ======================================== */
 img {
   border-radius: 0.4rem;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -96,10 +249,45 @@ img {
   height: auto;
 }
 
-/* Improve definition list styling */
+[data-md-color-scheme="slate"] img {
+  opacity: 0.95;
+}
+
+/* ========================================
+   NAVIGATION & SIDEBAR
+   ======================================== */
+.md-nav__link--active {
+  color: var(--fastr-green) !important;
+  font-weight: 600;
+}
+
+.md-tabs {
+  background-color: var(--fastr-deep-green);
+}
+
+/* ========================================
+   FOOTER
+   ======================================== */
+.md-footer {
+  background-color: var(--fastr-deep-green);
+}
+
+/* ========================================
+   SEARCH
+   ======================================== */
+mark {
+  background-color: var(--fastr-lime);
+  color: var(--fastr-deep-green);
+  padding: 0.1em 0.2em;
+  border-radius: 0.2rem;
+}
+
+/* ========================================
+   DEFINITION LISTS
+   ======================================== */
 dt {
   font-weight: 600;
-  color: var(--md-primary-fg-color);
+  color: var(--fastr-navy);
   margin-top: 1em;
 }
 
@@ -108,61 +296,26 @@ dd {
   margin-bottom: 1em;
 }
 
-/* Better keyboard key styling */
-kbd {
-  background-color: var(--md-code-bg-color);
-  border: 1px solid var(--md-default-fg-color--lightest);
-  border-radius: 0.2rem;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2);
-  padding: 0.1em 0.4em;
-  font-family: var(--md-code-font-family);
-  font-size: 0.85em;
-}
-
-/* Improve horizontal rule */
+/* ========================================
+   HORIZONTAL RULES
+   ======================================== */
 hr {
   border: none;
-  border-top: 2px solid var(--md-default-fg-color--lightest);
+  border-top: 2px solid var(--fastr-light-blue);
   margin: 2em 0;
 }
 
-/* Enhanced task list styling */
-.task-list-item {
-  list-style: none;
-}
-
-.task-list-control {
-  margin-right: 0.5em;
-}
-
-/* Better spacing for content sections */
+/* ========================================
+   CONTENT SPACING
+   ======================================== */
 .md-content__inner {
   padding-top: 1.5rem;
   padding-bottom: 2rem;
 }
 
-/* Improve search highlighting */
-mark {
-  background-color: var(--md-accent-fg-color);
-  color: white;
-  padding: 0.1em 0.2em;
-  border-radius: 0.2rem;
-}
-
-/* Dark mode specific adjustments */
-[data-md-color-scheme="slate"] table tr:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-[data-md-color-scheme="slate"] blockquote {
-  background-color: rgba(255, 255, 255, 0.05);
-}
-
-[data-md-color-scheme="slate"] img {
-  opacity: 0.9;
-}
-
-/* Responsive typography improvements */
+/* ========================================
+   RESPONSIVE
+   ======================================== */
 @media screen and (max-width: 76.1875em) {
   .md-content__inner {
     padding-left: 1rem;
@@ -170,7 +323,9 @@ mark {
   }
 }
 
-/* Print styling */
+/* ========================================
+   PRINT
+   ======================================== */
 @media print {
   .md-header,
   .md-tabs,
@@ -181,5 +336,9 @@ mark {
 
   img {
     box-shadow: none;
+  }
+
+  h1, h2, h3 {
+    color: #000 !important;
   }
 }
