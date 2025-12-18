@@ -684,30 +684,53 @@ schedule:
   # ─────────────────────────────────────────────────────────────────────
   # OPTIONAL SESSIONS - Uncomment and customize as needed
   # ─────────────────────────────────────────────────────────────────────
-  # Add any of these to your day1 schedule (or other days):
+  # Copy any of these into your day1/day2/etc schedule:
   #
+  # OPENING CEREMONY (Day 1)
   #   - time: "8:50 AM - 9:00 AM"
   #     session: Welcome to Country / Opening Prayer
   #     duration: 10
-  #
   #   - time: "9:00 AM - 9:15 AM"
-  #     session: Ministerial Remarks
+  #     session: Opening Remarks (Host Organization)
   #     duration: 15
-  #
   #   - time: "9:15 AM - 9:30 AM"
+  #     session: Ministerial Address
+  #     duration: 15
+  #   - time: "9:30 AM - 9:45 AM"
   #     session: Participant Introductions
   #     duration: 15
   #
+  # GUEST SPEAKERS / PRESENTATIONS
+  #   - time: "2:00 PM - 2:30 PM"
+  #     session: "Guest Speaker: [Name, Title]"
+  #     duration: 30
+  #   - time: "2:30 PM - 3:00 PM"
+  #     session: "Country Presentation: [Topic]"
+  #     duration: 30
+  #   - time: "3:00 PM - 3:30 PM"
+  #     session: Panel Discussion
+  #     duration: 30
+  #
+  # ACTIVITIES
   #   - time: "9:30 AM - 9:45 AM"
   #     session: Icebreaker Activity
   #     duration: 15
-  #
   #   - time: "12:00 PM"
   #     session: Group Photo
   #     duration: 10
-  #
-  #   - time: "5:00 PM - 5:15 PM"
+  #   - time: "4:30 PM - 4:45 PM"
   #     session: Daily Reflection & Feedback
+  #     duration: 15
+  #
+  # CLOSING CEREMONY (Final Day)
+  #   - time: "3:00 PM - 3:30 PM"
+  #     session: Participant Presentations
+  #     duration: 30
+  #   - time: "3:30 PM - 4:00 PM"
+  #     session: Certificate Ceremony
+  #     duration: 30
+  #   - time: "4:00 PM - 4:15 PM"
+  #     session: Closing Remarks
   #     duration: 15
   # ─────────────────────────────────────────────────────────────────────
 
