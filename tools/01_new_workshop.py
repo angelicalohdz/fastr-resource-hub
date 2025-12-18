@@ -680,11 +680,45 @@ schedule:
   tea_time: "{tea_time}"
   lunch_time: "{lunch_time}"
   afternoon_tea: "{afternoon_tea}"
+
+  # ─────────────────────────────────────────────────────────────────────
+  # OPTIONAL SESSIONS - Uncomment and customize as needed
+  # ─────────────────────────────────────────────────────────────────────
+  # Add any of these to your day1 schedule (or other days):
+  #
+  #   - time: "8:30 AM - 9:00 AM"
+  #     session: Welcome to Country / Opening Prayer
+  #     duration: 30
+  #
+  #   - time: "9:00 AM - 9:15 AM"
+  #     session: Ministerial Remarks
+  #     duration: 15
+  #
+  #   - time: "9:15 AM - 9:30 AM"
+  #     session: Participant Introductions
+  #     duration: 15
+  #
+  #   - time: "9:30 AM - 10:00 AM"
+  #     session: Icebreaker Activity
+  #     duration: 30
+  #
+  #   - time: "12:00 PM"
+  #     session: Group Photo
+  #     duration: 15
+  #
+  #   - time: "5:00 PM - 5:30 PM"
+  #     session: Daily Reflection & Feedback
+  #     duration: 30
+  # ─────────────────────────────────────────────────────────────────────
+
   agenda:
 """)
         # Write each day's schedule
         for day_key, day_items in daily_schedules.items():
             f.write(f"    {day_key}:\n")
+            # Add a hint for day 1 about optional opening sessions
+            if day_key == 'day1':
+                f.write(f"      # TIP: Add opening ceremony items here (see optional sessions above)\n")
             for item in day_items:
                 f.write(f"      - time: \"{item['time']}\"\n")
                 f.write(f"        session: {item['session']}\n")
