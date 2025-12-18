@@ -34,19 +34,96 @@ except ImportError:
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
-# MODULE DEFINITIONS
+# MODULE DEFINITIONS - Read dynamically from core_content/
 # ═══════════════════════════════════════════════════════════════════════════════
 
-MODULES = {
-    0: {'name': 'Introduction to FASTR', 'short': 'Intro', 'duration': 45, 'default': True},
-    1: {'name': 'Identify Questions & Indicators', 'short': 'Questions', 'duration': 60, 'default': False},
-    2: {'name': 'Data Extraction', 'short': 'Extraction', 'duration': 30, 'default': True},
-    3: {'name': 'FASTR Analytics Platform', 'short': 'Platform', 'duration': 90, 'default': False},
-    4: {'name': 'Data Quality Assessment', 'short': 'DQA', 'duration': 60, 'default': True},
-    5: {'name': 'Data Quality Adjustment', 'short': 'DQ Adjust', 'duration': 45, 'default': True},
-    6: {'name': 'Data Analysis', 'short': 'Analysis', 'duration': 60, 'default': True},
-    7: {'name': 'Results Communication', 'short': 'Results', 'duration': 60, 'default': False},
+# Official FASTR RMNCAH-N Service Use Monitoring Resource Package terminology
+MODULE_NAMES = {
+    0: 'Introduction to the FASTR Approach',
+    1: 'Identify Questions & Indicators',
+    2: 'Data Extraction',
+    3: 'The FASTR Data Analytics Platform',
+    4: 'Data Quality Assessment',
+    5: 'Data Quality Adjustment',
+    6: 'Data Analysis',
+    7: 'Results Communication and Data Use',
 }
+
+MODULE_SHORT_NAMES = {
+    0: 'Intro',
+    1: 'Questions',
+    2: 'Extraction',
+    3: 'Platform',
+    4: 'DQA',
+    5: 'DQ Adjust',
+    6: 'Analysis',
+    7: 'Results',
+}
+
+# Default modules for standard workshop (recommended)
+DEFAULT_MODULES = [0, 2, 4, 5, 6]
+
+# Estimated duration per topic in minutes
+MINUTES_PER_TOPIC = 15
+
+
+def discover_modules(base_dir):
+    """
+    Scan core_content/ folder to discover available modules and their topics.
+    Returns a dict of module info keyed by module number.
+    """
+    core_content_dir = os.path.join(base_dir, "core_content")
+    modules = {}
+
+    if not os.path.exists(core_content_dir):
+        print(f"Warning: core_content/ not found at {core_content_dir}")
+        return modules
+
+    # Find all module folders (m0_*, m1_*, etc.)
+    for item in sorted(os.listdir(core_content_dir)):
+        item_path = os.path.join(core_content_dir, item)
+        if os.path.isdir(item_path) and item.startswith('m') and '_' in item:
+            # Parse module number from folder name (e.g., "m0_introduction" -> 0)
+            try:
+                mod_num = int(item.split('_')[0][1:])  # Extract number after 'm'
+            except ValueError:
+                continue
+
+            # Count topics (markdown files in the module folder)
+            topics = []
+            for f in sorted(os.listdir(item_path)):
+                if f.endswith('.md'):
+                    topics.append(f)
+
+            # Get official name, or derive from folder name if not defined
+            if mod_num in MODULE_NAMES:
+                name = MODULE_NAMES[mod_num]
+            else:
+                # Convert folder name: m0_introduction -> Introduction
+                folder_name = '_'.join(item.split('_')[1:])
+                name = folder_name.replace('_', ' ').title()
+
+            short = MODULE_SHORT_NAMES.get(mod_num, f'M{mod_num}')
+
+            # Estimate duration based on number of topics
+            duration = len(topics) * MINUTES_PER_TOPIC
+            if duration < 15:
+                duration = 15  # Minimum 15 minutes
+
+            modules[mod_num] = {
+                'name': name,
+                'short': short,
+                'duration': duration,
+                'topics': len(topics),
+                'default': mod_num in DEFAULT_MODULES,
+                'folder': item,
+            }
+
+    return modules
+
+
+# Will be populated at runtime
+MODULES = {}
 
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -217,9 +294,18 @@ def build_daily_schedule(day_modules, start_time_mins, tea_time_mins, lunch_time
 # ═══════════════════════════════════════════════════════════════════════════════
 
 def main():
+    global MODULES
+
     # Determine base directory
     script_dir = os.path.dirname(os.path.abspath(__file__))
     base_dir = os.path.dirname(script_dir)
+
+    # Discover available modules from core_content/
+    MODULES = discover_modules(base_dir)
+    if not MODULES:
+        print("Error: No modules found in core_content/")
+        print("Make sure the core_content/ folder exists with module subfolders.")
+        sys.exit(1)
 
     print("\n" + "═" * 70)
     print("              FASTR WORKSHOP SETUP WIZARD")
@@ -293,9 +379,12 @@ def main():
     print("   Which modules do you want to include?\n")
 
     defaults = []
-    for num, mod in MODULES.items():
+    for num in sorted(MODULES.keys()):
+        mod = MODULES[num]
         mark = "*" if mod['default'] else " "
-        print(f"   [{mark}] {num}. {mod['name']} (~{mod['duration']} min)")
+        topics_info = f"{mod['topics']} topics" if mod['topics'] != 1 else "1 topic"
+        print(f"   [{mark}] {num}. {mod['name']}")
+        print(f"       ({topics_info}, ~{mod['duration']} min)")
         if mod['default']:
             defaults.append(str(num))
 
