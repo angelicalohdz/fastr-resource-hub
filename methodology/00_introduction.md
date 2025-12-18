@@ -24,6 +24,8 @@ The GFF collaborates with Ministries of Health to conduct rapid-cycle analyses o
 3. **Monitor coverage progress** by comparing service delivery trends against country-specific targets and benchmarks
 
 These analyses focus on priority indicators tied to national health reforms and World Bank investments, with findings informing country planning processes and project implementation cycles. During the COVID-19 pandemic, the GFF supported Ministries of Health in over 20 countries to monitor the impact of the pandemic on essential health services using this approach.
+
+![Steps to implement RMNCAH-N service use monitoring.](resources/diagrams/Steps%20to%20implement%20RMNCAH-N%20service%20chart.svg)
 <!-- /SLIDE -->
 
 ![Steps to implement RMNCAH-N service use monitoring.](resources/diagrams/Steps%20to%20implement%20RMNCAH-N%20service%20chart.svg)
@@ -40,6 +42,8 @@ Existing health systems data sources are critical but often come with challenges
 ### How does it work?
 
 Rapid-cycle analytic approaches provide timely, rigorous, and high-priority data that respond to each country's specific priorities and data use needs. This continuous cycle of analyze-learn-strengthen-act seeks to improve the systematic use of data for decision-making towards improved RMNCAH-N outcomes.
+
+![FASTR rapid-cycle analytics framework showing the continuous cycle of analyze, learn, strengthen, and act.](resources/diagrams/GFF-Rapid-Cycle-Analytics-Data-Use_Figure-1.svg)
 <!-- /SLIDE -->
 
 ![FASTR rapid-cycle analytics framework showing the continuous cycle of analyze, learn, strengthen, and act.](resources/diagrams/GFF-Rapid-Cycle-Analytics-Data-Use_Figure-1.svg)
@@ -60,6 +64,8 @@ FASTR's four technical approaches, underpinned by capacity strengthening and dat
 4. **Follow-on analyses** employ root cause analysis and implementation research approaches to provide deeper understanding of issues uncovered by rapid-cycle analytics (e.g., explaining district-level performance variation, contextualizing the impact of health systems reforms, or investigating underlying causes of data quality issues and service delivery disruptions).
 
 Illustrative capacity-building activities include support to automate the extraction, cleaning, and analysis of routine data and support to institutionalize rapid phone survey data collection and analysis approaches. Data use support prioritizes the integration of rapid-cycle analytics into existing data review and feedback mechanisms at national and subnational levels to strengthen the systematic use of data for decision making.
+
+![Rapid-cycle analytics under the Frequent Assessments and System Tools for Resilience (FASTR) initiative.](resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
 <!-- /SLIDE -->
 
 ![Rapid-cycle analytics under the Frequent Assessments and System Tools for Resilience (FASTR) initiative.](resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
