@@ -12,6 +12,9 @@ Audit of content status across all methodology modules.
 |--------|-------|-------|
 | **Ashley & Angelica** | Documentation content (detailed explanations) | Top half of each `.md` file |
 | **Claire** | Slide content (condensed bullets) | Bottom half (after ASCII separator) |
+| **Meghan** | Platform content |  |
+
+
 
 
 ### Where to Start
@@ -56,17 +59,17 @@ The placeholder modules (M1, M3, M7) already have the correct slide marker struc
 
 ## Summary
 
-| Module | Status | Action Needed |
-|--------|--------|---------------|
-| M0 Introduction | DRAFTED | Review needed |
-| M1 Questions & Indicators | PLACEHOLDER | **Create entire module content** |
-| M2 Data Extraction | PARTIAL | Complete missing content |
-| M3 FASTR Platform | PLACEHOLDER | **Create entire module content** |
-| M4 DQ Assessment | DRAFTED | Review needed |
-| M5 DQ Adjustment | DRAFTED | Review needed |
-| M6a Service Utilization | DRAFTED | Review needed |
-| M6b Coverage Estimates | DRAFTED | Review needed |
-| M7 Results Communication | PLACEHOLDER | **Create entire module content** |
+| Module | Status | Action Needed | Names |
+|--------|--------|---------------|-------|
+| M0 Introduction | DRAFTED | Review needed | Ashley |
+| M1 Questions & Indicators | PLACEHOLDER | **Create entire module content** | Angelica |
+| M2 Data Extraction | PARTIAL | Complete missing content | Ashley |
+| M3 FASTR Platform | PLACEHOLDER | **Create entire module content** | Meghan |
+| M4 DQ Assessment | DRAFTED | Review needed | Cb and Ashley |
+| M5 DQ Adjustment | DRAFTED | Review needed | Cb and Ashley |
+| M6a Service Utilization | DRAFTED | Review needed | Cb and Ashley |
+| M6b Coverage Estimates | DRAFTED | Review needed | Cb and Ashley |
+| M7 Results Communication | PLACEHOLDER | **Create entire module content** |TBD|
 
 **Modules needing full content creation: M1, M3, M7**
 **Modules needing review: M0, M4, M5, M6a, M6b**
