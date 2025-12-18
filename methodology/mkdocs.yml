@@ -107,6 +107,8 @@ plugins:
   - bibtex:
       bib_file: "references.bib"
       csl_file: "https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl"
+      bib_by_default: false
+      full_bib_command: "\\full_bibliography"
   - minify:
       minify_html: true
       minify_js: true

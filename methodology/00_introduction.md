@@ -143,4 +143,4 @@ This methodology documentation describes the FASTR approach to routine HMIS data
 
 ## References
 
-\bibliography
+\full_bibliography
