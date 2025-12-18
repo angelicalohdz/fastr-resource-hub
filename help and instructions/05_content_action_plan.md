@@ -2,38 +2,51 @@
 
 Audit of slide content status across all methodology modules.
 
+> **Note:** This is a suggested action plan for team discussion. The content needs and priorities listed here are initial recommendations - the team should review together and adjust based on actual requirements and expertise.
+
+---
+
+## Status Key
+
+| Status | Meaning |
+|--------|---------|
+| **DRAFTED** | Content exists, needs review and sign-off |
+| **PARTIAL** | Some content exists, more needed |
+| **PLACEHOLDER** | Just headers, no real content yet |
+
 ---
 
 ## Summary
 
 | Module | Status | Slides | Action Needed |
 |--------|--------|--------|---------------|
-| M0 Introduction | COMPLETE | 5 | None |
+| M0 Introduction | DRAFTED | 5 | Review needed |
 | M1 Questions & Indicators | PLACEHOLDER | 4 | Create all content |
 | M2 Data Extraction | PARTIAL | 2 | Complete 1 slide |
 | M3 FASTR Platform | PLACEHOLDER | 8 | Create all content |
-| M4 DQ Assessment | COMPLETE | 5 | None |
-| M5 DQ Adjustment | COMPLETE | 3 | None |
-| M6a Service Utilization | PARTIAL | 2 | Consider expansion |
-| M6b Coverage Estimates | PARTIAL | 1 | Consider expansion |
+| M4 DQ Assessment | DRAFTED | 5 | Review needed |
+| M5 DQ Adjustment | DRAFTED | 3 | Review needed |
+| M6a Service Utilization | PARTIAL | 2 | Review + consider expansion |
+| M6b Coverage Estimates | PARTIAL | 1 | Review + consider expansion |
 | M7 Results Communication | PLACEHOLDER | 5 | Create all content |
 
 **Total slides needing content: 17 placeholder + 1 partial = 18 slides**
+**Total slides needing review: 13 drafted slides**
 
 ---
 
 ## Detailed Status by Module
 
 ### Module 0: Introduction (00_introduction.md)
-**Status: COMPLETE**
+**Status: DRAFTED - NEEDS REVIEW**
 
-| Slide ID | Title | Status |
-|----------|-------|--------|
-| m0_1 | Introduction to FASTR | Complete |
-| m0_2 | RMNCAH-N Service Use Monitoring | Complete |
-| m0_3 | Why rapid-cycle analytics? / How does it work? | Complete |
-| m0_4 | Technical Approaches | Complete |
-| m0_5 | FASTR Approach to Routine Data Analysis | Complete |
+| Slide ID | Title | Status | Action |
+|----------|-------|--------|--------|
+| m0_1 | Introduction to FASTR | Drafted | Review |
+| m0_2 | RMNCAH-N Service Use Monitoring | Drafted | Review |
+| m0_3 | Why rapid-cycle analytics? / How does it work? | Drafted | Review |
+| m0_4 | Technical Approaches | Drafted | Review |
+| m0_5 | FASTR Approach to Routine Data Analysis | Drafted | Review |
 
 ---
 
@@ -54,7 +67,7 @@ Audit of slide content status across all methodology modules.
 
 | Slide ID | Title | Status | Content Needed |
 |----------|-------|--------|----------------|
-| m2_1 | 2.1 Why Extract Data? | Complete | - |
+| m2_1 | 2.1 Why Extract Data? | Drafted | Review |
 | m2_2 | 2.2 Tools for Data Extraction | Placeholder | DHIS2 export tools, API examples, validation steps |
 
 ---
@@ -76,45 +89,47 @@ Audit of slide content status across all methodology modules.
 ---
 
 ### Module 4: Data Quality Assessment (04_data_quality_assessment.md)
-**Status: COMPLETE**
+**Status: DRAFTED - NEEDS REVIEW**
 
-| Slide ID | Title | Status |
-|----------|-------|--------|
-| m4_1 | Data Quality Assessment | Complete |
-| m4_2 | Question 1: Are Facilities Reporting? (Completeness) | Complete |
-| m4_3 | Question 2: Are Numbers Reasonable? (Outliers) | Complete |
-| m4_4 | Question 3: Do Related Numbers Match Up? (Consistency) | Complete |
-| m4_5 | Putting It All Together: Overall Data Quality | Complete |
+| Slide ID | Title | Status | Action |
+|----------|-------|--------|--------|
+| m4_1 | Data Quality Assessment | Drafted | Review |
+| m4_2 | Question 1: Are Facilities Reporting? (Completeness) | Drafted | Review |
+| m4_3 | Question 2: Are Numbers Reasonable? (Outliers) | Drafted | Review |
+| m4_4 | Question 3: Do Related Numbers Match Up? (Consistency) | Drafted | Review |
+| m4_5 | Putting It All Together: Overall Data Quality | Drafted | Review |
 
 ---
 
 ### Module 5: Data Quality Adjustment (05_data_quality_adjustment.md)
-**Status: COMPLETE**
+**Status: DRAFTED - NEEDS REVIEW**
 
-| Slide ID | Title | Status |
-|----------|-------|--------|
-| m5_1 | Approach to Data Quality Adjustment | Complete |
-| m5_2 | Adjustment for Outliers | Complete |
-| m5_3 | Adjustment for Completeness | Complete |
+| Slide ID | Title | Status | Action |
+|----------|-------|--------|--------|
+| m5_1 | Approach to Data Quality Adjustment | Drafted | Review |
+| m5_2 | Adjustment for Outliers | Drafted | Review |
+| m5_3 | Adjustment for Completeness | Drafted | Review |
 
 ---
 
 ### Module 6a: Service Utilization (06a_service_utilization.md)
-**Status: PARTIAL**
+**Status: PARTIAL - NEEDS REVIEW + EXPANSION**
 
-| Slide ID | Title | Status | Notes |
-|----------|-------|--------|-------|
-| m6_1 | Service Utilization Analysis | Complete | Could add slides for the 4 default visualizations |
-| m6_2 | Surplus and Disruption Analyses | Complete | |
+| Slide ID | Title | Status | Action |
+|----------|-------|--------|--------|
+| m6_1 | Service Utilization Analysis | Drafted | Review |
+| m6_2 | Surplus and Disruption Analyses | Drafted | Review |
+| - | Additional visualization slides | Not created | Consider adding slides for the 4 default visualizations |
 
 ---
 
 ### Module 6b: Coverage Estimates (06b_coverage_estimates.md)
-**Status: PARTIAL**
+**Status: PARTIAL - NEEDS REVIEW + EXPANSION**
 
-| Slide ID | Title | Status | Notes |
-|----------|-------|--------|-------|
-| m6_3 | Service Coverage Estimates | Complete | Could add slides for the 3 default visualizations |
+| Slide ID | Title | Status | Action |
+|----------|-------|--------|--------|
+| m6_3 | Service Coverage Estimates | Drafted | Review |
+| - | Additional visualization slides | Not created | Consider adding slides for the 3 default visualizations |
 
 ---
 
@@ -132,6 +147,8 @@ Audit of slide content status across all methodology modules.
 ---
 
 ## Priority Action Items
+
+> **These are suggestions** - the team should discuss and confirm what content is actually needed for each slide.
 
 ### HIGH PRIORITY (Placeholder modules)
 
@@ -171,6 +188,8 @@ Audit of slide content status across all methodology modules.
 
 ## Delegation Suggestions
 
+> **For discussion** - suggested team assignments based on skill requirements.
+
 | Assignment | Modules | Skills Needed | Slides |
 |------------|---------|---------------|--------|
 | Team 1: Platform & Workflow | M1, M2, M3 | DHIS2 expertise, platform docs | 13 |
@@ -180,6 +199,8 @@ Audit of slide content status across all methodology modules.
 ---
 
 ## Workload Estimate
+
+> **Rough estimates only** - actual time will vary based on content complexity and available resources.
 
 | Category | Slides | Est. Hours |
 |----------|--------|------------|
