@@ -13,58 +13,11 @@ Audit of content status across all methodology modules.
 | **Ashley & Angelica** | Documentation content (detailed explanations) | Top half of each `.md` file |
 | **Claire** | Slide content (condensed bullets) | Bottom half (after ASCII separator) |
 
-**But feel free to do slides too!** If you're comfortable, you can write both parts. The slide content is just a condensed version of the documentation.
 
 ### Where to Start
 
 **Recommended first file:** `methodology/01_identify_questions_indicators.md`
 
-This module is a PLACEHOLDER (empty) and covers foundational content you know well:
-- Developing data use cases
-- Defining priority questions
-- Selecting indicators
-
-### How Each File Works
-
-```
-methodology/01_identify_questions_indicators.md
-┌─────────────────────────────────────────────────────────────────┐
-│  # Identify Questions & Indicators                              │
-│                                                                  │
-│  YOUR DOCUMENTATION GOES HERE                                   │
-│  - Full explanations                                            │
-│  - Context and background                                       │
-│  - Examples and references                                      │
-│                                                                  │
-├─────────────────────────────────────────────────────────────────┤
-│  <!-- SLIDE CONTENT (ASCII banner) -->                          │
-│                                                                  │
-│  <!-- SLIDE:m1_1 -->                                            │
-│  ## Slide Title                                                 │
-│  - Condensed bullet points                                      │  ← Claire can do this
-│  <!-- /SLIDE -->                                                │     (or you can!)
-│                                                                  │
-└─────────────────────────────────────────────────────────────────┘
-```
-
-### Quick Start Steps
-
-1. **Open the file** in GitHub or VS Code:
-   ```
-   methodology/01_identify_questions_indicators.md
-   ```
-
-2. **Write documentation** in the top section (before the ASCII art)
-   - Use your existing workshop materials as reference
-   - Explain concepts fully - this is for self-study readers
-
-3. **Optionally write slides** in the SLIDE markers at the bottom
-   - Or leave these for Claire to condense from your documentation
-
-4. **After editing, run** (or ask Claire to run):
-   ```bash
-   python3 tools/00_extract_slides.py
-   ```
 
 ### Priority Order
 
@@ -87,7 +40,7 @@ methodology/01_identify_questions_indicators.md
 4. Content goes into existing SLIDE markers (structure already in place)
 5. Review and refine with subject matter experts
 
-> **Good news:** The placeholder modules (M1, M3, M7) already have the correct slide marker structure - we just need to fill in the content, not create new markers.
+The placeholder modules (M1, M3, M7) already have the correct slide marker structure - we just need to fill in the content, not create new markers.
 
 ---
 
