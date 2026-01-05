@@ -34,12 +34,15 @@ When adding new content, add it to the appropriate methodology file in both sect
 
 ## Style guidelines
 
-**Headings**: Use sentence case (only capitalize the first word and proper nouns). Do NOT capitalize each word.
+See `help and instructions/07_style_guide.md` for the full style guide.
 
-- Correct: `## Why focus on high volume indicators?`
-- Incorrect: `## Why Focus on High Volume Indicators?`
-
-**Heading hierarchy**: Use `##` for main sections, `###` for subsections, etc.
+**Key rules:**
+- **Headings**: Sentence case (only capitalize first word and proper nouns)
+- **Heading hierarchy**: `#` title, `##` main sections, `###` subsections, `####` details
+- **Bold**: For key terms, feature introductions, labels (e.g., **Inputs**:)
+- **Inline code**: For filenames, variables, function names (e.g., `hmis_data.csv`)
+- **Lists**: No periods for single-line items
+- **Expandable sections**: Use `???` for technical details
 
 ## The 9 module files
 

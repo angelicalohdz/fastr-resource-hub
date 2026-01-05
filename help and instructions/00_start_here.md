@@ -119,6 +119,7 @@ marp --no-config outputs/NAME_deck.md --theme fastr-theme.css --pdf --allow-loca
 | [03 Local Setup](03_local_setup.md) | Setting up your computer |
 | [04 Codespaces Setup](04_codespaces_setup.md) | Working in browser (no install needed) |
 | [05 Content Action Plan](05_content_action_plan.md) | Slide content status & tasks to delegate |
+| [07 Style Guide](07_style_guide.md) | Formatting conventions for methodology docs |
 
 ---
 
