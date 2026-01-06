@@ -865,7 +865,7 @@ Part 1 executes the following workflow for each administrative level (national, 
 
 ??? "Output Files Specification"
 
-    Part 1 generates six CSV files:
+    Part 1 generates seven CSV files:
 
     **Denominator Files**
 
@@ -899,7 +899,7 @@ Part 1 executes the following workflow for each administrative level (national, 
     **Structure**:
 
     ```
-    admin_area_1, [admin_area_2/3], year, indicator_common_id, denominator_best_or_survey, value
+    admin_area_1, admin_area_3, year, indicator_common_id, denominator_best_or_survey, value
     ```
 
     **Fields**:
@@ -909,6 +909,23 @@ Part 1 executes the following workflow for each administrative level (national, 
     - `value`: Coverage percentage (0-100+)
 
     **Special "best" Entry**: Duplicates the selected optimal denominator for easy filtering
+
+    **7. M4_selected_denominator_per_indicator.csv**
+
+    **Purpose**: Summary of the best-performing denominator selected for each indicator at each geographic level
+
+    **Structure**:
+
+    ```
+    indicator_common_id, denominator_national, denominator_admin2, denominator_admin3
+    ```
+
+    **Fields**:
+
+    - `indicator_common_id`: Health indicator (e.g., `anc1`, `penta3`)
+    - `denominator_national`: Best denominator for national-level coverage
+    - `denominator_admin2`: Best denominator for admin level 2 coverage
+    - `denominator_admin3`: Best denominator for admin level 3 coverage
 
 ??? "Data Safeguards and Validation"
 
