@@ -87,7 +87,7 @@ The module transforms raw facility reports into quality-flagged datasets:
 1. **Input Format**: Monthly rows with facility ID, period, indicator name, and count
 2. **Enrichment**: Adds calculated fields like median volume, MAD residuals, proportional contributions
 3. **Completion**: Generates explicit rows for missing months (turning implicit gaps into explicit records)
-4. **Aggregation**: Rolls up facility data to district level for consistency calculations
+4. **Aggregation**: Aggregates facility data to district level for consistency calculations
 5. **Flagging**: Adds binary quality flags (outlier yes/no, complete yes/no, consistent yes/no)
 6. **Scoring**: Combines flags into continuous scores (0-1) and binary pass/fail indicators
 7. **Output Format**: Multiple files optimized for different use cases (quick outlier review, full analysis, downstream modules)
