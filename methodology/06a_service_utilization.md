@@ -6,13 +6,13 @@
 
 The Service Utilization module analyzes health service delivery patterns to detect and quantify disruptions in service volumes over time. It identifies when health services deviate significantly from expected patterns and measures the magnitude of these disruptions at national, provincial, and district levels.
 
-Using statistical process control methods and regression analysis, the module compares actual service volumes against historical trends and seasonal patterns. This helps distinguish between normal fluctuations (like expected increases in malaria cases during rainy season) and genuine disruptions that require investigation (like sudden drops in antenatal care during a pandemic or conflict).
+Using statistical process control methods and regression analysis, the module compares actual service volumes against historical trends and seasonal patterns. This enables distinction between normal fluctuations (such as expected increases in malaria cases during rainy season) and genuine disruptions requiring investigation (such as sudden decreases in antenatal care (ANC) visits during a pandemic or conflict).
 
 The analysis produces quantified estimates of service shortfalls and surpluses, enabling evidence-based resource allocation, policy decisions, and health system monitoring.
 
 ### Why is it needed in the FASTR pipeline?
 
-Service utilization data reflects how populations access essential healthcare, but this data can fluctuate due to various factors: seasonal patterns, policy changes, external shocks (pandemics, natural disasters, conflicts), data quality issues, or service availability problems. Without systematic analysis, it's difficult to know whether observed changes represent normal variation or significant disruptions requiring action.
+Service utilization data reflects how populations access essential healthcare, but this data can fluctuate due to various factors: seasonal patterns, policy changes, external shocks (pandemics, natural disasters, conflicts), data quality issues, or service availability problems. Without systematic analysis, it is difficult to determine whether observed changes represent normal variation or significant disruptions requiring action.
 
 This module provides objective, data-driven identification of service delivery problems and quantifies their impact. It enables health system managers to detect emerging issues early, target resources to affected areas, and monitor recovery after disruptions. The module's outputs support dashboard monitoring, impact assessments, and policy evaluation.
 
@@ -81,7 +81,7 @@ The control chart level determines where the statistical modeling occurs (trend 
 
 **Input Transformation**: The module starts with facility-level service counts (e.g., number of deliveries at each clinic each month) and aggregates them to geographic areas (provinces, districts). Outliers identified in Module 1 are removed to prevent anomalous data points from skewing the analysis.
 
-**Pattern Detection**: Using robust statistical methods, the module learns what "normal" looks like for each service and area based on historical patterns. It then identifies months where actual volumes deviate significantly from these patterns, accounting for predictable variations like seasonal changes.
+**Pattern Detection**: Using robust statistical methods, the module establishes expected patterns for each service and geographic area based on historical data. It then identifies months where actual volumes deviate significantly from these expected patterns, accounting for predictable variations such as seasonal changes.
 
 **Impact Quantification**: For months flagged as disrupted, the module uses regression models to estimate what service volumes would have been without the disruption. By comparing predicted to actual volumes, it calculates how many services were missed (shortfalls) or how much service delivery increased (surpluses).
 
@@ -903,7 +903,7 @@ The control chart level determines where the statistical modeling occurs (trend 
 
 ---
 
-**Last updated**: 10-11-2025
+**Last updated**: 06-01-2026
 **Contact**: FASTR Project Team
 
 ---
