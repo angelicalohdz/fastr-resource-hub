@@ -35,19 +35,19 @@ The module follows a logical sequence of quality checks, building from individua
 The module reads monthly facility reports and organizes them for analysis. It converts dates to a standard format and identifies which geographic areas and health indicators are present in the dataset.
 
 **Step 2: Detect Outliers**
-For each health facility and indicator (like pentavalent vaccine doses or antenatal care visits), the module identifies unusually high values that might indicate data entry errors. It uses two methods: statistical outliers (values far from the facility's typical volume) and proportional outliers (a single month accounting for most of the year's services).
+For each health facility and indicator (like pentavalent vaccine (Penta) doses or antenatal care (ANC) visits), the module identifies unusually high values that might indicate data entry errors. It uses two methods: statistical outliers (values far from the facility's typical volume) and proportional outliers (a single month accounting for most of the year's services).
 
 **Step 3: Assess Completeness**
 The module checks whether facilities are consistently reporting data. It creates a complete timeline for each facility and indicator, identifying months with missing reports. Facilities that stop reporting for 6+ months are flagged as inactive rather than incomplete.
 
 **Step 4: Measure Consistency**
-Related indicators should follow predictable patterns. For example, more women should receive their first antenatal visit (ANC1) than their fourth visit (ANC4). The module calculates ratios between paired indicators at the district level (to account for patients visiting multiple facilities) and flags relationships that don't meet expectations.
+Related indicators should follow predictable patterns. For example, more women should receive their first antenatal care visit (ANC1) than their fourth (ANC4). The module calculates ratios between paired indicators at the district level (to account for patients visiting multiple facilities) and flags relationships that don't meet expectations.
 
 **Step 5: Validate Indicator Availability**
 Before running consistency checks, the module verifies that the required indicator pairs actually exist in the dataset. Missing indicators are handled gracefully, with the analysis adapting to available data.
 
 **Step 6: Calculate DQA Scores**
-For a defined set of core indicators (typically pentavalent vaccine, first antenatal visit, and outpatient visits), the module combines the three quality dimensions. A facility-month receives a perfect DQA score only if all core indicators are complete, free of outliers, and meet consistency benchmarks.
+For a defined set of core indicators (typically first pentavalent dose (Penta1), first antenatal care visit (ANC1), and outpatient department visits (OPD)), the module combines the three quality dimensions. A facility-month receives a perfect DQA score only if all core indicators are complete, free of outliers, and meet consistency benchmarks.
 
 **Step 7: Export Results**
 The module produces several output files containing outlier lists, completeness flags, consistency results, and final DQA scores. These outputs inform subsequent modules and provide actionable insights for data quality improvement.
@@ -70,7 +70,7 @@ AND for which the count is greater than 100.
 The MAD is calculated using only values at or above the median to focus on detecting unusually high values.
 
 **Why measure consistency at the district level instead of facility level?**
-Patients often visit different facilities within their local district for different services. A woman might get her first antenatal visit at one health center but deliver at a district hospital. Measuring consistency at the district level accounts for this patient movement and provides a more accurate picture of service utilization patterns.
+Patients often visit different facilities within their local district for different services. A woman might get her first antenatal care visit (ANC1) at one health center but deliver at a district hospital. Measuring consistency at the district level accounts for this patient movement and provides a more accurate picture of service utilization patterns.
 
 **What happens when required indicators are missing?**
 The module adapts to available data. If consistency pairs cannot be evaluated, the DQA score is calculated using only completeness and outlier checks. The analysis continues with the dimensions that can be assessed.
