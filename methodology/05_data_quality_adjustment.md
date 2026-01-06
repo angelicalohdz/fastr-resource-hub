@@ -47,7 +47,7 @@ The module brings together three datasets: the raw facility service volumes, the
 Before making any adjustments, the module checks each indicator to see if it has meaningful variation. Indicators that never have values above 100 across the entire dataset are flagged and excluded from outlier adjustment, since outlier detection isn't meaningful for consistently low-count indicators.
 
 **Step 3: Adjust Outlier Values**
-For each value flagged as an outlier, the module calculates what the value "should have been" based on that facility's historical pattern. It uses a hierarchy of methods, preferring to use surrounding months when possible (like averaging the 3 months before and 3 months after), but falling back to other approaches if needed (like using the same month from the previous year for seasonal indicators).
+For each value flagged as an outlier, the module calculates what the value "should have been" based on that facility's historical pattern. It uses a hierarchy of methods: (1) centered 6-month rolling average, (2) forward 6-month average, (3) backward 6-month average, (4) same month from previous year, (5) facility-specific historical mean.
 
 **Step 4: Fill Missing and Incomplete Data**
 For months where data is missing or marked as incomplete, the module imputes (fills in) values using the same rolling average approach. This ensures that temporary reporting gaps don't create artificial drops to zero in the data.
@@ -310,7 +310,6 @@ The FASTR analysis generates three main visual outputs comparing service volumes
 
     Only values meeting ALL of the following criteria are used in calculations:
 
-    - `count > 0` (positive non-zero values)
     - `!is.na(count)` (non-missing)
     - `outlier_flag == 0` (not flagged as outlier)
 
@@ -528,7 +527,7 @@ The FASTR analysis generates three main visual outputs comparing service volumes
 
     **Scenario**:
 
-    A facility reports an unusually high ANC1 visit count in March 2023.
+    A facility reports an unusually high first antenatal care visit (ANC1) count in March 2023.
 
     **Data**:
 
@@ -803,7 +802,7 @@ The FASTR analysis generates three main visual outputs comparing service volumes
 
 ---
 
-**Last updated**: 10-11-2025
+**Last updated**: 06-01-2026
 **Contact**: FASTR Project Team
 
 ---
@@ -855,9 +854,11 @@ This allows analysts to understand how sensitive their results are to different 
 For each value flagged as an outlier, the module calculates what the value "should have been" based on that facility's historical pattern.
 
 **Methods used (in order of preference):**
-1. Average of 3 months before and 3 months after
-2. Same month from the previous year (for seasonal indicators)
-3. Facility-specific historical average
+1. Centered 6-month rolling average (3 months before + 3 months after)
+2. Forward 6-month rolling average
+3. Backward 6-month rolling average
+4. Same month from the previous year (for seasonal indicators)
+5. Facility-specific historical mean (fallback)
 
 ---
 
