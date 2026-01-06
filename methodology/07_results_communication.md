@@ -109,7 +109,7 @@ Storytelling is a powerful communication tool to help translate data and data vi
 
 - Can include data visualizations/images
 - With or without numbers
-- Beginning to end or vice versa; doesn't need to be in chronological order
+- Beginning to end or vice versa; does not need to be in chronological order
 
 Be creative and remember to tailor the story to your audience.
 
@@ -199,7 +199,7 @@ End user mapping helps ensure that our outputs will meet the real needs of our e
 
 3. **Based on the information we can include in the report, what information are they most interested in? What do they need to know?** (e.g., high level trends, detailed insights, comparisons across states/regions/districts/woredas?)
 
-4. **What do they like about current reports? What do they not like?** (e.g., they like maps and scorecards; they don't like too much text, complex technical details)
+4. **What do they like about current reports? What do they dislike?** (e.g., they like maps and scorecards; they dislike too much text, complex technical details)
 
 5. **How do they like to receive their information?** (PPT, brief, key messages/bullet points, graphs, maps, dashboards?)
 
@@ -210,7 +210,7 @@ End user mapping helps ensure that our outputs will meet the real needs of our e
 | **Who is the end user?** | Head of a regional health bureau/authority |
 | **What does this end user need to accomplish with this report?** | Make a decision; Direct their team |
 | **What kind of insights do they need?** | High-level trends by service and by sub-national area; Performance comparisons – who to hold accountable? |
-| **What do they like about current analysis? What do they not like?** | **Like:** actionable information, simple visuals; **Don't like:** things that are too technical or not aligned with decision making needs |
+| **What do they like about current analysis? What do they dislike?** | **Like:** actionable information, simple visuals; **Dislike:** overly technical content or content not aligned with decision-making needs |
 | **How do they like to receive their information?** | Presentations at top management meeting |
 | **Design implications for your output** | Short PPT with results focused only on service trends; Add actionable recommendations |
 
