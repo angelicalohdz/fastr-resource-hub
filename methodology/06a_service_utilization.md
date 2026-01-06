@@ -190,12 +190,6 @@ The control chart level determines where the statistical modeling occurs (trend 
     - `indicator_common_id`: Health service indicator code
     - `period_id`: Time period in YYYYMM format
     - `tagged`: Binary flag (1 = disruption detected, 0 = normal)
-    - `count_original`: Actual service volume
-    - `count_predict`: Predicted volume from regression
-    - `count_smooth`: Smoothed prediction
-    - `residual`: Deviation from expected
-    - `robust_control`: Standardized residual
-    - `tag_sharp`, `tag_sustained`, `tag_sustained_dip`, `tag_sustained_rise`, `tag_missing`: Individual disruption flags
 
     **Use**: Identifies which months require further investigation for each indicator-geography combination
 
@@ -316,7 +310,7 @@ The control chart level determines where the statistical modeling occurs (trend 
 
     ### Panel Regression Models
 
-    The disruption analysis uses fixed-effects panel regression models (`fixest::feols()`) at multiple geographic levels.
+    The disruption analysis uses panel regression models (`fixest::feols()`) at multiple geographic levels. Separate regressions are run for each geographic unit at each level, with clustered standard errors to account for within-area correlation.
 
     **Country-wide Model** (Admin Area 1):
 
@@ -324,31 +318,31 @@ The control chart level determines where the statistical modeling occurs (trend 
     count ~ date + factor(month) + tagged
     ```
 
-    Clustered standard errors at district level (`admin_area_3`)
+    Single regression across all facilities, clustered standard errors at district level (`admin_area_3`)
 
     **Province-level Models** (Admin Area 2):
 
     ```r
-    count ~ date + factor(month) + tagged | admin_area_2
+    count ~ date + factor(month) + tagged
     ```
 
-    Separate regression for each province, clustered at district level
+    Separate regression run for each province, clustered standard errors at district level
 
     **District-level Models** (Admin Area 3 - optional):
 
     ```r
-    count ~ date + factor(month) + tagged | admin_area_3
+    count ~ date + factor(month) + tagged
     ```
 
-    Separate regression for each district, clustered at ward level (`admin_area_4`)
+    Separate regression run for each district, clustered standard errors at ward level (`admin_area_4`)
 
     **Ward-level Models** (Admin Area 4 - optional):
 
     ```r
-    count ~ date + factor(month) + tagged | admin_area_4
+    count ~ date + factor(month) + tagged
     ```
 
-    Separate regression for each ward/finest unit
+    Separate regression run for each ward/finest unit (no clustering)
 
     ### Supporting Functions
 
@@ -381,8 +375,8 @@ The control chart level determines where the statistical modeling occurs (trend 
 
     **Sustained Drops**: Flags a sustained drop if:
 
-    - Three consecutive months show mild deviations (standardized residual ≥ 1), and
-    - The final month also exceeds the `MADS_THRESHOLD`.
+    - Three consecutive months show mild deviations (standardized residual ≥ 1 but < `MADS_THRESHOLD`), and
+    - The current month has a standardized residual ≥ 1.5 (hardcoded threshold).
 
     This captures slower, compounding declines.
 
@@ -482,33 +476,31 @@ The control chart level determines where the statistical modeling occurs (trend 
 
     The province-level disruption regression estimates how service utilization changes at the province level when a disruption occurs. Unlike the country-wide model, this approach runs separate regressions for each province to capture regional variations.
 
-    **Model specification:**
+    **Model specification** (run separately for each province):
 
-    $$Y_{it} = \beta_0 + \beta_1 \cdot \text{date} + \sum_{m=1}^{12} \gamma_m \cdot \text{month} + \beta_2 \cdot \text{tagged} + \alpha_{\text{province}} + \epsilon_{it}$$
+    $$Y_{it} = \beta_0 + \beta_1 \cdot \text{date} + \sum_{m=1}^{12} \gamma_m \cdot \text{month} + \beta_2 \cdot \text{tagged} + \epsilon_{it}$$
 
     Where:
     - $Y_{it}$ = volume (e.g., number of deliveries)
     - $\text{date}$ = time trend
     - $\text{month}_m$ = controls for seasonality (factor variable)
     - $\text{tagged}$ = dummy for disruption period
-    - $\alpha_{\text{province}}$ = province fixed effects
     - $\epsilon_{it}$ = error term, clustered at the district level
 
     #### District-level Regression
 
     The district-level disruption regression estimates how service utilization changes at the district level when a disruption occurs. This approach runs separate regressions for each district to capture localized variations.
 
-    **Model specification:**
+    **Model specification** (run separately for each district):
 
-    $$Y_{it} = \beta_0 + \beta_1 \cdot \text{date} + \sum_{m=1}^{12} \gamma_m \cdot \text{month} + \beta_2 \cdot \text{tagged} + \alpha_{\text{district}} + \epsilon_{it}$$
+    $$Y_{it} = \beta_0 + \beta_1 \cdot \text{date} + \sum_{m=1}^{12} \gamma_m \cdot \text{month} + \beta_2 \cdot \text{tagged} + \epsilon_{it}$$
 
     Where:
     - $Y_{it}$ = volume (e.g., number of deliveries)
     - $\text{date}$ = time trend
     - $\text{month}_m$ = controls for seasonality (factor variable)
     - $\text{tagged}$ = dummy for disruption period
-    - $\alpha_{\text{district}}$ = district fixed effects
-    - $\epsilon_{it}$ = error term
+    - $\epsilon_{it}$ = error term, clustered at the ward level (`admin_area_4`) if multiple clusters available
 
     #### Regression Outputs
 
@@ -597,7 +589,7 @@ The control chart level determines where the statistical modeling occurs (trend 
     Apply rule-based tagging to identify potential disruptions. Each rule is governed by user-defined parameters that can be tuned for sensitivity:
 
     - **Sharp Disruptions**: Tag if `|robust_control| ≥ MADS_THRESHOLD`
-    - **Sustained Drops**: Tag final month if 3 consecutive months have mild deviations and final month exceeds threshold
+    - **Sustained Drops**: Tag if 3 consecutive months have mild deviations (residual ≥ 1 but < MADS_THRESHOLD) and current month has residual ≥ 1.5
     - **Sustained Dips**: Tag entire sequence if `count_original < DIP_THRESHOLD × count_smooth` for 3+ months
     - **Sustained Rises**: Tag entire sequence if `count_original > RISE_THRESHOLD × count_smooth` for 3+ months
     - **Missing Data**: Tag if 2+ of past 3 months are missing or zero
