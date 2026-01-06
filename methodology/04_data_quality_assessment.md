@@ -92,7 +92,7 @@ The module transforms raw facility reports into quality-flagged datasets:
 6. **Scoring**: Combines flags into continuous scores (0-1) and binary pass/fail indicators
 7. **Output Format**: Multiple files optimized for different use cases (quick outlier review, full analysis, downstream modules)
 
-The data flows through the module in long format (one row per facility-indicator-period combination) and emerges with quality dimensions that subsequent modules use to weight, adjust, or exclude observations.
+The module processes data in long format (one row per facility-indicator-period combination) and outputs quality dimension scores used by subsequent modules to weight, adjust, or exclude observations.
 
 ### Analysis Outputs and Visualization
 
