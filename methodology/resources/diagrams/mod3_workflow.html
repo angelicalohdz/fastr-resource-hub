@@ -295,7 +295,14 @@
 
                 <div class="flow-box">
                     <h4>Data Preparation Pipeline</h4>
-                    <p>Load adjusted data and outlier flags → Exclude outlier values → Aggregate to geographic level → Create rows for missing months → Set low-volume months to NA → Interpolate NA values for modeling</p>
+                    <ul class="process-list">
+                        <li><strong>Load data:</strong> M2_adjusted_data.csv (quality-adjusted counts) + M1_output_outliers.csv (outlier flags)</li>
+                        <li><strong>Join and filter:</strong> Join outlier flags to adjusted data, then remove rows flagged as outliers</li>
+                        <li><strong>Aggregate:</strong> Sum facility counts to geographic level (e.g., district) by indicator and month</li>
+                        <li><strong>Expand time series:</strong> Create explicit rows for any missing months within each indicator-geography panel</li>
+                        <li><strong>Handle low-volume:</strong> Set months with count &lt; 50% of panel mean to NA</li>
+                        <li><strong>Interpolate:</strong> Fill NA values using linear interpolation for model fitting</li>
+                    </ul>
                 </div>
 
                 <div class="arrow-connector">↓</div>
