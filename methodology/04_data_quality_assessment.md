@@ -252,23 +252,21 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     - `admin_area_[2-8]`: Geographic areas (dynamically included based on data)
     - `indicator_common_id`: Health indicator name
     - `period_id`: Time period (YYYYMM)
-    - `year`, `month`: Extracted time components
     - `count`: Reported service volume
-    - `median_volume`: Facility-indicator median
-    - `mad_volume`: Median Absolute Deviation
-    - `mad_residual`: Standardized residual
-    - `pc`: Proportion of annual total
-    - `outlier_mad`: MAD-based outlier flag
-    - `outlier_pc`: Proportion-based outlier flag
-    - `outlier_flag`: Final combined outlier flag
 
     **Use Case**: Data managers reviewing specific outliers for investigation or correction
 
 ??? "M1_output_outliers.csv - All Records with Outlier Flags"
 
-    **Purpose**: Complete dataset with outlier metrics for all facility-indicator-period combinations
+    **Purpose**: Complete dataset with outlier flags for all facility-indicator-period combinations
 
-    **Columns**: Same as outlier_list.csv but includes all observations
+    **Columns:**
+
+    - `facility_id`: Facility identifier
+    - `admin_area_[2-8]`: Geographic areas (dynamically included based on data)
+    - `period_id`: Time period (YYYYMM)
+    - `indicator_common_id`: Health indicator name
+    - `outlier_flag`: Final combined outlier flag (0 = not outlier, 1 = outlier)
 
     **Use Case**:
 
@@ -283,17 +281,15 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     **Columns:**
 
     - `facility_id`: Facility identifier
-    - `admin_area_[2-8]`: Geographic areas
+    - `admin_area_[2-8]`: Geographic areas (dynamically included based on data)
     - `indicator_common_id`: Health indicator name
     - `period_id`: Time period (YYYYMM)
-    - `year`, `month`, `quarter_id`: Time components
-    - `count`: Reported volume (NA if missing)
-    - `completeness_flag`: 0=Incomplete, 1=Complete, 2=Inactive (removed from output)
+    - `completeness_flag`: 0=Incomplete (missing), 1=Complete (reported)
 
     **Special Features**:
 
     - Contains explicit rows for non-reporting months
-    - Inactive periods (6+ months at start/end) excluded
+    - Inactive periods (6+ months at start/end with completeness_flag=2) excluded from export
     - Full time series for each facility-indicator combination
 
     **Use Case**:
@@ -304,14 +300,13 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 
 ??? "M1_output_consistency_geo.csv - Geographic-Level Consistency"
 
-    **Purpose**: Consistency ratios calculated at the specified geographic level (e.g., district)
+    **Purpose**: Consistency flags calculated at the specified geographic level (e.g., district)
 
     **Columns:**
 
-    - `admin_area_1` through `admin_area_[X]`: Geographic identifiers up to specified GEOLEVEL
+    - `admin_area_[2-8]`: Geographic identifiers up to specified GEOLEVEL (dynamically included based on data)
     - `period_id`: Time period (YYYYMM)
     - `ratio_type`: Name of consistency pair (e.g., "pair_penta", "pair_anc")
-    - `consistency_ratio`: Calculated ratio value
     - `sconsistency`: Binary flag (1=consistent, 0=inconsistent, NA=cannot calculate)
 
     **Format**: Long format with one row per geographic area-period-ratio type
@@ -324,15 +319,17 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 
 ??? "M1_output_consistency_facility.csv - Facility-Level Consistency"
 
-    **Purpose**: Geographic consistency results expanded to facility level, pivoted to wide format
+    **Purpose**: Geographic consistency results expanded to facility level
 
     **Columns:**
 
     - `facility_id`: Facility identifier
-    - `period_id`: Time period
-    - `pair_[X]`: One column per consistency pair with flag values
+    - `admin_area_[2-8]`: Geographic areas (dynamically included based on data)
+    - `period_id`: Time period (YYYYMM)
+    - `ratio_type`: Name of consistency pair (e.g., "pair_penta", "pair_anc")
+    - `sconsistency`: Binary flag (1=consistent, 0=inconsistent, NA=cannot calculate)
 
-    **Format**: Wide format with one row per facility-period
+    **Format**: Long format with one row per facility-period-ratio type
 
     **Use Case**:
 
@@ -347,12 +344,10 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     **Columns:**
 
     - `facility_id`: Facility identifier
-    - `admin_area_[2-8]`: Geographic areas
+    - `admin_area_[2-8]`: Geographic areas (dynamically included based on data)
     - `period_id`: Time period (YYYYMM)
-    - `completeness_outlier_score`: Proportion of DQA indicators passing completeness & outlier checks (0-1)
-    - `consistency_score`: Proportion of consistency pairs passing benchmarks (0-1, or NA if no pairs)
     - `dqa_mean`: Average of component scores (0-1)
-    - `dqa_score`: Binary overall pass/fail (1 = complete, no outliers, consistent; 0 = any check failed)
+    - `dqa_score`: Binary overall pass/fail (1 = all checks pass; 0 = any check failed)
 
     **Use Case**:
 
