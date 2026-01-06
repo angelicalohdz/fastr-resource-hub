@@ -98,47 +98,47 @@ The module processes data in long format (one row per facility-indicator-period 
 
 The FASTR analysis generates six main visual outputs:
 
-**1. Outliers Heatmap**
+**1. Outliers heatmap**
 
 Heatmap table with zones as rows and health indicators as columns, color-coded by outlier percentage.
 
 ![Percentage of facility-months that are outliers.](resources/default_outputs/Default_1._Proportion_of_outliers.png)
 
 
-**2. Indicator Completeness**
+**2. Indicator completeness**
 
 Heatmap table with zones as rows and health indicators as columns, color-coded by completeness percentage.
 
 ![Percentage of facility-months with complete data.](resources/default_outputs/Default_2._Proportion_of_completed_records.png)
 
 
-**3. Indicator Completeness Over Time**
+**3. Indicator completeness over time**
 
 Horizontal timeline charts showing completeness trends for each indicator over the analysis period.
 
 ![Percentage of facility-months with complete data over time.](resources/default_outputs/Default_3._Proportion_of_completed_records_over_time.png)
 
-**4. Internal Consistency**
+**4. Internal consistency**
 
 Heatmap table with zones as rows and consistency benchmark categories as columns, color-coded by performance.
 
 ![Percentage of sub-national areas meeting consistency benchmarks.](resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
 
 
-**5. Overall DQA Score**
+**5. Overall DQA score**
 
 Heatmap table with zones as rows and time periods as columns, color-coded by DQA score percentage.
 
 ![Percentage of facility-months with adequate data quality over time.](resources/default_outputs/Default_5._Overall_DQA_score.png)
 
-**6. Mean DQA Score**
+**6. Mean DQA score**
 
 Heatmap table with zones as rows and time periods as columns, color-coded by average DQA score.
 
 ![Average data quality score across facility-months.](resources/default_outputs/Default_6._Mean_DQA_score.png)
 
 
-**Color Coding System:**
+**Color coding system:**
 - **Green**: 90% or above (completeness/consistency), Below 1% (outliers)
 - **Yellow**: 80% to 89% (completeness), 1% to 2% (outliers)
 - **Red**: Below 80% (completeness/consistency), 3% or above (outliers)
@@ -214,7 +214,7 @@ The module uses several configurable parameters that control analysis behavior:
 
 ### Input/output specifications
 
-#### Input File Structure
+#### Input file structure
 
 **Required File**: `hmis_[COUNTRY_ISO3].csv`
 
@@ -240,7 +240,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 - Zero counts should be explicit zeros, not missing
 - Geographic columns detected automatically (columns 2-8 are optional)
 
-#### Output Files
+#### Output files
 
 ??? "M1_output_outlier_list.csv - Flagged Outliers Only"
 
@@ -1556,7 +1556,7 @@ Each month, are facilities sending in their reports?
 
 ---
 
-## Completeness: FASTR Output
+## Completeness: FASTR output
 
 ![Indicator Completeness](resources/default_outputs/Default_2._Proportion_of_completed_records.png)
 <!-- /SLIDE -->
@@ -1612,7 +1612,7 @@ AND for which the count is greater than 100.
 
 ---
 
-## Outliers: FASTR Output
+## Outliers: FASTR output
 
 ![Outliers](resources/default_outputs/Default_1._Proportion_of_outliers.png)
 <!-- /SLIDE -->
@@ -1672,7 +1672,7 @@ This accounts for patients visiting different facilities for different services.
 
 ---
 
-## Consistency: FASTR Output
+## Consistency: FASTR output
 
 ![Internal Consistency](resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
 <!-- /SLIDE -->
@@ -1703,13 +1703,13 @@ This accounts for patients visiting different facilities for different services.
 
 ---
 
-## Overall DQA Score: FASTR Output
+## Overall DQA score: FASTR output
 
 ![Overall DQA Score](resources/default_outputs/Default_5._Overall_DQA_score.png)
 
 ---
 
-## Mean DQA Score: FASTR Output
+## Mean DQA score: FASTR output
 
 ![Mean DQA Score](resources/default_outputs/Default_6._Mean_DQA_score.png)
 <!-- /SLIDE -->

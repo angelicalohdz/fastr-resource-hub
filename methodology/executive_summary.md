@@ -12,7 +12,7 @@ The Global Financing Facility (GFF) supports country-led efforts to improve the 
 
 Traditional household surveys (DHS, MICS) provide validated coverage estimates but are conducted infrequently (typically every 3-5 years), creating gaps in the availability of timely data for monitoring service delivery trends, detecting disruptions, and tracking progress toward health system goals. FASTR addresses these constraints through a structured analytical process that systematically assesses and adjusts for data quality issues in routine HMIS data.
 
-## The FASTR Methodology
+## The FASTR methodology
 
 ### Identify questions and indicators
 

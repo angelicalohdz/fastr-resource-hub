@@ -166,7 +166,7 @@ Each health indicator targets a specific population (e.g., pregnant women for AN
 
 ### Part 1: Denominator calculation (technical details)
 
-#### Configuration Parameters
+#### Configuration parameters
 
 The module begins with several configurable parameters that control the analysis:
 
@@ -201,7 +201,7 @@ UNDER5_MORTALITY_RATE <- 0.103   # Under-5 mortality rate
 - `count_final_both`: Both adjustments **(recommended)**
 
 
-#### Input Data Sources
+#### Input data sources
 
 Part 1 integrates three primary data sources:
 
@@ -234,7 +234,7 @@ The Multiple Indicator Cluster Surveys (MICS), conducted by UNICEF, provide hous
 **Survey Data - DHS**
 The Demographic and Health Surveys (DHS), conducted by USAID, provide survey data on health service utilization, including immunization rates and maternal care coverage.
 
-#### Core Functions Documentation
+#### Core functions documentation
 
 ??? "`process_hmis_adjusted_volume()`"
 
@@ -476,7 +476,7 @@ The Demographic and Health Surveys (DHS), conducted by USAID, provide survey dat
     - `survey`: Actual survey observation
     - `d*_*`: Individual denominator results (all options)
 
-#### Statistical Methods & Algorithms
+#### Statistical methods & algorithms
 
 ??? "Forward-Filling (Last Observation Carried Forward)"
 
@@ -510,7 +510,7 @@ The Demographic and Health Surveys (DHS), conducted by USAID, provide survey dat
     - $S_t$ = Survey coverage in year $t$
     - Summation is across all years with survey data
 
-#### Conceptual Framework: Demographic Cascades
+#### Conceptual framework: Demographic cascades
 
 Before presenting the specific formulas, it is important to understand the **conceptual flow** of denominator calculations. Denominators are derived through sequential demographic adjustments that reflect the biological cascade from pregnancy to specific health service target populations.
 
@@ -804,7 +804,7 @@ Where:
 
 These target population estimates are calculated automatically for **all available live birth denominators**, ensuring consistent methodology across different source indicators.
 
-#### Workflow Execution Steps
+#### Workflow execution steps
 
 Part 1 executes the following workflow for each administrative level (national, admin2, admin3):
 
@@ -1031,7 +1031,7 @@ Part 2 serves three key purposes:
 
 3. **Survey Projection**: Projects survey-based coverage estimates forward in time using trends observed in administrative (HMIS) data, filling gaps where survey data is unavailable
 
-#### User Configuration
+#### User configuration
 
 Users configure Part 2 through two key parameter sets:
 
@@ -1091,7 +1091,7 @@ Users configure Part 2 through two key parameter sets:
 
     The script automatically checks data availability and disables admin levels with no data.
 
-#### Core Functions and Methods
+#### Core functions and methods
 
 ??? "Function 1: `coverage_deltas()`"
 
@@ -1289,7 +1289,7 @@ Users configure Part 2 through two key parameter sets:
     - `survey_raw_source`: Survey data source (e.g., "DHS", "MICS")
     - `survey_raw_source_detail`: Detailed source information
 
-#### Helper Functions
+#### Helper functions
 
 ??? "Helper Function: `filter_by_denominator_selection()`"
 
@@ -1331,7 +1331,7 @@ Users configure Part 2 through two key parameter sets:
 
     Survey data frame with columns: admin areas, year, indicator_common_id, survey_value
 
-#### Workflow Execution Steps
+#### Workflow execution steps
 
 Part 2 executes the following workflow for each administrative level (national, admin2, admin3):
 
@@ -1375,7 +1375,7 @@ Part 2 executes the following workflow for each administrative level (national, 
 - Save as CSV with UTF-8 encoding
 - Create empty files for admin levels with no data
 
-#### Output Specifications
+#### Output specifications
 
 Part 2 produces three output files:
 
@@ -1417,7 +1417,7 @@ Same as national, plus:
 - `survey_raw_source`: Survey source
 - `survey_raw_source_detail`: Source details
 
-#### Methodological Considerations
+#### Methodological considerations
 
 ??? "1. Denominator Selection Strategy"
 
@@ -1568,19 +1568,19 @@ The Coverage Estimates module (Module 4 in the FASTR analytics platform) estimat
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_5 -->
-## Coverage estimates: FASTR Outputs
+## Coverage estimates: FASTR outputs
 
 The FASTR analysis generates coverage estimate visualizations at multiple geographic levels:
 
-**1. Coverage Calculated from HMIS Data (National)**
+**1. Coverage calculated from HMIS data (national)**
 
 ![Coverage calculated from HMIS data at national level.](resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
 
-**2. Coverage Calculated from HMIS Data (Admin Area 2)**
+**2. Coverage calculated from HMIS data (admin area 2)**
 
 ![Coverage calculated from HMIS data at admin area 2 level.](resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
 
-**3. Coverage Calculated from HMIS Data (Admin Area 3)**
+**3. Coverage calculated from HMIS data (admin area 3)**
 
 ![Coverage calculated from HMIS data at admin area 3 level.](resources/default_outputs/Module4_3_Coverage_HMIS_Admin3.png)
 <!-- /SLIDE -->
