@@ -16,7 +16,7 @@ Together, these parts transform raw service counts into meaningful coverage esti
 
 ### Why is it needed in the FASTR pipeline?
 
-Understanding coverage is essential for monitoring health system performance and equity. While Module 2 provides adjusted service volumes, these numbers alone don't tell us whether services are reaching their intended populations. Coverage estimates provide context by comparing service delivery to population need.
+Understanding coverage is essential for monitoring health system performance and equity. While Module 2 provides adjusted service volumes, these numbers alone do not indicate whether services are reaching their intended populations. Coverage estimates provide context by comparing service delivery to population need.
 
 This module addresses some challenges in coverage estimation:
 
@@ -67,7 +67,7 @@ This module addresses some challenges in coverage estimation:
 #### Part 1: Denominator Calculation and Selection
 
 **Step 1: Load and Prepare Data Sources**
-The module begins by loading three data sources and ensuring they're compatible. HMIS data is aggregated from monthly to annual totals. Survey data is harmonized (DHS prioritized over MICS) and forward-filled to create continuous time series. Population data is filtered to the target country.
+The module begins by loading three data sources and ensuring they are compatible. HMIS data is aggregated from monthly to annual totals. Survey data is harmonized (DHS prioritized over MICS) and forward-filled to create continuous time series. Population data is filtered to the target country.
 
 **Step 2: Calculate Multiple Denominator Options**
 For each health indicator, the module calculates several possible target populations:
@@ -82,7 +82,7 @@ For each health indicator, the module calculates several possible target populat
 The module computes coverage by dividing the service volume by each denominator option. This produces multiple coverage estimates per indicator, each based on a different population assumption.
 
 **Step 4: Compare to Survey Benchmarks**
-Each coverage estimate is compared to survey data using squared error calculation. The survey serves as the "truth" benchmark since it's based on representative household sampling.
+Each coverage estimate is compared to survey data using squared error calculation. The survey serves as the benchmark since it is based on representative household sampling.
 
 **Step 5: Select the Best Denominator**
 The denominator producing the lowest error (closest match to survey) is automatically selected as "best." The selection prioritizes HMIS-based denominators over population projections to ensure data is driven by observed service delivery.
@@ -512,7 +512,7 @@ The Demographic and Health Surveys (DHS), conducted by USAID, provide survey dat
 
 #### Conceptual Framework: Demographic Cascades
 
-Before diving into the specific formulas, it's important to understand the **conceptual flow** of denominator calculations. Denominators are derived through sequential demographic adjustments that reflect the biological cascade from pregnancy to specific health service target populations.
+Before presenting the specific formulas, it is important to understand the **conceptual flow** of denominator calculations. Denominators are derived through sequential demographic adjustments that reflect the biological cascade from pregnancy to specific health service target populations.
 
 **Illustrative Example: From Pregnancy to DPT-eligible Population**
 
@@ -1444,7 +1444,7 @@ Same as national, plus:
     - **Complete time series**: The `coverage_deltas()` function can fill missing years, creating a continuous series
     - **Survey gaps**: Projections extend estimates forward, but years before the first survey remain NA
     - **Admin level gaps**: Script automatically detects and skips admin levels with no data
-    - **Missing denominators**: If a selected denominator doesn't exist for an indicator, that indicator-denominator combination is omitted
+    - **Missing denominators**: If a selected denominator does not exist for an indicator, that indicator-denominator combination is omitted
 
 ??? "4. Multi-Level Analysis Consistency"
 
@@ -1505,7 +1505,7 @@ Same as national, plus:
 
 ---
 
-**Last updated**: 10-11-2025
+**Last updated**: 06-01-2026
 **Contact**: FASTR Project Team
 
 ---
