@@ -1,4 +1,4 @@
-# FASTR RMNCAH-N Service Use Monitoring: Methodology Documentation
+# FASTR RMNCAH-N service use monitoring: Methodology documentation
 
 ## Introduction to FASTR
 
@@ -34,7 +34,7 @@ Rapid-cycle analytic approaches provide timely, rigorous, and high-priority data
 
 *Figure 2. FASTR's rapid-cycle analytics approach: Analyze, learn, strengthen, act*
 
-### Technical Approaches
+### Technical approaches
 
 FASTR's four technical approaches, underpinned by capacity strengthening and data use support, enable countries to use rapid-cycle analytics for strengthening PHC systems and improving RMNCAH-N outcomes through the timely and high-frequency analysis and use of data.
 
@@ -70,11 +70,11 @@ Health-facility data collected through routine health management information sys
 
 Poor-quality data impact various levels of the health system in different ways. For program managers, inaccurate data can lead to poor decisions that harm the program's operations and, ultimately, the population's health. At the planning level, poor-quality data can distort evidence of progress towards health-sector goals and hinder annual planning processes by providing misleading results. Additionally, when determining investments in the health sector, poor-quality data can lead to poor targeting of resources. Despite HMIS data being crucial for robust health systems, studies in Sub-Saharan Africa (SSA) have reported challenges with data quality, including issues with completeness, timeliness, accuracy, and consistency [@abouzahr2005; @mavimbe2005; @sychareun2014; @mutale2013; @amoakoh2015; @gimbel2011; @teklegiorgis2016; @rowe2009potential; @belay2013; @moukenet2021]. These concerns about the quality of routine information have undermined its use in decision-making within the health sector [@mutale2013; @belay2013; @xiao2017; @ohagan2017; @chen2014; @glele2014; @bhattacharya2019; @nshimyiryo2020; @ouedraogo2019; @endriyas2019; @mwangu2005; @rowe2009caution]. However, in recent years, countries have made substantial improvements in HMIS data quality which has been reinforced by a system of data quality assessment, data quality improvement, and data use for evidence-based decision making [@nisingizwe2014; @wagenaar2015; @mphatswe2012].
 
-## Defining Data Quality
+## Defining data quality
 
 Defining data quality is complex, and while there is no one single definition of data quality, there are four dimensions most frequently used to describe it: completeness, timeliness, consistency, and accuracy [@who2017dqa].
 
-### Data Quality Dimensions and Assessment
+### Data quality dimensions and assessment
 
 | **Data Quality Domain** | **What does it measure?** | **How is it assessed?** |
 |------------------------|---------------------------|-------------------------|
@@ -95,17 +95,17 @@ This approach enables identification of the highest priority data quality issues
 
 ---
 
-### Focus on a Set of Core Indicators
+### Focus on a set of core indicators
 
 The FASTR approach to routine data analysis focuses on a core set of RMNCAH-N indicators that characterize the reproductive, maternal and child healthcare continuum, priority health areas across LMICs. These indicators capture key service delivery events, which have higher completeness rates and higher volume. In addition, these indicators serve as proxies for other services and interventions delivered at the same service contact. In addition, outpatient consultations (OPDs) are used as a proxy for the general use of health services. Additional, country and program-specific indicators can be added to the analysis to be responsive to country priorities.
 
 ---
 
-### Focus on a Set of Core Data Quality Metrics
+### Focus on a set of core data quality metrics
 
 The FASTR approach to routine data analysis focuses on a core set of data quality metrics which enables identification of the highest priority data quality issues for which data quality adjustments can be made. In addition to the core data quality measures, the FASTR approach generates an overall data quality score which combines the core metrics into a single summary measure.
 
-## Results Communication and Data Use
+## Results communication and data use
 
 During the COVID-19 pandemic, the GFF supported Ministries of Health in over 20 countries to monitor the impact of the pandemic on essential health services.
 
@@ -116,17 +116,17 @@ During the COVID-19 pandemic, the GFF supported Ministries of Health in over 20 
 
 More results and reports can be found in the [FASTR Resource Repository](https://data.gffportal.org/key-theme/FASTR/resource-repository/index.php/home).
 
-## What This Documentation Covers
+## What this documentation covers
 
 This methodology documentation describes the complete FASTR approach to routine HMIS data analysis, from initial planning through results communication.
 
-### Planning & Preparation
+### Planning & preparation
 
 - [**Identify Questions & Indicators**](01_identify_questions_indicators.md) - Defining priority questions and selecting core indicators for FASTR implementation
 - [**Data Extraction**](02_data_extraction.md) - Extracting and preparing HMIS data from DHIS2 for analysis
 - [**The FASTR Data Analytics Platform**](03_fastr_analytics_platform.md) - Using the platform for automated analysis and visualization
 
-### Analytics Modules (FASTR Platform)
+### Analytics modules (FASTR platform)
 
 The FASTR analytics platform includes four automated modules:
 
@@ -135,7 +135,7 @@ The FASTR analytics platform includes four automated modules:
 - [**Service Utilization Analysis**](06a_service_utilization.md) - Module 3 in the platform. Analysis of health service usage patterns to detect and quantify disruptions
 - [**Coverage Estimates**](06b_coverage_estimates.md) - Module 4 in the platform. Methods for estimating service coverage and comparing trends to country targets
 
-### Results & Communication
+### Results & communication
 
 - [**Results Communication and Data Use**](07_results_communication.md) - Interpreting findings, data visualization, and using data for decision-making
 
@@ -211,7 +211,7 @@ Rapid-cycle analytic approaches provide timely, rigorous, and high-priority data
 <!-- /SLIDE -->
 
 <!-- SLIDE:m0_4 -->
-## Technical Approaches
+## Technical approaches
 
 FASTR's four technical approaches, underpinned by capacity strengthening and data use support, enable countries to use rapid-cycle analytics for strengthening PHC systems and improving RMNCAH-N outcomes through the timely and high-frequency analysis and use of data.
 
@@ -244,13 +244,13 @@ This approach enables identification of the highest priority data quality issues
 
 ---
 
-### Focus on a Set of Core Indicators
+### Focus on a set of core indicators
 
 The FASTR approach prioritizes a core set of RMNCAH-N indicators that span the reproductive, maternal, and child health continuum and reflect priority service areas across LMICs. These indicators represent key service delivery events with relatively high reporting completeness and volumes, and they act as proxies for other services delivered during the same contact. Outpatient consultations (OPDs) are included as a proxy for overall health service use. The indicator set can be expanded to include country- or programme-specific priorities as needed.
 
 ---
 
-### Focus on a Set of Core Data Quality Metrics
+### Focus on a set of core data quality metrics
 
 FASTR also relies on a core set of data quality metrics to identify the most critical data quality issues that can be addressed through adjustment methods. In addition to these individual metrics, the approach produces an overall data quality score that synthesizes them into a single summary measure.
 <!-- /SLIDE -->

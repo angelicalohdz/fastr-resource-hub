@@ -1,4 +1,4 @@
-# Results Communication and Data Use
+# Results communication and data use
 
 This module covers how to interpret, communicate, and use FASTR results for decision-making.
 
@@ -148,7 +148,7 @@ A data use roadmap is a strategic plan that outlines how data will be utilized, 
 - Outlines the steps needed to achieve data dissemination goals
 - Anticipates potential challenges and barriers in data dissemination and use and develops strategies to solve for them
 
-### Dissemination and data use roadmap Components
+### Dissemination and data use roadmap components
 
 | Component | Description | Example |
 |-----------|-------------|---------|

@@ -1,4 +1,4 @@
-# Data Quality Adjustment
+# Data quality adjustment
 
 ## Overview (What & Why)
 
@@ -24,7 +24,7 @@ Routine health management information system (HMIS) data often contains errors a
 
 By systematically addressing these data quality issues before analysis, this module ensures that downstream calculations and decisions are based on reliable, consistent data rather than artifacts of poor data quality.
 
-### Quick Summary
+### Quick summary
 
 | Component | Details |
 |-----------|---------|
@@ -34,9 +34,9 @@ By systematically addressing these data quality issues before analysis, this mod
 
 ---
 
-## How It Works
+## How it works
 
-### High-Level Workflow
+### High-level workflow
 
 The module follows a systematic seven-step process to clean and adjust health facility data:
 
@@ -61,11 +61,11 @@ After adjustments are complete, the facility-level data is aggregated (summed up
 **Step 7: Export Results**
 The module saves four CSV files: one for facility-level data, one for subnational areas, one for national totals, and one documenting which indicators were excluded from adjustment and why.
 
-### Workflow Diagram
+### Workflow diagram
 
 <iframe src="../resources/diagrams/mod2_workflow.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Module 2 Interactive Workflow"></iframe>
 
-### Key Decision Points
+### Key decision points
 
 **Which values should be adjusted?**
 
@@ -89,7 +89,7 @@ By producing four scenarios, the module allows different use cases:
 - **Completeness only**: Use when you trust the reported values but reporting is sporadic
 - **Both**: Use when both data quality issues are prevalent
 
-### What Happens to the Data
+### What happens to the data
 
 **Input Processing**: The module receives facility-level monthly service volumes along with quality flags from Module 1 (outlier indicators, completeness status). Each facility-indicator-period combination represents a single observation that may require adjustment.
 
@@ -99,15 +99,15 @@ By producing four scenarios, the module allows different use cases:
 
 **Output Aggregation**: The adjusted data is aggregated to geographic levels (country, provinces, districts) while preserving all four adjustment scenarios. Each output row contains the geographic area identifier, indicator code, time period, and all four count versions, enabling flexible analysis depending on data quality tolerance and research questions.
 
-### Analysis Outputs and Visualization
+### Analysis outputs and visualization
 
 The FASTR analysis generates three main visual outputs comparing service volumes before and after adjustments:
 
 ---
 
-## Detailed Reference
+## Detailed reference
 
-### Configuration Parameters
+### Configuration parameters
 
 ??? "Excluded Indicators"
 
@@ -153,7 +153,7 @@ The FASTR analysis generates three main visual outputs comparing service volumes
     - Could over-smooth in cases of genuine programmatic shifts
     - Requires at least 6 valid observations for optimal centered average
 
-### Input/Output Specifications
+### Input/output specifications
 
 ??? "Input Files"
 
@@ -227,7 +227,7 @@ The FASTR analysis generates three main visual outputs comparing service volumes
     - `count_final_completeness`: Only completeness adjustment applied
     - `count_final_both`: Both outlier and completeness adjustments applied
 
-### Key Functions Documentation
+### Key functions documentation
 
 ??? "Required Libraries"
 
@@ -296,7 +296,7 @@ The FASTR analysis generates three main visual outputs comparing service volumes
     - Preserves original values for excluded indicators (deaths)
     - Merges all scenario results into a single wide-format table
 
-### Statistical Methods & Algorithms
+### Statistical methods & algorithms
 
 ??? "Outlier Adjustment Methodology"
 
@@ -521,7 +521,7 @@ The FASTR analysis generates three main visual outputs comparing service volumes
 
     Rolling averages are calculated from available valid values only. If fewer than 6 values exist, the average is computed from whatever is available. If no valid values exist, the result is `NA`.
 
-### Code Examples
+### Code examples
 
 ??? "Example 1: Outlier Adjustment"
 
@@ -766,7 +766,7 @@ The FASTR analysis generates three main visual outputs comparing service volumes
     ```
 
 
-### Usage Notes & Recommendations
+### Usage notes & recommendations
 
 ??? "Choosing the Right Scenario"
 
@@ -834,7 +834,7 @@ Rather than simply deleting problematic data, this module replaces questionable 
 
 ---
 
-### Four Adjustment Scenarios
+### Four adjustment scenarios
 
 The module produces four parallel versions of the data:
 
@@ -862,7 +862,7 @@ For each value flagged as an outlier, the module calculates what the value "shou
 
 ---
 
-### Outlier Adjustment: FASTR Output
+### Outlier adjustment: FASTR output
 
 ![Percent change in volume due to outlier adjustment.](resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
 
@@ -878,7 +878,7 @@ This ensures that temporary reporting gaps don't create artificial drops to zero
 
 ---
 
-### Completeness Adjustment: FASTR Output
+### Completeness adjustment: FASTR output
 
 ![Percent change in volume due to completeness adjustment.](resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
 
@@ -886,7 +886,7 @@ Heatmap showing percent change in service volumes due to missing data imputation
 <!-- /SLIDE -->
 
 <!-- SLIDE:m5_4 -->
-## Combined Adjustment Impact
+## Combined adjustment impact
 
 Heatmap showing percent change in service volumes when both outlier and completeness adjustments are applied, with geographic areas as rows and indicators as columns.
 

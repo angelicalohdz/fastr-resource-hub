@@ -1,4 +1,4 @@
-# The FASTR Data Analytics Platform
+# The FASTR data analytics platform
 
 This module provides guidance on using the FASTR analytics platform for data analysis and visualization.
 

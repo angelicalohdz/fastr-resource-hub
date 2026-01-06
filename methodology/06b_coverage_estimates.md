@@ -1,4 +1,4 @@
-# Coverage Estimates
+# Coverage estimates
 
 ## Overview (What & Why)
 
@@ -28,7 +28,7 @@ This module addresses some challenges in coverage estimation:
 
 - **Subnational analysis**: Enables coverage monitoring at national, provincial, and district levels
 
-### Quick Summary
+### Quick summary
 
 | Component | Details |
 |-----------|---------|
@@ -36,7 +36,7 @@ This module addresses some challenges in coverage estimation:
 | **Outputs** | M4_denominators (national, admin2, admin3) - calculated target populations<br>M4_combined_results (national, admin2, admin3) - coverage estimates with all denominators<br>M5_coverage_estimation (national, admin2, admin3) - final coverage with projections |
 | **Purpose** | Estimate health service coverage by comparing service volumes to target populations, validated against survey benchmarks |
 
-### Part 1 and Part 2 Explained
+### Part 1 and part 2 explained
 
 **Part 1: Denominator Calculation and Selection**
 
@@ -60,9 +60,9 @@ This module addresses some challenges in coverage estimation:
 
 ---
 
-## How It Works
+## How it works
 
-### High-Level Workflow
+### High-level workflow
 
 #### Part 1: Denominator Calculation and Selection
 
@@ -122,11 +122,11 @@ The final output merges three types of estimates:
 **Step 7: Save Final Outputs**
 Results are saved with standardized column structures for each administrative level, ready for visualization and reporting.
 
-### Workflow Diagram
+### Workflow diagram
 
 <iframe src="../resources/diagrams/mod4_workflow.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Module 4 Interactive Workflow"></iframe>
 
-### Key Decision Points
+### Key decision points
 
 **1. Which denominator to use?**
 Part 1 automatically selects based on alignment with survey data, but users can override in Part 2. The choice affects whether coverage is anchored to service delivery patterns (HMIS-based) or demographic projections (population-based).
@@ -140,7 +140,7 @@ For **immunization indicators only**, when local survey data is unavailable at t
 **4. How to adjust denominators for different target populations?**
 Each health indicator targets a specific population (e.g., pregnant women for ANC, infants for vaccines). The module applies sequential demographic adjustments (pregnancy loss, stillbirths, mortality) to align denominators with target populations.
 
-### What Happens to the Data
+### What happens to the data
 
 **Input Integration**: The module combines three distinct data sources: facility-level service volumes from HMIS (aggregated annually by geographic area), household survey coverage estimates (harmonized across different survey years and forward-filled to create continuous time series), and population projections (filtered to extract age-specific target populations for each health indicator).
 
@@ -162,9 +162,9 @@ Each health indicator targets a specific population (e.g., pregnant women for AN
 
 ---
 
-## Detailed Reference
+## Detailed reference
 
-### Part 1: Denominator Calculation (Technical Details)
+### Part 1: Denominator calculation (technical details)
 
 #### Configuration Parameters
 
@@ -1019,7 +1019,7 @@ Part 1 executes the following workflow for each administrative level (national, 
 
 ---
 
-### Part 2: Denominator Selection and Survey Projection (Technical Details)
+### Part 2: Denominator selection and survey projection (technical details)
 
 #### Purpose and Objectives
 
@@ -1543,7 +1543,7 @@ Same as national, plus:
 -->
 
 <!-- SLIDE:m6_4 -->
-## Service Coverage Estimates
+## Service coverage estimates
 
 The Coverage Estimates module (Module 4 in the FASTR analytics platform) estimates health service coverage by answering: **"What percentage of the target population received this health service?"**
 
@@ -1554,7 +1554,7 @@ The Coverage Estimates module (Module 4 in the FASTR analytics platform) estimat
 
 ---
 
-### Two-Part Process
+### Two-part process
 
 **Part 1: Denominator Calculation**
 - Calculate target populations using multiple methods (HMIS-based and population-based)
@@ -1568,7 +1568,7 @@ The Coverage Estimates module (Module 4 in the FASTR analytics platform) estimat
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_5 -->
-## Coverage Estimates: FASTR Outputs
+## Coverage estimates: FASTR Outputs
 
 The FASTR analysis generates coverage estimate visualizations at multiple geographic levels:
 

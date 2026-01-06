@@ -1,4 +1,4 @@
-# Identify Questions & Indicators
+# Identify questions & indicators
 
 This module guides the process of identifying the right questions and indicators for FASTR implementation.
 
@@ -174,7 +174,7 @@ Effective data use relies on well-defined questions. Priority questions will gui
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_2c -->
-## What Do We Mean by Answerable?
+## What do we mean by answerable?
 
 **We have the data**
 - Type, quantity, quality sufficient for the question
@@ -211,7 +211,7 @@ A standard tool from evidence-based medicine and public health research for form
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_3a -->
-## Why Focus on High Volume Indicators?
+## Why focus on high volume indicators?
 
 One key added-value of the FASTR approach is making adjustments for data quality. Low-volume indicators are challenging to adjust:
 
@@ -223,7 +223,7 @@ Count indicators allow for ongoing data quality checks with improved precision i
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_3b -->
-## Why Focus on High Completeness Indicators?
+## Why focus on high completeness indicators?
 
 High completeness indicators improve data quality, reduce bias, and enable more accurate insights:
 
@@ -235,7 +235,7 @@ Statistical methods such as imputation can adjust for incomplete data, but this 
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_3c -->
-## Why Focus on Count Indicators?
+## Why focus on count indicators?
 
 **Challenges with Proportion Indicators:**
 - Proportions limit our ability to apply adjustments for data quality challenges

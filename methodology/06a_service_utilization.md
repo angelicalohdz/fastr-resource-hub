@@ -1,4 +1,4 @@
-# Service Utilization Analysis
+# Service utilization analysis
 
 ## Overview (What & Why)
 
@@ -16,7 +16,7 @@ Service utilization data reflects how populations access essential healthcare, b
 
 This module provides objective, data-driven identification of service delivery problems and quantifies their impact. It enables health system managers to detect emerging issues early, target resources to affected areas, and monitor recovery after disruptions. The module's outputs support dashboard monitoring, impact assessments, and policy evaluation.
 
-### Quick Summary
+### Quick summary
 
 | Component | Details |
 |-----------|---------|
@@ -26,9 +26,9 @@ This module provides objective, data-driven identification of service delivery p
 
 ---
 
-## How It Works
+## How it works
 
-### High-Level Workflow
+### High-level workflow
 
 The module operates in two sequential stages, each with a distinct purpose:
 
@@ -55,11 +55,11 @@ The module operates in two sequential stages, each with a distinct purpose:
 
 7. **Generate outputs**: Create summary files showing disruption impacts at each geographic level, ready for visualization and reporting.
 
-### Workflow Diagram
+### Workflow diagram
 
 <iframe src="../resources/diagrams/mod3_workflow.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Module 3 Interactive Workflow"></iframe>
 
-### Key Decision Points
+### Key decision points
 
 **Geographic Level Selection**: The module can analyze disruptions at different geographic scales. You can choose to run analysis at national and provincial levels only (faster, suitable for routine monitoring) or include district and ward levels (slower, provides detailed local information for targeted interventions).
 
@@ -77,7 +77,7 @@ The control chart level determines where the statistical modeling occurs (trend 
 
 **Data Completeness Approach**: The module accepts different versions of service counts from Module 2, allowing you to choose whether to adjust for reporting completeness or use raw counts.
 
-### What Happens to the Data
+### What happens to the data
 
 **Input Transformation**: The module starts with facility-level service counts (e.g., number of deliveries at each clinic each month) and aggregates them to geographic areas (provinces, districts). Outliers identified in Module 1 are removed to prevent anomalous data points from skewing the analysis.
 
@@ -95,9 +95,9 @@ The control chart level determines where the statistical modeling occurs (trend 
 
 ---
 
-## Detailed Reference
+## Detailed reference
 
-### Configuration Parameters
+### Configuration parameters
 
 ??? "Core Analysis Parameters"
 
@@ -149,7 +149,7 @@ The control chart level determines where the statistical modeling occurs (trend 
     - `RUN_ADMIN_AREA_4_ANALYSIS = FALSE`
     - `CONTROL_CHART_LEVEL = "admin_area_2"`
 
-### Input/Output Specifications
+### Input/output specifications
 
 ??? "Input Requirements"
 
@@ -274,7 +274,7 @@ The control chart level determines where the statistical modeling occurs (trend 
 
     These are automatically deleted upon successful completion. If the script crashes, these files may remain and will be cleaned up on the next run.
 
-### Key Functions Documentation
+### Key functions documentation
 
 ??? "`robust_control_chart(panel_data, selected_count)`"
 
@@ -355,7 +355,7 @@ The control chart level determines where the statistical modeling occurs (trend 
     - Efficient data.table operations for large datasets
     - Progressive aggregation and merging strategies
 
-### Statistical Methods & Algorithms
+### Statistical methods & algorithms
 
 ??? "Control Chart Analysis"
 
@@ -553,7 +553,7 @@ The control chart level determines where the statistical modeling occurs (trend 
     - Example: Country-wide model clusters by district, province model clusters by district
     - Prevents underestimation of standard errors and false positives
 
-### Detailed Analysis Steps
+### Detailed analysis steps
 
 ??? "Part 1: Control Chart Analysis"
 
@@ -748,7 +748,7 @@ The control chart level determines where the statistical modeling occurs (trend 
     - Use appropriate level for your research question
     - Cross-check patterns across levels for robustness
 
-### Usage Notes
+### Usage notes
 
 ??? "Interpretation Guidelines"
 
@@ -919,7 +919,7 @@ The control chart level determines where the statistical modeling occurs (trend 
 -->
 
 <!-- SLIDE:m6_1 -->
-## Service Utilization Analysis
+## Service utilization analysis
 
 The Service Utilization module (Module 3 in the FASTR analytics platform) analyzes health service delivery patterns to detect and quantify disruptions in service volumes over time.
 
@@ -930,7 +930,7 @@ The Service Utilization module (Module 3 in the FASTR analytics platform) analyz
 
 ---
 
-### Two-Stage Analysis Process
+### Two-stage analysis process
 
 **Stage 1: Control Chart Analysis**
 - Model expected patterns using historical trends and seasonality
@@ -957,7 +957,7 @@ The module detects multiple types of service disruptions:
 
 ---
 
-### Quantifying Impact
+### Quantifying impact
 
 Disruption analysis quantifies shortfalls and surpluses by comparing:
 - **Predicted volumes** (what would have happened without disruption)

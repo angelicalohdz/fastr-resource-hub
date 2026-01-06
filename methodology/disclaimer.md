@@ -1,4 +1,4 @@
-# Disclaimer and Copyright
+# Disclaimer and copyright
 
 © 2024 International Bank for Reconstruction and Development / The World Bank
 

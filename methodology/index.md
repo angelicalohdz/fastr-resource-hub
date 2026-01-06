@@ -4,13 +4,13 @@
 
 </div>
 
-# FASTR RMNCAH-N Service Use Monitoring
+# FASTR RMNCAH-N service use monitoring
 
 **Methodology Documentation**
 
 This documentation describes the FASTR approach to routine HMIS data analysis for monitoring reproductive, maternal, newborn, child, and adolescent health and nutrition (RMNCAH-N) services.
 
-## Documentation Modules
+## Documentation modules
 
 | Section | Description |
 |---------|-------------|
@@ -24,7 +24,7 @@ This documentation describes the FASTR approach to routine HMIS data analysis fo
 | [**Coverage Estimates**](06b_coverage_estimates.md) | Module 4 in platform. Estimating service coverage against targets |
 | [**Results Communication**](07_results_communication.md) | Communicating findings for decision-making |
 
-## Quick Links
+## Quick links
 
 - [Executive Summary](executive_summary.md)
 - [Disclaimer](disclaimer.md)

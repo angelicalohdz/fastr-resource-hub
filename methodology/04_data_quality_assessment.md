@@ -1,4 +1,4 @@
-# Data Quality Assessment (DQA)
+# Data quality assessment (DQA)
 
 ## Overview (What & Why)
 
@@ -15,7 +15,7 @@ Routinely reported health facility data are an important source for health indic
 
 Data quality directly impacts the reliability of health indicators and coverage estimates. Before calculating service utilization rates or estimating population coverage, we must ensure the underlying facility data is trustworthy. This module identifies problematic data patterns that could skew results, allowing analysts to make informed decisions about data adjustments or exclusions in subsequent pipeline steps.
 
-### Quick Summary
+### Quick summary
 
 | Component | Details |
 |-----------|---------|
@@ -25,9 +25,9 @@ Data quality directly impacts the reliability of health indicators and coverage 
 
 ---
 
-## How It Works
+## How it works
 
-### High-Level Workflow
+### High-level workflow
 
 The module follows a logical sequence of quality checks, building from individual data points to an overall quality score:
 
@@ -52,11 +52,11 @@ For a defined set of core indicators (typically first pentavalent dose (Penta1),
 **Step 7: Export Results**
 The module produces several output files containing outlier lists, completeness flags, consistency results, and final DQA scores. These outputs inform subsequent modules and provide actionable insights for data quality improvement.
 
-### Workflow Diagram
+### Workflow diagram
 
 <iframe src="../resources/diagrams/mod1_workflow.html" width="100%" height="800" style="border: 1px solid #ccc; border-radius: 4px;" title="Module 1 Interactive Workflow"></iframe>
 
-### Key Decision Points
+### Key decision points
 
 **When is a value considered an outlier?**
 
@@ -78,7 +78,7 @@ The module adapts to available data. If consistency pairs cannot be evaluated, t
 **How are inactive facilities handled?**
 If a facility does not report for 6 or more consecutive months at the start or end of their reporting period, those months are flagged as "inactive" rather than "incomplete." This prevents penalizing facilities that have not yet started reporting or have permanently closed.
 
-### What Happens to the Data
+### What happens to the data
 
 **Transformation Overview:**
 
@@ -94,7 +94,7 @@ The module transforms raw facility reports into quality-flagged datasets:
 
 The module processes data in long format (one row per facility-indicator-period combination) and outputs quality dimension scores used by subsequent modules to weight, adjust, or exclude observations.
 
-### Analysis Outputs and Visualization
+### Analysis outputs and visualization
 
 The FASTR analysis generates six main visual outputs:
 
@@ -145,11 +145,11 @@ Heatmap table with zones as rows and time periods as columns, color-coded by ave
 
 ---
 
-## Detailed Reference
+## Detailed reference
 
 This section provides technical details for implementers, developers, and analysts who need to understand the underlying methodology.
 
-### Configuration Parameters
+### Configuration parameters
 
 The module uses several configurable parameters that control analysis behavior:
 
@@ -212,7 +212,7 @@ The module uses several configurable parameters that control analysis behavior:
 
     The ranges reflect programmatic expectations. For example, ANC1 should always be at least 95% of ANC4 (more women start care than complete four visits). The 5% tolerance accounts for data entry variations. BCG, as a birth dose vaccine, should approximately equal facility deliveries, with 30% tolerance for variation.
 
-### Input/Output Specifications
+### Input/output specifications
 
 #### Input File Structure
 
@@ -355,7 +355,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     - Tracking data quality trends over time
     - Identifying facilities needing data quality improvement support
 
-### Key Functions Documentation
+### Key functions documentation
 
 ??? "load_and_preprocess_data()"
 
@@ -708,7 +708,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     )
     ```
 
-### Statistical Methods & Algorithms
+### Statistical methods & algorithms
 
 ??? "Median Absolute Deviation (MAD) Calculation"
 
@@ -899,7 +899,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     DQA Score = 1 (all checks passed)
     ```
 
-### Code Examples
+### Code examples
 
 ??? "Example 1: Running the Module with Default Settings"
 
@@ -1206,7 +1206,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     names(data)  # Should include: facility_id, period_id, indicator_common_id, count
     ```
 
-### Usage Notes
+### Usage notes
 
 ??? "Data Type Handling"
 
@@ -1391,7 +1391,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     - dqa_score = 0 requires further investigation
     - dqa_mean provides nuanced view (0.75 = mostly good, 0.25 = mostly poor)
 
-### Data Quality Metrics Summary
+### Data quality metrics summary
 
 | Metric                        | Type        | Range      | Interpretation                                                            |
 |-------------------------------|-------------|------------|---------------------------------------------------------------------------|
@@ -1409,7 +1409,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 | dqa_score                     | Binary      | 0 or 1     | 1 = All checks pass (complete, no outliers, consistent); 0 = any check failed |
 
 
-### Execution Workflow
+### Execution workflow
 
 The module follows this sequence:
 
@@ -1488,12 +1488,12 @@ The module follows this sequence:
 -->
 
 <!-- SLIDE:m4_1 -->
-## Data Quality Assessment
+## Data quality assessment
 
 Understanding the reliability of routine health data
 
 ---
-## Why Talk About Data Quality?
+## Why talk about data quality?
 
 **The challenge:** Health facilities report data every month, but sometimes:
 - Numbers seem too high or too low
@@ -1508,7 +1508,7 @@ Understanding the reliability of routine health data
 **FASTR's solution:** Check data quality systematically, fix what we can, and be transparent about limitations
 
 ---
-## Three Simple Questions About Data Quality
+## Three simple questions about data quality
 
 **1. Are facilities reporting regularly?**
 - Completeness: Did we get reports from facilities this month?
@@ -1582,7 +1582,7 @@ Are there any values that seem way too high compared to what that facility norma
 
 ---
 
-## How We Spot Outliers
+## How we spot outliers
 
 Outliers are identified by assessing the within-facility variation in monthly reporting for each indicator.
 
@@ -1595,7 +1595,7 @@ AND for which the count is greater than 100.
 
 ---
 
-## Outlier Example
+## Outlier example
 
 **Health Center B - Malaria Tests:**
 
@@ -1641,7 +1641,7 @@ Health services are related - certain patterns are expected.
 
 ---
 
-## Why Check Consistency at District Level?
+## Why check consistency at district level?
 
 **Patients move between facilities:**
 - Woman might get ANC1 at Health Center A
@@ -1657,7 +1657,7 @@ This accounts for patients visiting different facilities for different services.
 
 ---
 
-## Consistency Example
+## Consistency example
 
 **District X - ANC Services:**
 
@@ -1678,11 +1678,11 @@ This accounts for patients visiting different facilities for different services.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_5 -->
-## Putting It All Together: Overall Data Quality
+## Putting it all together: Overall data quality
 
 ---
 
-## Overall Quality Score
+## Overall quality score
 
 **For each facility and month, we combine all three checks:**
 
