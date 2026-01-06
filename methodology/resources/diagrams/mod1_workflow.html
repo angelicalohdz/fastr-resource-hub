@@ -428,11 +428,11 @@
                     <h4>DQA Scoring</h4>
                 </div>
                 <ul class="step-list">
-                    <li>Filter to core DQA indicators (e.g., penta1, anc1, opd)</li>
-                    <li>Calculate completeness-outlier score: (complete + no outlier) / max points</li>
-                    <li>Calculate consistency score: passing pairs / available pairs</li>
-                    <li>DQA mean: average of completeness-outlier and consistency scores</li>
-                    <li>Binary DQA score: 1 if all consistency pairs pass</li>
+                    <li>Filter to core DQA indicators (e.g., Penta1, ANC1, OPD)</li>
+                    <li>Completeness-outlier score: points for complete + no outlier</li>
+                    <li>Consistency score: passing pairs / available pairs</li>
+                    <li>DQA mean: average of both component scores</li>
+                    <li>DQA score: 1 = pass, 0 = fail</li>
                 </ul>
             </div>
 
