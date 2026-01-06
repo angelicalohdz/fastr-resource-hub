@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             padding: 40px 20px;
             min-height: 100vh;
         }
@@ -28,7 +28,7 @@
         }
 
         header {
-            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a8c 100%);
+            background: linear-gradient(135deg, #09544F 0%, #0C716B 100%);
             color: white;
             padding: 40px;
             text-align: center;
@@ -56,14 +56,14 @@
 
         .part-header {
             background: #f0f4f8;
-            border-left: 5px solid #2d5a8c;
+            border-left: 5px solid #0C716B;
             padding: 20px;
             margin-bottom: 30px;
             border-radius: 4px;
         }
 
         .part-header h2 {
-            color: #1e3a5f;
+            color: #09544F;
             font-size: 20px;
             margin-bottom: 5px;
         }
@@ -90,18 +90,18 @@
         .input-box {
             flex: 1;
             min-width: 200px;
-            background: #e8f1f8;
-            border: 2px solid #2d5a8c;
+            background: #CAE6E9;
+            border: 2px solid #0C716B;
             border-radius: 6px;
             padding: 20px;
             text-align: center;
             font-weight: 600;
-            color: #1e3a5f;
+            color: #09544F;
             transition: all 0.3s ease;
         }
 
         .input-box:hover {
-            background: #d4e5f2;
+            background: #B8DDE0;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(45, 90, 140, 0.15);
         }
@@ -110,7 +110,7 @@
             flex: 1;
             min-width: 250px;
             background: #fafbfc;
-            border: 2px solid #4a7ba7;
+            border: 2px solid #1F9A9C;
             border-radius: 6px;
             padding: 20px;
             text-align: left;
@@ -118,7 +118,7 @@
         }
 
         .process-box h4 {
-            color: #1e3a5f;
+            color: #09544F;
             font-size: 14px;
             margin-bottom: 12px;
             font-weight: 600;
@@ -139,22 +139,22 @@
 
         .process-box li:before {
             content: "•";
-            color: #2d5a8c;
+            color: #0C716B;
             font-weight: bold;
             position: absolute;
             left: 0;
         }
 
         .comparison-box {
-            background: #f9f3e9;
-            border: 2px solid #d4a574;
+            background: #FDF6E3;
+            border: 2px solid #D8A822;
             border-radius: 6px;
             padding: 20px;
             margin: 15px 0;
         }
 
         .comparison-box h4 {
-            color: #8b5a2b;
+            color: #D8A822;
             font-size: 13px;
             margin-bottom: 10px;
             font-weight: 600;
@@ -171,43 +171,43 @@
             background: white;
             padding: 10px;
             border-radius: 4px;
-            border-left: 3px solid #d4a574;
+            border-left: 3px solid #D8A822;
             padding-left: 12px;
         }
 
         .arrow {
             text-align: center;
-            color: #2d5a8c;
+            color: #0C716B;
             font-size: 24px;
             margin: 10px 0;
             font-weight: 300;
         }
 
         .decision-box {
-            background: #e8f5e9;
-            border: 2px solid #4caf50;
+            background: #E6F7E6;
+            border: 2px solid #1F9A9C;
             border-radius: 6px;
             padding: 20px;
             margin: 15px 0;
         }
 
         .decision-box h4 {
-            color: #2e7d32;
+            color: #09544F;
             font-size: 14px;
             margin-bottom: 10px;
             font-weight: 600;
         }
 
         .output-box {
-            background: #f3e5f5;
-            border: 2px solid #7b1fa2;
+            background: #F5EBF4;
+            border: 2px solid #7A1F6E;
             border-radius: 6px;
             padding: 20px;
             margin: 15px 0;
         }
 
         .output-box h4 {
-            color: #4a148c;
+            color: #7A1F6E;
             font-size: 14px;
             margin-bottom: 10px;
             font-weight: 600;
@@ -228,7 +228,7 @@
 
         .output-box li:before {
             content: "✓";
-            color: #7b1fa2;
+            color: #7A1F6E;
             font-weight: bold;
             position: absolute;
             left: 0;
@@ -236,7 +236,7 @@
 
         .step-number {
             display: inline-block;
-            background: #2d5a8c;
+            background: #0C716B;
             color: white;
             width: 32px;
             height: 32px;
@@ -250,7 +250,7 @@
         }
 
         .stage-title {
-            color: #1e3a5f;
+            color: #09544F;
             font-weight: 600;
             font-size: 15px;
             margin-bottom: 15px;
@@ -430,6 +430,7 @@
                             <ul>
                                 <li><strong>M4_denominators:</strong> All calculated denominator options and coverage estimates</li>
                                 <li><strong>M4_combined_results:</strong> Coverage values + best denominator selection by indicator</li>
+                                <li><strong>M4_selected_denominator_per_indicator:</strong> Summary of which denominator was selected as "best" for each indicator</li>
                             </ul>
                         </div>
                     </div>
