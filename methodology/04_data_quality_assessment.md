@@ -352,7 +352,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     - `completeness_outlier_score`: Proportion of DQA indicators passing completeness & outlier checks (0-1)
     - `consistency_score`: Proportion of consistency pairs passing benchmarks (0-1, or NA if no pairs)
     - `dqa_mean`: Average of component scores (0-1)
-    - `dqa_score`: Binary overall pass/fail (1 = all consistency pairs passed, 0 = any pair failed; when no consistency data, 1 = all completeness/outlier checks passed)
+    - `dqa_score`: Binary overall pass/fail (1 = complete, no outliers, consistent; 0 = any check failed)
 
     **Use Case**:
 
@@ -649,8 +649,8 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     - Formula: `(completeness_outlier_score + consistency_score) / 2`
 
     **4. Binary DQA Score:**
-    - 1 if ALL available consistency pairs pass
-    - 0 otherwise
+    - 1 if all checks pass (complete, no outliers, consistent)
+    - 0 if any check fails
 
     **Handling Missing Indicators:**
     The function intelligently handles cases where some consistency indicators are missing:
@@ -875,15 +875,15 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     $$
     \text{DQA Score} =
     \begin{cases}
-    1, & \text{if all available consistency pairs pass} \\
-    0, & \text{otherwise}
+    1, & \text{if all checks pass (complete, no outliers, consistent)} \\
+    0, & \text{if any check fails}
     \end{cases}
     $$
 
-    **Passing Criteria for Binary Score (when consistency data is available):**
+    **Passing Criteria for Binary Score:**
+    - ALL DQA indicators must be complete (completeness_flag = 1)
+    - ALL DQA indicators must be free of outliers (outlier_flag = 0)
     - ALL available consistency pairs must pass benchmarks (sconsistency = 1)
-
-    **Note:** When consistency data is NOT available, the binary score is based on completeness and outlier checks only (dqa_score = 1 if all DQA indicators are complete AND free of outliers).
 
     **Example Calculation:**
 
@@ -1411,7 +1411,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 | completeness_outlier_score    | Continuous  | 0 to 1     | Proportion of DQA indicators passing completeness & outlier checks        |
 | consistency_score             | Continuous  | 0 to 1     | Proportion of consistency pairs passing benchmarks                        |
 | dqa_mean                      | Continuous  | 0 to 1     | Average of component scores (overall quality measure)                     |
-| dqa_score                     | Binary      | 0 or 1     | 1 = All consistency pairs passed (or all completeness/outlier checks if no consistency data) |
+| dqa_score                     | Binary      | 0 or 1     | 1 = All checks pass (complete, no outliers, consistent); 0 = any check failed |
 
 
 ### Execution Workflow
