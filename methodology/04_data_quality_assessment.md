@@ -41,7 +41,7 @@ For each health facility and indicator (like pentavalent vaccine (Penta) doses o
 The module checks whether facilities are consistently reporting data. It creates a complete timeline for each facility and indicator, identifying months with missing reports. Facilities that stop reporting for 6+ months are flagged as inactive rather than incomplete.
 
 **Step 4: Measure Consistency**
-Related indicators should follow predictable patterns. For example, more women should receive their first antenatal care visit (ANC1) than their fourth (ANC4). The module calculates ratios between paired indicators at the district level (to account for patients visiting multiple facilities) and flags relationships that don't meet expectations.
+Related indicators should follow predictable patterns. For example, more women should receive their first antenatal care visit (ANC1) than their fourth (ANC4). The module calculates ratios between paired indicators at the district level (to account for patients visiting multiple facilities) and flags relationships that do not meet expectations.
 
 **Step 5: Validate Indicator Availability**
 Before running consistency checks, the module verifies that the required indicator pairs actually exist in the dataset. Missing indicators are handled gracefully, with the analysis adapting to available data.
@@ -76,7 +76,7 @@ Patients often visit different facilities within their local district for differ
 The module adapts to available data. If consistency pairs cannot be evaluated, the DQA score is calculated using only completeness and outlier checks. The analysis continues with the dimensions that can be assessed.
 
 **How are inactive facilities handled?**
-If a facility doesn't report for 6 or more consecutive months at the start or end of their reporting period, those months are flagged as "inactive" rather than "incomplete." This prevents penalizing facilities that haven't yet started reporting or have permanently closed.
+If a facility does not report for 6 or more consecutive months at the start or end of their reporting period, those months are flagged as "inactive" rather than "incomplete." This prevents penalizing facilities that have not yet started reporting or have permanently closed.
 
 ### What Happens to the Data
 
@@ -656,7 +656,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     The function intelligently handles cases where some consistency indicators are missing:
     - NA values in consistency pairs are NOT replaced with 0
     - Only available pairs contribute to the denominator
-    - This prevents penalizing facilities for indicators they don't provide
+    - This prevents penalizing facilities for indicators they do not provide
 
     **Example Calculation:**
 
@@ -692,7 +692,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 
     - No consistency pairs defined in configuration
     - All consistency pairs have missing indicators
-    - Dataset doesn't contain paired indicators
+    - Dataset does not contain paired indicators
 
     **Scoring:**
 
@@ -1181,7 +1181,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     ```
 
     **Considerations:**
-    1. If your DHIS2 doesn't store zeros, low-volume facilities may appear incomplete when they legitimately had no services to report
+    1. If your DHIS2 does not store zeros, low-volume facilities may appear incomplete when they legitimately had no services to report
     2. Completeness percentages should be interpreted in context - 70% completeness may be acceptable depending on the health system
     3. Use the completeness_flag in subsequent modules to weight estimates appropriately
 
@@ -1366,7 +1366,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 
     **Empty Results:**
     - Creates CSV files with proper headers even when no data
-    - Ensures downstream processes don't break
+    - Ensures downstream processes do not break
 
     **Missing Indicators:**
     - Validates all indicator requirements before analysis
