@@ -160,6 +160,28 @@ Each health indicator targets a specific population (e.g., pregnant women for AN
 
 - **Geographic disaggregation**: Lower administrative levels enable targeting of interventions to areas with coverage gaps
 
+### Analysis outputs and visualization
+
+The FASTR analysis generates coverage estimate visualizations at multiple geographic levels:
+
+**1. Coverage calculated from HMIS data (national)**
+
+National-level coverage trends comparing HMIS-derived estimates against survey benchmarks.
+
+![Coverage calculated from HMIS data at national level.](resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
+
+**2. Coverage calculated from HMIS data (admin area 2)**
+
+Regional/provincial coverage patterns showing geographic variation in service delivery.
+
+![Coverage calculated from HMIS data at admin area 2 level.](resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
+
+**3. Coverage calculated from HMIS data (admin area 3)**
+
+District-level coverage estimates enabling local-level monitoring and targeting.
+
+![Coverage calculated from HMIS data at admin area 3 level.](resources/default_outputs/Module4_3_Coverage_HMIS_Admin3.png)
+
 ---
 
 ## Detailed reference

@@ -93,6 +93,34 @@ The control chart level determines where the statistical modeling occurs (trend 
 - **Negative deviations**: Service volumes fall below expected (shortfalls)
 - **Control limits**: Statistical thresholds indicating normal variation vs. significant disruption
 
+### Analysis outputs and visualization
+
+The FASTR analysis generates four main visual outputs for service utilization:
+
+**1. Change in service volume**
+
+Line charts showing service volume trends over time, with highlighted periods of significant change.
+
+![Change in service volume over time.](resources/default_outputs/Module3_1_Change_in_service_volume.png)
+
+**2. Actual vs expected services (national)**
+
+Comparison charts showing observed service volumes against model predictions at the national level.
+
+![Actual vs expected number of services at national level.](resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
+
+**3. Actual vs expected services (subnational)**
+
+Geographic breakdown of service delivery patterns compared to expected volumes.
+
+![Actual vs expected number of services at subnational level.](resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
+
+**4. Volume change due to data quality adjustments**
+
+Impact visualization showing how data quality adjustments affect reported service volumes.
+
+![Volume change due to data quality adjustments.](resources/default_outputs/Module3_4_Volume_change_adjustments.png)
+
 ---
 
 ## Detailed reference
