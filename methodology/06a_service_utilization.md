@@ -20,7 +20,7 @@ This module provides objective, data-driven identification of service delivery p
 
 | Component | Details |
 |-----------|---------|
-| **Inputs** | Raw HMIS data (`hmis_ISO3.csv`)<br>Outlier flags from Module 1 (`M1_output_outliers.csv`)<br>Adjusted service volumes from Module 2 (`M2_adjusted_data.csv`) |
+| **Inputs** | Adjusted service volumes from Module 2 (`M2_adjusted_data.csv`)<br>Outlier flags from Module 1 (`M1_output_outliers.csv`)<br>Raw HMIS (`hmis_ISO3.csv`) - only for admin_area_1 lookup |
 | **Outputs** | Disruption flags (`M3_chartout.csv`)<br>Quantified impacts by geographic level (`M3_disruptions_analysis_*.csv`)<br>Shortfall/surplus summaries (`M3_all_indicators_shortfalls_*.csv`) |
 | **Purpose** | Detect and quantify service delivery disruptions through two-stage analysis: control charts identify when disruptions occur, panel regression quantifies their magnitude |
 
@@ -155,19 +155,20 @@ The control chart level determines where the statistical modeling occurs (trend 
 
     #### Primary Inputs
 
-    1. **`hmis_ISO3.csv`** (country-specific HMIS file where ISO3 is the 3-letter country code)
-       - Raw HMIS service utilization data
-       - Required columns: `facility_id`, `admin_area_1`, `admin_area_2`, `admin_area_3`, `admin_area_4`, `indicator_common_id`, `period_id`, service count columns
-
-    2. **`M1_output_outliers.csv`**
-       - Output from Module 1 (Data Quality Assessment)
-       - Contains `outlier_flag` to exclude anomalous data points
-       - Required columns: `facility_id`, `indicator_common_id`, `period_id`, `outlier_flag`
-
-    3. **`M2_adjusted_data.csv`**
+    1. **`M2_adjusted_data.csv`** (main data source)
        - Output from Module 2 (Data Quality Adjustments)
        - Contains adjusted service counts with different completeness assumptions
        - Required columns: `facility_id`, `indicator_common_id`, `period_id`, `count_final_none`, `count_final_completeness`, `count_final_both`
+
+    2. **`M1_output_outliers.csv`**
+       - Output from Module 1 (Data Quality Assessment)
+       - Contains `outlier_flag` to identify and exclude anomalous data points
+       - Required columns: `facility_id`, `indicator_common_id`, `period_id`, `outlier_flag`
+
+    3. **`hmis_ISO3.csv`** (used only for geographic lookup)
+       - Raw HMIS file used solely to extract facility_id → admin_area_1 mapping
+       - Required because M2_adjusted_data.csv does not include admin_area_1
+       - Required columns: `facility_id`, `admin_area_1`
 
     #### Data Requirements
 
@@ -558,8 +559,10 @@ The control chart level determines where the statistical modeling occurs (trend 
 
     #### Step 1: Prepare the Data
 
-    - Load raw HMIS service utilization data.
-    - Merge in outlier flags (`outlier_flag`) by facility × indicator × month.
+    - Load adjusted service volumes from `M2_adjusted_data.csv`.
+    - Load outlier flags from `M1_output_outliers.csv`.
+    - Load raw HMIS only to extract `facility_id → admin_area_1` lookup (then discard).
+    - Merge outlier flags into adjusted data by facility × indicator × month.
     - Remove rows flagged as outliers (`outlier_flag == 1`).
     - Create a `date` variable from `period_id` and extract `year` and `month`.
     - Create a unique `panelvar` for each geographic area-indicator combination.
