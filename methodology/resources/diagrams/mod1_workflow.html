@@ -380,10 +380,10 @@
                     <h4>Outlier Detection</h4>
                 </div>
                 <ul class="step-list">
-                    <li>Calculate median and median absolute deviation (MAD)</li>
-                    <li>Flag statistical outliers using MAD multiplier (typically 2.5×)</li>
-                    <li>Flag proportional outliers where a single value dominates</li>
-                    <li>Generate outlier flags and facility-level alerts</li>
+                    <li>Calculate median and MAD for each facility-indicator combination</li>
+                    <li>Flag MAD-based outliers: values >10× MAD from median</li>
+                    <li>Flag proportional outliers: single month >80% of annual volume</li>
+                    <li>Final flag: (MAD outlier OR proportional outlier) AND count >100</li>
                 </ul>
             </div>
 
@@ -396,10 +396,10 @@
                     <h4>Completeness Assessment</h4>
                 </div>
                 <ul class="step-list">
-                    <li>Generate expected full time series for each facility-indicator pair</li>
-                    <li>Identify missing monthly reports</li>
-                    <li>Flag inactive facilities (zero reporting)</li>
-                    <li>Calculate completeness percentages by facility and indicator</li>
+                    <li>Generate complete monthly time series for each facility-indicator</li>
+                    <li>Flag months with missing reports as incomplete (flag=0)</li>
+                    <li>Flag inactive periods: 6+ months missing before first or after last report</li>
+                    <li>Remove inactive periods from analysis (flag=2)</li>
                 </ul>
             </div>
 
@@ -412,10 +412,10 @@
                     <h4>Consistency Analysis</h4>
                 </div>
                 <ul class="step-list">
-                    <li>Aggregate facility-level data to district level</li>
-                    <li>Calculate indicator ratios and relationships (e.g., deliveries vs. ANC1)</li>
-                    <li>Apply evidence-based benchmarks for logical consistency</li>
-                    <li>Assign consistency scores to individual facilities</li>
+                    <li>Aggregate to district level (accounts for patient movement)</li>
+                    <li>Calculate indicator pair ratios: Penta1/Penta3 ≥0.95, ANC1/ANC4 ≥0.95</li>
+                    <li>Apply BCG/Delivery benchmark: ratio between 0.7-1.3</li>
+                    <li>Expand district consistency results to all facilities in that area</li>
                 </ul>
             </div>
 
@@ -428,10 +428,11 @@
                     <h4>DQA Scoring</h4>
                 </div>
                 <ul class="step-list">
-                    <li>Filter to core indicators specified in DQA framework</li>
-                    <li>Combine quality dimensions (completeness, consistency, accuracy)</li>
-                    <li>Calculate facility-level composite DQA scores</li>
-                    <li>Assign DQA categories (Good, Acceptable, Poor)</li>
+                    <li>Filter to core DQA indicators (e.g., penta1, anc1, opd)</li>
+                    <li>Calculate completeness-outlier score: (complete + no outlier) / max points</li>
+                    <li>Calculate consistency score: passing pairs / available pairs</li>
+                    <li>DQA mean: average of completeness-outlier and consistency scores</li>
+                    <li>Binary DQA score: 1 if all consistency pairs pass</li>
                 </ul>
             </div>
 
@@ -439,12 +440,12 @@
             <div class="output-section">
                 <h3>OUTPUTS</h3>
                 <div class="output-list">
-                    <div class="output-item">Outlier flags & facility lists</div>
-                    <div class="output-item">Completeness status report</div>
-                    <div class="output-item">Consistency results & ratios</div>
-                    <div class="output-item">DQA scores by facility</div>
-                    <div class="output-item">Quality dimension breakdowns</div>
-                    <div class="output-item">Trend analysis visualizations</div>
+                    <div class="output-item">M1_output_outlier_list.csv (flagged outliers only)</div>
+                    <div class="output-item">M1_output_outliers.csv (all records with flags)</div>
+                    <div class="output-item">M1_output_completeness.csv (completeness status)</div>
+                    <div class="output-item">M1_output_consistency_geo.csv (district-level)</div>
+                    <div class="output-item">M1_output_consistency_facility.csv (facility-level)</div>
+                    <div class="output-item">M1_output_dqa.csv (final DQA scores)</div>
                 </div>
             </div>
         </div>

@@ -59,9 +59,15 @@ The module produces several output files containing outlier lists, completeness 
 ### Key Decision Points
 
 **When is a value considered an outlier?**
-An observation is flagged as an outlier if it meets EITHER of two criteria AND the count exceeds 100:
-- It's more than 10 times the Median Absolute Deviation (MAD) away from the facility's typical volume, OR
-- It represents more than 80% of that facility's annual total for that indicator
+
+Outliers are identified by assessing the within-facility variation in monthly reporting for each indicator. A value is flagged as an outlier if it meets EITHER of two criteria:
+
+1. A value greater than 10 times the Median Absolute Deviation (MAD) from the monthly median value for the indicator, OR
+2. A value for which the proportional contribution in volume for a facility, indicator, and time period is greater than 80%
+
+AND for which the count is greater than 100.
+
+The MAD is calculated using only values at or above the median to focus on detecting unusually high values.
 
 **Why measure consistency at the district level instead of facility level?**
 Patients often visit different facilities within their local district for different services. A woman might get her first antenatal visit at one health center but deliver at a district hospital. Measuring consistency at the district level accounts for this patient movement and provides a more accurate picture of service utilization patterns.
@@ -346,7 +352,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     - `completeness_outlier_score`: Proportion of DQA indicators passing completeness & outlier checks (0-1)
     - `consistency_score`: Proportion of consistency pairs passing benchmarks (0-1, or NA if no pairs)
     - `dqa_mean`: Average of component scores (0-1)
-    - `dqa_score`: Binary overall pass/fail (1 = all checks passed, 0 = any check failed)
+    - `dqa_score`: Binary overall pass/fail (1 = all consistency pairs passed, 0 = any pair failed; when no consistency data, 1 = all completeness/outlier checks passed)
 
     **Use Case**:
 
@@ -456,7 +462,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 
     **Step 4**: Combine flags
     - Final outlier_flag = 1 if (outlier_mad = 1 OR outlier_pc = 1) AND count > MINIMUM_COUNT_THRESHOLD
-    - This ensures only substantial volumes are flagged
+    - The threshold (default 100) ensures only substantial volumes are flagged, avoiding false positives at low-volume facilities
 
 ??? "process_completeness()"
 
@@ -643,7 +649,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     - Formula: `(completeness_outlier_score + consistency_score) / 2`
 
     **4. Binary DQA Score:**
-    - 1 if ALL available consistency pairs pass AND completeness-outlier score is perfect
+    - 1 if ALL available consistency pairs pass
     - 0 otherwise
 
     **Handling Missing Indicators:**
@@ -728,7 +734,8 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     $$
 
     **Outlier Classification:**
-    - If MAD Residual > 10 (configurable via `MADS` parameter), the value is flagged as a statistical outlier
+    - If MAD Residual > 10 (configurable via `MADS` parameter), the value is flagged as a MAD-based outlier (`outlier_mad = 1`)
+    - The final `outlier_flag` also requires count > 100
 
     **Example:**
 
@@ -741,7 +748,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     Step 3: Absolute deviations from median: 0.5, 3.5, 0, 1.5, 125.5, 2.5, 0.5, 0
     Step 4: MAD = median(0, 0, 0.5, 0.5, 1.5, 2.5, 3.5, 125.5) = 1.0
     Step 5: For count=150: MAD residual = |150 - 24.5| / 1.0 = 125.5
-    Step 6: 125.5 > 10, therefore 150 is flagged as an outlier
+    Step 6: 125.5 > 10 AND 150 > 100, therefore outlier_flag = 1
     ```
 
 ??? "Proportional Outlier Detection"
@@ -751,7 +758,8 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     **Algorithm:**
     1. For each facility-indicator-year, sum the total annual count
     2. Calculate the proportion: `pc = monthly_count / annual_total`
-    3. Flag as outlier if `pc > OUTLIER_PROPORTION_THRESHOLD` (default 0.8)
+    3. Flag as proportional outlier (`outlier_pc = 1`) if `pc > OUTLIER_PROPORTION_THRESHOLD` (default 0.8)
+    4. The final `outlier_flag` also requires count > 100
 
     **Rationale:**
     A facility reporting 80% of its annual volume in a single month likely indicates a data entry error (e.g., cumulative reporting instead of monthly, extra digit entered).
@@ -765,7 +773,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 
     For May (count=890):
     pc = 890 / 1052 = 0.846
-    0.846 > 0.8, therefore May is flagged as a proportional outlier
+    0.846 > 0.8 AND 890 > 100, therefore outlier_flag = 1
     ```
 
 ??? "Consistency Ratio Benchmarks"
@@ -867,15 +875,15 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     $$
     \text{DQA Score} =
     \begin{cases}
-    1, & \text{if all checks passed} \\
+    1, & \text{if all available consistency pairs pass} \\
     0, & \text{otherwise}
     \end{cases}
     $$
 
-    **Passing Criteria for Binary Score:**
-    - ALL DQA indicators must be complete (completeness_flag = 1)
-    - ALL DQA indicators must be free of outliers (outlier_flag = 0)
+    **Passing Criteria for Binary Score (when consistency data is available):**
     - ALL available consistency pairs must pass benchmarks (sconsistency = 1)
+
+    **Note:** When consistency data is NOT available, the binary score is based on completeness and outlier checks only (dqa_score = 1 if all DQA indicators are complete AND free of outliers).
 
     **Example Calculation:**
 
@@ -1392,7 +1400,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 
 | Metric                        | Type        | Range      | Interpretation                                                            |
 |-------------------------------|-------------|------------|---------------------------------------------------------------------------|
-| outlier_flag                  | Binary      | 0 or 1     | 1 = Outlier detected by either method and count > threshold              |
+| outlier_flag                  | Binary      | 0 or 1     | 1 = Outlier detected by either method (MAD or proportional) AND count > 100 |
 | outlier_mad                   | Binary      | 0 or 1     | 1 = Statistical outlier (MAD-based)                                       |
 | outlier_pc                    | Binary      | 0 or 1     | 1 = Proportional outlier (>80% of annual volume)                          |
 | mad_residual                  | Continuous  | 0 to ∞     | Standardized deviation from median (higher = more extreme)                |
@@ -1403,7 +1411,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 | completeness_outlier_score    | Continuous  | 0 to 1     | Proportion of DQA indicators passing completeness & outlier checks        |
 | consistency_score             | Continuous  | 0 to 1     | Proportion of consistency pairs passing benchmarks                        |
 | dqa_mean                      | Continuous  | 0 to 1     | Average of component scores (overall quality measure)                     |
-| dqa_score                     | Binary      | 0 or 1     | 1 = All checks passed (high quality), 0 = Any check failed               |
+| dqa_score                     | Binary      | 0 or 1     | 1 = All consistency pairs passed (or all completeness/outlier checks if no consistency data) |
 
 
 ### Execution Workflow
@@ -1426,7 +1434,7 @@ The module follows this sequence:
 
 3. OUTLIER ANALYSIS
    ├─ Calculate median and MAD by facility-indicator
-   ├─ Flag MAD-based outliers (>10 MADs)
+   ├─ Flag MAD-based outliers (>10 MADs from median)
    ├─ Flag proportion-based outliers (>80% of annual volume)
    └─ Combine flags (either method + count > 100)
 
@@ -1464,7 +1472,7 @@ The module follows this sequence:
 
 ---
 
-**Last updated**: 10-11-2025
+**Last updated**: 06-01-2026 (reviewed for consistency with R code)
 **Contact**: FASTR Project Team
 
 ---
@@ -1581,17 +1589,14 @@ Are there any values that seem way too high compared to what that facility norma
 
 ## How We Spot Outliers
 
-**We use two checks:**
+Outliers are identified by assessing the within-facility variation in monthly reporting for each indicator.
 
-**Check 1: Is this value much higher than usual for this facility?**
-- Look at the facility's typical monthly values
-- If one month is extremely different, flag it
+A value is flagged as an outlier if it meets EITHER of two criteria:
 
-**Check 2: Does one month account for most of the year's total?**
-- If March has 80% of the facility's annual deliveries, something's wrong
-- Services should be spread more evenly across months
+1. A value greater than 10 times the Median Absolute Deviation (MAD) from the monthly median value for the indicator, OR
+2. A value for which the proportional contribution in volume for a facility, indicator, and time period is greater than 80%
 
-**Both checks together** help us find data entry errors or reporting problems.
+AND for which the count is greater than 100.
 
 ---
 
@@ -1690,8 +1695,11 @@ This accounts for patients visiting different facilities for different services.
 **No outliers:** Are the numbers reasonable?
 **Consistent:** Do related numbers make sense?
 
-**If all three pass -> Quality Score = 1 (good quality)**
-**If any fail -> Quality Score = 0 (quality issue)**
+**Binary DQA Score:**
+- dqa_score = 1 if all consistency pairs pass
+- dqa_score = 0 if any consistency pair fails
+
+**DQA Mean:** Average of completeness-outlier score and consistency score
 
 **This score helps us:**
 - Decide which data to use for analysis
