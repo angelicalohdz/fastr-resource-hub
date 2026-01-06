@@ -296,7 +296,7 @@
                 <div class="flow-box">
                     <h4>Data Preparation Pipeline</h4>
                     <ul class="process-list">
-                        <li><strong>Load data:</strong> M2_adjusted_data.csv (quality-adjusted counts) + M1_output_outliers.csv (outlier flags)</li>
+                        <li><strong>Load data:</strong> M2_adjusted_data.csv (quality-adjusted counts) + M1_output_outliers.csv (outlier flags) + raw HMIS (only to extract admin_area_1 lookup)</li>
                         <li><strong>Join and filter:</strong> Join outlier flags to adjusted data, then remove rows flagged as outliers</li>
                         <li><strong>Aggregate:</strong> Sum facility counts to geographic level (e.g., district) by indicator and month</li>
                         <li><strong>Expand time series:</strong> Create explicit rows for any missing months within each indicator-geography panel</li>
