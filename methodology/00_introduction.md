@@ -56,27 +56,32 @@ Illustrative capacity-building activities include support to automate the extrac
 
 | Acronym | Definition |
 |---------|------------|
-| **ANC** | Antenatal Care |
-| **BCG** | Bacillus Calmette-Guérin (tuberculosis vaccine) |
-| **DHIS2** | DHIS2 (also spelled DHIS 2, formerly District Health Information Software) |
-| **DHS** | Demographic and Health Surveys |
-| **DQA** | Data Quality Assessment |
+| | ***Programs & organizations*** |
+| **DHS** | The Demographic and Health Surveys (DHS) Program |
 | **FASTR** | Frequent Assessments and Health System Tools for Resilience |
 | **GFF** | Global Financing Facility |
-| **HMIS** | Health Management Information System |
-| **LMIC** | Low- and Middle-Income Country |
-| **MAD** | Median Absolute Deviation |
-| **MCV** | Measles-Containing Vaccine |
 | **MICS** | Multiple Indicator Cluster Surveys |
 | **MoH** | Ministry of Health |
+| **UN** | United Nations |
+| | ***Data systems & sources*** |
+| **DHIS2** | DHIS2 (also spelled DHIS 2, formerly District Health Information Software) |
+| **HMIS** | Health Management Information System |
+| **WPP** | World Population Prospects |
+| | ***Health indicators & services*** |
+| **ANC** | Antenatal Care |
+| **BCG** | Bacillus Calmette-Guérin (tuberculosis vaccine) |
+| **MCV** | Measles-Containing Vaccine |
 | **OPD** | Outpatient Department |
 | **Penta** | Pentavalent vaccine (diphtheria, tetanus, pertussis, hepatitis B, Haemophilus influenzae type b) |
 | **PHC** | Primary Healthcare |
 | **RMNCAH-N** | Reproductive, Maternal, Newborn, Child, and Adolescent Health and Nutrition |
 | **SBA** | Skilled Birth Attendant |
+| | ***Technical & statistical terms*** |
+| **DQA** | Data Quality Assessment |
+| **MAD** | Median Absolute Deviation |
+| | ***Geographic*** |
+| **LMIC** | Low- and Middle-Income Country |
 | **SSA** | Sub-Saharan Africa |
-| **UN** | United Nations |
-| **WPP** | World Population Prospects |
 
 ## Use of routine health management information system data in LMICs
 
