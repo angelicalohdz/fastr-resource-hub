@@ -6,7 +6,7 @@ This module covers the process of extracting data from DHIS2 for use in FASTR an
 
 ### Why extract data from DHIS2?
 
-**Data Quality Adjustment**
+**Data quality adjustment**
 
 The FASTR approach focuses on data quality adjustments to expand the analyses countries can do with DHIS2 data and to generate more robust estimates. The FASTR methodology includes specific approaches to:
 - Identify and adjust for outliers
@@ -15,7 +15,7 @@ The FASTR approach focuses on data quality adjustments to expand the analyses co
 
 These adjustments require processing that cannot be done within DHIS2's native analytics.
 
-**Analysis Complexity**
+**Analysis complexity**
 
 The FASTR approach uses more advanced statistical methods, such as regression analysis, which are not available in DHIS2. While DHIS2 can plot trends over time using raw data, FASTR can go further by:
 - Identifying significant increases or decreases in service volume
@@ -32,7 +32,7 @@ Data should be downloaded for each **indicator of interest**, at **facility leve
 - Data should be saved in **long format** meaning each row represents a single observation or measurement
 - Data should be saved in **.csv format** and can be saved in either a single .csv file or multiple .csv files which will be combined when uploading to the analysis platform
 
-**Why Monthly Facility Level Data?**
+**Why monthly facility level data?**
 
 We want to use the most granular data we have access to in order to make more fine tuned assessments for data quality and adjustments for data quality. We also want to be able to look at trends over time, accounting for things like seasonality. Using monthly facility level data allows us to conduct the most robust analysis.
 
@@ -47,7 +47,7 @@ The data extracted should include the following required elements:
 | Indicator name | Name of the indicator |
 | Total/count | The aggregated value |
 
-**Organisational Unit Terms**
+**Organisational unit terms**
 
 | Term | Description |
 |------|-------------|
@@ -61,7 +61,7 @@ The data extracted should include the following required elements:
 | `organisationunitcode` | A code assigned to an organizational unit (shortened or standardized representation) |
 | `organisationunitdescription` | A detailed description of the organizational unit |
 
-**Period Terms**
+**Period terms**
 
 | Term | Description |
 |------|-------------|
@@ -70,7 +70,7 @@ The data extracted should include the following required elements:
 | `periodcode` | A standardized code representing a period, such as "202411" for January 2024 |
 | `perioddescription` | A more detailed description of the period with exact start and end dates |
 
-**Data Element Terms**
+**Data element terms**
 
 | Term | Description |
 |------|-------------|
@@ -79,7 +79,7 @@ The data extracted should include the following required elements:
 | `datacode` | A code assigned to a data element (e.g., "MAL_CASES" for malaria cases) |
 | `datadescription` | A detailed description of the data element |
 
-**Other Terms**
+**Other terms**
 
 | Term | Description |
 |------|-------------|
@@ -88,7 +88,7 @@ The data extracted should include the following required elements:
 
 ### How much data?
 
-**Initial FASTR Analysis**
+**Initial FASTR analysis**
 
 - Generally recommended to download approximately **five years** of historical data
 - The exact period should be determined based on:
@@ -97,7 +97,7 @@ The data extracted should include the following required elements:
   - The specifics of a country's routine data system
 - Ideally, using at least five years of historical data allows for a thorough assessment of trends over time
 
-**Routine Update to FASTR Analysis**
+**Routine update to FASTR analysis**
 
 - Start with the existing database and download new data covering the most recent months not previously included – this is usually a **three-month period** when the FASTR analysis is being implemented on a quarterly basis
 - Additionally, include the **three preceding months** to the new data time period, as this relatively recent data is often subject to changes due to late reporting or data quality adjustments

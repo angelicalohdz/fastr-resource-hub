@@ -73,9 +73,9 @@ When selecting indicators for FASTR analysis, consider the following criteria:
 
 One key added-value of the FASTR approach is making adjustments for data quality. Low-volume indicators are challenging to adjust:
 
-- **Greater Sensitivity to Outliers**: In low-volume data, a single unusually high or low data point can disproportionately impact the overall analysis. Adjusting for outliers in low-volume indicators may result in artificial fluctuations that do not accurately reflect real trends.
-- **Unstable Estimates**: Low-volume indicators are often less reliable because small variations can lead to large percentage changes, making it harder to distinguish genuine trends from random variability.
-- **Difficulty in Identifying True Outliers**: In low-volume indicators, it's challenging to determine whether a data point is genuinely an outlier or simply part of the natural variability. This uncertainty complicates the adjustment process and may lead to incorrect assumptions.
+- **Greater sensitivity to outliers**: In low-volume data, a single unusually high or low data point can disproportionately impact the overall analysis. Adjusting for outliers in low-volume indicators may result in artificial fluctuations that do not accurately reflect real trends.
+- **Unstable estimates**: Low-volume indicators are often less reliable because small variations can lead to large percentage changes, making it harder to distinguish genuine trends from random variability.
+- **Difficulty in identifying true outliers**: In low-volume indicators, it's challenging to determine whether a data point is genuinely an outlier or simply part of the natural variability. This uncertainty complicates the adjustment process and may lead to incorrect assumptions.
 
 Count indicators allow for ongoing data quality checks, including improved precision in identifying outliers or data issues and flexibility to validate counts before deriving proportions externally.
 
@@ -83,22 +83,22 @@ Count indicators allow for ongoing data quality checks, including improved preci
 
 High completeness indicators are recommended because they improve data quality, reduce bias, and enable more accurate, timely, and actionable insights, ultimately leading to better-informed public health decisions.
 
-- **Data Reliability**: High completeness ensures that data is representative of the full picture across facilities, regions, or populations, reducing the risk of biased insights. This reliability is essential for making confident decisions based on the data.
-- **Consistency in Analysis**: With high completeness, you have data points from most or all reporting units, allowing for a more consistent analysis across time periods and locations. This consistency is necessary for identifying accurate trends and making meaningful comparisons.
-- **Reduced Risk of Misinterpretation**: Incomplete data can lead to incorrect conclusions. For example, low completeness might falsely suggest a drop in service utilization when, in reality, it's due to missing data. High completeness helps avoid these misinterpretations.
+- **Data reliability**: High completeness ensures that data is representative of the full picture across facilities, regions, or populations, reducing the risk of biased insights. This reliability is essential for making confident decisions based on the data.
+- **Consistency in analysis**: With high completeness, you have data points from most or all reporting units, allowing for a more consistent analysis across time periods and locations. This consistency is necessary for identifying accurate trends and making meaningful comparisons.
+- **Reduced risk of misinterpretation**: Incomplete data can lead to incorrect conclusions. For example, low completeness might falsely suggest a drop in service utilization when, in reality, it's due to missing data. High completeness helps avoid these misinterpretations.
 
 Statistical methods such as imputation can be used to adjust for incomplete data; however, this requires making assumptions about the missing data. See [Data Quality Adjustment](05_data_quality_adjustment.md) for details.
 
 ### Why focus on count indicators?
 
-**Challenges with Proportion Indicators:**
+**Challenges with proportion indicators:**
 
 - Proportions limit our ability to apply adjustments to account for data quality challenges
 - Numerators may have data quality challenges, skewing actual coverage levels
 - Denominators may be outdated or inaccurate
 - Utilizing numerators and denominators separately to generate proportions allows us to make adjustments to both numerator and denominator
 
-**Mortality as a Rare Event:**
+**Mortality as a rare event:**
 
 - Mortality indicators are inherently low-frequency, making proportional adjustments unreliable
 - Mortality and similar rare events are better suited for annual reviews than frequent (e.g., monthly or quarterly) updates
@@ -237,13 +237,13 @@ Statistical methods such as imputation can adjust for incomplete data, but this 
 <!-- SLIDE:m1_3c -->
 ## Why focus on count indicators?
 
-**Challenges with Proportion Indicators:**
+**Challenges with proportion indicators:**
 - Proportions limit our ability to apply adjustments for data quality challenges
 - Numerators may have data quality challenges, skewing actual coverage levels
 - Denominators may be outdated or inaccurate
 - Using numerators and denominators separately allows adjustments to both
 
-**Mortality as a Rare Event:**
+**Mortality as a rare event:**
 - Mortality indicators are inherently low-frequency, making proportional adjustments unreliable
 - Better suited for annual reviews than monthly or quarterly updates
 <!-- /SLIDE -->

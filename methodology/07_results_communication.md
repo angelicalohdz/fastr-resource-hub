@@ -6,13 +6,13 @@ This module covers how to interpret, communicate, and use FASTR results for deci
 
 This section covers the complete process of communicating and using FASTR results:
 
-1. **Analytical Thinking & Interpretation** - Frameworks for interpreting FASTR outputs, connecting data patterns to programmatic meaning, common interpretation pitfalls to avoid, building analytical thinking skills
+1. **Analytical thinking & interpretation** - Frameworks for interpreting FASTR outputs, connecting data patterns to programmatic meaning, common interpretation pitfalls to avoid, building analytical thinking skills
 
-2. **Data Visualization, Communication & Message Development** - Principles of effective data visualization, tailoring messages to different audiences, creating compelling narratives from data, best practices for presenting findings
+2. **Data visualization, communication & message development** - Principles of effective data visualization, tailoring messages to different audiences, creating compelling narratives from data, best practices for presenting findings
 
-3. **Using Data for Decision-Making** - Translating insights into action, decision-making frameworks, prioritization approaches, monitoring implementation of decisions
+3. **Using data for decision-making** - Translating insights into action, decision-making frameworks, prioritization approaches, monitoring implementation of decisions
 
-4. **Stakeholder Engagement & Advocacy** - Identifying key stakeholders, engagement strategies, building buy-in for data-driven decisions, advocacy approaches
+4. **Stakeholder engagement & advocacy** - Identifying key stakeholders, engagement strategies, building buy-in for data-driven decisions, advocacy approaches
 
 5. **Practice: Generating Quarterly Reporting Products** - Quarterly reporting workflow, using the FASTR platform for automated reports, quality assurance for reports, distribution and feedback mechanisms
 
@@ -259,7 +259,7 @@ Key takeaways are what the results are telling us — why the results matter, th
 **Result:**
 > In Q3 2022, the volume of ANC1 visits increased by 15% from the previous quarter—the largest quarterly rise in the period—followed by a 12% drop in Q1 2023. Since then, ANC1 volumes have remained relatively stable.
 
-**Key Takeaway:**
+**Key takeaway:**
 > The relative stability observed from mid-2023 onward suggests improvements in the consistency of service delivery. This trend may reflect strengthened systems or more predictable care-seeking patterns — providing a stronger foundation for sustained antenatal care coverage.
 <!-- /SLIDE -->
 

@@ -16,7 +16,7 @@ This section will cover the complete process of working with the FASTR analytics
 
 2. **Accessing the Platform** - Creating accounts, signing in, user permissions and roles
 
-3. **Setting Up the Structure** - Configuring admin areas (regions, districts), setting up facilities, defining indicators
+3. **Setting up the structure** - Configuring admin areas (regions, districts), setting up facilities, defining indicators
 
 4. **Importing a Dataset** - Data format requirements, import process, validation and error handling
 
@@ -24,9 +24,9 @@ This section will cover the complete process of working with the FASTR analytics
 
 6. **Creating a New Project** - Project setup workflow, configuration options, best practices
 
-7. **Creating Visualizations** - Available chart types, customization options, exporting visualizations
+7. **Creating visualizations** - Available chart types, customization options, exporting visualizations
 
-8. **Creating Reports** - Report templates, automated report generation, customizing reports
+8. **Creating reports** - Report templates, automated report generation, customizing reports
 
 ---
 
