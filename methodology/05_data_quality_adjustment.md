@@ -1,8 +1,8 @@
 # Data quality adjustment
 
-## Overview (What & Why)
+## Background and purpose
 
-### What does this module do?
+### Objective of the module
 
 The Data Quality Adjustment module addresses two common limitations of routine health facility data: extreme values resulting from reporting or data entry errors (**outliers**) and gaps arising from incomplete reporting (**missing data**). Rather than excluding affected observations, the module replaces these values with statistically derived estimates informed by each facility’s historical reporting patterns.
 
@@ -10,13 +10,13 @@ The adjustment process applies time-series smoothing methods that draw on observ
 
 To support transparency and analytical flexibility, the module generates four parallel datasets: unadjusted data, data with outlier corrections only, data with missing values imputed only, and data with both adjustments applied. This allows users to assess the sensitivity of results to different data quality assumptions and select the dataset most appropriate for their analytical purpose.
 
-### Why is it needed in the FASTR pipeline?
+### Analytical rationale
 
 Routine health management information system (HMIS) data frequently contain reporting errors and gaps that can distort observed trends and obscure underlying patterns in service delivery. Extreme values may create artificial spikes in service volumes, while incomplete reporting can result in apparent declines that reflect data quality issues rather than true changes in service provision. These limitations are particularly consequential when HMIS data are used for performance tracking, comparison across geographic units, or trend analysis.
 
 By systematically addressing outliers and missing data prior to analysis, this module improves the consistency and interpretability of HMIS data. This helps ensure that subsequent analytical outputs are based on observed service delivery patterns rather than artifacts introduced by reporting variability or data quality constraints.
 
-### Quick summary
+### Key points
 
 | Component | Details |
 |-----------|---------|
@@ -26,9 +26,9 @@ By systematically addressing outliers and missing data prior to analysis, this m
 
 ---
 
-## How it works
+## Analytical workflow
 
-### High-level workflow
+### Overview of analytical steps
 
 The module applies a standardized, multi-step process to adjust routine health facility data while preserving underlying service delivery patterns:
 

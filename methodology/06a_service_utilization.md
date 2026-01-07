@@ -1,8 +1,8 @@
 # Service utilization analysis
 
-## Overview (What & Why)
+## Background and purpose
 
-### What does this module do?
+### Objective of the module
 
 The Service Utilization module analyzes health service delivery patterns to detect and quantify disruptions in service volumes over time. It identifies when health services deviate significantly from expected patterns and measures the magnitude of these disruptions at national, provincial, and district levels.
 
@@ -10,13 +10,13 @@ Using statistical process control and regression analysis, the module compares o
 
 The analysis yields quantified estimates of service shortfalls and surpluses, allowing changes in service delivery to be measured and compared across time and geographic levels.
 
-### Why is it needed in the FASTR pipeline?
+### Analytical rationale
 
 Service utilization data provide insight into how populations access essential health services, but observed volumes may vary for multiple reasons, including seasonality, policy changes, external shocks (such as pandemics, natural disasters, or conflict), data quality limitations, and changes in service availability. Without systematic analysis, it is difficult to distinguish normal variation from material disruptions in service delivery.
 
 This module applies a standardized, data-driven approach to identify deviations in service utilization and to quantify their magnitude. The outputs allow emerging issues in service delivery to be detected, compared across geographic levels, and tracked over time, including during periods of disruption and recovery. The results are structured for use in routine monitoring, analytical reporting, and assessment of changes in health service performance.
 
-### Quick summary
+### Key points
 
 | Component | Details |
 |-----------|---------|
@@ -26,9 +26,9 @@ This module applies a standardized, data-driven approach to identify deviations 
 
 ---
 
-## How it works
+## Analytical workflow
 
-### High-level workflow
+### Overview of analytical steps
 
 The module operates in two sequential parts, each with a distinct purpose:
 

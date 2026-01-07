@@ -1,8 +1,8 @@
 # Coverage estimates
 
-## Overview (What & Why)
+## Background and purpose
 
-### What does this module do?
+### Objective of the module
 
 This module estimates health service coverage by integrating three core data sources: adjusted administrative service volumes from the health management information system (HMIS; Module 2), population projections from the United Nations World Population Prospects (UN WPP), and household survey data from the Multiple Indicator Cluster Surveys (MICS) and Demographic and Health Surveys (DHS). It addresses the question of what proportion of the target population received a given health service.
 
@@ -14,7 +14,7 @@ The module is structured in two components.
 
 Together, these components convert administrative service volumes into standardized coverage estimates that can be examined over time and across geographic levels, and used in analytical and monitoring contexts.
 
-### Why is it needed in the FASTR pipeline?
+### Analytical rationale
 
 Health service coverage is a core metric for assessing health system performance and equity. While Module 2 produces adjusted service volumes, these figures on their own do not indicate the extent to which services reach the populations they are intended to serve. Coverage estimates place service delivery in context by relating service volumes to population need.
 
@@ -28,7 +28,7 @@ This module addresses key challenges in estimating coverage, including:
 
 - **Subnational analysis**: Enables coverage monitoring at national, provincial, and district levels
 
-### Quick summary
+### Key points
 
 | Component | Details |
 |-----------|---------|
@@ -60,9 +60,9 @@ This module addresses key challenges in estimating coverage, including:
 
 ---
 
-## How it works
+## Analytical workflow
 
-### High-level workflow
+### Overview of analytical steps
 
 #### Part 1: Denominator calculation and selection
 

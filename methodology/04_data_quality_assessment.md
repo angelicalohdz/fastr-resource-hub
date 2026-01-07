@@ -1,8 +1,8 @@
 # Data quality assessment (DQA)
 
-## Overview (What & Why)
+## Background and purpose
 
-### What does this module do?
+### Objective of the module
 
 The Data Quality Assessment (DQA) module (Module 1 of the FASTR analytics platform) evaluates the reliability of routine Health Management Information System (HMIS) data reported by health facilities. It serves as an initial quality control step in the FASTR pipeline, reviewing monthly facility reports to identify data quality issues before the data are used in downstream analysis.
 
@@ -10,11 +10,11 @@ The module assesses data quality across three complementary dimensions: **outlie
 
 Routine HMIS data are a key source of information for monitoring health service delivery at both facility and population levels, capturing events such as immunizations delivered or births attended by skilled health personnel. As with all routinely collected data, these data are subject to quality limitations. The FASTR DQA module applies a systematic, indicator- and facility-level review of monthly data to assess these limitations. Results are summarized as annual estimates, which may reflect partial-year data depending on availability at the time of analysis (for example, an analysis conducted mid-year may include data from only the first months of that year).
 
-### Why is it needed in the FASTR pipeline?
+### Analytical rationale
 
 Data quality directly affects the reliability of health indicators and coverage estimates. Before service utilization rates or population coverage are calculated, it is necessary to assess whether the underlying facility data are sufficiently reliable. This module identifies data patterns that may distort analytical results, allowing users to make informed decisions about data treatment in subsequent steps of the pipeline.
 
-### Quick summary
+### Key points
 
 | Component | Details |
 |-----------|---------|
@@ -24,9 +24,9 @@ Data quality directly affects the reliability of health indicators and coverage 
 
 ---
 
-## How it works
+## Analytical workflow
 
-### High-level workflow
+### Overview of analytical steps
 
 The module applies a structured sequence of data quality checks, progressing from individual observations to an overall assessment of data reliability:
 
