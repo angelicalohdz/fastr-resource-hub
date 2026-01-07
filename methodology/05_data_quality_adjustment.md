@@ -137,6 +137,13 @@ Heatmap showing the percent change in service volume when both outlier and compl
 
 **Interpretation guide**
 
+- **Rows**: Geographic areas (zones/regions)
+- **Columns**: Health indicators
+- **Values**: Percent change in service volume after adjustment
+- **Negative values**: Outlier adjustment reduced total volume (extreme high values replaced)
+- **Positive values**: Completeness adjustment increased total volume (missing data filled)
+- **Near zero**: Minimal adjustment needed; original data was adequate
+
 ---
 
 ## Detailed reference

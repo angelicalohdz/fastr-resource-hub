@@ -115,32 +115,31 @@ The FASTR analysis generates four main visual outputs for service utilization:
 
 **1. Change in service volume**
 
-Line charts showing service volume trends over time, with highlighted periods of significant change.
+Bar chart showing annual service volumes by region and indicator, with year-on-year percent change annotations.
 
 ![Change in service volume over time.](resources/default_outputs/Module3_1_Change_in_service_volume.png)
 
 **2. Actual vs expected services (national)**
 
-Comparison charts showing observed service volumes against model predictions at the national level.
+Line chart comparing observed service volumes against model predictions at the national level.
 
 ![Actual vs expected number of services at national level.](resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
 
 **3. Actual vs expected services (subnational)**
 
-Geographic breakdown of service delivery patterns compared to expected volumes.
+Line charts by region comparing observed volumes to expected patterns.
 
 ![Actual vs expected number of services at subnational level.](resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
 
+- **Black line**: Actual (observed) service volumes
+- **Red shaded areas**: Shortfall periods (actual below expected)
+- **Green shaded areas**: Surplus periods (actual above expected)
+
 **4. Volume change due to data quality adjustments**
 
-Impact visualization showing how data quality adjustments affect reported service volumes.
+Grouped bar chart comparing service volumes across four adjustment scenarios: no adjustment, outlier adjustment only, completeness adjustment only, and both adjustments.
 
 ![Volume change due to data quality adjustments.](resources/default_outputs/Module3_4_Volume_change_adjustments.png)
-
-**Interpretation guide**
-
-- **Positive deviations**: Observed volumes exceed expected levels (service surpluses)  
-- **Negative deviations**: Observed volumes fall below expected levels (service shortfalls)  
 
 ---
 

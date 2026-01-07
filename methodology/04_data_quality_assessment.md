@@ -141,6 +141,13 @@ Heatmap table with zones as rows and time periods as columns, color-coded by ave
 
 **Interpretation guide**
 
+- **Rows**: Geographic areas (zones/regions)
+- **Columns**: Health indicators or time periods
+- **Outlier heatmap**: Lower percentages indicate fewer extreme values
+- **Completeness heatmap**: Higher percentages indicate more complete reporting
+- **Consistency heatmap**: Shows whether related indicators follow expected relationships
+- **DQA score**: Combines all dimensions; higher scores indicate better overall data quality
+
 ---
 
 ## Detailed reference
