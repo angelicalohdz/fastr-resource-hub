@@ -31,25 +31,25 @@ Data quality directly impacts the reliability of health indicators and coverage 
 
 The module follows a logical sequence of quality checks, building from individual data points to an overall quality score:
 
-**Step 1: Load and Prepare Data**
+**Step 1: Load and prepare data**
 The module reads monthly facility reports and organizes them for analysis. It converts dates to a standard format and identifies which geographic areas and health indicators are present in the dataset.
 
-**Step 2: Detect Outliers**
+**Step 2: Detect outliers**
 For each health facility and indicator (like pentavalent vaccine (Penta) doses or antenatal care (ANC) visits), the module identifies unusually high values that might indicate data entry errors. It uses two methods: statistical outliers (values far from the facility's typical volume) and proportional outliers (a single month accounting for most of the year's services).
 
-**Step 3: Assess Completeness**
+**Step 3: Assess completeness**
 The module checks whether facilities are consistently reporting data. It creates a complete timeline for each facility and indicator, identifying months with missing reports. Facilities that stop reporting for 6+ months are flagged as inactive rather than incomplete.
 
-**Step 4: Measure Consistency**
+**Step 4: Measure consistency**
 Related indicators should follow predictable patterns. For example, more women should receive ANC1 than ANC4. The module calculates ratios between paired indicators at the district level (to account for patients visiting multiple facilities) and flags relationships that do not meet expectations.
 
-**Step 5: Validate Indicator Availability**
+**Step 5: Validate indicator availability**
 Before running consistency checks, the module verifies that the required indicator pairs actually exist in the dataset. Missing indicators are handled gracefully, with the analysis adapting to available data.
 
-**Step 6: Calculate DQA Scores**
+**Step 6: Calculate DQA scores**
 For a defined set of core indicators (typically Penta1, ANC1, and outpatient department visits (OPD)), the module combines the three quality dimensions. A facility-month receives a perfect DQA score only if all core indicators are complete, free of outliers, and meet consistency benchmarks.
 
-**Step 7: Export Results**
+**Step 7: Export results**
 The module produces several output files containing outlier lists, completeness flags, consistency results, and final DQA scores. These outputs inform subsequent modules and provide actionable insights for data quality improvement.
 
 ### Workflow diagram
@@ -80,17 +80,17 @@ If a facility does not report for 6 or more consecutive months at the start or e
 
 ### What happens to the data
 
-**Transformation Overview:**
+**Transformation overview:**
 
 The module transforms raw facility reports into quality-flagged datasets:
 
-1. **Input Format**: Monthly rows with facility ID, period, indicator name, and count
+1. **Input format**: Monthly rows with facility ID, period, indicator name, and count
 2. **Enrichment**: Adds calculated fields like median volume, MAD residuals, proportional contributions
 3. **Completion**: Generates explicit rows for missing months (turning implicit gaps into explicit records)
 4. **Aggregation**: Aggregates facility data to district level for consistency calculations
 5. **Flagging**: Adds binary quality flags (outlier yes/no, complete yes/no, consistent yes/no)
 6. **Scoring**: Combines flags into continuous scores (0-1) and binary pass/fail indicators
-7. **Output Format**: Multiple files optimized for different use cases (quick outlier review, full analysis, downstream modules)
+7. **Output format**: Multiple files optimized for different use cases (quick outlier review, full analysis, downstream modules)
 
 The module processes data in long format (one row per facility-indicator-period combination) and outputs quality dimension scores used by subsequent modules to weight, adjust, or exclude observations.
 
@@ -153,7 +153,7 @@ This section provides technical details for implementers, developers, and analys
 
 The module uses several configurable parameters that control analysis behavior:
 
-???+ "Geographic Settings"
+???+ "Geographic settings"
 
     ```r
     # Country identifier
@@ -165,7 +165,7 @@ The module uses several configurable parameters that control analysis behavior:
 
     The `GEOLEVEL` parameter determines the aggregation level for consistency analysis. Lower administrative levels (3-4) capture local patterns but may have sparse data. Higher levels (2) provide more stable estimates but may mask local inconsistencies.
 
-??? "Outlier Detection Parameters"
+??? "Outlier detection parameters"
 
     ```r
     # Proportion threshold for outlier detection
@@ -178,13 +178,13 @@ The module uses several configurable parameters that control analysis behavior:
     MADS <- 10  # Flag if value > 10 MADs from median
     ```
 
-    **Tuning Guidance:**
+    **Tuning guidance:**
     - **More sensitive detection**: Lower `OUTLIER_PROPORTION_THRESHOLD` to 0.6-0.7, reduce `MADS` to 8
     - **Less sensitive detection**: Increase `OUTLIER_PROPORTION_THRESHOLD` to 0.9, increase `MADS` to 12-15
     - **Small facilities**: Lower `MINIMUM_COUNT_THRESHOLD` to 50
     - **Large facilities only**: Increase `MINIMUM_COUNT_THRESHOLD` to 200+
 
-??? "DQA Indicator Selection"
+??? "DQA indicator selection"
 
     ```r
     # Core indicators used for DQA scoring
@@ -194,12 +194,12 @@ The module uses several configurable parameters that control analysis behavior:
     CONSISTENCY_PAIRS_USED <- c("penta", "anc")
     ```
 
-    **Standard Indicator Sets:**
+    **Standard indicator sets:**
     - **Maternal-child focus**: `c("anc1", "anc4", "delivery", "penta1", "penta3")`
     - **Immunization focus**: `c("bcg", "penta1", "penta3", "measles1")`
     - **Comprehensive**: `c("penta1", "anc1", "opd", "delivery", "pnc1")`
 
-??? "Consistency Benchmark Ranges"
+??? "Consistency benchmark ranges"
 
     ```r
     all_consistency_ranges <- list(
@@ -216,16 +216,16 @@ The module uses several configurable parameters that control analysis behavior:
 
 #### Input file structure
 
-**Required File**: `hmis_[COUNTRY_ISO3].csv`
+**Required file**: `hmis_[COUNTRY_ISO3].csv`
 
-**Required Columns:**
+**Required columns:**
 - `facility_id` (character/integer): Unique identifier for each health facility
 - `period_id` (integer): Time period in YYYYMM format (e.g., 202401 for January 2024)
 - `indicator_common_id` (character): Standardized indicator names (e.g., "penta1", "anc1", "opd")
 - `count` (numeric): Service volume or count for the indicator
 - `admin_area_1` through `admin_area_8` (character): Geographic/administrative area columns
 
-**Format Example:**
+**Format example:**
 
 ```csv
 facility_id,period_id,indicator_common_id,count,admin_area_1,admin_area_2,admin_area_3
@@ -234,7 +234,7 @@ FAC001,202401,anc1,67,Country_A,Province_A,District_A
 FAC001,202402,penta1,52,Country_A,Province_A,District_A
 ```
 
-**Data Requirements:**
+**Data requirements:**
 - At least 12 months of data recommended for robust outlier detection
 - Missing values represented as NA or absent rows (both handled)
 - Zero counts should be explicit zeros, not missing
@@ -242,7 +242,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 
 #### Output files
 
-??? "M1_output_outlier_list.csv - Flagged Outliers Only"
+??? "M1_output_outlier_list.csv - Flagged outliers only"
 
     **Purpose**: Quick reference list of only the observations flagged as outliers
 
@@ -254,9 +254,9 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     - `period_id`: Time period (YYYYMM)
     - `count`: Reported service volume
 
-    **Use Case**: Data managers reviewing specific outliers for investigation or correction
+    **Use case**: Data managers reviewing specific outliers for investigation or correction
 
-??? "M1_output_outliers.csv - All Records with Outlier Flags"
+??? "M1_output_outliers.csv - All records with outlier flags"
 
     **Purpose**: Complete dataset with outlier flags for all facility-indicator-period combinations
 
@@ -268,13 +268,13 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     - `indicator_common_id`: Health indicator name
     - `outlier_flag`: Final combined outlier flag (0 = not outlier, 1 = outlier)
 
-    **Use Case**:
+    **Use case**:
 
     - Input for Module 2 (Data Quality Adjustments)
     - Statistical analysis of outlier patterns
     - Generating visualizations of outlier prevalence
 
-??? "M1_output_completeness.csv - Completeness Status"
+??? "M1_output_completeness.csv - Completeness status"
 
     **Purpose**: Completeness flags for all facility-indicator-period combinations, including explicitly created records for missing months
 
@@ -286,19 +286,19 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     - `period_id`: Time period (YYYYMM)
     - `completeness_flag`: 0=Incomplete (missing), 1=Complete (reported)
 
-    **Special Features**:
+    **Special features**:
 
     - Contains explicit rows for non-reporting months
     - Inactive periods (6+ months at start/end with completeness_flag=2) excluded from export
     - Full time series for each facility-indicator combination
 
-    **Use Case**:
+    **Use case**:
 
     - Calculating completeness percentages
     - Identifying reporting gaps
     - Trend analysis of reporting behavior
 
-??? "M1_output_consistency_geo.csv - Geographic-Level Consistency"
+??? "M1_output_consistency_geo.csv - Geographic-level consistency"
 
     **Purpose**: Consistency flags calculated at the specified geographic level (e.g., district)
 
@@ -311,13 +311,13 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 
     **Format**: Long format with one row per geographic area-period-ratio type
 
-    **Use Case**:
+    **Use case**:
 
     - Understanding district-level service delivery patterns
     - Identifying geographic areas with consistency issues
     - Creating consistency heatmaps by zone
 
-??? "M1_output_consistency_facility.csv - Facility-Level Consistency"
+??? "M1_output_consistency_facility.csv - Facility-level consistency"
 
     **Purpose**: Geographic consistency results expanded to facility level
 
@@ -331,13 +331,13 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 
     **Format**: Long format with one row per facility-period-ratio type
 
-    **Use Case**:
+    **Use case**:
 
     - Input for DQA scoring
     - Merging consistency flags with facility-level analyses
     - Facility-specific quality reports
 
-??? "M1_output_dqa.csv - Final DQA Scores"
+??? "M1_output_dqa.csv - final DQA scores"
 
     **Purpose**: Composite data quality scores by facility and time period
 
@@ -349,7 +349,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     - `dqa_mean`: Average of component scores (0-1)
     - `dqa_score`: Binary overall pass/fail (1 = all checks pass; 0 = any check failed)
 
-    **Use Case**:
+    **Use case**:
 
     - Filtering data for subsequent modules (e.g., only use facility-months with dqa_score=1)
     - Tracking data quality trends over time
@@ -407,7 +407,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     3. Issues warnings about removed pairs
     4. Returns empty list if no valid pairs remain
 
-    **Example Output:**
+    **Example output:**
 
     ```
     Warning: Skipping pair_delivery - indicator 'delivery' not found in data
@@ -431,7 +431,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 
     **Returns**: Dataframe with outlier flags and diagnostic metrics for each facility-indicator-period
 
-    **Calculated Fields:**
+    **Calculated fields:**
 
     - `median_volume`: Median count by facility-indicator
     - `mad_volume`: MAD calculated on values >= median
@@ -441,7 +441,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     - `outlier_pc`: Binary flag (1 if pc > threshold)
     - `outlier_flag`: Final flag (1 if either method flags AND count > minimum threshold)
 
-    **Algorithm Steps:**
+    **Algorithm steps:**
 
     **Step 1**: Calculate median volume for each facility-indicator combination
 
@@ -480,7 +480,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     5. Combines results across all indicators
     6. Removes inactive periods (completeness_flag = 2)
 
-    **Output Structure:**
+    **Output structure:**
 
     - Explicit rows for both reported and non-reported periods
     - Completeness flag: 0 (incomplete), 1 (complete), 2 (inactive - removed)
@@ -509,7 +509,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     5. Missing counts indicate non-reporting periods
     6. Applies inactive detection algorithm
 
-    **Inactive Detection Algorithm:**
+    **Inactive detection algorithm:**
 
     ```r
     # A facility is flagged inactive (offline_flag = 2) if:
@@ -523,7 +523,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     )
     ```
 
-    **Example Timeline:**
+    **Example timeline:**
 
     ```
     Facility A reporting pattern for indicator "penta1":
@@ -562,7 +562,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     4. Calculates ratio for each indicator pair
     5. Flags consistency based on predefined ranges
 
-    **Output Columns:**
+    **Output columns:**
 
     - Geographic identifiers (up to specified level)
     - `period_id`: Time period
@@ -570,7 +570,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     - `consistency_ratio`: Calculated ratio value
     - `sconsistency`: Binary flag (1 = consistent, 0 = inconsistent, NA = cannot calculate)
 
-    **Example Output:**
+    **Example output:**
 
     ```
     admin_area_2  admin_area_3  period_id  ratio_type    consistency_ratio  sconsistency
@@ -627,7 +627,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     )
     ```
 
-    **Scoring Algorithm:**
+    **Scoring algorithm:**
 
     **1. Completeness-Outlier Score** (per facility-period):
     - Each DQA indicator scores 0-2 points (1 for completeness + 1 for no outlier)
@@ -647,13 +647,13 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     - 1 if all checks pass (complete, no outliers, consistent)
     - 0 if any check fails
 
-    **Handling Missing Indicators:**
+    **Handling missing indicators:**
     The function intelligently handles cases where some consistency indicators are missing:
     - NA values in consistency pairs are NOT replaced with 0
     - Only available pairs contribute to the denominator
     - This prevents penalizing facilities for indicators they do not provide
 
-    **Example Calculation:**
+    **Example calculation:**
 
     ```
     Facility X in period 202401:
@@ -683,7 +683,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 
     **Purpose**: Calculates DQA scores using only completeness and outlier checks when consistency data is unavailable or no valid consistency pairs exist
 
-    **When Used:**
+    **When used:**
 
     - No consistency pairs defined in configuration
     - All consistency pairs have missing indicators
@@ -695,7 +695,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     - `dqa_mean` = `completeness_outlier_score`
     - `dqa_score` = 1 if all completeness and outlier checks pass, 0 otherwise
 
-    **Output Structure:**
+    **Output structure:**
 
     ```r
     dqa_results <- data.frame(
@@ -710,7 +710,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 
 ### Statistical methods & algorithms
 
-??? "Median Absolute Deviation (MAD) Calculation"
+??? "Median absolute deviation (MAD) calculation"
 
     The MAD is a robust measure of variability that is less sensitive to outliers than standard deviation.
 
@@ -722,13 +722,13 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     **FASTR Modification:**
     The module calculates MAD using only values at or above the median, making it more sensitive to high outliers while avoiding bias from facilities with many low-volume months.
 
-    **Outlier Degree Calculation:**
+    **Outlier degree calculation:**
 
     $$
     \text{MAD Residual} = \frac{|\text{volume} - \text{median volume}|}{\text{MAD}}
     $$
 
-    **Outlier Classification:**
+    **Outlier classification:**
     - If MAD Residual > 10 (configurable via `MADS` parameter), the value is flagged as a MAD-based outlier (`outlier_mad = 1`)
     - The final `outlier_flag` also requires count > 100
 
@@ -746,7 +746,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     Step 6: 125.5 > 10 AND 150 > 100, therefore outlier_flag = 1
     ```
 
-??? "Proportional Outlier Detection"
+??? "Proportional outlier detection"
 
     This method identifies months where a single observation represents an unusually large proportion of the annual total for a facility-indicator combination.
 
@@ -771,7 +771,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     0.846 > 0.8 AND 890 > 100, therefore outlier_flag = 1
     ```
 
-??? "Consistency Ratio Benchmarks"
+??? "Consistency ratio benchmarks"
 
     The module applies programmatically defined benchmarks for indicator pairs:
 
@@ -787,7 +787,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 
     **Interpretation**: More women should start ANC (ANC1) than complete four visits (ANC4). The ratio is expected to be ≥ 0.95, allowing up to 5% tolerance for data variations.
 
-    **Penta Consistency:**
+    **Penta consistency:**
 
     $$
     \text{Penta Consistency} =
@@ -811,10 +811,10 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 
     **Interpretation**: BCG is a birth dose vaccine, so BCG vaccinations should approximately equal facility deliveries. The wider range (±30%) accounts for infants born elsewhere receiving BCG at the facility or facility-born infants receiving BCG elsewhere.
 
-    **Implementation Detail:**
+    **Implementation detail:**
     Consistency is assessed at the district/ward level (specified by `GEOLEVEL`) to account for patients visiting multiple facilities within their local area for different services.
 
-??? "Completeness Calculation"
+??? "Completeness calculation"
 
     For a given indicator in a given month:
 
@@ -822,10 +822,10 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     \text{Completeness} = \frac{\text{Number of reporting facilities}}{\text{Number of expected facilities}} \times 100
     $$
 
-    **Expected Facilities Definition:**
+    **Expected facilities definition:**
     A facility is expected to report for an indicator if it has ever reported for that indicator within the analysis timeframe AND is not flagged as inactive.
 
-    **Inactive Facility Definition:**
+    **Inactive facility definition:**
     A facility is flagged as inactive for periods where it did not report for six or more consecutive months before its first report or after its last report.
 
     **Example:**
@@ -839,13 +839,13 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     Completeness = 18 / 20 × 100 = 90%
     ```
 
-    **Important Note**: A high level of completeness does not necessarily indicate that the HMIS is representative of all service delivery in the country, as some services may not be delivered in facilities or some facilities may not report. For countries where DHIS2 does not store zeros, indicator completeness may be underestimated if there are many low-volume facilities.
+    **Important note**: A high level of completeness does not necessarily indicate that the HMIS is representative of all service delivery in the country, as some services may not be delivered in facilities or some facilities may not report. For countries where DHIS2 does not store zeros, indicator completeness may be underestimated if there are many low-volume facilities.
 
-??? "DQA Composite Score Calculation"
+??? "DQA composite score calculation"
 
     The DQA score combines three quality dimensions for a defined set of core indicators.
 
-    **Component Scores:**
+    **Component scores:**
 
     **1. Completeness-Outlier Score:**
 
@@ -875,12 +875,12 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     \end{cases}
     $$
 
-    **Passing Criteria for Binary Score:**
+    **Passing criteria for binary score:**
     - ALL DQA indicators must be complete (completeness_flag = 1)
     - ALL DQA indicators must be free of outliers (outlier_flag = 0)
     - ALL available consistency pairs must pass benchmarks (sconsistency = 1)
 
-    **Example Calculation:**
+    **Example calculation:**
 
     ```
     Facility 123, Period 202403
@@ -901,7 +901,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 
 ### Code examples
 
-??? "Example 1: Running the Module with Default Settings"
+??? "Example 1: Running the module with default settings"
 
     ```r
     # Set working directory
@@ -922,7 +922,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     source("01_module_data_quality_assessment.R")
     ```
 
-??? "Example 2: Adjusting Outlier Detection Sensitivity"
+??? "Example 2: Adjusting outlier detection sensitivity"
 
     ```r
     # Make outlier detection more sensitive (lower thresholds)
@@ -934,9 +934,9 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     source("01_module_data_quality_assessment.R")
     ```
 
-    **Use Case**: Countries with generally low service volumes where the default thresholds are too conservative.
+    **Use case**: Countries with generally low service volumes where the default thresholds are too conservative.
 
-??? "Example 3: Different Geographic Level for Consistency"
+??? "Example 3: Different geographic level for consistency"
 
     ```r
     # Use district level (admin_area_2) instead of sub-district (admin_area_3)
@@ -946,9 +946,9 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     source("01_module_data_quality_assessment.R")
     ```
 
-    **Use Case**: Sub-district level has sparse data or too few facilities per area, making district-level aggregation more stable.
+    **Use case**: Sub-district level has sparse data or too few facilities per area, making district-level aggregation more stable.
 
-??? "Example 4: Custom DQA Indicators"
+??? "Example 4: custom DQA indicators"
 
     ```r
     # Focus DQA on maternal health indicators only
@@ -960,9 +960,9 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     source("01_module_data_quality_assessment.R")
     ```
 
-    **Use Case**: Specialized analysis focusing on a specific service area.
+    **Use case**: Specialized analysis focusing on a specific service area.
 
-??? "Example 5: Running for Different Country"
+??? "Example 5: Running for different country"
 
     ```r
     # Configure for your country
@@ -976,7 +976,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     source("01_module_data_quality_assessment.R")
     ```
 
-??? "Example 6: Programmatic Use of Outputs"
+??? "Example 6: Programmatic use of outputs"
 
     ```r
     # After running the module, work with outputs
@@ -1069,7 +1069,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 
     4. Review the data: Check if there are genuine quality issues requiring data cleaning rather than parameter adjustment
 
-??? "Problem: No DQA results generated"
+??? "Problem: no DQA results generated"
 
     **Symptoms:**
     - M1_output_dqa.csv is empty or has only headers
@@ -1208,7 +1208,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 
 ### Usage notes
 
-??? "Data Type Handling"
+??? "Data type handling"
 
     **period_id Flexibility:**
     The module accepts `period_id` in multiple formats:
@@ -1225,21 +1225,21 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
 
     This ensures proper temporal ordering even with gaps in reporting periods.
 
-    **Count Values:**
+    **Count values:**
     - Numeric values required (integers or decimals)
     - Zero counts should be explicit `0`, not `NA`
     - Missing counts represented as `NA` or absent rows
 
-    **Geographic Columns:**
+    **Geographic columns:**
     - Character type recommended
     - Can contain spaces and special characters
     - Case-sensitive in some operations
 
-??? "Missing Value Strategy"
+??? "Missing value strategy"
 
     The module uses context-specific approaches to missing values:
 
-    **Outlier Analysis:**
+    **Outlier analysis:**
     - NA values excluded from median/MAD calculations
     - Only non-NA values contribute to statistics
     - Prevents bias from sparse reporting
@@ -1259,7 +1259,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     - Only available pairs affect consistency score
     - Allows partial scoring when some indicators missing
 
-??? "Memory Considerations"
+??? "Memory considerations"
 
     For large datasets (>1 million rows), the module implements several optimizations:
 
@@ -1267,11 +1267,11 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     - Completeness processing uses `data.table` for in-place operations
     - Significantly faster and more memory-efficient than `dplyr` for large data
 
-    **Filtering Strategy:**
+    **Filtering strategy:**
     - Filters to relevant indicators before expensive operations
     - Reduces memory footprint during calculations
 
-    **Object Management:**
+    **Object management:**
     - Removes intermediate objects after use
     - Prevents memory accumulation during sequential processing
 
@@ -1280,12 +1280,12 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     - Consider processing by year if multi-year datasets cause memory issues
     - Monitor memory usage: `pryr::mem_used()` at various stages
 
-??? "Performance Optimization Opportunities"
+??? "Performance optimization opportunities"
 
-    **Current Implementation:**
+    **Current implementation:**
     The completeness analysis processes indicators sequentially using `lapply()`.
 
-    **Potential Enhancement:**
+    **Potential enhancement:**
     For datasets with many indicators, parallelization could improve performance:
 
     ```r
@@ -1310,15 +1310,15 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     completeness_data <- rbindlist(completeness_list)
     ```
 
-    **Expected Speedup:**
+    **Expected speedup:**
     - 3-4x faster with 4 cores on datasets with 10+ indicators
     - Most beneficial for countries with many indicators and long time series
 
-??? "Dynamic Indicator Selection"
+??? "Dynamic indicator selection"
 
     The module intelligently adapts to available data:
 
-    **Delivery Indicator Selection:**
+    **Delivery indicator selection:**
 
     ```r
     # Automatically chooses between "delivery" and "sba" for BCG consistency pair
@@ -1343,34 +1343,34 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     }
     ```
 
-    **Consistency Pair Validation:**
+    **Consistency pair validation:**
     The module checks each consistency pair and removes those with missing indicators, providing clear warnings about which pairs were skipped.
 
-??? "Error Handling and Fallbacks"
+??? "Error handling and fallbacks"
 
     The module includes robust error handling:
 
-    **Missing Consistency Pairs:**
+    **Missing consistency pairs:**
     - If no valid pairs exist, skips consistency analysis
     - Uses `dqa_without_consistency()` for scoring
     - Outputs dummy files with proper headers
 
-    **Missing Geographic Levels:**
+    **Missing geographic levels:**
     - Falls back to lowest available admin level if specified `GEOLEVEL` not found
     - Issues warning about the fallback
 
-    **Empty Results:**
+    **Empty results:**
     - Creates CSV files with proper headers even when no data
     - Ensures downstream processes do not break
 
-    **Missing Indicators:**
+    **Missing indicators:**
     - Validates all indicator requirements before analysis
     - Warns about removed pairs
     - Continues with available indicators
 
-??? "Interpretation Guidelines"
+??? "Interpretation guidelines"
 
-    **Outlier Flags:**
+    **Outlier flags:**
     - outlier_flag = 1 suggests potential data quality issues, but require investigation
     - Not all flagged outliers are errors (genuine service campaigns can trigger flags)
     - Use mad_residual and pc values to prioritize review
@@ -1597,7 +1597,7 @@ AND for which the count is greater than 100.
 
 ## Outlier example
 
-**Health Center B - Malaria Tests:**
+**Health Center B - Malaria tests:**
 
 | Month | Tests Reported | Normal? |
 |-------|----------------|---------|

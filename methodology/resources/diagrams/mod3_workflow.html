@@ -286,15 +286,15 @@
         </header>
 
         <div class="workflow">
-            <!-- STAGE 1 -->
+            <!-- PART 1 -->
             <div class="stage-section">
                 <div class="stage-header">
-                    <h2>STAGE 1: Control Chart Analysis</h2>
+                    <h2>PART 1: Control chart analysis</h2>
                     <p>Identifies WHEN disruptions occur across service indicators</p>
                 </div>
 
                 <div class="flow-box">
-                    <h4>Data Preparation Pipeline</h4>
+                    <h4>Data preparation pipeline</h4>
                     <ul class="process-list">
                         <li><strong>Load data:</strong> M2_adjusted_data.csv (quality-adjusted counts) + M1_output_outliers.csv (outlier flags) + raw HMIS (only to extract admin_area_1 lookup)</li>
                         <li><strong>Join and filter:</strong> Join outlier flags to adjusted data, then remove rows flagged as outliers</li>
@@ -308,7 +308,7 @@
                 <div class="arrow-connector">↓</div>
 
                 <div class="process-box">
-                    <h4>Control Chart Analysis for Each Indicator × Geographic Area</h4>
+                    <h4>Control chart analysis for each indicator × geographic area</h4>
                     <ul class="process-list">
                         <li>Fit robust model: count ~ seasonality + time trend</li>
                         <li>Smooth predictions to reduce noise and variability</li>
@@ -321,7 +321,7 @@
                 <div class="arrow-connector">↓</div>
 
                 <div class="output-section">
-                    <h4>Stage 1 Output</h4>
+                    <h4>Part 1 output</h4>
                     <ul class="output-list">
                         <li><span class="output-filename">M3_chartout.csv</span> — Disruption flags by month, geographic area, and indicator</li>
                     </ul>
@@ -330,22 +330,22 @@
 
             <div class="divider"></div>
 
-            <!-- STAGE 2 -->
+            <!-- PART 2 -->
             <div class="stage-section">
                 <div class="stage-header">
-                    <h2>STAGE 2: Disruption Analysis</h2>
+                    <h2>PART 2: Disruption analysis</h2>
                     <p>Quantifies HOW MUCH impact occurred during disrupted periods</p>
                 </div>
 
                 <div class="flow-box">
-                    <h4>Data Integration</h4>
-                    <p>Join disruption flags from Stage 1 to facility-level data for detailed impact analysis</p>
+                    <h4>Data integration</h4>
+                    <p>Join disruption flags from Part 1 to facility-level data for detailed impact analysis</p>
                 </div>
 
                 <div class="arrow-connector">↓</div>
 
                 <div class="regression-box">
-                    <h5>Panel Regressions at Multiple Geographic Levels</h5>
+                    <h5>Panel regressions at multiple geographic levels</h5>
                     <div class="regression-grid">
                         <div class="regression-item">
                             <strong>Admin Area Level 1:</strong> National impact
@@ -373,7 +373,7 @@
                 <div class="arrow-connector">↓</div>
 
                 <div class="calculation-box">
-                    <h5>Calculate Shortfalls and Surpluses</h5>
+                    <h5>Calculate shortfalls and surpluses</h5>
                     <ul class="calculation-list">
                         <li>Absolute difference: Number of services lost/gained</li>
                         <li>Percentage difference: Percent change from expected volume</li>
@@ -384,7 +384,7 @@
                 <div class="arrow-connector">↓</div>
 
                 <div class="output-section">
-                    <h4>Stage 2 Outputs</h4>
+                    <h4>Part 2 outputs</h4>
                     <ul class="output-list">
                         <li><span class="output-filename">M3_disruptions_analysis_admin_area_1.csv</span> — Admin area level 1 (national) impact estimates</li>
                         <li><span class="output-filename">M3_disruptions_analysis_admin_area_2.csv</span> — Admin area level 2 impact estimates</li>

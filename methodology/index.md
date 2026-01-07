@@ -15,14 +15,14 @@ This documentation describes the FASTR approach to routine HMIS data analysis fo
 | Section | Description |
 |---------|-------------|
 | [**Introduction**](00_introduction.md) | Overview of FASTR, rapid-cycle analytics, and the approach to routine data analysis |
-| [**Identify Questions & Indicators**](01_identify_questions_indicators.md) | Defining priority questions and selecting core indicators |
-| [**Data Extraction**](02_data_extraction.md) | Extracting and preparing HMIS data for analysis |
-| [**The FASTR Data Analytics Platform**](03_fastr_analytics_platform.md) | Using the platform for automated analysis |
-| [**Data Quality Assessment**](04_data_quality_assessment.md) | Module 1 in platform. Assessing completeness and consistency |
-| [**Data Quality Adjustment**](05_data_quality_adjustment.md) | Module 2 in platform. Adjusting for outliers and missing data |
-| [**Service Utilization Analysis**](06a_service_utilization.md) | Module 3 in platform. Analyzing health service usage patterns |
-| [**Coverage Estimates**](06b_coverage_estimates.md) | Module 4 in platform. Estimating service coverage against targets |
-| [**Results Communication**](07_results_communication.md) | Communicating findings for decision-making |
+| [**Identify questions & indicators**](01_identify_questions_indicators.md) | Defining priority questions and selecting core indicators |
+| [**Data extraction**](02_data_extraction.md) | Extracting and preparing HMIS data for analysis |
+| [**The FASTR data analytics platform**](03_fastr_analytics_platform.md) | Using the platform for automated analysis |
+| [**Data quality assessment**](04_data_quality_assessment.md) | Module 1 in platform. Assessing completeness and consistency |
+| [**Data quality adjustment**](05_data_quality_adjustment.md) | Module 2 in platform. Adjusting for outliers and missing data |
+| [**Service utilization analysis**](06a_service_utilization.md) | Module 3 in platform. Analyzing health service usage patterns |
+| [**Coverage estimates**](06b_coverage_estimates.md) | Module 4 in platform. Estimating service coverage against targets |
+| [**Results communication**](07_results_communication.md) | Communicating findings for decision-making |
 
 ## Quick links
 

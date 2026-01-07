@@ -40,25 +40,25 @@ By systematically addressing these data quality issues before analysis, this mod
 
 The module follows a systematic seven-step process to clean and adjust health facility data:
 
-**Step 1: Load and Prepare Data**
+**Step 1: Load and prepare data**
 The module brings together three datasets: the raw facility service volumes, the outlier flags identifying suspicious values (from Module 1), and the completeness flags showing which months had incomplete reporting (from Module 1). It also identifies certain sensitive indicators like deaths that should never be adjusted.
 
-**Step 2: Identify Low-Volume Indicators**
+**Step 2: Identify low-volume indicators**
 Before making any adjustments, the module checks each indicator to see if it has meaningful variation. Indicators that never have values above 100 across the entire dataset are flagged and excluded from outlier adjustment, since outlier detection isn't meaningful for consistently low-count indicators.
 
-**Step 3: Adjust Outlier Values**
+**Step 3: Adjust outlier values**
 For each value flagged as an outlier, the module calculates what the value "should have been" based on that facility's historical pattern. It uses a hierarchy of methods: (1) centered 6-month rolling average, (2) forward 6-month average, (3) backward 6-month average, (4) same month from previous year, (5) facility-specific historical mean.
 
-**Step 4: Fill Missing and Incomplete Data**
+**Step 4: Fill missing and incomplete data**
 For months where data is missing or marked as incomplete, the module imputes (fills in) values using the same rolling average approach. This ensures that temporary reporting gaps don't create artificial drops to zero in the data.
 
-**Step 5: Create Multiple Scenarios**
+**Step 5: Create multiple scenarios**
 The module runs the adjustment logic four different ways: with no adjustments (baseline), only outlier corrections, only completeness corrections, and both types of corrections together. This allows analysts to see how different choices affect their results.
 
-**Step 6: Aggregate to Geographic Levels**
+**Step 6: Aggregate to geographic levels**
 After adjustments are complete, the facility-level data is aggregated (summed up) to create subnational and national-level datasets. Each geographic level maintains all four scenarios, so analysts can work at whichever level they need.
 
-**Step 7: Export Results**
+**Step 7: Export results**
 The module saves four CSV files: one for facility-level data, one for subnational areas, one for national totals, and one documenting which indicators were excluded from adjustment and why.
 
 ### Workflow diagram
@@ -91,13 +91,13 @@ By producing four scenarios, the module allows different use cases:
 
 ### What happens to the data
 
-**Input Processing**: The module receives facility-level monthly service volumes along with quality flags from Module 1 (outlier indicators, completeness status). Each facility-indicator-period combination represents a single observation that may require adjustment.
+**Input processing**: The module receives facility-level monthly service volumes along with quality flags from Module 1 (outlier indicators, completeness status). Each facility-indicator-period combination represents a single observation that may require adjustment.
 
-**Adjustment Application**: Based on the selected scenario, the module creates adjusted versions of the service counts. For outliers, abnormally high values are replaced with mean values calculated from non-outlier months. For incomplete reporting periods, missing values are imputed using facility-specific averages from available data.
+**Adjustment application**: Based on the selected scenario, the module creates adjusted versions of the service counts. For outliers, abnormally high values are replaced with mean values calculated from non-outlier months. For incomplete reporting periods, missing values are imputed using facility-specific averages from available data.
 
-**Multiple Scenario Generation**: The module generates four parallel versions of the dataset: `count_final_none` (no adjustments), `count_final_outliers` (outliers only), `count_final_completeness` (missing data only), and `count_final_both` (both adjustments applied). This allows downstream analysis to compare results across different data quality assumptions.
+**Multiple scenario generation**: The module generates four parallel versions of the dataset: `count_final_none` (no adjustments), `count_final_outliers` (outliers only), `count_final_completeness` (missing data only), and `count_final_both` (both adjustments applied). This allows downstream analysis to compare results across different data quality assumptions.
 
-**Output Aggregation**: The adjusted data is aggregated to geographic levels (country, provinces, districts) while preserving all four adjustment scenarios. Each output row contains the geographic area identifier, indicator code, time period, and all four count versions, enabling flexible analysis depending on data quality tolerance and research questions.
+**Output aggregation**: The adjusted data is aggregated to geographic levels (country, provinces, districts) while preserving all four adjustment scenarios. Each output row contains the geographic area identifier, indicator code, time period, and all four count versions, enabling flexible analysis depending on data quality tolerance and research questions.
 
 ### Analysis outputs and visualization
 
@@ -127,7 +127,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
 
 ### Configuration parameters
 
-??? "Excluded Indicators"
+??? "Excluded indicators"
 
     Some indicators are excluded from all adjustments due to their sensitive nature:
 
@@ -137,11 +137,11 @@ Heatmap showing the percent change in service volume when both outlier and compl
 
     **Rationale**: Death counts should not be smoothed or imputed as they represent discrete events that may have genuine temporal variation. Adjusting these could mask important epidemiological patterns or outbreak signals.
 
-??? "Low Volume Exclusions"
+??? "Low volume exclusions"
 
     Indicators are also automatically excluded from **outlier adjustment** if they have zero observations above 100 across the entire dataset. This prevents meaningless outlier detection on indicators with consistently low counts.
 
-    **Exclusion Logic**:
+    **Exclusion logic**:
 
     ```r
     volume_check <- raw_data[, .(
@@ -154,7 +154,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
 
     This information is saved to `M2_low_volume_exclusions.csv` for transparency.
 
-??? "Rolling Window Configuration"
+??? "Rolling window configuration"
 
     The module uses a **6-month window** for all rolling averages. This choice balances:
 
@@ -173,7 +173,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
 
 ### Input/output specifications
 
-??? "Input Files"
+??? "Input files"
 
     The module requires three input files from previous processing steps:
 
@@ -183,7 +183,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
     | `M1_output_outliers.csv` | Module 1 | Outlier flags for each facility-month-indicator | `facility_id`, `indicator_common_id`, `period_id`, `outlier_flag` |
     | `M1_output_completeness.csv` | Module 1 | Completeness flags for each facility-month-indicator | `facility_id`, `indicator_common_id`, `period_id`, `completeness_flag` |
 
-??? "Input Data Structure"
+??? "Input data structure"
 
     **Raw HMIS Data (`hmis_ISO3.csv`)**:
 
@@ -195,7 +195,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
     FAC001      | ISO3         | Province_A   | District_A   | 202303    | anc1                | 890  # Outlier
     ```
 
-    **Outlier Flags (`M1_output_outliers.csv`)**:
+    **Outlier flags (`M1_output_outliers.csv`)**:
 
     ```text
     facility_id | indicator_common_id | period_id | outlier_flag
@@ -205,7 +205,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
     FAC001      | anc1                | 202303    | 1           # Flagged as outlier
     ```
 
-    **Completeness Flags (`M1_output_completeness.csv`)**:
+    **Completeness flags (`M1_output_completeness.csv`)**:
 
     ```text
     facility_id | indicator_common_id | period_id | completeness_flag
@@ -215,7 +215,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
     FAC001      | anc1                | 202303    | 1             # Complete
     ```
 
-??? "Output Files"
+??? "Output files"
 
     The module generates four output files:
 
@@ -226,7 +226,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
     | `M2_adjusted_data_national.csv` | National | Aggregated adjusted volumes at national level | `admin_area_1`, `period_id`, `indicator_common_id`, `count_final_*` |
     | `M2_low_volume_exclusions.csv` | Metadata | Indicators excluded from outlier adjustment due to low volumes | `indicator_common_id`, `low_volume_exclude` |
 
-??? "Output Data Structure"
+??? "Output data structure"
 
     **Facility-Level Output** (`M2_adjusted_data.csv`):
 
@@ -247,7 +247,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
 
 ### Key functions documentation
 
-??? "Required Libraries"
+??? "Required libraries"
 
     The module depends on the following R packages:
 
@@ -275,7 +275,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
 
     data.table with adjusted values in `count_working` column and adjustment metadata
 
-    **Key Operations**:
+    **Key operations**:
 
     1. Merges input datasets by `facility_id`, `indicator_common_id`, and `period_id`
     2. Converts `period_id` to dates for temporal ordering
@@ -301,14 +301,14 @@ Heatmap showing the percent change in service volume when both outlier and compl
 
     data.table with four `count_final_*` columns, one per scenario
 
-    **Scenarios Processed**:
+    **Scenarios processed**:
 
     1. `none`: No adjustments (baseline)
     2. `outliers`: Outlier adjustment only
     3. `completeness`: Completeness adjustment only
     4. `both`: Sequential outlier then completeness adjustment
 
-    **Processing Logic**:
+    **Processing logic**:
 
     - Calls `apply_adjustments()` once per scenario
     - Preserves original values for excluded indicators (deaths)
@@ -316,15 +316,15 @@ Heatmap showing the percent change in service volume when both outlier and compl
 
 ### Statistical methods & algorithms
 
-??? "Outlier Adjustment Methodology"
+??? "Outlier adjustment methodology"
 
     Outlier adjustment is applied to any facility-month value flagged in Module 1 (`outlier_flag == 1`). The goal is to replace these outlier values using valid historical data from the same facility and indicator.
 
-    **Statistical Approach**:
+    **Statistical approach**:
 
     Rolling averages are used to estimate expected values. A rolling average (also called moving average) is the mean of a set of time periods surrounding the target period. This technique smooths short-term fluctuations and highlights longer-term trends.
 
-    **Valid Values Definition**:
+    **Valid values definition**:
 
     Only values meeting ALL of the following criteria are used in calculations:
 
@@ -345,7 +345,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
     ), by = .(facility_id, indicator_common_id)]
     ```
 
-??? "Adjustment Hierarchy for Outliers"
+??? "Adjustment hierarchy for outliers"
 
     The adjustment process follows this **hierarchical order** (stopping at the first available method):
 
@@ -368,7 +368,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
         -   Takes the average of the six most recent valid months before the outlier
         -   Method tag: `backward`
 
-    4.  **Same Month from Previous Year**
+    4.  **Same month from previous year**
 
         -   If no valid 6-month average exists, the value from the **same calendar month in the previous year** is used (e.g., Jan 2023 for Jan 2024)
         -   Only applied if that previous value is valid (not an outlier, and > 0)
@@ -397,27 +397,27 @@ Heatmap showing the percent change in service volume when both outlier and compl
         -   Provides a facility-specific baseline when no temporal pattern is available
         -   Method tag: `fallback`
 
-    **Edge Case**:
+    **Edge case**:
 
     If no valid replacement can be found from any of these methods, the original outlier value is retained.
 
-??? "Completeness Adjustment Methodology"
+??? "Completeness adjustment methodology"
 
     Completeness adjustment is applied to any facility-month where:
 
     - The month is flagged as incomplete (`completeness_flag != 1`) in Module 1, OR
     - The value is missing (`is.na(count_working)`)
 
-    **Statistical Approach**:
+    **Statistical approach**:
 
     The same rolling average methodology is applied, but the definition of "valid values" differs slightly:
 
-    **Valid Values for Completeness Adjustment**:
+    **Valid values for completeness adjustment**:
 
     - `!is.na(count_working)` (non-missing, possibly already adjusted for outliers)
     - `outlier_flag == 0` (not flagged as outlier in original data)
 
-    **Key Difference from Outlier Adjustment**:
+    **Key difference from outlier adjustment**:
 
     - Completeness adjustment can use values that were already adjusted for outliers (when scenarios include both adjustments)
     - No same-month-last-year method is used (only rolling averages and fallback)
@@ -434,7 +434,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
     ), by = .(facility_id, indicator_common_id)]
     ```
 
-??? "Adjustment Hierarchy for Completeness"
+??? "Adjustment hierarchy for completeness"
 
     The replacement follows this **hierarchical order**:
 
@@ -460,11 +460,11 @@ Heatmap showing the percent change in service volume when both outlier and compl
         -   Provides a facility-specific baseline
         -   Method tag: `fallback`
 
-    **Edge Case**:
+    **Edge case**:
 
     If no valid replacement is found, the value remains missing (`NA`).
 
-??? "Scenario Processing Logic"
+??? "Scenario processing logic"
 
     The module processes all four adjustment scenarios simultaneously using the `apply_adjustments_scenarios()` function:
 
@@ -495,7 +495,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
     - Most comprehensive adjustment
     - Use case: When both data quality issues are prevalent
 
-    **Processing Order for "Both" Scenario**:
+    **Processing order for "Both" scenario**:
 
     1. Outlier adjustment creates `count_working` with outliers replaced
     2. Completeness adjustment then operates on `count_working`, using the already-adjusted values
@@ -509,7 +509,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
     dat[indicator_common_id %in% EXCLUDED_FROM_ADJUSTMENT, count_working := count]
     ```
 
-??? "Aggregation Methods"
+??? "Aggregation methods"
 
     All geographic aggregations use **simple sums**:
 
@@ -527,7 +527,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
 
     If many facilities have `NA` values after adjustment, subnational/national totals may be underestimated. The `count_final_none` scenario provides a reference point for assessing impact.
 
-??? "Handling Missing Data in Calculations"
+??? "Handling missing data in calculations"
 
     The module applies `na.rm = TRUE` in all rolling calculations:
 
@@ -541,7 +541,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
 
 ### Code examples
 
-??? "Example 1: Outlier Adjustment"
+??? "Example 1: Outlier adjustment"
 
     **Scenario**:
 
@@ -560,7 +560,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
     202306    | 147   | 0            | valid
     ```
 
-    **Adjustment Calculation** (centered 6-month average):
+    **Adjustment calculation** (centered 6-month average):
 
     - Valid values: [145, 152, 148, 155, 147] (excludes outlier 890)
     - Average: (145 + 152 + 148 + 155 + 147) / 5 = 149.4
@@ -570,7 +570,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
 
     `roll6`
 
-??? "Example 2: Completeness Adjustment"
+??? "Example 2: Completeness adjustment"
 
     **Scenario**:
 
@@ -588,7 +588,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
     202305    | 50    | 1                 | valid
     ```
 
-    **Adjustment Calculation** (centered 6-month average):
+    **Adjustment calculation** (centered 6-month average):
 
     - Valid values: [45, 48, 52, 50, ...]
     - Average: 48.75 (using available surrounding months)
@@ -598,7 +598,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
 
     `roll6`
 
-??? "Example 3: Seasonal Indicator with Same-Month-Last-Year"
+??? "Example 3: Seasonal indicator with same-month-last-year"
 
     **Scenario**:
 
@@ -613,7 +613,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
     202306    | 1850  | 1            | June 2023 (OUTLIER)
     ```
 
-    **Adjustment Logic**:
+    **Adjustment logic**:
 
     1. Centered, forward, and backward rolling averages unavailable (insufficient data)
     2. Same-month-last-year method activated
@@ -624,7 +624,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
 
     `same_month_last_year`
 
-??? "Example 4: Scenario Comparison"
+??? "Example 4: Scenario comparison"
 
     **Facility**:
 
@@ -638,7 +638,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
 
     Q1 2023
 
-    **Original Data**:
+    **Original data**:
 
     ```text
     Month    | Count | Outlier? | Complete?
@@ -648,7 +648,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
     Mar 2023 | NA    | -        | No        # Incomplete
     ```
 
-    **Scenario Results**:
+    **Scenario results**:
 
     | Month    | None | Outliers | Completeness | Both |
     |----------|------|----------|--------------|------|
@@ -667,9 +667,9 @@ Heatmap showing the percent change in service volume when both outlier and compl
     - **Completeness**: March filled in, but February outlier retained
     - **Both**: Most complete and clean dataset
 
-??? "Example 5: Geographic Aggregation"
+??? "Example 5: Geographic aggregation"
 
-    **Subnational Aggregation Code**:
+    **Subnational aggregation code**:
 
     ```r
     adjusted_data_admin_area_final <- adjusted_data_export[
@@ -684,7 +684,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
     ]
     ```
 
-    **National Aggregation Code**:
+    **National aggregation code**:
 
     ```r
     adjusted_data_national_final <- adjusted_data_export[
@@ -701,7 +701,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
 
 ### Troubleshooting
 
-??? "Common Issues"
+??? "Common issues"
 
     **Issue 1: All values remain unadjusted**
 
@@ -757,16 +757,16 @@ Heatmap showing the percent change in service volume when both outlier and compl
     - Review Module 1 completeness statistics
     - Consider data quality threshold for inclusion
 
-??? "Quality Assurance Checks"
+??? "Quality assurance checks"
 
     The module includes several quality checks:
 
-    1. **Low Volume Exclusions**: Automatically identifies and excludes indicators with zero high-value observations
-    2. **Adjustment Tracking**: Counts and reports number of values adjusted by each method
-    3. **Excluded Indicators**: Ensures deaths are never adjusted
-    4. **Console Logging**: Provides detailed progress and summary statistics
+    1. **Low volume exclusions**: Automatically identifies and excludes indicators with zero high-value observations
+    2. **Adjustment tracking**: Counts and reports number of values adjusted by each method
+    3. **Excluded indicators**: Ensures deaths are never adjusted
+    4. **Console logging**: Provides detailed progress and summary statistics
 
-    **Example Console Output**:
+    **Example console output**:
 
     ```text
     Running adjustments...
@@ -786,7 +786,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
 
 ### Usage notes
 
-??? "Choosing the Right Scenario"
+??? "Choosing the right scenario"
 
     | Situation | Recommended Scenario | Rationale |
     |-----------|---------------------|-----------|
@@ -796,7 +796,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
     | Poor quality and completeness | `both` | Comprehensive cleaning |
     | Uncertainty about data quality | Compare all scenarios | Sensitivity analysis |
 
-??? "Validation Steps"
+??? "Validation steps"
 
     After running this module, consider:
 
@@ -910,6 +910,6 @@ Heatmap showing percent change in service volumes when both outlier and complete
 
 ![Percent change in volume due to both outlier and completeness adjustment.](resources/default_outputs/Default_3._Percent_change_in_volume_due_to_both_outlier_and_completeness_adjustment.png)
 
-**Interpretation Guide:**
+**Interpretation guide:**
 tbd
 <!-- /SLIDE -->

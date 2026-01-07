@@ -95,7 +95,7 @@ Defining data quality is complex, and while there is no one single definition of
 
 ### Data quality dimensions and assessment
 
-| **Data Quality Domain** | **What does it measure?** | **How is it assessed?** |
+| **Data quality domain** | **What does it measure?** | **How is it assessed?** |
 |------------------------|---------------------------|-------------------------|
 | **Completeness** | Are all data present? Is there sufficient information available to make decisions about the health of the population and to target resources to improve health-system coverage, efficiency and quality? | • Assessed by measuring whether all units that are supposed to report actually do (**reporting completeness**)<br><br>• Assessed by measuring the completeness of indicator data (no missing values); this is different from overall reporting completeness in that it looks at completeness of specific data elements and not only at the receipt of the monthly reporting form (**indicator completeness**) |
 | **Timeliness** | Are data regularly submitted on time? | • Assessed by measuring whether the units that submitted reports did so before a set deadline (**timeliness**) |
@@ -141,22 +141,22 @@ This methodology documentation describes the complete FASTR approach to routine 
 
 ### Planning & preparation
 
-- [**Identify Questions & Indicators**](01_identify_questions_indicators.md) - Defining priority questions and selecting core indicators for FASTR implementation
-- [**Data Extraction**](02_data_extraction.md) - Extracting and preparing HMIS data from DHIS2 for analysis
-- [**The FASTR Data Analytics Platform**](03_fastr_analytics_platform.md) - Using the platform for automated analysis and visualization
+- [**Identify questions & indicators**](01_identify_questions_indicators.md) - Defining priority questions and selecting core indicators for FASTR implementation
+- [**Data extraction**](02_data_extraction.md) - Extracting and preparing HMIS data from DHIS2 for analysis
+- [**The FASTR data analytics platform**](03_fastr_analytics_platform.md) - Using the platform for automated analysis and visualization
 
 ### Analytics modules (FASTR platform)
 
 The FASTR analytics platform includes four automated modules:
 
-- [**Data Quality Assessment**](04_data_quality_assessment.md) - Module 1 in the platform. Assessment of HMIS data quality through completeness, outlier detection, and consistency metrics
-- [**Data Quality Adjustment**](05_data_quality_adjustment.md) - Module 2 in the platform. Techniques for improving data accuracy by adjusting for outliers and incomplete reporting
-- [**Service Utilization Analysis**](06a_service_utilization.md) - Module 3 in the platform. Analysis of health service usage patterns to detect and quantify disruptions
-- [**Coverage Estimates**](06b_coverage_estimates.md) - Module 4 in the platform. Methods for estimating service coverage and comparing trends to country targets
+- [**Data quality assessment**](04_data_quality_assessment.md) - Module 1 in the platform. Assessment of HMIS data quality through completeness, outlier detection, and consistency metrics
+- [**Data quality adjustment**](05_data_quality_adjustment.md) - Module 2 in the platform. Techniques for improving data accuracy by adjusting for outliers and incomplete reporting
+- [**Service utilization analysis**](06a_service_utilization.md) - Module 3 in the platform. Analysis of health service usage patterns to detect and quantify disruptions
+- [**Coverage estimates**](06b_coverage_estimates.md) - Module 4 in the platform. Methods for estimating service coverage and comparing trends to country targets
 
 ### Results & communication
 
-- [**Results Communication and Data Use**](07_results_communication.md) - Interpreting findings, data visualization, and using data for decision-making
+- [**Results communication and data use**](07_results_communication.md) - Interpreting findings, data visualization, and using data for decision-making
 
 ## References
 

@@ -38,7 +38,7 @@ This module addresses some challenges in coverage estimation:
 
 ### Part 1 and part 2 explained
 
-**Part 1: Denominator Calculation and Selection**
+**Part 1: Denominator calculation and selection**
 
 - Calculates target populations (denominators) using multiple approaches: HMIS-based (from ANC1, delivery, BCG, Penta1) and population-based (UN WPP)
 
@@ -48,7 +48,7 @@ This module addresses some challenges in coverage estimation:
 
 - Outputs: Denominator datasets and combined results showing all options
 
-**Part 2: Denominator Selection and Survey Projection**
+**Part 2: Denominator selection and survey projection**
 
 - Allows users to override automatic selections and choose specific denominators
 
@@ -64,12 +64,12 @@ This module addresses some challenges in coverage estimation:
 
 ### High-level workflow
 
-#### Part 1: Denominator Calculation and Selection
+#### Part 1: Denominator calculation and selection
 
-**Step 1: Load and Prepare Data Sources**
+**Step 1: Load and prepare data sources**
 The module begins by loading three data sources and ensuring they are compatible. HMIS data is aggregated from monthly to annual totals. Survey data is harmonized (DHS prioritized over MICS) and forward-filled to create continuous time series. Population data is filtered to the target country.
 
-**Step 2: Calculate Multiple Denominator Options**
+**Step 2: Calculate multiple denominator options**
 For each health indicator, the module calculates several possible target populations:
 
 - **Service-based denominators**: Using HMIS volumes divided by survey coverage (e.g., if 10,000 women received ANC1 and survey says coverage is 80%, estimated pregnancies = 10,000/0.80 = 12,500)
@@ -78,39 +78,39 @@ For each health indicator, the module calculates several possible target populat
 
 - Each denominator is adjusted for demographic factors (pregnancy loss, stillbirths, mortality rates) to match the indicator's target age group
 
-**Step 3: Calculate Coverage for Each Denominator**
+**Step 3: Calculate coverage for each denominator**
 The module computes coverage by dividing the service volume by each denominator option. This produces multiple coverage estimates per indicator, each based on a different population assumption.
 
-**Step 4: Compare to Survey Benchmarks**
+**Step 4: Compare to survey benchmarks**
 Each coverage estimate is compared to survey data using squared error calculation. The survey serves as the benchmark since it is based on representative household sampling.
 
-**Step 5: Select the Best Denominator**
+**Step 5: Select the best denominator**
 The denominator producing the lowest error (closest match to survey) is automatically selected as "best." The selection prioritizes HMIS-based denominators over population projections to ensure data is driven by observed service delivery.
 
-**Step 6: Generate Outputs**
+**Step 6: Generate outputs**
 The module saves denominator datasets for transparency and combined results files showing coverage from all denominators plus the selected best option.
 
-**Step 7: Repeat for Subnational Levels**
+**Step 7: Repeat for subnational levels**
 If subnational data is available, the process repeats for administrative level 2 (e.g., provinces) and level 3 (e.g., districts), with fallback mechanisms to handle missing local survey data.
 
-#### Part 2: Denominator Selection and Survey Projection
+#### Part 2: Denominator selection and survey projection
 
-**Step 1: User Configuration**
+**Step 1: User configuration**
 Users review Part 1 results and configure denominator selections for each indicator. Options include using the automatic "best" selection or overriding with a specific denominator based on programmatic knowledge.
 
-**Step 2: Filter to Selected Denominators**
+**Step 2: Filter to selected denominators**
 The module filters Part 1's combined results to include only user-selected denominators, creating a focused dataset for analysis.
 
-**Step 3: Calculate Coverage Trends**
+**Step 3: Calculate coverage trends**
 Year-over-year changes (deltas) in HMIS-based coverage are calculated. This shows whether coverage is increasing, decreasing, or stable over time.
 
-**Step 4: Identify Survey Baseline**
+**Step 4: Identify survey baseline**
 For each geographic area and indicator, the most recent survey observation is identified as the baseline anchor point for projections.
 
-**Step 5: Project Survey Estimates Forward**
+**Step 5: Project survey estimates forward**
 The module extends survey coverage estimates into years without surveys by applying HMIS trends. The projection uses: Last survey value + (Current year HMIS coverage - Survey year HMIS coverage). This preserves the survey calibration while incorporating observed trends.
 
-**Step 6: Combine All Estimates**
+**Step 6: Combine all estimates**
 The final output merges three types of estimates:
 
 - **HMIS-based coverage**: Direct calculation from service volumes and selected denominators
@@ -119,7 +119,7 @@ The final output merges three types of estimates:
 
 - **Projected survey coverage**: Survey estimates extended using HMIS trends
 
-**Step 7: Save Final Outputs**
+**Step 7: Save final outputs**
 Results are saved with standardized column structures for each administrative level, ready for visualization and reporting.
 
 ### Workflow diagram
@@ -142,15 +142,15 @@ Each health indicator targets a specific population (e.g., pregnant women for AN
 
 ### What happens to the data
 
-**Input Integration**: The module combines three distinct data sources: facility-level service volumes from HMIS (aggregated annually by geographic area), household survey coverage estimates (harmonized across different survey years and forward-filled to create continuous time series), and population projections (filtered to extract age-specific target populations for each health indicator).
+**Input integration**: The module combines three distinct data sources: facility-level service volumes from HMIS (aggregated annually by geographic area), household survey coverage estimates (harmonized across different survey years and forward-filled to create continuous time series), and population projections (filtered to extract age-specific target populations for each health indicator).
 
-**Denominator Construction**: Using the relationship between HMIS service volumes and survey-based coverage estimates, the module calculates HMIS-implied denominators that represent the population that would need to exist for the observed service volumes to match survey coverage rates. These denominators are adjusted for indicator-specific target populations through sequential demographic corrections accounting for pregnancy loss, stillbirths, and mortality.
+**Denominator construction**: Using the relationship between HMIS service volumes and survey-based coverage estimates, the module calculates HMIS-implied denominators that represent the population that would need to exist for the observed service volumes to match survey coverage rates. These denominators are adjusted for indicator-specific target populations through sequential demographic corrections accounting for pregnancy loss, stillbirths, and mortality.
 
-**Coverage Calculation**: The module calculates multiple coverage estimates by dividing service volumes by different denominator options (population-based, HMIS-implied, hybrid approaches). Each coverage estimate is then compared against survey benchmarks to identify which denominator produces the most plausible results for each indicator, balancing between HMIS data quality and population estimate accuracy.
+**Coverage calculation**: The module calculates multiple coverage estimates by dividing service volumes by different denominator options (population-based, HMIS-implied, hybrid approaches). Each coverage estimate is then compared against survey benchmarks to identify which denominator produces the most plausible results for each indicator, balancing between HMIS data quality and population estimate accuracy.
 
-**Temporal Projection**: For years beyond the most recent survey, the module projects coverage estimates forward by combining the last observed survey value with HMIS-based trends. This produces complete coverage time series that leverage both the validity of survey data and the timeliness of routine HMIS reporting, with all estimates accompanied by metadata indicating data source and projection methodology.
+**Temporal projection**: For years beyond the most recent survey, the module projects coverage estimates forward by combining the last observed survey value with HMIS-based trends. This produces complete coverage time series that leverage both the validity of survey data and the timeliness of routine HMIS reporting, with all estimates accompanied by metadata indicating data source and projection methodology.
 
-**Interpretation Guide:**
+**Interpretation guide:**
 
 - **Survey points**: Black line with black points representing validated household survey coverage estimates
 
@@ -198,13 +198,13 @@ SELECTED_COUNT_VARIABLE <- "count_final_both"  # Which adjusted count to use
 ANALYSIS_LEVEL <- "NATIONAL_PLUS_AA2"          # Geographic scope
 ```
 
-**Analysis Level Options:**
+**Analysis level options:**
 
 - `NATIONAL_ONLY`: National-level analysis only
 - `NATIONAL_PLUS_AA2`: National + administrative area 2 (e.g., provinces)
 - `NATIONAL_PLUS_AA2_AA3`: National + admin area 2 + admin area 3 (e.g., districts)
 
-**Demographic Adjustment Rates:**
+**Demographic adjustment rates:**
 ```r
 PREGNANCY_LOSS_RATE <- 0.03      # 3% pregnancy loss
 TWIN_RATE <- 0.015               # 1.5% twin births
@@ -215,7 +215,7 @@ INFANT_MORTALITY_RATE <- 0.063   # Infant mortality rate
 UNDER5_MORTALITY_RATE <- 0.103   # Under-5 mortality rate
 ```
 
-**Count Variable Options:**
+**Count variable options:**
 
 - `count_final_none`: No adjustments (raw reported data)
 - `count_final_outlier`: Outlier adjustment only
@@ -245,15 +245,15 @@ Part 1 integrates three primary data sources:
 - Provides population-based denominators
 - Includes total population, births, under-1, and under-5 populations
 
-**Additional Data Context:**
+**Additional data context:**
 
-**Population Projections (UN WPP)**
+**Population projections (UN WPP)**
 Sourced from the United Nations World Population Prospects, these estimates provide age-specific and total population figures used to calculate denominators for coverage estimates. These projections account for demographic trends, including fertility, mortality, and migration.
 
-**Survey Data - MICS**
+**Survey data - MICS**
 MICS, conducted by UNICEF, provide household survey-based estimates for key health indicators, including coverage of maternal and child health services.
 
-**Survey Data - DHS**
+**Survey data - DHS**
 DHS, conducted by USAID, provide survey data on health service utilization, including immunization rates and maternal care coverage.
 
 #### Core functions documentation
@@ -279,7 +279,7 @@ DHS, conducted by USAID, provide survey data on health service utilization, incl
     - `hmis_countries`: List of countries in dataset
     - `hmis_iso3`: ISO3 code(s) present
 
-    **Example Structure**:
+    **Example structure**:
 
     ```
     admin_area_1  admin_area_2  year  countanc1  countdelivery  ...  nummonth
@@ -297,19 +297,19 @@ DHS, conducted by USAID, provide survey data on health service utilization, incl
     - HMIS country names and ISO3 codes
     - Optional national reference (for subnational fallback)
 
-    **Key Processing Steps**:
+    **Key processing steps**:
 
     1. **Harmonization**
        - Recodes indicator names (e.g., `polio1` → `opv1`, `vitamina` → `vitaminA`)
        - Normalizes source labels (`dhs`, `mics`)
        - Filters by country and date range
 
-    2. **Source Prioritization**
+    2. **Source prioritization**
        - When both DHS and MICS exist for same year/area/indicator
        - DHS is selected preferentially
        - Preserves source details for transparency
 
-    3. **Fallback Logic**
+    3. **Fallback logic**
        - If `sba` missing, uses `delivery` values
        - If `pnc1_mother` missing, uses `pnc1` values
        - Subnational areas use national values when local data unavailable (for BCG, Penta1, Penta3)
@@ -357,7 +357,7 @@ DHS, conducted by USAID, provide survey data on health service utilization, incl
     - `survey_data`: Survey reference values (carried forward)
     - `population_data`: UN WPP estimates (national only)
 
-    **Denominator Types Calculated**:
+    **Denominator types calculated**:
 
     **A. Service-Based Denominators** (using HMIS numerator ÷ survey coverage):
 
@@ -370,7 +370,7 @@ DHS, conducted by USAID, provide survey data on health service utilization, incl
        - `danc1_measles1`: Eligible for MCV1
        - `danc1_measles2`: Eligible for MCV2
 
-    2. **From Delivery**:
+    2. **From delivery**:
        - `ddelivery_livebirth`, `ddelivery_birth`, `ddelivery_pregnancy`
        - `ddelivery_dpt`, `ddelivery_measles1`, `ddelivery_measles2`
 
@@ -435,23 +435,23 @@ DHS, conducted by USAID, provide survey data on health service utilization, incl
     - Coverage estimates from all denominators
     - Survey reference values (forward-filled)
 
-    **Selection Algorithm**:
+    **Selection algorithm**:
 
-    1. **Calculate Coverage**: For each denominator option
+    1. **Calculate coverage**: For each denominator option
 
        ```
        coverage = (service_volume / denominator) × 100
        ```
 
-    2. **Calculate Error**: Compare to survey benchmark
+    2. **Calculate error**: Compare to survey benchmark
 
        ```
        squared_error = (HMIS_coverage - survey_coverage)²
        ```
 
-    3. **Classify Source Type**: Label each denominator as independent, reference-based, or UNWPP
+    3. **Classify source type**: Label each denominator as independent, reference-based, or UNWPP
 
-    4. **Selection Hierarchy**:
+    4. **Selection hierarchy**:
 
        ```
        Priority 1: Independent denominators (non-reference, non-UNWPP) → lowest error
@@ -459,13 +459,13 @@ DHS, conducted by USAID, provide survey data on health service utilization, incl
        Priority 3: UNWPP denominators (last resort fallback)
        ```
 
-    5. **Geographic Consistency**: Best denominator selected per geographic area × indicator (not per year)
+    5. **Geographic consistency**: Best denominator selected per geographic area × indicator (not per year)
 
     **Output**:
 
     Coverage data filtered to only the best-performing denominator for each indicator, with ranking
 
-    **Key Design Decision**:
+    **Key design decision**:
 
     - UNWPP denominators excluded from "best" selection by default
     - Prevents over-reliance on population projections
@@ -482,7 +482,7 @@ DHS, conducted by USAID, provide survey data on health service utilization, incl
     - Raw survey observations
     - All coverage data (optional, includes all denominators)
 
-    **Output Structure**:
+    **Output structure**:
 
     ```
     admin_area_1  year  indicator_common_id  denominator_best_or_survey  value
@@ -492,7 +492,7 @@ DHS, conducted by USAID, provide survey data on health service utilization, incl
     Country_Name  2020  anc1                 dwpp_pregnancy              82.1
     ```
 
-    **Denominator Categories**:
+    **Denominator categories**:
 
     - `best`: Selected optimal denominator
     - `survey`: Actual survey observation
@@ -500,7 +500,7 @@ DHS, conducted by USAID, provide survey data on health service utilization, incl
 
 #### Statistical methods & algorithms
 
-??? "Forward-Filling (Last Observation Carried Forward)"
+??? "Forward-filling (last observation carried forward)"
 
     Survey data typically has gaps (e.g., DHS every 5 years). To create continuous denominators:
 
@@ -518,7 +518,7 @@ DHS, conducted by USAID, provide survey data on health service utilization, incl
 
     This assumes coverage remains constant until next observation.
 
-??? "Squared Error Minimization"
+??? "Squared error minimization"
 
     To select the best denominator:
 
@@ -536,7 +536,7 @@ DHS, conducted by USAID, provide survey data on health service utilization, incl
 
 Before presenting the specific formulas, it is important to understand the **conceptual flow** of denominator calculations. Denominators are derived through sequential demographic adjustments that reflect the biological cascade from pregnancy to specific health service target populations.
 
-**Illustrative Example: From Pregnancy to DPT-eligible Population**
+**Illustrative example: From pregnancy to DPT-eligible population**
 
 Consider how an estimated 10,000 pregnancies translate to the population eligible for DPT vaccination:
 
@@ -557,7 +557,7 @@ The specific rates and formulas for each denominator source are provided in deta
 
 #### HMIS-based Denominator Calculations
 
-**Denominators Derived from ANC1**
+**Denominators derived from ANC1**
 
 Starting from ANC1 service counts and survey coverage, we calculate:
 
@@ -605,7 +605,7 @@ $$
 
 ---
 
-**Denominators Derived from Delivery**
+**Denominators derived from delivery**
 
 Starting from institutional delivery counts and survey coverage:
 
@@ -649,7 +649,7 @@ $$
 
 ---
 
-**Denominators Derived from BCG** *(National analysis only)*
+**Denominators derived from BCG** *(National analysis only)*
 
 Starting from BCG vaccination counts and survey coverage:
 
@@ -673,7 +673,7 @@ $$
 
 ---
 
-**Denominators Derived from Penta1**
+**Denominators derived from Penta1**
 
 Starting from Penta1 vaccination counts and survey coverage:
 
@@ -697,7 +697,7 @@ $$
 
 ---
 
-**Denominators Derived from Live Birth Counts**
+**Denominators derived from live birth counts**
 
 When live birth data is directly reported in HMIS:
 
@@ -745,7 +745,7 @@ $$
 
 #### UNWPP-based Denominator Calculations
 
-**Denominators Derived from UN WPP** *(National analysis only)*
+**Denominators derived from UN WPP** *(National analysis only)*
 
 Instead of using service volumes, these denominators are calculated directly from population projections and demographic rates:
 
@@ -791,11 +791,11 @@ This adjustment ensures denominators are comparable to service volumes that may 
 
 ---
 
-**Denominators Derived from Live Birth Estimates (Secondary Calculations)**
+**Denominators derived from live birth estimates (secondary calculations)**
 
 After all primary live birth denominators are calculated (from ANC1, Delivery, BCG, Penta1, Live Birth Counts, and WPP), the module generates additional target population estimates for specific interventions by applying age-specific mortality adjustments:
 
-**Children Aged 6-59 Months (Vitamin A Supplementation Target Population)**
+**Children aged 6-59 months (Vitamin A supplementation target population)**
 
 For each live birth denominator source, the estimated number of children aged 6-59 months is calculated:
 
@@ -810,7 +810,7 @@ Where:
 - Under-5 mortality rate adjusts for child survival to reach the 6-59 month age range
 - Result: **Estimated population of children aged 6-59 months** eligible for Vitamin A supplementation
 
-**Infants Under 12 Months (Fully Immunized Child Target Population)**
+**Infants under 12 months (fully immunized child target population)**
 
 For each live birth denominator source, the estimated number of infants under 12 months is calculated:
 
@@ -830,7 +830,7 @@ These target population estimates are calculated automatically for **all availab
 
 Part 1 executes the following workflow for each administrative level (national, admin2, admin3):
 
-**Step 1: Load and Validate Input Data**
+**Step 1: Load and validate input data**
 
 - Load HMIS adjusted data from Module 2 (national and subnational files)
 - Load survey data from GitHub repository (unified DHS/MICS dataset)
@@ -840,14 +840,14 @@ Part 1 executes the following workflow for each administrative level (national, 
 - Harmonize survey data (DHS prioritized over MICS)
 - Forward-fill survey values to create continuous time series
 
-**Step 2: Calculate HMIS-based Denominators**
+**Step 2: Calculate HMIS-based denominators**
 
 - For each health indicator with survey coverage data:
   - Calculate base denominator: `count ÷ survey_coverage`
   - Apply demographic cascades to derive related denominators
   - Generate denominators from all available source indicators (ANC1, Delivery, BCG, Penta1, Live Births)
 
-**Step 3: Calculate WPP-based Denominators**
+**Step 3: Calculate WPP-based denominators**
 
 - Extract population projections for target country
 - Calculate pregnancy estimates from crude birth rate
@@ -856,19 +856,19 @@ Part 1 executes the following workflow for each administrative level (national, 
 - Apply mortality adjustments for vaccine-eligible populations
 - Adjust for incomplete reporting periods (months reported < 12)
 
-**Step 4: Calculate Secondary Denominators**
+**Step 4: Calculate secondary denominators**
 
 - For each `*_livebirth` denominator:
   - Calculate Vitamin A denominator: `livebirth × (1 - U5MR) × 4.5`
   - Calculate Fully Immunized denominator: `livebirth × (1 - IMR)`
 
-**Step 5: Calculate Coverage Estimates**
+**Step 5: Calculate coverage estimates**
 
 - Divide HMIS service volume by each denominator option
 - Create coverage estimates for all indicator-denominator combinations
 - Preserve survey-based coverage as benchmark
 
-**Step 6: Select Best Denominator**
+**Step 6: Select best denominator**
 
 - For each indicator, compare all denominator-based coverage estimates to survey data
 - Calculate squared error: `Σ(coverage_d,t - survey_t)²`
@@ -876,7 +876,7 @@ Part 1 executes the following workflow for each administrative level (national, 
 - Apply preference rules (HMIS-based preferred over WPP)
 - Flag denominators as "reference" if from same service
 
-**Step 7: Format and Save Outputs**
+**Step 7: Format and save outputs**
 
 - Save denominator files with source and target metadata
 - Save combined results with all coverage estimates
@@ -885,11 +885,11 @@ Part 1 executes the following workflow for each administrative level (national, 
 - Create separate files for national, admin2, and admin3 levels
 - Generate empty files with correct structure for unavailable admin levels
 
-??? "Output Files Specification"
+??? "Output files specification"
 
     Part 1 generates seven CSV files:
 
-    **Denominator Files**
+    **Denominator files**
 
     **1. M4_denominators_national.csv**
 
@@ -910,7 +910,7 @@ Part 1 executes the following workflow for each administrative level (national, 
     - `target_population`: Target group (e.g., `target_livebirth`, `target_dpt`)
     - `value`: Calculated denominator size
 
-    **Combined Results Files**
+    **Combined results files**
 
     **4. M4_combined_results_national.csv**
 
@@ -949,32 +949,32 @@ Part 1 executes the following workflow for each administrative level (national, 
     - `denominator_admin2`: Best denominator for admin level 2 coverage
     - `denominator_admin3`: Best denominator for admin level 3 coverage
 
-??? "Data Safeguards and Validation"
+??? "Data safeguards and validation"
 
     Part 1 includes multiple validation checks:
 
     1. **ISO3 Validation**: Ensures survey and population data match HMIS country
 
-    2. **Geographic Matching**: Validates admin area names between HMIS and survey
+    2. **Geographic matching**: Validates admin area names between HMIS and survey
        - Reports match rate (e.g., "15/20 regions match")
        - Falls back to higher geographic level if mismatch detected
 
-    3. **Fallback Mechanisms**:
+    3. **Fallback mechanisms**:
        - Subnational → National if no local survey data
        - SBA → Delivery if SBA missing
        - PNC1_mother → PNC1 if missing
 
-    4. **Edge Case Handling**: Detects when admin_area_3 should be used as admin_area_2 in certain country contexts
+    4. **Edge case handling**: Detects when admin_area_3 should be used as admin_area_2 in certain country contexts
 
-    5. **Empty Data Handling**: Creates empty CSVs with correct structure when data unavailable
+    5. **Empty data handling**: Creates empty CSVs with correct structure when data unavailable
 
-    6. **Error Handling**: Wraps survey processing in `tryCatch` to handle mismatches gracefully
+    6. **Error handling**: Wraps survey processing in `tryCatch` to handle mismatches gracefully
 
-??? "Indicators Supported"
+??? "Indicators supported"
 
     Part 1 processes the following health indicators:
 
-    **Maternal Health**:
+    **Maternal health**:
 
     - `anc1`: Antenatal care 1st visit
     - `anc4`: Antenatal care 4+ visits
@@ -992,13 +992,13 @@ Part 1 executes the following workflow for each administrative level (national, 
     - `opv1`, `opv2`, `opv3`: Oral polio vaccine
     - `fully_immunized`: Full immunization status
 
-    **Child Health**:
+    **Child health**:
 
     - `nmr`: Neonatal mortality rate (survey only)
     - `imr`: Infant mortality rate (survey only)
     - `vitaminA`: Vitamin A supplementation
 
-??? "Usage Notes and Best Practices"
+??? "Usage notes and best practices"
 
     **When to Use Which Count Variable**
 
@@ -1016,7 +1016,7 @@ Part 1 executes the following workflow for each administrative level (national, 
     - Population projection quality (affects WPP denominators)
     - Survey coverage levels (extreme values reduce denominator options)
 
-    **Why Multiple Denominators?**
+    **Why multiple denominators?**
 
     Different denominators serve different purposes:
 
@@ -1025,7 +1025,7 @@ Part 1 executes the following workflow for each administrative level (national, 
     - **WPP denominators**: Offer population-based benchmarks
     - Comparing multiple options reveals data quality issues
 
-??? "Troubleshooting Common Issues"
+??? "Troubleshooting common issues"
 
     **Issue**: No matching admin areas between HMIS and survey
 
@@ -1047,17 +1047,17 @@ Part 1 executes the following workflow for each administrative level (national, 
 
 Part 2 serves three key purposes:
 
-1. **User-Driven Denominator Selection**: While Part 1 automatically selects the "best" denominator by minimizing error against survey data, Part 2 allows users to override this selection and choose specific denominators based on programmatic knowledge or policy priorities
+1. **User-driven denominator selection**: While Part 1 automatically selects the "best" denominator by minimizing error against survey data, Part 2 allows users to override this selection and choose specific denominators based on programmatic knowledge or policy priorities
 
-2. **Temporal Trend Analysis**: Computes year-over-year changes (deltas) in coverage to understand service delivery trends over time
+2. **Temporal trend analysis**: Computes year-over-year changes (deltas) in coverage to understand service delivery trends over time
 
-3. **Survey Projection**: Projects survey-based coverage estimates forward in time using trends observed in administrative (HMIS) data, filling gaps where survey data is unavailable
+3. **Survey projection**: Projects survey-based coverage estimates forward in time using trends observed in administrative (HMIS) data, filling gaps where survey data is unavailable
 
 #### User configuration
 
 Users configure Part 2 through two key parameter sets:
 
-??? "1. Denominator Selection Configuration"
+??? "1. Denominator selection configuration"
 
     At the top of the script, users specify which denominator to use for each indicator:
 
@@ -1092,7 +1092,7 @@ Users configure Part 2 through two key parameter sets:
     )
     ```
 
-    **Denominator Options by Indicator Type:**
+    **Denominator options by indicator type:**
 
     The available denominators vary by indicator type based on the appropriate target population:
 
@@ -1103,7 +1103,7 @@ Users configure Part 2 through two key parameter sets:
 
     Each denominator option combines a source (ANC1, Delivery, BCG, Penta1, or WPP) with an age-adjustment factor.
 
-??? "2. Administrative Level Configuration"
+??? "2. Administrative level configuration"
 
     ```r
     RUN_NATIONAL <- TRUE  # Always TRUE - national analysis is mandatory
@@ -1132,7 +1132,7 @@ Users configure Part 2 through two key parameter sets:
     3. Sorts data chronologically within each group
     4. Calculates delta as: $\Delta\text{coverage}_t = \text{coverage}_t - \text{coverage}_{t-1}$
 
-    **Mathematical Formulation**:
+    **Mathematical formulation**:
     $$
     \Delta C_{i,d,g,t} = C_{i,d,g,t} - C_{i,d,g,t-1}
     $$
@@ -1154,7 +1154,7 @@ Users configure Part 2 through two key parameter sets:
 
     Data frame with original coverage values plus a `delta` column showing year-over-year change.
 
-    **Example Output**:
+    **Example output**:
 
     | admin_area_1 | indicator_common_id | denominator | year | coverage | delta |
     |--------------|---------------------|-------------|------|----------|-------|
@@ -1174,21 +1174,21 @@ Users configure Part 2 through two key parameter sets:
 
     **Process**:
 
-    1. **Identify Baseline**: For each geography-indicator combination, find the most recent survey observation
+    1. **Identify baseline**: For each geography-indicator combination, find the most recent survey observation
        - Extract the last observed survey year
        - Record the baseline coverage value at that year
 
-    2. **Attach Baseline to Each Denominator Path**: Since Part 2 operates on specific denominator selections, attach the baseline to each denominator series
+    2. **Attach baseline to each denominator path**: Since Part 2 operates on specific denominator selections, attach the baseline to each denominator series
 
-    3. **Compute Cumulative Deltas**: For years after the baseline year, calculate cumulative sum of deltas:
+    3. **Compute cumulative deltas**: For years after the baseline year, calculate cumulative sum of deltas:
 
        $$\text{cumulative delta}_t = \sum_{\tau = \text{baseline year} + 1}^{t} \Delta C_\tau$$
 
-    4. **Calculate Projection**: Add cumulative delta to baseline value:
+    4. **Calculate projection**: Add cumulative delta to baseline value:
 
        $$\text{Projected coverage}_t = \text{Baseline coverage} + \text{cumulative delta}_t$$
 
-    **Mathematical Formulation**:
+    **Mathematical formulation**:
 
     For each indicator $i$, denominator $d$, and geography $g$:
 
@@ -1229,7 +1229,7 @@ Users configure Part 2 through two key parameter sets:
 
     Data frame with projected coverage for each year, indicator, denominator, and geography combination.
 
-    **Example Output**:
+    **Example output**:
 
     | admin_area_1 | indicator_common_id | denominator | year | baseline_year | projected |
     |--------------|---------------------|-------------|------|---------------|-----------|
@@ -1249,19 +1249,19 @@ Users configure Part 2 through two key parameter sets:
 
     **Process**:
 
-    1. **Prepare HMIS Coverage**: Extract coverage estimates from administrative data
+    1. **Prepare HMIS coverage**: Extract coverage estimates from administrative data
        - Rename coverage column to `coverage_cov` for clarity
 
-    2. **Merge Projections**: Join projected survey estimates
+    2. **Merge projections**: Join projected survey estimates
        - Match by geography, year, indicator, and denominator
        - Create `coverage_avgsurveyprojection` column
 
-    3. **Process Original Survey Data** (if available):
+    3. **Process original survey data** (if available):
        - Collapse multiple survey sources by taking mean value
        - Preserve source metadata (source, source_detail)
        - Expand survey values across all denominators for that indicator
 
-    4. **Calculate Final Projections**: Use an improved projection formula that anchors to the last survey value:
+    4. **Calculate final projections**: Use an improved projection formula that anchors to the last survey value:
 
        For years after the last survey year:
 
@@ -1274,12 +1274,12 @@ Users configure Part 2 through two key parameter sets:
        - Applies the HMIS trend (delta) to extend the estimate forward
        - Avoids compounding errors from year-to-year deltas
 
-    5. **Combine Results**: Merge all components using full outer join to preserve:
+    5. **Combine results**: Merge all components using full outer join to preserve:
        - Years with only HMIS data
        - Years with only survey data
        - Years with both data sources
 
-    **Mathematical Formulation**:
+    **Mathematical formulation**:
 
     Let:
 
@@ -1313,7 +1313,7 @@ Users configure Part 2 through two key parameter sets:
 
 #### Helper functions
 
-??? "Helper Function: `filter_by_denominator_selection()`"
+??? "Helper function: `filter_by_denominator_selection()`"
 
     **Purpose**: Filters the combined results from Part 1 based on user's denominator selection.
 
@@ -1335,7 +1335,7 @@ Users configure Part 2 through two key parameter sets:
 
     Filtered data frame containing only the user-selected denominators.
 
-??? "Helper Function: `extract_survey_from_combined()`"
+??? "Helper function: `extract_survey_from_combined()`"
 
     **Purpose**: Extracts raw survey values from Part 1 combined results.
 
@@ -1357,38 +1357,38 @@ Users configure Part 2 through two key parameter sets:
 
 Part 2 executes the following workflow for each administrative level (national, admin2, admin3):
 
-**Step 1: Load Data**
+**Step 1: Load data**
 
 - Load combined results from Part 1 for all admin levels
 - Check which admin levels have data
 - Extract survey data for use as projection baseline
 - Display messages about data availability
 
-**Step 2: For Each Admin Level**
+**Step 2: For each admin level**
 
-**Sub-step 1: Filter by Denominator Selection**
+**Sub-step 1: Filter by denominator selection**
 
 - Apply user's denominator choices using `filter_by_denominator_selection()`
 - Message: Number of records selected
 
-**Sub-step 2: Compute Deltas**
+**Sub-step 2: Compute deltas**
 
 - Calculate year-over-year coverage changes using `coverage_deltas()`
 - Creates complete time series with gaps filled
 
-**Sub-step 3: Project Survey Values**
+**Sub-step 3: Project survey values**
 
 - Use `project_survey_from_deltas()` to extend survey estimates
 - Baseline is anchored to most recent survey
 - Projections use cumulative deltas from HMIS trends
 
-**Sub-step 4: Build Final Results**
+**Sub-step 4: Build final results**
 
 - Combine HMIS coverage, projections, and original surveys
 - Calculate final projected estimates using additive formula
 - Preserve all metadata
 
-**Step 3: Standardize and Save Outputs**
+**Step 3: Standardize and save outputs**
 
 - Define required columns for each admin level
 - Ensure all required columns exist (add as NA if missing)
@@ -1441,7 +1441,7 @@ Same as national, plus:
 
 #### Methodological considerations
 
-??? "1. Denominator Selection Strategy"
+??? "1. Denominator selection strategy"
 
     **When to use "best"**:
 
@@ -1456,7 +1456,7 @@ Same as national, plus:
     - Conducting sensitivity analyses
     - Known issues with certain data sources
 
-??? "2. Projection Methodology"
+??? "2. Projection methodology"
 
     The projection approach in Part 2 uses an **additive delta method** rather than multiplicative or direct replacement:
 
@@ -1474,9 +1474,9 @@ Same as national, plus:
     - Projections become less reliable further from baseline survey
     - Does not account for systematic biases in HMIS data
 
-    **Best Practice**: Projections should be validated against new survey data when available, and the baseline should be updated with the most recent survey.
+    **Best practice**: Projections should be validated against new survey data when available, and the baseline should be updated with the most recent survey.
 
-??? "3. Handling Missing Data"
+??? "3. Handling missing data"
 
     Part 2 implements several strategies for missing data:
 
@@ -1485,7 +1485,7 @@ Same as national, plus:
     - **Admin level gaps**: Script automatically detects and skips admin levels with no data
     - **Missing denominators**: If a selected denominator does not exist for an indicator, that indicator-denominator combination is omitted
 
-??? "4. Multi-Level Analysis Consistency"
+??? "4. Multi-level analysis consistency"
 
     Part 2 processes each administrative level independently:
 
@@ -1495,7 +1495,7 @@ Same as national, plus:
 
     **Important**: Estimates across levels may not be directly comparable if different denominators are selected or if data quality varies by level.
 
-??? "Validation and Quality Checks"
+??? "Validation and quality checks"
 
     Users should validate Part 2 outputs by:
 
@@ -1520,7 +1520,7 @@ Same as national, plus:
        - Investigate large discrepancies
 
 
-??? "Troubleshooting Common Issues"
+??? "Troubleshooting common issues"
 
     **Issue**: "No data in admin2 combined results"
 
@@ -1600,12 +1600,12 @@ The Coverage Estimates module (Module 4 in the FASTR analytics platform) estimat
 
 ### Two-part process
 
-**Part 1: Denominator Calculation**
+**Part 1: Denominator calculation**
 - Calculate target populations using multiple methods (HMIS-based and population-based)
 - Compare against survey benchmarks
 - Automatically select best denominator for each indicator
 
-**Part 2: Coverage Estimation**
+**Part 2: Coverage estimation**
 - Override automatic selections based on programmatic knowledge
 - Project survey estimates forward using HMIS trends
 - Generate final coverage estimates

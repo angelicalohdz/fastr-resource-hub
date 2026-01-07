@@ -8,11 +8,11 @@ This module guides the process of identifying the right questions and indicators
 
 This section will cover the complete process of:
 
-1. **Introduction to FASTR: Gaps and Challenges** - Identifying gaps and challenges that FASTR is well suited to support, how FASTR serves as an entry point to reduce fragmentation, and starting the conversation with government stakeholders
+1. **Introduction to FASTR: gaps and challenges** - Identifying gaps and challenges that FASTR is well suited to support, how FASTR serves as an entry point to reduce fragmentation, and starting the conversation with government stakeholders
 
-2. **Development of a Data Use Case** - Co-creation workshop approach with Ministry of Health (MoH) and stakeholders, data use case development guidance, and example use cases from country implementations
+2. **Development of a data use case** - Co-creation workshop approach with Ministry of Health (MoH) and stakeholders, data use case development guidance, and example use cases from country implementations
 
-3. **Defining Priority Questions and Selecting Indicators** - How to define priority questions for FASTR analysis, criteria for selecting indicators, what makes a good FASTR indicator, and aligning indicators with national strategies
+3. **Defining priority questions and selecting indicators** - How to define priority questions for FASTR analysis, criteria for selecting indicators, what makes a good FASTR indicator, and aligning indicators with national strategies
 
 ## Defining priority questions
 
@@ -107,7 +107,7 @@ Statistical methods such as imputation can be used to adjust for incomplete data
 
 The FASTR approach to routine data analysis focuses on a core set of RMNCAH-N indicators that characterize the reproductive, maternal and child healthcare continuum across LMICs. These indicators capture key service delivery events with higher completeness rates and higher volume, and serve as proxies for other services and interventions delivered at the same service contact. Outpatient consultations (OPDs) are also used as a proxy for the general use of health services. Additional country and program-specific indicators can be added to the analysis to be responsive to country priorities
 
-4. **Preparing for Data Extraction** - Pre-extraction checklist, understanding your DHIS2 configuration, mapping indicators to data elements, and planning your extraction timeline
+4. **Preparing for data extraction** - Pre-extraction checklist, understanding your DHIS2 configuration, mapping indicators to data elements, and planning your extraction timeline
 
 ---
 
@@ -215,9 +215,9 @@ A standard tool from evidence-based medicine and public health research for form
 
 One key added-value of the FASTR approach is making adjustments for data quality. Low-volume indicators are challenging to adjust:
 
-- **Greater Sensitivity to Outliers**: A single unusually high or low data point can disproportionately impact overall analysis
-- **Unstable Estimates**: Small variations can lead to large percentage changes, making it harder to distinguish genuine trends from random variability
-- **Difficulty Identifying True Outliers**: Challenging to determine whether a data point is genuinely an outlier or part of natural variability
+- **Greater sensitivity to outliers**: A single unusually high or low data point can disproportionately impact overall analysis
+- **Unstable estimates**: Small variations can lead to large percentage changes, making it harder to distinguish genuine trends from random variability
+- **Difficulty identifying true outliers**: Challenging to determine whether a data point is genuinely an outlier or part of natural variability
 
 Count indicators allow for ongoing data quality checks with improved precision in identifying outliers.
 <!-- /SLIDE -->
@@ -227,9 +227,9 @@ Count indicators allow for ongoing data quality checks with improved precision i
 
 High completeness indicators improve data quality, reduce bias, and enable more accurate insights:
 
-- **Data Reliability**: Data is representative of the full picture across facilities, regions, or populations
-- **Consistency in Analysis**: Data points from most or all reporting units allow for consistent analysis across time periods and locations
-- **Reduced Risk of Misinterpretation**: Incomplete data can lead to incorrect conclusions (e.g., low completeness might falsely suggest a drop in service utilization)
+- **Data reliability**: Data is representative of the full picture across facilities, regions, or populations
+- **Consistency in analysis**: Data points from most or all reporting units allow for consistent analysis across time periods and locations
+- **Reduced risk of misinterpretation**: Incomplete data can lead to incorrect conclusions (e.g., low completeness might falsely suggest a drop in service utilization)
 
 Statistical methods such as imputation can adjust for incomplete data, but this requires assumptions about the missing data.
 <!-- /SLIDE -->

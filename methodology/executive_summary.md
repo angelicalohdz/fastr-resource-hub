@@ -48,13 +48,13 @@ Translates analytical outputs into actionable insights for decision-makers. This
 
 ## Key features
 
-**End-to-End Process**: The methodology covers the complete workflow from defining questions through data extraction, platform-based analysis, and results communication—not just the analytical modules.
+**End-to-end process**: The methodology covers the complete workflow from defining questions through data extraction, platform-based analysis, and results communication—not just the analytical modules.
 
-**Multiple Adjustment Options**: The platform generates four versions of adjusted data (no adjustments, outliers only, missing data only, or both), allowing users to test how different data quality assumptions affect results.
+**Multiple adjustment options**: The platform generates four versions of adjusted data (no adjustments, outliers only, missing data only, or both), allowing users to test how different data quality assumptions affect results.
 
-**Geographic Flexibility**: Analysis works at national and sub-national levels, with outputs available at admin area 2 and admin area 3 levels where data quality permits.
+**Geographic flexibility**: Analysis works at national and sub-national levels, with outputs available at admin area 2 and admin area 3 levels where data quality permits.
 
-**Customizable Settings**: All thresholds, time windows, and adjustment methods can be modified to fit country-specific data and context.
+**Customizable settings**: All thresholds, time windows, and adjustment methods can be modified to fit country-specific data and context.
 
 ---
 

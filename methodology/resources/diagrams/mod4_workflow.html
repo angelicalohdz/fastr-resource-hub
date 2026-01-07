@@ -299,7 +299,7 @@
                     <div>
                         <div class="stage-title">
                             <span class="step-number">1</span>
-                            Gather Data Sources
+                            Gather data sources
                         </div>
                         <div class="flow-row">
                             <div class="input-box">HMIS Data<br><small>(Module 2)</small></div>
@@ -314,10 +314,10 @@
                     <div>
                         <div class="stage-title">
                             <span class="step-number">2</span>
-                            Process and Harmonize Data
+                            Process and harmonize data
                         </div>
                         <div class="process-box">
-                            <h4>Data Preparation Steps</h4>
+                            <h4>Data preparation steps</h4>
                             <ul>
                                 <li>Aggregate monthly data to annual level</li>
                                 <li>Prioritize DHS data over MICS where both available</li>
@@ -334,10 +334,10 @@
                     <div>
                         <div class="stage-title">
                             <span class="step-number">3</span>
-                            Calculate Multiple Denominator Options
+                            Calculate multiple denominator options
                         </div>
                         <div class="comparison-box">
-                            <h4>Denominator Options by Source</h4>
+                            <h4>Denominator options by source</h4>
                             <div class="comparison-row">
                                 <div class="comparison-item">
                                     <strong>HMIS-Based:</strong><br>
@@ -364,10 +364,10 @@
                     <div>
                         <div class="stage-title">
                             <span class="step-number">4</span>
-                            Calculate Coverage for Each Denominator
+                            Calculate coverage for each denominator
                         </div>
                         <div class="process-box">
-                            <h4>Coverage Calculation Formula</h4>
+                            <h4>Coverage calculation formula</h4>
                             <ul>
                                 <li><strong>Coverage = (Service Volume / Denominator) × 100</strong></li>
                                 <li>Apply demographic adjustments to each denominator option</li>
@@ -382,10 +382,10 @@
                     <div>
                         <div class="stage-title">
                             <span class="step-number">5</span>
-                            Compare Each Coverage to Survey Benchmark
+                            Compare each coverage to survey benchmark
                         </div>
                         <div class="comparison-box">
-                            <h4>Error Calculation</h4>
+                            <h4>Error calculation</h4>
                             <div class="comparison-row">
                                 <div class="comparison-item">
                                     <strong>Error Metric:</strong><br>
@@ -405,10 +405,10 @@
                     <div>
                         <div class="stage-title">
                             <span class="step-number">6</span>
-                            Select Best Denominator
+                            Select best denominator
                         </div>
                         <div class="decision-box">
-                            <h4>Selection Criteria</h4>
+                            <h4>Selection criteria</h4>
                             <ul style="list-style: none; font-size: 13px;">
                                 <li style="margin-bottom: 8px;">✓ <strong>Primary:</strong> Minimum error compared to survey</li>
                                 <li style="margin-bottom: 8px;">✓ <strong>Secondary:</strong> Prefer HMIS-based over population-based</li>
@@ -423,10 +423,10 @@
                     <div>
                         <div class="stage-title">
                             <span class="step-number">7</span>
-                            Save Part 1 Outputs
+                            Save Part 1 outputs
                         </div>
                         <div class="output-box">
-                            <h4>Output Files</h4>
+                            <h4>Output files</h4>
                             <ul>
                                 <li><strong>M4_denominators:</strong> All calculated denominator options and coverage estimates</li>
                                 <li><strong>M4_combined_results:</strong> Coverage values + best denominator selection by indicator</li>
@@ -449,10 +449,10 @@
                     <div>
                         <div class="stage-title">
                             <span class="step-number">1</span>
-                            User Configures Denominator Selection
+                            User configures denominator selection
                         </div>
                         <div class="process-box">
-                            <h4>Configuration Options</h4>
+                            <h4>Configuration options</h4>
                             <ul>
                                 <li>Use "best" denominators (automatically selected from Part 1)</li>
                                 <li>Override with custom denominator specifications per indicator</li>
@@ -467,10 +467,10 @@
                     <div>
                         <div class="stage-title">
                             <span class="step-number">2</span>
-                            Filter Part 1 Results to Selected Denominators
+                            Filter Part 1 results to selected denominators
                         </div>
                         <div class="process-box">
-                            <h4>Data Subsetting</h4>
+                            <h4>Data subsetting</h4>
                             <ul>
                                 <li>Extract selected denominator option for each indicator</li>
                                 <li>Retain associated coverage calculations</li>
@@ -485,10 +485,10 @@
                     <div>
                         <div class="stage-title">
                             <span class="step-number">3</span>
-                            Calculate Year-Over-Year Coverage Deltas
+                            Calculate year-over-year coverage deltas
                         </div>
                         <div class="comparison-box">
-                            <h4>Delta Calculation</h4>
+                            <h4>Delta calculation</h4>
                             <div class="comparison-row">
                                 <div class="comparison-item">
                                     <strong>Formula:</strong><br>
@@ -508,10 +508,10 @@
                     <div>
                         <div class="stage-title">
                             <span class="step-number">4</span>
-                            Identify Most Recent Survey as Baseline
+                            Identify most recent survey as baseline
                         </div>
                         <div class="process-box">
-                            <h4>Baseline Selection</h4>
+                            <h4>Baseline selection</h4>
                             <ul>
                                 <li>Locate most recent DHS or MICS survey</li>
                                 <li>Extract survey coverage estimates for all indicators</li>
@@ -526,10 +526,10 @@
                     <div>
                         <div class="stage-title">
                             <span class="step-number">5</span>
-                            Project Survey Estimates Forward
+                            Project survey estimates forward
                         </div>
                         <div class="decision-box">
-                            <h4>Projection Formula</h4>
+                            <h4>Projection formula</h4>
                             <ul style="list-style: none; font-size: 13px;">
                                 <li style="margin-bottom: 10px;">
                                     <strong>Projected Coverage = Last Survey + (HMIS_now - HMIS_then)</strong>
@@ -550,10 +550,10 @@
                     <div>
                         <div class="stage-title">
                             <span class="step-number">6</span>
-                            Combine Final Results
+                            Combine final results
                         </div>
                         <div class="comparison-box">
-                            <h4>Result Integration</h4>
+                            <h4>Result integration</h4>
                             <div class="comparison-row">
                                 <div class="comparison-item">
                                     • HMIS-based coverage estimates
@@ -579,10 +579,10 @@
                     <div>
                         <div class="stage-title">
                             <span class="step-number">7</span>
-                            Save Final Outputs
+                            Save final outputs
                         </div>
                         <div class="output-box">
-                            <h4>Final Deliverable</h4>
+                            <h4>Final deliverable</h4>
                             <ul>
                                 <li><strong>M5_coverage_estimation_national.csv:</strong> National-level coverage estimates including HMIS-based values, survey data, and forward projections</li>
                                 <li><strong>M5_coverage_estimation_admin2.csv:</strong> Admin area level 2 coverage estimates</li>

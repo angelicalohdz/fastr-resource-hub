@@ -47,9 +47,38 @@ When phrasing headings as questions, use sentence case with a question mark:
 Use bold (`**text**`) for:
 
 - **Key terms** on first introduction
-- **Labels** before descriptions: `**Inputs**:`, `**Purpose**:`, `**Process**:`
+- **Labels** before descriptions
 - **Emphasis** on critical concepts
-- **Step labels**: `**Step 1:**`, `**Step 2:**`
+- **Step/Part labels**
+
+#### Sentence case for bold labels
+
+Bold labels must use sentence case, just like headings. Only capitalize the first word and proper nouns.
+
+| Correct | Incorrect |
+|---------|-----------|
+| `**Geographic level selection**:` | `**Geographic Level Selection**:` |
+| `**Data completeness approach**:` | `**Data Completeness Approach**:` |
+| `**Input transformation**:` | `**Input Transformation**:` |
+| `**Step 1: Load and prepare data**` | `**Step 1: Load and Prepare Data**` |
+| `**Part 1: Denominator calculation**` | `**Part 1: Denominator Calculation**` |
+| `**Interpretation guide**:` | `**Interpretation Guide**:` |
+| `**Key features**:` | `**Key Features**:` |
+
+#### Step and Part labels
+
+Use consistent formatting for sequential steps or parts:
+
+```markdown
+**Step 1: Load and prepare data**
+**Step 2: Detect outliers**
+**Step 3: Assess completeness**
+
+**Part 1: Denominator calculation**
+**Part 2: Coverage projection**
+```
+
+#### Example usage
 
 ```markdown
 **Inputs**
@@ -57,6 +86,11 @@ Use bold (`**text**`) for:
 - Geographic identifiers
 
 **Purpose**: Loads and prepares data for analysis.
+
+**Geographic level selection**: The module can analyze at different scales.
+
+**Step 1: Load and prepare data**
+The module reads facility-level data...
 ```
 
 ### Inline code
@@ -305,11 +339,13 @@ End each methodology file with:
 
 | Element | Convention |
 |---------|------------|
-| Headings | Sentence case |
-| Bold | Key terms, labels |
+| Headings | Sentence case (capitalize first word + proper nouns only) |
+| Bold labels | Sentence case (same rule as headings) |
+| Step/Part labels | Sentence case: `**Step 1: Load data**` not `**Step 1: Load Data**` |
 | Inline code | Filenames, variables, functions |
 | Lists | No periods for single items |
 | Tables | Sentence case headers |
 | Code blocks | Include language tag |
-| Abbreviations | Define on first use |
+| Abbreviations | Define on first use in each chapter |
 | Slide markers | `<!-- SLIDE:m#_# -->` |
+| Terminology | Use "Step" or "Part", never "Stage" |

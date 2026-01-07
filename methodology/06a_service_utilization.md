@@ -30,9 +30,9 @@ This module provides objective, data-driven identification of service delivery p
 
 ### High-level workflow
 
-The module operates in two sequential stages, each with a distinct purpose:
+The module operates in two sequential parts, each with a distinct purpose:
 
-**Stage 1: Control Chart Analysis** - Identifies unusual patterns in service volumes
+**Part 1: Control chart analysis** - Identifies unusual patterns in service volumes
 
 1. **Prepare the data**: Load health service data, remove previously identified outliers, aggregate to the appropriate geographic level, and fill in missing months using interpolation.
 
@@ -47,7 +47,7 @@ The module operates in two sequential stages, each with a distinct purpose:
 
 4. **Flag disrupted periods**: Mark months where any disruption pattern is detected, ensuring recent months are always flagged for review.
 
-**Stage 2: Disruption Analysis** - Quantifies the impact of identified disruptions
+**Part 2: Disruption analysis** - Quantifies the impact of identified disruptions
 
 5. **Apply regression models**: Use panel regression at multiple geographic levels (national, provincial, district) to estimate how much service volumes changed during flagged disruption periods, controlling for trends and seasonality.
 
@@ -61,9 +61,9 @@ The module operates in two sequential stages, each with a distinct purpose:
 
 ### Key decision points
 
-**Geographic Level Selection**: The module can analyze disruptions at different geographic scales. You can choose to run analysis at national and provincial levels only (faster, suitable for routine monitoring) or include district and ward levels (slower, provides detailed local information for targeted interventions).
+**Geographic level selection**: The module can analyze disruptions at different geographic scales. You can choose to run analysis at national and provincial levels only (faster, suitable for routine monitoring) or include district and ward levels (slower, provides detailed local information for targeted interventions).
 
-**Control Chart Level Selection**: This determines at which geographic level the control charts are calculated. The module uses two configuration flags:
+**Control chart level selection**: This determines at which geographic level the control charts are calculated. The module uses two configuration flags:
 
 - **Default (both flags FALSE)**: Control charts calculated at **provincial level (admin_area_2)** - data aggregated to provinces, control limits and disruption detection performed for each province-indicator combination. This is the fastest option suitable for routine monitoring.
 
@@ -73,21 +73,21 @@ The module operates in two sequential stages, each with a distinct purpose:
 
 The control chart level determines where the statistical modeling occurs (trend estimation, control limits, disruption flagging). Disruption analysis outputs are then aggregated and reported at all available geographic levels (national, admin2, admin3, admin4), regardless of which level the control charts were calculated at.
 
-**Sensitivity Settings**: The module uses configurable thresholds to determine what constitutes a "disruption." More sensitive settings (lower thresholds) will flag smaller deviations, useful for early warning systems. More conservative settings (higher thresholds) will only flag major disruptions, useful for focusing on critical issues.
+**Sensitivity settings**: The module uses configurable thresholds to determine what constitutes a "disruption." More sensitive settings (lower thresholds) will flag smaller deviations, useful for early warning systems. More conservative settings (higher thresholds) will only flag major disruptions, useful for focusing on critical issues.
 
-**Data Completeness Approach**: The module accepts different versions of service counts from Module 2, allowing you to choose whether to adjust for reporting completeness or use raw counts.
+**Data completeness approach**: The module accepts different versions of service counts from Module 2, allowing you to choose whether to adjust for reporting completeness or use raw counts.
 
 ### What happens to the data
 
-**Input Transformation**: The module starts with facility-level service counts (e.g., number of deliveries at each clinic each month) and aggregates them to geographic areas (provinces, districts). Outliers identified in Module 1 are removed to prevent anomalous data points from skewing the analysis.
+**Input transformation**: The module starts with facility-level service counts (e.g., number of deliveries at each clinic each month) and aggregates them to geographic areas (provinces, districts). Outliers identified in Module 1 are removed to prevent anomalous data points from skewing the analysis.
 
-**Pattern Detection**: Using robust statistical methods, the module establishes expected patterns for each service and geographic area based on historical data. It then identifies months where actual volumes deviate significantly from these expected patterns, accounting for predictable variations such as seasonal changes.
+**Pattern detection**: Using robust statistical methods, the module establishes expected patterns for each service and geographic area based on historical data. It then identifies months where actual volumes deviate significantly from these expected patterns, accounting for predictable variations such as seasonal changes.
 
-**Impact Quantification**: For months flagged as disrupted, the module uses regression models to estimate what service volumes would have been without the disruption. By comparing predicted to actual volumes, it calculates how many services were missed (shortfalls) or how much service delivery increased (surpluses).
+**Impact quantification**: For months flagged as disrupted, the module uses regression models to estimate what service volumes would have been without the disruption. By comparing predicted to actual volumes, it calculates how many services were missed (shortfalls) or how much service delivery increased (surpluses).
 
-**Output Generation**: The final outputs provide disruption impacts at multiple geographic scales, enabling users to see both national-level summaries and local-level details. All calculations preserve the original data while adding predicted values and disruption metrics.
+**Output generation**: The final outputs provide disruption impacts at multiple geographic scales, enabling users to see both national-level summaries and local-level details. All calculations preserve the original data while adding predicted values and disruption metrics.
 
-**Interpretation Guide:**
+**Interpretation guide:**
 - **Disrupted periods**: Indicated by shaded regions or highlighting where actual volumes deviate significantly from expected
 - **Positive deviations**: Service volumes exceed expected (surpluses)
 - **Negative deviations**: Service volumes fall below expected (shortfalls)
@@ -127,7 +127,7 @@ Impact visualization showing how data quality adjustments affect reported servic
 
 ### Configuration parameters
 
-??? "Core Analysis Parameters"
+??? "Core analysis parameters"
 
     | Parameter | Default | Type | Description | Tuning Guidance |
     |-----------|---------|------|-------------|-----------------|
@@ -135,7 +135,7 @@ Impact visualization showing how data quality adjustments affect reported servic
     | `SELECTEDCOUNT` | "count_final_both" | String | Data column used for analysis | Options: `count_final_none`, `count_final_completeness`, `count_final_both` |
     | `VISUALIZATIONCOUNT` | "count_final_both" | String | Data column used for visualization | Should match or complement `SELECTEDCOUNT` |
 
-??? "Control Chart Parameters"
+??? "Control chart parameters"
 
     | Parameter | Default | Type | Description | Tuning Guidance |
     |-----------|---------|------|-------------|-----------------|
@@ -146,7 +146,7 @@ Impact visualization showing how data quality adjustments affect reported servic
 
     **Note**: `RISE_THRESHOLD` is automatically calculated as `1 / DIP_THRESHOLD` (default: ~1.11) to mirror dip detection symmetrically.
 
-??? "Geographic Analysis Parameters"
+??? "Geographic analysis parameters"
 
     | Parameter | Default | Type | Description | Tuning Guidance |
     |-----------|---------|------|-------------|-----------------|
@@ -154,32 +154,32 @@ Impact visualization showing how data quality adjustments affect reported servic
     | `RUN_DISTRICT_MODEL` | FALSE | Logical | Whether to run admin_area_3 regressions | Set TRUE for district-level analysis (increases runtime) |
     | `RUN_ADMIN_AREA_4_ANALYSIS` | FALSE | Logical | Whether to run admin_area_4 analysis | Set TRUE for finest-level analysis (very slow for large datasets) |
 
-??? "Data Source Parameters"
+??? "Data source parameters"
 
     | Parameter | Default | Type | Description |
     |-----------|---------|------|-------------|
     | `PROJECT_DATA_HMIS` | "hmis_ISO3.csv" | String | Filename for raw HMIS data |
 
-??? "Parameter Selection Guide"
+??? "Parameter selection guide"
 
-    **For High-Sensitivity Analysis** (detecting smaller disruptions):
+    **For high-sensitivity analysis** (detecting smaller disruptions):
     - `MADS_THRESHOLD = 1.0`
     - `DIP_THRESHOLD = 0.95` (5% drop)
     - `SMOOTH_K = 5` (less smoothing)
 
-    **For Conservative Analysis** (only major disruptions):
+    **For conservative analysis** (only major disruptions):
     - `MADS_THRESHOLD = 2.0`
     - `DIP_THRESHOLD = 0.80` (20% drop)
     - `SMOOTH_K = 9` or `11` (more smoothing)
 
-    **For Faster Runtime**:
+    **For faster runtime**:
     - `RUN_DISTRICT_MODEL = FALSE`
     - `RUN_ADMIN_AREA_4_ANALYSIS = FALSE`
     - `CONTROL_CHART_LEVEL = "admin_area_2"`
 
 ### Input/output specifications
 
-??? "Input Requirements"
+??? "Input requirements"
 
     #### Primary Inputs
 
@@ -330,7 +330,7 @@ Impact visualization showing how data quality adjustments affect reported servic
     - `tagged`: Binary flag (1 = disruption detected, 0 = normal variation)
     - Additional flags: `tag_sharp`, `tag_sustained`, `tag_sustained_dip`, `tag_sustained_rise`, `tag_missing`
 
-    **Key Features**:
+    **Key features**:
 
     - Handles missing data gracefully with interpolation
     - Uses robust regression to minimize influence of outliers
@@ -377,7 +377,7 @@ Impact visualization showing how data quality adjustments affect reported servic
 
     **`mem_usage(msg)`**: Tracks and logs memory consumption throughout execution
 
-    **Data Processing**:
+    **Data processing**:
 
     - Batch processing with disk-based temporary files for memory efficiency
     - Efficient data.table operations for large datasets
@@ -385,7 +385,7 @@ Impact visualization showing how data quality adjustments affect reported servic
 
 ### Statistical methods & algorithms
 
-??? "Control Chart Analysis"
+??? "Control chart analysis"
 
     Service volumes are aggregated at the specified geographic level (configurable via `CONTROL_CHART_LEVEL`). The pipeline removes outliers (`outlier_flag == 1`), fills in missing months, and filters low-volume months (<50% of global mean volume).
 
@@ -395,43 +395,43 @@ Impact visualization showing how data quality adjustments affect reported servic
 
     Each rule is controlled by user-defined parameters, allowing customization of the sensitivity and behavior of the detection logic:
 
-    **Sharp Disruptions**: Flags a single month when the standardized residual (residual divided by MAD) exceeds a threshold:
+    **Sharp disruptions**: Flags a single month when the standardized residual (residual divided by MAD) exceeds a threshold:
 
     $$ \left| \frac{\text{residual}}{\text{MAD}} \right| \geq \text{MADS_THRESHOLD} $$
 
     - **Parameter:** `MADS_THRESHOLD` (default: `1.5`)
     - Lower values make the detection more sensitive to sudden spikes or dips.
 
-    **Sustained Drops**: Flags a sustained drop if:
+    **Sustained drops**: Flags a sustained drop if:
 
     - Three consecutive months show mild deviations (standardized residual ≥ 1 but < `MADS_THRESHOLD`), and
     - The current month has a standardized residual ≥ 1.5 (hardcoded threshold).
 
     This captures slower, compounding declines.
 
-    **Sustained Dips**: Flags periods where the actual volume falls consistently below a defined proportion of expected volume (smoothed prediction):
+    **Sustained dips**: Flags periods where the actual volume falls consistently below a defined proportion of expected volume (smoothed prediction):
 
     $$ \text{count_original} < \text{DIP_THRESHOLD} \times \text{count_smooth} $$
 
     - **Parameter:** `DIP_THRESHOLD` (default: `0.90`)
     - Users can adjust this to detect deeper or shallower dips (e.g., `0.80` for a 20% drop).
 
-    **Sustained Rises**: Symmetric to dips, flags periods of consistent overperformance:
+    **Sustained rises**: Symmetric to dips, flags periods of consistent overperformance:
 
     $$ \text{count_original} > \text{RISE_THRESHOLD} \times \text{count_smooth} $$
 
     - **Parameter:** `RISE_THRESHOLD` (default: `1 / DIP_THRESHOLD`, e.g., `1.11`)
     - Users can adjust this to detect upward surges in volume.
 
-    **Missing Data**: Flags when 2 or more of the past 3 months have missing (`NA`) or zero service volume.
+    **Missing data**: Flags when 2 or more of the past 3 months have missing (`NA`) or zero service volume.
 
     - **Fixed rule**.
 
-    **Recent Tail Override**: Automatically flags all months in the last 6 months of data to ensure recent trends are reviewed, even if model-based tagging is not conclusive.
+    **Recent tail override**: Automatically flags all months in the last 6 months of data to ensure recent trends are reviewed, even if model-based tagging is not conclusive.
 
     - **Fixed rule**.
 
-    **Final Flag**: A month is assigned `tagged = 1` if **any** of the following conditions are met:
+    **Final flag**: A month is assigned `tagged = 1` if **any** of the following conditions are met:
 
     - `tag_sharp == 1`
     - `tag_sustained == 1`
@@ -490,7 +490,7 @@ Impact visualization showing how data quality adjustments affect reported servic
 
     The country-wide regression estimates how service utilization changes at the national level when a disruption occurs. Instead of analyzing individual provinces or districts separately, this model considers the entire country's data in a single regression. Errors are clustered at the lowest available geographic level (`lowest_geo_level`), typically districts.
 
-    **Model Specification:**
+    **Model specification:**
 
     $$Y_{it} = \beta_0 + \beta_1 \cdot \text{date} + \sum_{m=1}^{12} \gamma_m \cdot \text{month} + \beta_2 \cdot \text{tagged} + \epsilon_{it}$$
 
@@ -553,7 +553,7 @@ Impact visualization showing how data quality adjustments affect reported servic
 
     ### Statistical Methods Used
 
-    **Robust Regression (`MASS::rlm`)**:
+    **Robust regression (`MASS::rlm`)**:
 
     - Uses iteratively reweighted least squares (IRLS)
     - Minimizes influence of outliers and extreme values
@@ -567,14 +567,14 @@ Impact visualization showing how data quality adjustments affect reported servic
     - More resistant to outliers than standard deviation
     - Used to standardize residuals for anomaly detection
 
-    **Panel Regression (`fixest::feols`)**:
+    **Panel regression (`fixest::feols`)**:
 
     - Fixed-effects estimation with clustered standard errors
     - Accounts for within-group correlation in errors
     - More efficient than traditional panel regression packages
     - Handles unbalanced panels gracefully
 
-    **Geographic Clustering**:
+    **Geographic clustering**:
 
     - Regressions use clustered standard errors at the lowest available geographic level
     - This accounts for within-area correlation in service delivery patterns
@@ -583,7 +583,7 @@ Impact visualization showing how data quality adjustments affect reported servic
 
 ### Detailed analysis steps
 
-??? "Part 1: Control Chart Analysis"
+??? "Part 1: Control chart analysis"
 
     #### Step 1: Prepare the Data
 
@@ -619,16 +619,16 @@ Impact visualization showing how data quality adjustments affect reported servic
 
     Apply rule-based tagging to identify potential disruptions. Each rule is governed by user-defined parameters that can be tuned for sensitivity:
 
-    - **Sharp Disruptions**: Tag if `|robust_control| ≥ MADS_THRESHOLD`
-    - **Sustained Drops**: Tag if 3 consecutive months have mild deviations (residual ≥ 1 but < MADS_THRESHOLD) and current month has residual ≥ 1.5
-    - **Sustained Dips**: Tag entire sequence if `count_original < DIP_THRESHOLD × count_smooth` for 3+ months
-    - **Sustained Rises**: Tag entire sequence if `count_original > RISE_THRESHOLD × count_smooth` for 3+ months
-    - **Missing Data**: Tag if 2+ of past 3 months are missing or zero
-    - **Recent Tail Override**: Automatically tag all months in last 6 months of data
+    - **Sharp disruptions**: Tag if `|robust_control| ≥ MADS_THRESHOLD`
+    - **Sustained drops**: Tag if 3 consecutive months have mild deviations (residual ≥ 1 but < MADS_THRESHOLD) and current month has residual ≥ 1.5
+    - **Sustained dips**: Tag entire sequence if `count_original < DIP_THRESHOLD × count_smooth` for 3+ months
+    - **Sustained rises**: Tag entire sequence if `count_original > RISE_THRESHOLD × count_smooth` for 3+ months
+    - **Missing data**: Tag if 2+ of past 3 months are missing or zero
+    - **Recent tail override**: Automatically tag all months in last 6 months of data
 
     A month is assigned `tagged = 1` if any of the above conditions are met. Tagged records are saved in `M3_chartout.csv` and passed to the disruption analysis.
 
-??? "Part 2: Disruption Analysis"
+??? "Part 2: Disruption analysis"
 
     #### Step 1: Data Preparation
 
@@ -697,7 +697,7 @@ This section will include R code examples demonstrating:
 
 ### Troubleshooting
 
-??? "Common Issues and Solutions"
+??? "Common issues and solutions"
 
     #### Issue: Script crashes with "out of memory" error
 
@@ -789,9 +789,9 @@ This section will include R code examples demonstrating:
 
 ### Usage notes
 
-??? "Interpretation Guidelines"
+??? "Interpretation guidelines"
 
-    **Disruption Effects (b_admin_area_*)**:
+    **Disruption effects (b_admin_area_*)**:
 
     - Negative values indicate service volume shortfalls during disrupted periods
     - Positive values indicate service volume surpluses during disrupted periods
@@ -802,7 +802,7 @@ This section will include R code examples demonstrating:
     - Values < 0.05 suggest statistically significant disruptions
     - Values > 0.05 may indicate normal variation rather than true disruptions
 
-    **Trend Coefficients (b_trend_admin_area_*)**:
+    **Trend coefficients (b_trend_admin_area_*)**:
 
     - Positive values indicate increasing service utilization over time
     - Negative values indicate declining service utilization over time
@@ -810,20 +810,20 @@ This section will include R code examples demonstrating:
 
     ### Performance Considerations
 
-    **Runtime Factors**:
+    **Runtime factors**:
 
     - **Number of indicators**: Linear scaling
     - **Number of geographic units**: Linear scaling within each level
     - **Time series length**: Minimal impact (efficient regression)
     - **Geographic detail**: Exponential scaling (many more units at finer levels)
 
-    **Estimated Runtimes** (example dataset: 50 indicators, 100 districts):
+    **Estimated runtimes** (example dataset: 50 indicators, 100 districts):
 
     - Country-wide + Province models: ~5-10 minutes
     - Add District models: ~30-60 minutes
     - Add Ward models: Several hours (depends on number of wards)
 
-    **Optimization Strategies**:
+    **Optimization strategies**:
 
     - Set `RUN_DISTRICT_MODEL = FALSE` for faster execution (skips district level)
     - Set `RUN_ADMIN_AREA_4_ANALYSIS = FALSE` (default) to avoid ward-level analysis
@@ -832,14 +832,14 @@ This section will include R code examples demonstrating:
 
     ### Data Processing Details
 
-    **Memory Management**:
+    **Memory management**:
 
     - Uses `data.table` for efficient operations on large datasets
     - Batch processing: Results saved to disk periodically
     - Progressive cleanup: Objects deleted when no longer needed
     - Temporary files enable processing datasets larger than RAM
 
-    **Batch Sizes** (tunable for memory constraints):
+    **Batch sizes** (tunable for memory constraints):
 
     - Control chart: 100 panels per batch
     - Indicators: 5 indicators per batch
@@ -847,7 +847,7 @@ This section will include R code examples demonstrating:
     - Districts: 15 results per batch
     - Admin area 4: 10 results per batch
 
-    **Missing Data Handling**:
+    **Missing data handling**:
 
     1. Missing months filled via `tidyr::complete()`
     2. Forward/backward fill for metadata
@@ -858,7 +858,7 @@ This section will include R code examples demonstrating:
 
     The control chart analysis uses adaptive model selection based on data availability:
 
-    **Full Model** (requires ≥12 obs AND >12 unique dates):
+    **Full model** (requires ≥12 obs AND >12 unique dates):
 
     ```r
     count ~ month_factor + as.numeric(date)
@@ -874,7 +874,7 @@ This section will include R code examples demonstrating:
 
     Accounts for linear trend only (insufficient data for seasonality)
 
-    **Median Fallback** (<12 observations):
+    **Median fallback** (<12 observations):
 
     ```r
     count_predict = median(count)
@@ -882,7 +882,7 @@ This section will include R code examples demonstrating:
 
     Uses global median when insufficient data for regression
 
-    **Convergence Checks**:
+    **Convergence checks**:
 
     - Models checked for convergence status
     - Warnings issued for non-convergent models
@@ -890,24 +890,24 @@ This section will include R code examples demonstrating:
 
     ### Quality Assurance
 
-    **Data Cleaning**:
+    **Data cleaning**:
 
     - Outliers removed prior to control chart analysis (based on Module 1 flags)
     - Low-volume months (<50% of mean) excluded to improve model stability
     - Predictions bounded at zero (counts cannot be negative)
 
-    **Automatic Flagging**:
+    **Automatic flagging**:
 
     - Recent months (last 6 months) automatically flagged to ensure current disruptions captured
     - Prevents missing ongoing disruptions due to insufficient deviation from trend
 
-    **Robustness Checks**:
+    **Robustness checks**:
 
     - Model coefficients checked for `NA` values before use
     - If `tagged` variable dropped from model (no variation), disruption effect set to 0
     - P-values calculated only when valid standard errors available
 
-    **Edge Case Handling**:
+    **Edge case handling**:
 
     - Single-cluster panels: No clustering applied (would fail)
     - Insufficient data: Skip analysis for that panel/level
@@ -971,12 +971,12 @@ The Service Utilization module (Module 3 in the FASTR analytics platform) analyz
 
 ### Two-stage analysis process
 
-**Stage 1: Control Chart Analysis**
+**Part 1: Control chart analysis**
 - Model expected patterns using historical trends and seasonality
 - Detect significant deviations from expected volumes
 - Flag disrupted periods
 
-**Stage 2: Disruption Quantification**
+**Part 2: Disruption quantification**
 - Use panel regression to estimate service volume changes
 - Calculate shortfalls and surpluses in absolute numbers
 <!-- /SLIDE -->

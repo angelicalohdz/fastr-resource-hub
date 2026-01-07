@@ -361,13 +361,12 @@
             <div class="step-box">
                 <div class="step-header">
                     <div class="step-number-circle">1</div>
-                    <h4>Data Loading & Preparation</h4>
+                    <h4>Data loading and preparation</h4>
                 </div>
                 <ul class="step-list">
-                    <li>Convert dates to standardized format</li>
-                    <li>Detect and assign geographic hierarchy</li>
-                    <li>Create composite indicators from component data</li>
-                    <li>Validate facility identifiers and metadata</li>
+                    <li>Load raw HMIS data from CSV file</li>
+                    <li>Convert period_id to date format for time series ordering</li>
+                    <li>Detect available admin area columns in dataset</li>
                 </ul>
             </div>
 
@@ -377,7 +376,7 @@
             <div class="step-box">
                 <div class="step-header">
                     <div class="step-number-circle">2</div>
-                    <h4>Outlier Detection</h4>
+                    <h4>Outlier detection</h4>
                 </div>
                 <ul class="step-list">
                     <li>Calculate median and MAD for each facility-indicator combination</li>
@@ -393,7 +392,7 @@
             <div class="step-box">
                 <div class="step-header">
                     <div class="step-number-circle">3</div>
-                    <h4>Completeness Assessment</h4>
+                    <h4>Completeness assessment</h4>
                 </div>
                 <ul class="step-list">
                     <li>Generate complete monthly time series for each facility-indicator</li>
@@ -409,7 +408,7 @@
             <div class="step-box">
                 <div class="step-header">
                     <div class="step-number-circle">4</div>
-                    <h4>Consistency Analysis</h4>
+                    <h4>Consistency analysis</h4>
                 </div>
                 <ul class="step-list">
                     <li>Aggregate to district level (accounts for patient movement)</li>
@@ -425,7 +424,7 @@
             <div class="step-box">
                 <div class="step-header">
                     <div class="step-number-circle">5</div>
-                    <h4>DQA Scoring</h4>
+                    <h4>DQA scoring</h4>
                 </div>
                 <ul class="step-list">
                     <li>Filter to core DQA indicators</li>

@@ -13,7 +13,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             padding: 40px 20px;
             min-height: 100vh;
         }
@@ -28,7 +28,7 @@
         }
 
         header {
-            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a8c 100%);
+            background: linear-gradient(135deg, #09544F 0%, #0C716B 100%);
             color: white;
             padding: 40px;
             text-align: center;
@@ -51,8 +51,8 @@
         }
 
         .input-section {
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            border: 3px solid #1e3a5f;
+            background: linear-gradient(135deg, #CAE6E9 0%, #CAE6E9 100%);
+            border: 3px solid #09544F;
             border-radius: 8px;
             padding: 25px;
             margin-bottom: 30px;
@@ -60,14 +60,14 @@
         }
 
         .input-section h3 {
-            color: #1e3a5f;
+            color: #09544F;
             font-size: 16px;
             margin-bottom: 12px;
             font-weight: 600;
         }
 
         .input-section p {
-            color: #0d47a1;
+            color: #21568C;
             font-size: 13px;
             line-height: 1.6;
         }
@@ -90,7 +90,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #2d5a8c;
+            background: #0C716B;
             color: white;
             width: 60px;
             min-width: 60px;
@@ -110,7 +110,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #2d5a8c;
+            color: #0C716B;
             font-size: 24px;
             font-weight: 300;
             background: white;
@@ -121,7 +121,7 @@
         .step-content {
             flex: 1;
             background: #fafbfc;
-            border: 2px solid #4a7ba7;
+            border: 2px solid #1F9A9C;
             border-left: none;
             padding: 20px;
             display: flex;
@@ -130,7 +130,7 @@
         }
 
         .step-content h4 {
-            color: #1e3a5f;
+            color: #09544F;
             font-size: 14px;
             margin-bottom: 12px;
             font-weight: 600;
@@ -151,22 +151,22 @@
 
         .step-content li:before {
             content: "•";
-            color: #2d5a8c;
+            color: #0C716B;
             font-weight: bold;
             position: absolute;
             left: 0;
         }
 
         .output-section {
-            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
-            border: 3px solid #7b1fa2;
+            background: linear-gradient(135deg, #F5EBF4 0%, #E8D4E6 100%);
+            border: 3px solid #7A1F6E;
             border-radius: 8px;
             padding: 25px;
             margin-top: 30px;
         }
 
         .output-section h3 {
-            color: #4a148c;
+            color: #7A1F6E;
             font-size: 16px;
             margin-bottom: 15px;
             font-weight: 600;
@@ -182,14 +182,14 @@
             background: white;
             padding: 12px;
             border-radius: 4px;
-            border-left: 4px solid #7b1fa2;
+            border-left: 4px solid #7A1F6E;
             font-size: 13px;
             color: #555;
         }
 
         .output-item:before {
             content: "✓ ";
-            color: #7b1fa2;
+            color: #7A1F6E;
             font-weight: bold;
             margin-right: 6px;
         }
@@ -258,7 +258,7 @@
             justify-content: center;
             width: 40px;
             height: 40px;
-            background: #2d5a8c;
+            background: #0C716B;
             color: white;
             border-radius: 50%;
             font-weight: 600;
@@ -269,7 +269,7 @@
 
         .step-box {
             background: #fafbfc;
-            border: 2px solid #4a7ba7;
+            border: 2px solid #1F9A9C;
             border-radius: 6px;
             padding: 20px;
             margin-bottom: 15px;
@@ -282,7 +282,7 @@
         }
 
         .step-header h4 {
-            color: #1e3a5f;
+            color: #09544F;
             font-size: 14px;
             font-weight: 600;
             margin: 0;
@@ -290,7 +290,7 @@
 
         .arrow-connector {
             text-align: center;
-            color: #2d5a8c;
+            color: #0C716B;
             font-size: 28px;
             margin: 15px 0;
             font-weight: 300;
@@ -315,7 +315,7 @@
 
         .step-list li:before {
             content: "•";
-            color: #2d5a8c;
+            color: #0C716B;
             font-weight: bold;
             position: absolute;
             left: 0;
@@ -361,13 +361,12 @@
             <div class="step-box">
                 <div class="step-header">
                     <div class="step-number-circle">1</div>
-                    <h4>Data Loading & Preparation</h4>
+                    <h4>Data loading and preparation</h4>
                 </div>
                 <ul class="step-list">
-                    <li>Convert dates to standardized format</li>
-                    <li>Detect and assign geographic hierarchy</li>
-                    <li>Create composite indicators from component data</li>
-                    <li>Validate facility identifiers and metadata</li>
+                    <li>Load raw HMIS data from CSV file</li>
+                    <li>Convert period_id to date format for time series ordering</li>
+                    <li>Detect available admin area columns in dataset</li>
                 </ul>
             </div>
 
@@ -377,7 +376,7 @@
             <div class="step-box">
                 <div class="step-header">
                     <div class="step-number-circle">2</div>
-                    <h4>Outlier Detection</h4>
+                    <h4>Outlier detection</h4>
                 </div>
                 <ul class="step-list">
                     <li>Calculate median and MAD for each facility-indicator combination</li>
@@ -393,7 +392,7 @@
             <div class="step-box">
                 <div class="step-header">
                     <div class="step-number-circle">3</div>
-                    <h4>Completeness Assessment</h4>
+                    <h4>Completeness assessment</h4>
                 </div>
                 <ul class="step-list">
                     <li>Generate complete monthly time series for each facility-indicator</li>
@@ -409,7 +408,7 @@
             <div class="step-box">
                 <div class="step-header">
                     <div class="step-number-circle">4</div>
-                    <h4>Consistency Analysis</h4>
+                    <h4>Consistency analysis</h4>
                 </div>
                 <ul class="step-list">
                     <li>Aggregate to district level (accounts for patient movement)</li>
@@ -425,7 +424,7 @@
             <div class="step-box">
                 <div class="step-header">
                     <div class="step-number-circle">5</div>
-                    <h4>DQA Scoring</h4>
+                    <h4>DQA scoring</h4>
                 </div>
                 <ul class="step-list">
                     <li>Filter to core DQA indicators</li>

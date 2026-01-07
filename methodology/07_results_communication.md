@@ -14,7 +14,7 @@ This section covers the complete process of communicating and using FASTR result
 
 4. **Stakeholder engagement & advocacy** - Identifying key stakeholders, engagement strategies, building buy-in for data-driven decisions, advocacy approaches
 
-5. **Practice: Generating Quarterly Reporting Products** - Quarterly reporting workflow, using the FASTR platform for automated reports, quality assurance for reports, distribution and feedback mechanisms
+5. **Practice: Generating quarterly reporting products** - Quarterly reporting workflow, using the FASTR platform for automated reports, quality assurance for reports, distribution and feedback mechanisms
 
 ## Moving from data to key messages
 
@@ -115,7 +115,7 @@ Be creative and remember to tailor the story to your audience.
 
 ### Example: developing a data story
 
-**Part 1: Introduction and Context**
+**Part 1: Introduction and context**
 
 Setting, audience, why we care:
 > Examining routine data quality is critical to inform targeted action by the Ministry of Health
@@ -129,11 +129,11 @@ Additional data/context to help explain the issue:
 Call to action:
 > Further investigation is needed to identify the specific areas/facilities that need attention to improve data quality of OPD and Penta 3 indicators.
 
-**Part 2: Deeper Analysis (OPD)**
+**Part 2: Deeper analysis (OPD)**
 
 > For outpatient visits, zooming in even further into Hirshabelle and Puntland States suggests that the high proportion of outliers in Hirshabelle State are not spread throughout the State, but rather in specific regions. Hiiraan region requires further investigation to understand reasons for the high 4.7% outliers and to improve data quality.
 
-**Part 3: Deeper Analysis (Penta 3)**
+**Part 3: Deeper analysis (Penta 3)**
 
 > For Penta 3 immunization, Ayn Region and Ras-Asayr Region in Puntland State need further attention with >6% outliers. Showing disaggregated data is imperative as national and state-level estimates of data quality indicators can mask specific regions requiring further data quality investigation.
 
