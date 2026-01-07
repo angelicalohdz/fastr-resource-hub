@@ -137,12 +137,26 @@ Heatmap showing the percent change in service volume when both outlier and compl
 
 **Interpretation guide**
 
+For all heatmaps:
+
 - **Rows**: Geographic areas (zones/regions)
 - **Columns**: Health indicators
 - **Values**: Percent change in service volume after adjustment
-- **Negative values**: Outlier adjustment reduced total volume (extreme high values replaced)
-- **Positive values**: Completeness adjustment increased total volume (missing data filled)
-- **Near zero**: Minimal adjustment needed; original data was adequate
+
+For the outlier adjustment heatmap (output 1):
+
+- **Negative values**: Extreme high values were replaced with lower estimates
+- Values near zero indicate few outliers detected
+
+For the completeness adjustment heatmap (output 2):
+
+- **Positive values**: Missing data was filled, increasing total volume
+- Values near zero indicate reporting was already complete
+
+For the combined adjustment heatmap (output 3):
+
+- Shows net effect of both adjustments
+- Negative = outlier effect dominates; Positive = completeness effect dominates
 
 ---
 

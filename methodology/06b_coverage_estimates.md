@@ -189,11 +189,19 @@ District-level coverage estimates enabling local-level monitoring and targeting.
 
 **Interpretation guide**
 
+For all coverage charts (outputs 1–3):
+
 - **Black line/points**: Survey-based coverage (DHS/MICS) — the reference standard
 - **Grey line/points**: HMIS-based coverage calculated from facility data
 - **Red line/points**: Projected coverage extending survey estimates using HMIS trends
 - **Y-axis**: Coverage percentage (0–100%)
 - **X-axis**: Time period (years)
+
+Geographic levels:
+
+- **Output 1**: National-level trends
+- **Output 2**: Admin area 2 (regional/provincial) breakdown
+- **Output 3**: Admin area 3 (district) breakdown for local targeting
 
 ---
 

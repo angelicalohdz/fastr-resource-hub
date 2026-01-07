@@ -141,12 +141,32 @@ Heatmap table with zones as rows and time periods as columns, color-coded by ave
 
 **Interpretation guide**
 
+For the heatmaps (outputs 1, 2, 4):
+
 - **Rows**: Geographic areas (zones/regions)
-- **Columns**: Health indicators or time periods
-- **Outlier heatmap**: Lower percentages indicate fewer extreme values
-- **Completeness heatmap**: Higher percentages indicate more complete reporting
-- **Consistency heatmap**: Shows whether related indicators follow expected relationships
-- **DQA score**: Combines all dimensions; higher scores indicate better overall data quality
+- **Columns**: Health indicators
+
+For the outliers heatmap (output 1):
+
+- **Values**: Percentage of facility-months flagged as outliers
+- Lower percentages indicate fewer extreme values
+
+For the indicator completeness heatmaps (outputs 2–3):
+
+- **Values**: Percentage of facility-months with complete reporting
+- Higher percentages indicate more complete reporting
+- Output 3 shows trends over time for each indicator
+
+For the internal consistency heatmap (output 4):
+
+- **Values**: Percentage of areas meeting consistency benchmarks
+- Shows whether related indicators follow expected relationships (e.g., ANC1 ≥ ANC4)
+
+For the DQA score heatmaps (outputs 5–6):
+
+- **Output 5**: Percentage of facility-months passing all quality checks
+- **Output 6**: Average DQA score across facility-months
+- Higher scores indicate better overall data quality
 
 ---
 
