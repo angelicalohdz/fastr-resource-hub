@@ -4,11 +4,11 @@
 
 The Global Financing Facility (GFF) supports country-led efforts to improve the timely use of data for decision-making, ultimately leading to stronger primary healthcare (PHC) systems and better reproductive, maternal, newborn, child, and adolescent health and nutrition (RMNCAH-N) outcomes. This set of initiatives and technical support is referred to as **Frequent Assessments and Health System Tools for Resilience (FASTR)**.
 
-FASTR encompasses four technical approaches: (1) RMNCAH-N service use monitoring using routine HMIS data, (2) rapid-cycle health facility phone surveys, (3) high-frequency household phone surveys, and (4) follow-on analyses. **This methodology documentation focuses specifically on the first approach: RMNCAH-N service use monitoring.**
+FASTR encompasses four technical approaches: (1) RMNCAH-N service use monitoring using routine health management information system (HMIS) data, (2) rapid-cycle health facility phone surveys, (3) high-frequency household phone surveys, and (4) follow-on analyses. **This methodology documentation focuses specifically on the first approach: RMNCAH-N service use monitoring.**
 
 ## RMNCAH-N service use monitoring
 
-The GFF collaborates with Ministries of Health to conduct rapid-cycle analyses of routine health management information system (HMIS) data. This approach addresses three core objectives:
+The GFF collaborates with Ministries of Health to conduct rapid-cycle analyses of routine HMIS data. This approach addresses three core objectives:
 
 1. **Assess data quality** at national and sub-national levels to identify and address completeness, accuracy, and consistency issues
 2. **Track service utilization changes** by measuring monthly shifts in priority RMNCAH-N health service volumes
@@ -22,7 +22,7 @@ These analyses focus on priority indicators tied to national health reforms and 
 
 ### Why rapid-cycle analytics?
 
-Existing health systems data sources are critical but often come with challenges that limit their use. Health management information system data may not be analyzed promptly or may be perceived as too low-quality to use for decision making. Traditional in-person household and facility-based surveys demand extensive resources and time, with long lags between survey design, data collection, and the availability of findings. This prevents decision-makers from using data to drive meaningful improvements in health outcomes. To fill this gap, the GFF supports countries to develop and use rapid-cycle analytic approaches.
+Existing health systems data sources are critical but often come with challenges that limit their use. HMIS data may not be analyzed promptly or may be perceived as too low-quality to use for decision making. Traditional in-person household and facility-based surveys demand extensive resources and time, with long lags between survey design, data collection, and the availability of findings. This prevents decision-makers from using data to drive meaningful improvements in health outcomes. To fill this gap, the GFF supports countries to develop and use rapid-cycle analytic approaches.
 
 ---
 
@@ -38,7 +38,7 @@ Rapid-cycle analytic approaches provide timely, rigorous, and high-priority data
 
 FASTR's four technical approaches, underpinned by capacity strengthening and data use support, enable countries to use rapid-cycle analytics for strengthening PHC systems and improving RMNCAH-N outcomes through the timely and high-frequency analysis and use of data.
 
-1. **Analysis of routine health management information system (HMIS) data** assesses data quality, quantifies changes in priority health service volumes, and compares trends in service coverage to country targets for priority RMNCAH-N indicators.
+1. **Analysis of routine HMIS data** assesses data quality, quantifies changes in priority health service volumes, and compares trends in service coverage to country targets for priority RMNCAH-N indicators.
 
 2. **Rapid-cycle health facility phone surveys** assess the performance of PHC facilities, monitor the implementation of reforms, identify the impact of shocks, and track changes over time. The phone survey is administered to a representative panel sample of PHCs over four quarterly contacts a year.
 
@@ -85,7 +85,7 @@ Illustrative capacity-building activities include support to automate the extrac
 
 ## Use of routine health management information system data in LMICs
 
-Health-facility data collected through routine health management information systems (HMIS) constitute a primary data source for assessing the performance of the health sector. HMIS health data are widely used for a variety of purposes including health sector reviews, planning and resource allocation, program monitoring, health care quality improvement, and reporting purposes. Ministries of Health in low- and middle-income countries (LMICs) are striving to ensure equitable access to quality health services and care towards attaining universal health coverage and other national strategies. The efforts can be more successful if decision making at all levels of the sector are well informed by timely, reliable, and comprehensive data gathered through a well-established health information system. Sound decisions are based on sound data; therefore, it is essential to ensure that the data are of good quality.
+Health-facility data collected through routine HMIS constitute a primary data source for assessing the performance of the health sector. HMIS data are widely used for a variety of purposes including health sector reviews, planning and resource allocation, program monitoring, health care quality improvement, and reporting purposes. Ministries of Health in low- and middle-income countries (LMICs) are striving to ensure equitable access to quality health services and care towards attaining universal health coverage and other national strategies. The efforts can be more successful if decision making at all levels of the sector are well informed by timely, reliable, and comprehensive data gathered through a well-established health information system. Sound decisions are based on sound data; therefore, it is essential to ensure that the data are of good quality.
 
 Poor-quality data impact various levels of the health system in different ways. For program managers, inaccurate data can lead to poor decisions that harm the program's operations and, ultimately, the population's health. At the planning level, poor-quality data can distort evidence of progress towards health-sector goals and hinder annual planning processes by providing misleading results. Additionally, when determining investments in the health sector, poor-quality data can lead to poor targeting of resources. Despite HMIS data being crucial for robust health systems, studies in Sub-Saharan Africa (SSA) have reported challenges with data quality, including issues with completeness, timeliness, accuracy, and consistency [@abouzahr2005; @mavimbe2005; @sychareun2014; @mutale2013; @amoakoh2015; @gimbel2011; @teklegiorgis2016; @rowe2009potential; @belay2013; @moukenet2021]. These concerns about the quality of routine information have undermined its use in decision-making within the health sector [@mutale2013; @belay2013; @xiao2017; @ohagan2017; @chen2014; @glele2014; @bhattacharya2019; @nshimyiryo2020; @ouedraogo2019; @endriyas2019; @mwangu2005; @rowe2009caution]. However, in recent years, countries have made substantial improvements in HMIS data quality which has been reinforced by a system of data quality assessment, data quality improvement, and data use for evidence-based decision making [@nisingizwe2014; @wagenaar2015; @mphatswe2012].
 
