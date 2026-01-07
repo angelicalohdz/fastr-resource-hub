@@ -41,13 +41,13 @@ For each health facility and indicator (like pentavalent vaccine (Penta) doses o
 The module checks whether facilities are consistently reporting data. It creates a complete timeline for each facility and indicator, identifying months with missing reports. Facilities that stop reporting for 6+ months are flagged as inactive rather than incomplete.
 
 **Step 4: Measure Consistency**
-Related indicators should follow predictable patterns. For example, more women should receive their first antenatal care visit (ANC1) than their fourth (ANC4). The module calculates ratios between paired indicators at the district level (to account for patients visiting multiple facilities) and flags relationships that do not meet expectations.
+Related indicators should follow predictable patterns. For example, more women should receive ANC1 than ANC4. The module calculates ratios between paired indicators at the district level (to account for patients visiting multiple facilities) and flags relationships that do not meet expectations.
 
 **Step 5: Validate Indicator Availability**
 Before running consistency checks, the module verifies that the required indicator pairs actually exist in the dataset. Missing indicators are handled gracefully, with the analysis adapting to available data.
 
 **Step 6: Calculate DQA Scores**
-For a defined set of core indicators (typically first pentavalent dose (Penta1), first antenatal care visit (ANC1), and outpatient department visits (OPD)), the module combines the three quality dimensions. A facility-month receives a perfect DQA score only if all core indicators are complete, free of outliers, and meet consistency benchmarks.
+For a defined set of core indicators (typically Penta1, ANC1, and outpatient department visits (OPD)), the module combines the three quality dimensions. A facility-month receives a perfect DQA score only if all core indicators are complete, free of outliers, and meet consistency benchmarks.
 
 **Step 7: Export Results**
 The module produces several output files containing outlier lists, completeness flags, consistency results, and final DQA scores. These outputs inform subsequent modules and provide actionable insights for data quality improvement.
@@ -785,7 +785,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     \end{cases}
     $$
 
-    **Interpretation**: More women should start antenatal care (ANC1) than complete four visits (ANC4). The ratio is expected to be ≥ 0.95, allowing up to 5% tolerance for data variations.
+    **Interpretation**: More women should start ANC (ANC1) than complete four visits (ANC4). The ratio is expected to be ≥ 0.95, allowing up to 5% tolerance for data variations.
 
     **Penta Consistency:**
 
@@ -797,7 +797,7 @@ FAC001,202402,penta1,52,Country_A,Province_A,District_A
     \end{cases}
     $$
 
-    **Interpretation**: More children should receive the first pentavalent dose (Penta1) than complete the three-dose series (Penta3).
+    **Interpretation**: More children should receive Penta1 than complete the three-dose series (Penta3).
 
     **BCG/Delivery Consistency:**
 
