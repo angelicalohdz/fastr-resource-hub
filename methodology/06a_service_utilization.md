@@ -6,15 +6,15 @@
 
 The Service Utilization module analyzes health service delivery patterns to detect and quantify disruptions in service volumes over time. It identifies when health services deviate significantly from expected patterns and measures the magnitude of these disruptions at national, provincial, and district levels.
 
-Using statistical process control methods and regression analysis, the module compares actual service volumes against historical trends and seasonal patterns. This enables distinction between normal fluctuations (such as expected increases in malaria cases during rainy season) and genuine disruptions requiring investigation (such as sudden decreases in antenatal care (ANC) visits during a pandemic or conflict).
+Using statistical process control and regression analysis, the module compares observed service volumes with expected levels based on historical trends and seasonal patterns. This allows routine, predictable variation (such as seasonal increases in malaria cases) to be distinguished from true service disruptions that warrant further investigation, including abrupt declines in antenatal care (ANC) visits during periods of conflict or public health emergencies.
 
-The analysis produces quantified estimates of service shortfalls and surpluses, enabling evidence-based resource allocation, policy decisions, and health system monitoring.
+The analysis yields quantified estimates of service shortfalls and surpluses, allowing changes in service delivery to be measured and compared across time and geographic levels.
 
 ### Why is it needed in the FASTR pipeline?
 
-Service utilization data reflects how populations access essential healthcare, but this data can fluctuate due to various factors: seasonal patterns, policy changes, external shocks (pandemics, natural disasters, conflicts), data quality issues, or service availability problems. Without systematic analysis, it is difficult to determine whether observed changes represent normal variation or significant disruptions requiring action.
+Service utilization data provide insight into how populations access essential health services, but observed volumes may vary for multiple reasons, including seasonality, policy changes, external shocks (such as pandemics, natural disasters, or conflict), data quality limitations, and changes in service availability. Without systematic analysis, it is difficult to distinguish normal variation from material disruptions in service delivery.
 
-This module provides objective, data-driven identification of service delivery problems and quantifies their impact. It enables health system managers to detect emerging issues early, target resources to affected areas, and monitor recovery after disruptions. The module's outputs support dashboard monitoring, impact assessments, and policy evaluation.
+This module applies a standardized, data-driven approach to identify deviations in service utilization and to quantify their magnitude. The outputs allow emerging issues in service delivery to be detected, compared across geographic levels, and tracked over time, including during periods of disruption and recovery. The results are structured for use in routine monitoring, analytical reporting, and assessment of changes in health service performance.
 
 ### Quick summary
 
@@ -61,37 +61,53 @@ The module operates in two sequential parts, each with a distinct purpose:
 
 ### Key decision points
 
-**Geographic level selection**: The module can analyze disruptions at different geographic scales. You can choose to run analysis at national and provincial levels only (faster, suitable for routine monitoring) or include district and ward levels (slower, provides detailed local information for targeted interventions).
+**Geographic level of analysis**
 
-**Control chart level selection**: This determines at which geographic level the control charts are calculated. The module uses two configuration flags:
+The module supports disruption analysis at multiple geographic scales. Users may limit analysis to national and provincial levels, which is computationally faster and suitable for routine monitoring, or extend the analysis to district and ward levels to obtain more granular information for targeted investigation and response.
 
-- **Default (both flags FALSE)**: Control charts calculated at **provincial level (admin_area_2)** - data aggregated to provinces, control limits and disruption detection performed for each province-indicator combination. This is the fastest option suitable for routine monitoring.
+**Control chart level selection**
 
-- **RUN_DISTRICT_MODEL = TRUE**: Control charts calculated at **district level (admin_area_3)** - data aggregated to districts, enabling detection of local disruptions that might be masked in provincial aggregates. Slower but provides more detailed local information.
+The level at which control charts are calculated determines where statistical modeling is performed. This is configured through two flags:
 
-- **RUN_ADMIN_AREA_4_ANALYSIS = TRUE**: Control charts calculated at **ward/facility level (admin_area_4)** - finest level analysis detecting disruptions at individual health facilities or wards. Slowest option but identifies facility-specific issues for highly targeted interventions.
+- **Default configuration (both flags set to FALSE)**  
+  Control charts are calculated at the provincial level (admin_area_2). Service volumes are aggregated to provinces, and trend estimation, control limit calculation, and disruption detection are performed for each province–indicator combination. This option is the most efficient and is appropriate for routine monitoring.
 
-The control chart level determines where the statistical modeling occurs (trend estimation, control limits, disruption flagging). Disruption analysis outputs are then aggregated and reported at all available geographic levels (national, admin2, admin3, admin4), regardless of which level the control charts were calculated at.
+- **RUN_DISTRICT_MODEL = TRUE**  
+  Control charts are calculated at the district level (admin_area_3). Service volumes are aggregated to districts, allowing detection of localized disruptions that may be masked in provincial aggregates. This option is more computationally intensive but provides greater spatial resolution.
 
-**Sensitivity settings**: The module uses configurable thresholds to determine what constitutes a "disruption." More sensitive settings (lower thresholds) will flag smaller deviations, useful for early warning systems. More conservative settings (higher thresholds) will only flag major disruptions, useful for focusing on critical issues.
+- **RUN_ADMIN_AREA_4_ANALYSIS = TRUE**  
+  Control charts are calculated at the ward or facility level (admin_area_4). This represents the most granular level of analysis and enables identification of facility-specific disruptions. It is the most resource-intensive option and is typically used for detailed, targeted analysis.
 
-**Data completeness approach**: The module accepts different versions of service counts from Module 2, allowing you to choose whether to adjust for reporting completeness or use raw counts.
+The selected control chart level determines where statistical modeling is conducted, including trend estimation, control limit calculation, and disruption flagging. Regardless of the control chart level used, disruption results are aggregated and reported at all available geographic levels (national, provincial, district, and ward).
 
-### What happens to the data
+**Sensitivity settings**
 
-**Input transformation**: The module starts with facility-level service counts (e.g., number of deliveries at each clinic each month) and aggregates them to geographic areas (provinces, districts). Outliers identified in Module 1 are removed to prevent anomalous data points from skewing the analysis.
+The module uses configurable statistical thresholds to define what constitutes a disruption. More sensitive settings (lower thresholds) flag smaller deviations from expected patterns and are suitable for early warning purposes. More conservative settings (higher thresholds) restrict detection to larger deviations and are useful for focusing on major disruptions.
 
-**Pattern detection**: Using robust statistical methods, the module establishes expected patterns for each service and geographic area based on historical data. It then identifies months where actual volumes deviate significantly from these expected patterns, accounting for predictable variations such as seasonal changes.
+**Treatment of reporting completeness**
 
-**Impact quantification**: For months flagged as disrupted, the module uses regression models to estimate what service volumes would have been without the disruption. By comparing predicted to actual volumes, it calculates how many services were missed (shortfalls) or how much service delivery increased (surpluses).
+The module accepts alternative versions of service counts produced by Module 2, allowing users to choose whether to analyze raw reported volumes or volumes adjusted for reporting completeness. This provides flexibility to align disruption analysis with different data quality assumptions.
 
-**Output generation**: The final outputs provide disruption impacts at multiple geographic scales, enabling users to see both national-level summaries and local-level details. All calculations preserve the original data while adding predicted values and disruption metrics.
 
-**Interpretation guide:**
-- **Disrupted periods**: Indicated by shaded regions or highlighting where actual volumes deviate significantly from expected
-- **Positive deviations**: Service volumes exceed expected (surpluses)
-- **Negative deviations**: Service volumes fall below expected (shortfalls)
-- **Control limits**: Statistical thresholds indicating normal variation vs. significant disruption
+### Data processing and outputs
+
+**Input transformation**
+
+The module begins with facility-level monthly service counts (for example, deliveries reported by each facility). These data are aggregated to the selected geographic level. Observations identified as outliers in Module 1 are excluded to prevent anomalous values from influencing trend estimation and control limits.
+
+**Pattern estimation and detection**
+
+Using robust statistical methods, the module estimates expected service utilization patterns for each indicator and geographic unit based on historical data, accounting for long-term trends and seasonality. Months in which observed service volumes deviate significantly from these expected patterns are flagged as potential disruptions.
+
+**Quantification of disruption impacts**
+
+For periods identified as disrupted, regression-based models are used to estimate counterfactual service volumes—representing expected utilization in the absence of disruption. Differences between predicted and observed volumes are calculated to quantify service shortfalls or surpluses.
+
+**Output structure**
+
+The final outputs report disruption metrics at multiple geographic levels, from national summaries to detailed local results. The original reported data are preserved, with additional fields providing expected values, disruption flags, and quantified impacts.
+
+---
 
 ### Analysis outputs and visualization
 
@@ -120,6 +136,11 @@ Geographic breakdown of service delivery patterns compared to expected volumes.
 Impact visualization showing how data quality adjustments affect reported service volumes.
 
 ![Volume change due to data quality adjustments.](resources/default_outputs/Module3_4_Volume_change_adjustments.png)
+
+**Interpretation guide**
+
+- **Positive deviations**: Observed volumes exceed expected levels (service surpluses)  
+- **Negative deviations**: Observed volumes fall below expected levels (service shortfalls)  
 
 ---
 

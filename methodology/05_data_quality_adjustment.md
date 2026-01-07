@@ -4,25 +4,17 @@
 
 ### What does this module do?
 
-The Data Quality Adjustment module systematically corrects two common problems in routine health facility data: **outliers** (extreme values caused by reporting errors or data entry mistakes) and **missing data** (from incomplete reporting). Rather than simply deleting problematic data, this module replaces questionable values with statistically sound estimates based on each facility's own historical patterns.
+The Data Quality Adjustment module addresses two common limitations of routine health facility data: extreme values resulting from reporting or data entry errors (**outliers**) and gaps arising from incomplete reporting (**missing data**). Rather than excluding affected observations, the module replaces these values with statistically derived estimates informed by each facility’s historical reporting patterns.
 
-The module uses temporal smoothing techniques that analyze trends over time. By calculating rolling averages and examining facility-specific historical patterns, it preserves the underlying trends in the data while correcting anomalous values. This approach ensures that adjusted data remains grounded in real service delivery patterns rather than arbitrary replacements.
+The adjustment process applies time-series smoothing methods that draw on observed trends and seasonality within facility-level data. Rolling averages and facility-specific historical profiles are used to correct anomalous values while preserving underlying service delivery patterns.
 
-To accommodate different analytical needs, the module produces four parallel versions of the data: one with no adjustments (the original data), one with only outlier corrections, one with only missing data filled in, and one with both types of corrections applied. This multi-scenario approach allows analysts to understand how sensitive their results are to different data quality assumptions and choose the most appropriate version for their analysis.
+To support transparency and analytical flexibility, the module generates four parallel datasets: unadjusted data, data with outlier corrections only, data with missing values imputed only, and data with both adjustments applied. This allows users to assess the sensitivity of results to different data quality assumptions and select the dataset most appropriate for their analytical purpose.
 
 ### Why is it needed in the FASTR pipeline?
 
-Routine health management information system (HMIS) data often contains errors and gaps that can seriously distort trends, mask true patterns, and lead to incorrect conclusions. A single extreme outlier can make service volumes appear to spike dramatically, while missing data can make it seem like services stopped entirely. These issues are particularly problematic when:
+Routine health management information system (HMIS) data frequently contain reporting errors and gaps that can distort observed trends and obscure underlying patterns in service delivery. Extreme values may create artificial spikes in service volumes, while incomplete reporting can result in apparent declines that reflect data quality issues rather than true changes in service provision. These limitations are particularly consequential when HMIS data are used for performance tracking, comparison across geographic units, or trend analysis.
 
-- Tracking progress toward health goals and targets
-
-- Comparing facilities or regions to identify high and low performers
-
-- Allocating resources based on service delivery patterns
-
-- Detecting genuine changes in health service utilization versus data quality issues
-
-By systematically addressing these data quality issues before analysis, this module ensures that downstream calculations and decisions are based on reliable, consistent data rather than artifacts of poor data quality.
+By systematically addressing outliers and missing data prior to analysis, this module improves the consistency and interpretability of HMIS data. This helps ensure that subsequent analytical outputs are based on observed service delivery patterns rather than artifacts introduced by reporting variability or data quality constraints.
 
 ### Quick summary
 
@@ -38,28 +30,46 @@ By systematically addressing these data quality issues before analysis, this mod
 
 ### High-level workflow
 
-The module follows a systematic seven-step process to clean and adjust health facility data:
+The module applies a standardized, multi-step process to adjust routine health facility data while preserving underlying service delivery patterns:
 
 **Step 1: Load and prepare data**
-The module brings together three datasets: the raw facility service volumes, the outlier flags identifying suspicious values (from Module 1), and the completeness flags showing which months had incomplete reporting (from Module 1). It also identifies certain sensitive indicators like deaths that should never be adjusted.
+The module integrates three inputs: reported facility-level service volumes, outlier flags identifying anomalous values (from Module 1), and completeness flags indicating months with incomplete reporting (from Module 1). Indicators for which adjustment is not appropriate (such as mortality-related measures) are identified and excluded from subsequent adjustment steps.
 
 **Step 2: Identify low-volume indicators**
-Before making any adjustments, the module checks each indicator to see if it has meaningful variation. Indicators that never have values above 100 across the entire dataset are flagged and excluded from outlier adjustment, since outlier detection isn't meaningful for consistently low-count indicators.
+Before any adjustments are applied, each indicator is assessed for sufficient variation. Indicators that never exceed 100 reported events in any month across the full time series are flagged and excluded from outlier adjustment, as statistical outlier detection is not meaningful for consistently low-count indicators.
 
 **Step 3: Adjust outlier values**
-For each value flagged as an outlier, the module calculates what the value "should have been" based on that facility's historical pattern. It uses a hierarchy of methods: (1) centered 6-month rolling average, (2) forward 6-month average, (3) backward 6-month average, (4) same month from previous year, (5) facility-specific historical mean.
+For observations flagged as outliers, the module estimates replacement values based on the facility’s own historical reporting patterns. A hierarchical set of methods is applied sequentially:
+
+- Centered six-month rolling average (three months before and three months after)
+
+- Forward six-month rolling average
+
+- Backward six-month rolling average
+
+- Same calendar month in the previous year
+
+- Facility-specific historical mean
 
 **Step 4: Fill missing and incomplete data**
-For months where data is missing or marked as incomplete, the module imputes (fills in) values using the same rolling average approach. This ensures that temporary reporting gaps don't create artificial drops to zero in the data.
+For months identified as missing or incomplete, values are imputed using the same rolling-average framework applied to outlier adjustment. This approach prevents artificial drops to zero caused by temporary reporting gaps while maintaining consistency with facility-specific trends.
 
 **Step 5: Create multiple scenarios**
-The module runs the adjustment logic four different ways: with no adjustments (baseline), only outlier corrections, only completeness corrections, and both types of corrections together. This allows analysts to see how different choices affect their results.
+To support transparency and sensitivity analysis, the module produces four parallel datasets:
+
+- Unadjusted data (original reported values)
+
+- Data with outlier adjustments only
+
+- Data with adjustments for missing or incomplete reporting only
+
+- Data with both outlier and completeness adjustments applied
 
 **Step 6: Aggregate to geographic levels**
-After adjustments are complete, the facility-level data is aggregated (summed up) to create subnational and national-level datasets. Each geographic level maintains all four scenarios, so analysts can work at whichever level they need.
+Following adjustment, facility-level data are aggregated to subnational and national levels. All adjustment scenarios are preserved at each geographic level, allowing analysis at different administrative scales.
 
 **Step 7: Export results**
-The module saves four CSV files: one for facility-level data, one for subnational areas, one for national totals, and one documenting which indicators were excluded from adjustment and why.
+The module generates structured output files for facility-level, subnational, and national datasets, along with a metadata file documenting indicators excluded from adjustment and the reasons for their exclusion.
 
 ### Workflow diagram
 
@@ -67,38 +77,42 @@ The module saves four CSV files: one for facility-level data, one for subnationa
 
 ### Key decision points
 
-**Which values should be adjusted?**
+**Identification of values subject to adjustment**
 
-The module adjusts two types of problematic values:
+The module applies adjustments to two categories of observations:
 
-- Values flagged as outliers by Module 1's statistical detection algorithms
+- Values flagged as outliers through the statistical detection procedures implemented in Module 1  
+- Values corresponding to months identified as incomplete or missing due to reporting gaps  
 
-- Values from months marked as incomplete or entirely missing
+Certain indicators are explicitly excluded from adjustment:
 
-However, certain indicators are NEVER adjusted:
+- Mortality-related indicators (including under-five deaths, maternal deaths, and neonatal deaths), as these represent discrete events for which smoothing or imputation is not appropriate  
+- Low-volume indicators that never exceed 100 reported events in any month, for which statistical outlier detection is not meaningful  
 
-- Death counts (under-5 deaths, maternal deaths, neonatal deaths) because these represent discrete events that should not be smoothed
+**Selection of adjustment scenario**
 
-- Low-volume indicators (those that never exceed 100) where outlier detection isn't meaningful
+The module generates four adjustment scenarios to accommodate different analytical contexts and data quality conditions:
 
-**Which scenario should analysts use?**
-By producing four scenarios, the module allows different use cases:
+- **No adjustment**: Retains reported values and is suitable for validation exercises or settings where data quality is assessed as high  
+- **Outlier adjustment only**: Applies corrections where extreme values are present but reporting completeness is otherwise stable  
+- **Completeness adjustment only**: Addresses gaps in reporting while preserving reported values in periods with complete data  
+- **Outlier and completeness adjustments**: Applies both corrections where data quality limitations are present in both dimensions  
 
-- **None**: Use for validation or when data quality is already excellent
-- **Outliers only**: Use when completeness is good but occasional extreme values are problematic
-- **Completeness only**: Use when you trust the reported values but reporting is sporadic
-- **Both**: Use when both data quality issues are prevalent
+### Data processing and outputs
 
-### What happens to the data
+**Input structure**  
+The module receives facility-level monthly service volumes together with data quality flags generated in Module 1, including outlier indicators and completeness status. Each facility–indicator–month combination is treated as a distinct observation for potential adjustment.
 
-**Input processing**: The module receives facility-level monthly service volumes along with quality flags from Module 1 (outlier indicators, completeness status). Each facility-indicator-period combination represents a single observation that may require adjustment.
+**Application of adjustments**  
+Based on the selected scenario, adjusted service counts are generated. Observations flagged as outliers are replaced with values derived from facility-specific historical averages excluding anomalous periods. For months with incomplete or missing reporting, values are imputed using facility-level historical patterns to maintain continuity in the time series.
 
-**Adjustment application**: Based on the selected scenario, the module creates adjusted versions of the service counts. For outliers, abnormally high values are replaced with mean values calculated from non-outlier months. For incomplete reporting periods, missing values are imputed using facility-specific averages from available data.
+**Generation of parallel datasets**  
+Four parallel versions of the adjusted counts are produced: unadjusted values, outlier-adjusted values, completeness-adjusted values, and values with both adjustments applied. This structure enables downstream analyses to explicitly assess sensitivity to different data quality assumptions.
 
-**Multiple scenario generation**: The module generates four parallel versions of the dataset: `count_final_none` (no adjustments), `count_final_outliers` (outliers only), `count_final_completeness` (missing data only), and `count_final_both` (both adjustments applied). This allows downstream analysis to compare results across different data quality assumptions.
+**Aggregation and output structure**  
+Adjusted facility-level data are aggregated to district, subnational, and national levels, with all four adjustment scenarios retained. Each output record includes the geographic unit, indicator, time period, and the corresponding service counts under each scenario, supporting flexible analysis across use cases and analytical objectives.
 
-**Output aggregation**: The adjusted data is aggregated to geographic levels (country, provinces, districts) while preserving all four adjustment scenarios. Each output row contains the geographic area identifier, indicator code, time period, and all four count versions, enabling flexible analysis depending on data quality tolerance and research questions.
-
+---
 ### Analysis outputs and visualization
 
 The FASTR analysis generates three main visual outputs comparing service volumes before and after adjustments:
@@ -120,6 +134,8 @@ Heatmap showing the percent change in service volume due to completeness (missin
 Heatmap showing the percent change in service volume when both outlier and completeness adjustments are applied.
 
 ![Percent change in volume due to both outlier and completeness adjustment.](resources/default_outputs/Default_3._Percent_change_in_volume_due_to_both_outlier_and_completeness_adjustment.png)
+
+**Interpretation guide**
 
 ---
 

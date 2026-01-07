@@ -4,16 +4,15 @@
 
 ### What does this module do?
 
-The Data Quality Assessment (DQA) module (Module 1 in the FASTR analytics platform) evaluates the reliability of Health Management Information System (HMIS) data from health facilities. It acts as a quality control checkpoint in the FASTR pipeline, examining monthly facility reports to identify data issues before the information is used for decision-making.
+The Data Quality Assessment (DQA) module (Module 1 of the FASTR analytics platform) evaluates the reliability of routine Health Management Information System (HMIS) data reported by health facilities. It serves as an initial quality control step in the FASTR pipeline, reviewing monthly facility reports to identify data quality issues before the data are used in downstream analysis.
 
-The module assesses data quality through three complementary lenses: **detecting outliers** (unusually high values that may indicate reporting errors), **assessing completeness** (whether facilities consistently submit their reports), and **measuring consistency** (whether related health indicators align with expected patterns). These assessments are combined into an overall DQA score that provides a single measure of data reliability.
+The module assesses data quality across three complementary dimensions: **outliers**, which identify unusually high or low values that may reflect reporting or data entry errors; **completeness**, which measures the consistency of facility reporting over time; and **consistency**, which examines whether related indicators follow expected relationships. These dimensions are combined into an overall DQA score that provides a standardized summary measure of data reliability.
 
-Routinely reported health facility data are an important source for health indicators at the facility and population levels. Health facilities report on events such as immunizations given or live births attended by a skilled provider. As with any data, quality is an issue. The FASTR approach conducts an analysis of monthly data by facility and by indicator to assess data quality. Results are presented as annual estimates but may comprise a partial year of data given the availability of data at the time the analysis is conducted (e.g., an analysis conducted in June 2024 may contain data from January-May 2024, and this will be presented as the analysis for 2024).
-
+Routine HMIS data are a key source of information for monitoring health service delivery at both facility and population levels, capturing events such as immunizations delivered or births attended by skilled health personnel. As with all routinely collected data, these data are subject to quality limitations. The FASTR DQA module applies a systematic, indicator- and facility-level review of monthly data to assess these limitations. Results are summarized as annual estimates, which may reflect partial-year data depending on availability at the time of analysis (for example, an analysis conducted mid-year may include data from only the first months of that year).
 
 ### Why is it needed in the FASTR pipeline?
 
-Data quality directly impacts the reliability of health indicators and coverage estimates. Before calculating service utilization rates or estimating population coverage, we must ensure the underlying facility data is trustworthy. This module identifies problematic data patterns that could skew results, allowing analysts to make informed decisions about data adjustments or exclusions in subsequent pipeline steps.
+Data quality directly affects the reliability of health indicators and coverage estimates. Before service utilization rates or population coverage are calculated, it is necessary to assess whether the underlying facility data are sufficiently reliable. This module identifies data patterns that may distort analytical results, allowing users to make informed decisions about data treatment in subsequent steps of the pipeline.
 
 ### Quick summary
 
@@ -29,28 +28,28 @@ Data quality directly impacts the reliability of health indicators and coverage 
 
 ### High-level workflow
 
-The module follows a logical sequence of quality checks, building from individual data points to an overall quality score:
+The module applies a structured sequence of data quality checks, progressing from individual observations to an overall assessment of data reliability:
 
-**Step 1: Load and prepare data**
-The module reads monthly facility reports and organizes them for analysis. It converts dates to a standard format and identifies which geographic areas and health indicators are present in the dataset.
+**Step 1: Data preparation**  
+Monthly facility reports are loaded and organized for analysis. Dates are standardized, and the geographic units and health indicators available in the dataset are identified.
 
-**Step 2: Detect outliers**
-For each health facility and indicator (like pentavalent vaccine (Penta) doses or antenatal care (ANC) visits), the module identifies unusually high values that might indicate data entry errors. It uses two methods: statistical outliers (values far from the facility's typical volume) and proportional outliers (a single month accounting for most of the year's services).
+**Step 2: Outlier detection**  
+For each facility and indicator (for example, pentavalent vaccine doses or antenatal care visits), the module identifies unusually high values that may reflect reporting or data entry errors. Two complementary approaches are used: statistical outlier detection based on deviations from a facility’s historical reporting pattern, and proportional checks that flag months accounting for an implausibly large share of annual service volumes.
 
-**Step 3: Assess completeness**
-The module checks whether facilities are consistently reporting data. It creates a complete timeline for each facility and indicator, identifying months with missing reports. Facilities that stop reporting for 6+ months are flagged as inactive rather than incomplete.
+**Step 3: Completeness assessment**  
+The module evaluates the consistency of facility reporting over time by constructing a complete reporting timeline for each facility–indicator combination and identifying missing months. Facilities with extended periods of non-reporting (six months or more) are classified as inactive rather than incomplete.
 
-**Step 4: Measure consistency**
-Related indicators should follow predictable patterns. For example, more women should receive ANC1 than ANC4. The module calculates ratios between paired indicators at the district level (to account for patients visiting multiple facilities) and flags relationships that do not meet expectations.
+**Step 4: Consistency assessment**  
+Related indicators are expected to follow predictable relationships. For example, the number of first antenatal care visits should exceed the number of fourth visits. The module assesses these relationships using indicator ratios calculated at the district level, reducing bias from patient movement across facilities, and flags deviations from expected patterns.
 
-**Step 5: Validate indicator availability**
-Before running consistency checks, the module verifies that the required indicator pairs actually exist in the dataset. Missing indicators are handled gracefully, with the analysis adapting to available data.
+**Step 5: Indicator availability checks**  
+Before consistency assessments are applied, the module verifies that the required indicator pairs are present in the data. Where indicators are missing, the analysis adapts to the available information without generating errors.
 
-**Step 6: Calculate DQA scores**
-For a defined set of core indicators (typically Penta1, ANC1, and outpatient department visits (OPD)), the module combines the three quality dimensions. A facility-month receives a perfect DQA score only if all core indicators are complete, free of outliers, and meet consistency benchmarks.
+**Step 6: DQA score calculation**  
+For a defined set of core indicators (typically first-dose pentavalent vaccination, first antenatal care visit, and outpatient department visits), results from the outlier, completeness, and consistency checks are combined into an overall DQA score. A facility–month receives the highest score only if all core indicators meet minimum standards across all three dimensions.
 
-**Step 7: Export results**
-The module produces several output files containing outlier lists, completeness flags, consistency results, and final DQA scores. These outputs inform subsequent modules and provide actionable insights for data quality improvement.
+**Step 7: Outputs**  
+The module generates a set of structured outputs, including outlier flags, completeness indicators, consistency results, and final DQA scores. These outputs are used in subsequent FASTR modules and provide a transparent basis for data quality review and improvement.
 
 ### Workflow diagram
 
@@ -60,40 +59,42 @@ The module produces several output files containing outlier lists, completeness 
 
 **When is a value considered an outlier?**
 
-Outliers are identified by assessing the within-facility variation in monthly reporting for each indicator. A value is flagged as an outlier if it meets EITHER of two criteria:
+Outliers are identified by assessing within-facility variation in monthly reporting for each indicator. A value is flagged as an outlier if it meets **either** of the following criteria:
 
-1. A value greater than 10 times the Median Absolute Deviation (MAD) from the monthly median value for the indicator, OR
-2. A value for which the proportional contribution in volume for a facility, indicator, and time period is greater than 80%
+1. The value exceeds 10 times the Median Absolute Deviation (MAD) from the monthly median for the indicator; **or**  
+2. The value accounts for more than 80 percent of the total reported volume for a given facility, indicator, and year **and** the reported count exceeds 100.
 
-AND for which the count is greater than 100.
+The MAD is calculated using only values at or above the median, in order to focus detection on unusually high values and avoid flagging low-volume observations.
 
-The MAD is calculated using only values at or above the median to focus on detecting unusually high values.
+**Why is consistency assessed at the district level rather than the facility level?**
 
-**Why measure consistency at the district level instead of facility level?**
-Patients often visit different facilities within their local district for different services. A woman might get her first antenatal care visit (ANC1) at one health center but deliver at a district hospital. Measuring consistency at the district level accounts for this patient movement and provides a more accurate picture of service utilization patterns.
+Patients frequently seek care from different facilities within the same district depending on the service. For example, a woman may receive her first antenatal care visit at a primary health center but deliver at a district hospital. Assessing consistency at the district level accounts for this patient movement and provides a more accurate representation of service utilization patterns.
 
 **What happens when required indicators are missing?**
-The module adapts to available data. If consistency pairs cannot be evaluated, the DQA score is calculated using only completeness and outlier checks. The analysis continues with the dimensions that can be assessed.
+
+The module adapts to the data that are available. If required indicator pairs for consistency assessment are missing, consistency checks are not applied, and the DQA score is calculated using only outlier and completeness dimensions. Analysis proceeds using the quality dimensions that can be assessed.
 
 **How are inactive facilities handled?**
-If a facility does not report for 6 or more consecutive months at the start or end of their reporting period, those months are flagged as "inactive" rather than "incomplete." This prevents penalizing facilities that have not yet started reporting or have permanently closed.
 
-### What happens to the data
+Facilities that do not report for six or more consecutive months at the beginning or end of their reporting period are classified as inactive for those months rather than incomplete. This prevents penalizing facilities that have not yet begun reporting or that have permanently ceased operations.
 
-**Transformation overview:**
+### Data processing and outputs
 
-The module transforms raw facility reports into quality-flagged datasets:
+**Transformation overview**
 
-1. **Input format**: Monthly rows with facility ID, period, indicator name, and count
-2. **Enrichment**: Adds calculated fields like median volume, MAD residuals, proportional contributions
-3. **Completion**: Generates explicit rows for missing months (turning implicit gaps into explicit records)
-4. **Aggregation**: Aggregates facility data to district level for consistency calculations
-5. **Flagging**: Adds binary quality flags (outlier yes/no, complete yes/no, consistent yes/no)
-6. **Scoring**: Combines flags into continuous scores (0-1) and binary pass/fail indicators
-7. **Output format**: Multiple files optimized for different use cases (quick outlier review, full analysis, downstream modules)
+The module transforms raw facility reports into quality-flagged datasets through the following steps:
 
-The module processes data in long format (one row per facility-indicator-period combination) and outputs quality dimension scores used by subsequent modules to weight, adjust, or exclude observations.
+1. **Input format**: Monthly observations with facility identifier, reporting period, indicator, and reported count  
+2. **Enrichment**: Calculation of supporting statistics, including median values, MAD-based residuals, and proportional volume contributions  
+3. **Completion**: Explicit generation of records for missing months, converting implicit reporting gaps into observable data points  
+4. **Aggregation**: Aggregation of facility-level data to the district level for consistency assessment  
+5. **Flagging**: Assignment of binary quality flags for outliers, completeness, and consistency  
+6. **Scoring**: Combination of quality flags into continuous scores (0–1) and corresponding pass/fail indicators  
+7. **Output format**: Production of multiple output files tailored to different analytical uses, including rapid outlier review, full data quality analysis, and inputs for downstream FASTR modules  
 
+The module processes data in long format, with one record per facility–indicator–period combination, and outputs standardized data quality measures that are used by subsequent modules to inform data adjustment, weighting, or exclusion decisions.
+
+---
 ### Analysis outputs and visualization
 
 The FASTR analysis generates six main visual outputs:
@@ -138,10 +139,7 @@ Heatmap table with zones as rows and time periods as columns, color-coded by ave
 ![Average data quality score across facility-months.](resources/default_outputs/Default_6._Mean_DQA_score.png)
 
 
-**Color coding system:**
-- **Green**: 90% or above (completeness/consistency), Below 1% (outliers)
-- **Yellow**: 80% to 89% (completeness), 1% to 2% (outliers)
-- **Red**: Below 80% (completeness/consistency), 3% or above (outliers)
+**Interpretation guide**
 
 ---
 

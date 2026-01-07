@@ -4,21 +4,21 @@
 
 ### What does this module do?
 
-This module estimates health service coverage by integrating three key data sources: adjusted health service volumes from HMIS (Module 2), population projections from the United Nations World Population Prospects (UN WPP), and household survey data from the Multiple Indicator Cluster Surveys (MICS) and Demographic and Health Surveys (DHS). It helps answer the question: "What percentage of the target population received this health service?"
+This module estimates health service coverage by integrating three core data sources: adjusted administrative service volumes from the health management information system (HMIS; Module 2), population projections from the United Nations World Population Prospects (UN WPP), and household survey data from the Multiple Indicator Cluster Surveys (MICS) and Demographic and Health Surveys (DHS). It addresses the question of what proportion of the target population received a given health service.
 
-The module operates in two distinct parts.
+The module is structured in two components.
 
-**Part 1** calculates target population sizes (denominators) using multiple methods and automatically selects the best option for each health indicator by comparing results against survey benchmarks.
+**Part 1** constructs target population denominators using multiple methodological approaches and evaluates their performance by comparing resulting coverage estimates with available survey reference values for each health indicator.
 
-**Part 2** allows users to refine these selections, choose specific denominators based on programmatic knowledge, and project survey estimates forward in time using administrative data trends to fill gaps where surveys are unavailable.
+**Part 2** allows users to review and adjust denominator selections based on programmatic considerations and to extend survey-based coverage estimates over time using trends derived from administrative data, where survey data are not available.
 
-Together, these parts transform raw service counts into meaningful coverage estimates that can be analyzed for trends, compared across regions, and used for policy decisions.
+Together, these components convert administrative service volumes into standardized coverage estimates that can be examined over time and across geographic levels, and used in analytical and monitoring contexts.
 
 ### Why is it needed in the FASTR pipeline?
 
-Understanding coverage is essential for monitoring health system performance and equity. While Module 2 provides adjusted service volumes, these numbers alone do not indicate whether services are reaching their intended populations. Coverage estimates provide context by comparing service delivery to population need.
+Health service coverage is a core metric for assessing health system performance and equity. While Module 2 produces adjusted service volumes, these figures on their own do not indicate the extent to which services reach the populations they are intended to serve. Coverage estimates place service delivery in context by relating service volumes to population need.
 
-This module addresses some challenges in coverage estimation:
+This module addresses key challenges in estimating coverage, including:
 
 - **Multiple data sources**: Integrates HMIS data with survey data
 
@@ -128,37 +128,42 @@ Results are saved with standardized column structures for each administrative le
 
 ### Key decision points
 
-**1. Which denominator to use?**
-Part 1 automatically selects based on alignment with survey data, but users can override in Part 2. The choice affects whether coverage is anchored to service delivery patterns (HMIS-based) or demographic projections (population-based).
+**1. Selection of denominators**
 
-**2. How to handle survey gaps?**
-Surveys occur infrequently (every 3-5 years). The module forward-fills survey values in Part 1 (assumes constant coverage until next survey) and uses projection in Part 2 (incorporates HMIS trends).
+In Part 1, the module automatically selects denominator options based on their alignment with available survey reference values. In Part 2, users may review and override these selections based on programmatic knowledge or analytical priorities. The choice of denominator determines whether coverage estimates are primarily anchored to observed service delivery patterns (HMIS-based denominators) or to demographic projections (population-based denominators).
 
-**3. Should subnational analysis use local or national survey data?**
-For **immunization indicators only**, when local survey data is unavailable at the subnational level, the module imputes national survey values. This assumes national immunization coverage rates apply to subnational areas, which may not hold in all contexts. This fallback mechanism is **not applied** to other health indicators (maternal health, child health), which require local survey data for subnational analysis.
+**2. Treatment of gaps between surveys**
 
-**4. How to adjust denominators for different target populations?**
-Each health indicator targets a specific population (e.g., pregnant women for ANC, infants for vaccines). The module applies sequential demographic adjustments (pregnancy loss, stillbirths, mortality) to align denominators with target populations.
+Household surveys are conducted at irregular intervals, typically every three to five years. In Part 1, survey values are forward-filled between survey years, implicitly assuming constant coverage until the next survey observation. In Part 2, coverage is projected forward using trends derived from HMIS data, allowing changes in service delivery to be reflected in periods without survey data.
 
-### What happens to the data
+**3. Use of national versus subnational survey data**
 
-**Input integration**: The module combines three distinct data sources: facility-level service volumes from HMIS (aggregated annually by geographic area), household survey coverage estimates (harmonized across different survey years and forward-filled to create continuous time series), and population projections (filtered to extract age-specific target populations for each health indicator).
+For immunization indicators only, when subnational survey estimates are not available, the module applies national survey values to subnational units as a fallback. This approach assumes that national immunization coverage rates are broadly representative at subnational levels, an assumption that may not hold in all settings. This fallback mechanism is not applied to other indicators, such as maternal or child health services, for which subnational analysis requires locally observed survey data.
 
-**Denominator construction**: Using the relationship between HMIS service volumes and survey-based coverage estimates, the module calculates HMIS-implied denominators that represent the population that would need to exist for the observed service volumes to match survey coverage rates. These denominators are adjusted for indicator-specific target populations through sequential demographic corrections accounting for pregnancy loss, stillbirths, and mortality.
+**4. Adjustment of denominators for target populations**
 
-**Coverage calculation**: The module calculates multiple coverage estimates by dividing service volumes by different denominator options (population-based, HMIS-implied, hybrid approaches). Each coverage estimate is then compared against survey benchmarks to identify which denominator produces the most plausible results for each indicator, balancing between HMIS data quality and population estimate accuracy.
+Each health indicator corresponds to a specific target population (for example, pregnant women for antenatal care or infants for childhood vaccination). The module applies sequential demographic adjustments—such as pregnancy loss, stillbirths, and mortality—to align denominators with the relevant target population for each indicator.
 
-**Temporal projection**: For years beyond the most recent survey, the module projects coverage estimates forward by combining the last observed survey value with HMIS-based trends. This produces complete coverage time series that leverage both the validity of survey data and the timeliness of routine HMIS reporting, with all estimates accompanied by metadata indicating data source and projection methodology.
 
-**Interpretation guide:**
+### Data processing and outputs
 
-- **Survey points**: Black line with black points representing validated household survey coverage estimates
+**Input integration**
 
-- **HMIS-based estimates**: Grey line with grey points showing coverage calculated from routine facility data
+The module integrates three primary data sources: annualized HMIS service volumes aggregated by geographic unit; household survey coverage estimates harmonized across survey rounds and forward-filled to create continuous time series; and population projections filtered to extract age- and sex-specific populations relevant to each health indicator.
 
-- **Projected coverage**: Red line with red points showing forward projections combining survey benchmarks with HMIS trends
+**Denominator construction**
 
-- **Geographic disaggregation**: Lower administrative levels enable targeting of interventions to areas with coverage gaps
+Using the relationship between reported HMIS service volumes and survey-based coverage estimates, the module derives HMIS-implied denominators representing the population size consistent with observed service delivery and survey coverage levels. These denominators are further adjusted to reflect indicator-specific target populations through sequential demographic corrections, including pregnancy loss, stillbirths, and mortality.
+
+**Coverage calculation**
+
+Multiple coverage estimates are calculated by dividing service volumes by alternative denominator options, including population-based, HMIS-implied, and hybrid approaches. Each coverage estimate is evaluated against survey reference values to assess plausibility and to inform denominator selection for each indicator.
+
+**Temporal projection**
+
+For years beyond the most recent survey observation, coverage estimates are projected forward by combining the last observed survey value with trends derived from HMIS data.
+
+---
 
 ### Analysis outputs and visualization
 
@@ -182,6 +187,15 @@ District-level coverage estimates enabling local-level monitoring and targeting.
 
 ![Coverage calculated from HMIS data at admin area 3 level.](resources/default_outputs/Module4_3_Coverage_HMIS_Admin3.png)
 
+**Interpretation guide:**
+
+- **Survey points**: Black line with black points representing validated household survey coverage estimates
+
+- **HMIS-based estimates**: Grey line with grey points showing coverage calculated from routine facility data
+
+- **Projected coverage**: Red line with red points showing forward projections combining survey benchmarks with HMIS trends
+
+- **Geographic disaggregation**: Lower administrative levels enable targeting of interventions to areas with coverage gaps
 ---
 
 ## Detailed reference
