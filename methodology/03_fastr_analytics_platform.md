@@ -12,17 +12,17 @@ The platform provides a user-friendly interface for running analyses and offers 
 
 This section will cover the complete process of working with the FASTR analytics platform:
 
-1. **Overview of the Platform** - Introduction to the FASTR analytics platform, key features and capabilities, how the platform supports the FASTR methodology
+1. **Overview of the platform** - Introduction to the FASTR analytics platform, key features and capabilities, how the platform supports the FASTR methodology
 
-2. **Accessing the Platform** - Creating accounts, signing in, user permissions and roles
+2. **Accessing the platform** - Creating accounts, signing in, user permissions and roles
 
 3. **Setting up the structure** - Configuring admin areas (regions, districts), setting up facilities, defining indicators
 
-4. **Importing a Dataset** - Data format requirements, import process, validation and error handling
+4. **Importing a dataset** - Data format requirements, import process, validation and error handling
 
-5. **Installing and Running Modules** - Available analysis modules, module installation, running analyses
+5. **Installing and running modules** - Available analysis modules, module installation, running analyses
 
-6. **Creating a New Project** - Project setup workflow, configuration options, best practices
+6. **Creating a new project** - Project setup workflow, configuration options, best practices
 
 7. **Creating visualizations** - Available chart types, customization options, exporting visualizations
 
