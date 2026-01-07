@@ -265,12 +265,15 @@ img {
   background-color: var(--fastr-deep-green);
 }
 
-.md-tabs__link {
+.md-tabs__link,
+.md-tabs a {
   color: rgba(255, 255, 255, 0.9) !important;
+  border-bottom: none;
 }
 
 .md-tabs__link:hover,
-.md-tabs__link--active {
+.md-tabs__link--active,
+.md-tabs a:hover {
   color: #ffffff !important;
 }
 
@@ -281,6 +284,15 @@ img {
 
 .md-header__title {
   color: #ffffff !important;
+}
+
+.md-header a {
+  color: #ffffff !important;
+  border-bottom: none;
+}
+
+.md-header a:hover {
+  color: rgba(255, 255, 255, 0.8) !important;
 }
 
 .md-header__button {
