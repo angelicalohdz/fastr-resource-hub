@@ -139,11 +139,21 @@ Grouped bar chart comparing service volumes across four adjustment scenarios: no
 
 **Interpretation guide**
 
+For the change in service volume chart (output 1):
+
+- **Bars**: Annual service volumes by region
+- **Annotations**: Year-on-year percent change between consecutive years
+
 For the actual vs expected charts (outputs 2–3):
 
 - **Black line**: Actual (observed) service volumes
 - **Red shaded areas**: Shortfall periods (actual below expected)
 - **Green shaded areas**: Surplus periods (actual above expected)
+
+For the volume change chart (output 4):
+
+- **Four bars per year**: Each bar represents a different adjustment scenario
+- Compare bar heights to see how adjustments affect reported volumes
 
 ---
 
