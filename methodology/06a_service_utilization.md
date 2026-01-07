@@ -971,7 +971,7 @@ The Service Utilization module (Module 3 in the FASTR analytics platform) analyz
 <!-- /SLIDE -->
 
 <!-- SLIDE:m6_2 -->
-## Surplus and Disruption Analyses
+## Surplus and disruption analyses
 
 The module detects multiple types of service disruptions:
 

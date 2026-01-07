@@ -841,7 +841,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
 -->
 
 <!-- SLIDE:m5_1 -->
-## Approach to Data Quality Adjustment
+## Approach to data quality adjustment
 
 The Data Quality Adjustment module (Module 2 in the FASTR analytics platform) systematically corrects two common problems in routine health facility data:
 
@@ -867,7 +867,7 @@ This allows analysts to understand how sensitive their results are to different 
 <!-- /SLIDE -->
 
 <!-- SLIDE:m5_2 -->
-## Adjustment for Outliers
+## Adjustment for outliers
 
 For each value flagged as an outlier, the module calculates what the value "should have been" based on that facility's historical pattern.
 
@@ -888,7 +888,7 @@ Heatmap showing percent change in service volumes due to outlier replacement.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m5_3 -->
-## Adjustment for Completeness
+## Adjustment for completeness
 
 For months where data is missing or marked as incomplete, the module imputes (fills in) values using the same rolling average approach.
 

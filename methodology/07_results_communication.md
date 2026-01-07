@@ -356,3 +356,8 @@ This section will cover:
 - Quality assurance for reports
 - Distribution and feedback mechanisms
 <!-- /SLIDE -->
+
+---
+
+**Last updated**: 07-01-2026
+**Contact**: FASTR Project Team

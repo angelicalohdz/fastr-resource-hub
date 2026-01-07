@@ -1523,11 +1523,11 @@ These three questions help us understand if we can trust the data for decision-m
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_2 -->
-## Question 1: Are Facilities Reporting?
+## Question 1: Are facilities reporting?
 
 ---
 
-## Completeness: Did We Get Reports?
+## Completeness: Did we get reports?
 
 **What we're checking:**
 Each month, are facilities sending in their reports?
@@ -1543,7 +1543,7 @@ Each month, are facilities sending in their reports?
 
 ---
 
-## What's Good Completeness?
+## What's good completeness?
 
 **It depends on your health system:**
 - 90%+ is excellent
@@ -1562,11 +1562,11 @@ Each month, are facilities sending in their reports?
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_3 -->
-## Question 2: Are Numbers Reasonable?
+## Question 2: Are numbers reasonable?
 
 ---
 
-## Outliers: Spotting Suspicious Numbers
+## Outliers: Spotting suspicious numbers
 
 **What we're checking:**
 Are there any values that seem way too high compared to what that facility normally reports?
@@ -1618,11 +1618,11 @@ AND for which the count is greater than 100.
 <!-- /SLIDE -->
 
 <!-- SLIDE:m4_4 -->
-## Question 3: Do Related Numbers Match Up?
+## Question 3: Do related numbers match up?
 
 ---
 
-## Consistency: Do Related Services Make Sense Together?
+## Consistency: Do related services make sense together?
 
 **What we're checking:**
 Health services are related - certain patterns are expected.

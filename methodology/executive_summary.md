@@ -55,3 +55,8 @@ Translates analytical outputs into actionable insights for decision-makers. This
 **Geographic Flexibility**: Analysis works at national and sub-national levels, with outputs available at admin area 2 and admin area 3 levels where data quality permits.
 
 **Customizable Settings**: All thresholds, time windows, and adjustment methods can be modified to fit country-specific data and context.
+
+---
+
+**Last updated**: 07-01-2026
+**Contact**: FASTR Project Team

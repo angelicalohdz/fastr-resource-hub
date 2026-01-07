@@ -249,7 +249,7 @@ Statistical methods such as imputation can adjust for incomplete data, but this 
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_3d -->
-## FASTR Core Indicators
+## FASTR core indicators
 
 The FASTR approach focuses on a core set of RMNCAH-N indicators that:
 - Characterize the reproductive, maternal and child healthcare continuum
@@ -272,3 +272,8 @@ This section will cover:
 - Mapping indicators to data elements
 - Planning your extraction timeline
 <!-- /SLIDE -->
+
+---
+
+**Last updated**: 07-01-2026
+**Contact**: FASTR Project Team

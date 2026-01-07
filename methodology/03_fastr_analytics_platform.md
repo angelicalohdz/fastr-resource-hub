@@ -131,3 +131,8 @@ This section will cover:
 - Automated report generation
 - Customizing reports
 <!-- /SLIDE -->
+
+---
+
+**Last updated**: 07-01-2026
+**Contact**: FASTR Project Team

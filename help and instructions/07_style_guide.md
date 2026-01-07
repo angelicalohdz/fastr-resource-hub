@@ -1,6 +1,6 @@
 # Style guide
 
-> **Note:** This is the current working style guide (January 2025). Follow these conventions for consistency, but they are not set in stone. If you find something that doesn't work or have suggestions for improvement, flag it for discussion and we can update the guide.
+> **Note:** This is the current working style guide (January 2026). Follow these conventions for consistency, but they are not set in stone. If you find something that doesn't work or have suggestions for improvement, flag it for discussion and we can update the guide.
 
 This document defines the typographic and formatting conventions for FASTR methodology documentation.
 

@@ -6,7 +6,7 @@ The Global Financing Facility (GFF) supports country-led efforts to improve the 
 
 FASTR encompasses four technical approaches: (1) RMNCAH-N service use monitoring using routine HMIS data, (2) rapid-cycle health facility phone surveys, (3) high-frequency household phone surveys, and (4) follow-on analyses. **This methodology documentation focuses specifically on the first approach: RMNCAH-N service use monitoring.**
 
-## RMNCAH-N Service Use Monitoring
+## RMNCAH-N service use monitoring
 
 The GFF collaborates with Ministries of Health to conduct rapid-cycle analyses of routine health management information system (HMIS) data. This approach addresses three core objectives:
 
@@ -52,7 +52,7 @@ Illustrative capacity-building activities include support to automate the extrac
 
 *Figure 3. Rapid-cycle analytics under the Frequent Assessments and System Tools for Resilience (FASTR) initiative*
 
-## Acronyms and Abbreviations
+## Acronyms and abbreviations
 
 | Acronym | Definition |
 |---------|------------|
@@ -64,7 +64,7 @@ Illustrative capacity-building activities include support to automate the extrac
 | **RMNCAH+N** | Reproductive, Maternal, Newborn, Child, and Adolescent Health and Nutrition |
 | **SSA** | Sub-Saharan Africa |
 
-## Use of Routine Health Management Information System Data in LMICs
+## Use of routine health management information system data in LMICs
 
 Health-facility data collected through routine health management information systems (HMIS) constitute a primary data source for assessing the performance of the health sector. HMIS health data are widely used for a variety of purposes including health sector reviews, planning and resource allocation, program monitoring, health care quality improvement, and reporting purposes. Ministries of Health in low- and middle-income countries (LMICs) are striving to ensure equitable access to quality health services and care towards attaining universal health coverage and other national strategies. The efforts can be more successful if decision making at all levels of the sector are well informed by timely, reliable, and comprehensive data gathered through a well-established health information system. Sound decisions are based on sound data; therefore, it is essential to ensure that the data are of good quality.
 
@@ -83,7 +83,7 @@ Defining data quality is complex, and while there is no one single definition of
 | **Consistency** | Are data plausible in view of what has been previously reported? | • Trends are evaluated to determine whether reported values are extreme relative to other values reported during the year or across several years (**presence of outliers**)<br><br>• Assess trends in program indicators to determine whether reported values are extreme in relation to other values that are reported during the year or over several years (**consistency over time**)<br><br>• Assess program indicators which have a predictable relationship to determine whether the expected relationship exists between those 2 indicators (**consistency between related indicators**)<br><br>• Assess the level of agreement between two sources of data measuring the same health indicator; the two sources of data that are usually compared are data flowing through the HMIS and data from a periodic population-based survey (**external comparison with other data sources**)<br><br>• Determine the adequacy of the population data used in evaluating the performance of health indicators by comparing two different sources of related population estimates for congruence (**consistency of population data**) |
 | **Accuracy** | Do data faithfully reflect the actual level of service delivery conducted in the health facility? | • Assess the accuracy for selected indicators through the review of source documents in health facilities and comparison to monthly reports and HMIS values (**consistency of reported data and original records, data verification factor**) |
 
-## FASTR Approach to Routine Data Analysis
+## FASTR approach to routine data analysis
 
 The FASTR approach to routine data analysis takes a three-pronged approach:
 
@@ -177,7 +177,7 @@ FASTR encompasses four technical approaches:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m0_2 -->
-## RMNCAH-N Service Use Monitoring
+## RMNCAH-N service use monitoring
 
 The GFF collaborates with Ministries of Health to conduct rapid-cycle analyses of routine health management information system (HMIS) data. This approach addresses three core objectives:
 
@@ -231,7 +231,7 @@ Illustrative capacity-building activities include support to automate the extrac
 <!-- /SLIDE -->
 
 <!-- SLIDE:m0_5 -->
-## FASTR Approach to Routine Data Analysis
+## FASTR approach to routine data analysis
 
 The FASTR approach to routine data analysis takes a three-pronged approach:
 
@@ -254,3 +254,8 @@ The FASTR approach prioritizes a core set of RMNCAH-N indicators that span the r
 
 FASTR also relies on a core set of data quality metrics to identify the most critical data quality issues that can be addressed through adjustment methods. In addition to these individual metrics, the approach produces an overall data quality score that synthesizes them into a single summary measure.
 <!-- /SLIDE -->
+
+---
+
+**Last updated**: 07-01-2026
+**Contact**: FASTR Project Team
