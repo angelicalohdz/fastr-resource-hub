@@ -684,6 +684,17 @@ Impact visualization showing how data quality adjustments affect reported servic
     This logic is applied consistently across all admin levels. These adjusted values are then exported as part of the final output files for each level.
 
 
+### Code examples
+
+*Content to be developed*
+
+This section will include R code examples demonstrating:
+
+- Running the module with default settings
+- Adjusting sensitivity parameters
+- Working with outputs programmatically
+
+
 ### Troubleshooting
 
 ??? "Common Issues and Solutions"

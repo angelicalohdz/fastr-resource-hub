@@ -784,7 +784,7 @@ Heatmap showing the percent change in service volume when both outlier and compl
     ```
 
 
-### Usage notes & recommendations
+### Usage notes
 
 ??? "Choosing the Right Scenario"
 

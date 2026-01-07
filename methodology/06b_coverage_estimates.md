@@ -1542,9 +1542,31 @@ Same as national, plus:
     - **Cause**: Missing HMIS data for some years
     - **Solution**: Review Module 2 outputs, check data completeness adjustments
 
+
+### Code examples
+
+*Content to be developed*
+
+This section will include R code examples demonstrating:
+
+- Running the module with default settings
+- Customizing denominator selections
+- Working with coverage outputs programmatically
+
+
+### Usage notes
+
+*Content to be developed*
+
+This section will cover:
+
+- Recommendations for selecting denominators
+- Interpreting coverage estimates
+- Best practices for subnational analysis
+
 ---
 
-**Last updated**: 06-01-2026
+**Last updated**: 07-01-2026
 **Contact**: FASTR Project Team
 
 ---
