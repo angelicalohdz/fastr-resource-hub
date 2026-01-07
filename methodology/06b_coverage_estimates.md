@@ -4,7 +4,7 @@
 
 ### What does this module do?
 
-This module estimates health service coverage by integrating three key data sources: adjusted health service volumes from HMIS (Module 2), population projections from the United Nations, and household survey data from MICS/DHS. It helps answer the question: "What percentage of the target population received this health service?"
+This module estimates health service coverage by integrating three key data sources: adjusted health service volumes from HMIS (Module 2), population projections from the United Nations World Population Prospects (UN WPP), and household survey data from the Multiple Indicator Cluster Surveys (MICS) and Demographic and Health Surveys (DHS). It helps answer the question: "What percentage of the target population received this health service?"
 
 The module operates in two distinct parts.
 
@@ -251,10 +251,10 @@ Part 1 integrates three primary data sources:
 Sourced from the United Nations World Population Prospects, these estimates provide age-specific and total population figures used to calculate denominators for coverage estimates. These projections account for demographic trends, including fertility, mortality, and migration.
 
 **Survey Data - MICS**
-The Multiple Indicator Cluster Surveys (MICS), conducted by UNICEF, provide household survey-based estimates for key health indicators, including coverage of maternal and child health services.
+MICS, conducted by UNICEF, provide household survey-based estimates for key health indicators, including coverage of maternal and child health services.
 
 **Survey Data - DHS**
-The Demographic and Health Surveys (DHS), conducted by USAID, provide survey data on health service utilization, including immunization rates and maternal care coverage.
+DHS, conducted by USAID, provide survey data on health service utilization, including immunization rates and maternal care coverage.
 
 #### Core functions documentation
 
@@ -745,7 +745,7 @@ $$
 
 #### UNWPP-based Denominator Calculations
 
-**Denominators Derived from UN World Population Prospects (WPP)** *(National analysis only)*
+**Denominators Derived from UN WPP** *(National analysis only)*
 
 Instead of using service volumes, these denominators are calculated directly from population projections and demographic rates:
 
