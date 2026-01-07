@@ -177,13 +177,13 @@ National-level coverage trends comparing HMIS-derived estimates against survey b
 
 **2. Coverage calculated from HMIS data (admin area 2)**
 
-Regional/provincial coverage patterns showing geographic variation in service delivery.
+Coverage patterns at an intermediate subnational level (**admin_area_2**), highlighting geographic variation in service delivery across regions.
 
 ![Coverage calculated from HMIS data at admin area 2 level.](resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
 
 **3. Coverage calculated from HMIS data (admin area 3)**
 
-District-level coverage estimates enabling local-level monitoring and targeting.
+Coverage estimates at a finer subnational level (**admin_area_3**), supporting more localized monitoring and identification of subnational disparities.
 
 ![Coverage calculated from HMIS data at admin area 3 level.](resources/default_outputs/Module4_3_Coverage_HMIS_Admin3.png)
 

@@ -67,18 +67,19 @@ The module supports disruption analysis at multiple geographic scales. Users may
 
 **Control chart level selection**
 
-The level at which control charts are calculated determines where statistical modeling is performed. This is configured through two flags:
+The level at which control charts are calculated determines where statistical modeling is performed. This is configured through two flags and follows the FASTR convention in which higher administrative level numbers correspond to smaller geographic units.
 
 - **Default configuration (both flags set to FALSE)**  
-  Control charts are calculated at the provincial level (admin_area_2). Service volumes are aggregated to provinces, and trend estimation, control limit calculation, and disruption detection are performed for each province–indicator combination. This option is the most efficient and is appropriate for routine monitoring.
+  Control charts are calculated at an intermediate subnational level (**admin_area_2**). Service volumes are aggregated to this level, and trend estimation, control limit calculation, and disruption detection are performed for each geography–indicator combination. This option is the most computationally efficient and is suitable for routine monitoring.
 
 - **RUN_DISTRICT_MODEL = TRUE**  
-  Control charts are calculated at the district level (admin_area_3). Service volumes are aggregated to districts, allowing detection of localized disruptions that may be masked in provincial aggregates. This option is more computationally intensive but provides greater spatial resolution.
+  Control charts are calculated at a finer subnational level (**admin_area_3**). Service volumes are aggregated to smaller geographic units, allowing detection of localized disruptions that may be masked at higher levels of aggregation. This option is more computationally intensive but provides greater spatial resolution.
 
 - **RUN_ADMIN_AREA_4_ANALYSIS = TRUE**  
-  Control charts are calculated at the ward or facility level (admin_area_4). This represents the most granular level of analysis and enables identification of facility-specific disruptions. It is the most resource-intensive option and is typically used for detailed, targeted analysis.
+  Control charts are calculated at the most granular geographic level available (**admin_area_4**). This enables identification of highly localized or facility-level disruptions. It is the most resource-intensive option and is typically used for targeted or diagnostic analysis.
 
-The selected control chart level determines where statistical modeling is conducted, including trend estimation, control limit calculation, and disruption flagging. Regardless of the control chart level used, disruption results are aggregated and reported at all available geographic levels (national, provincial, district, and ward).
+The selected control chart level determines where statistical modeling is conducted, including trend estimation, control limit calculation, and disruption flagging. Regardless of the level at which control charts are calculated, disruption results are aggregated and reported at all available geographic levels (national and subnational).
+
 
 **Sensitivity settings**
 
@@ -669,29 +670,29 @@ For the volume change chart (output 4):
     - The `M3_chartout` dataset is merged with the main dataset to integrate the `tagged` variable, which identifies flagged disruptions.
     - The lowest available geographic level (`lowest_geo_level`) is identified for clustering, based on the highest-resolution `admin_area_*` column available.
 
-    #### Step 2: Country-Wide Regression
+    #### Step 2: National-Level Regression
 
     For each `indicator_common_id`, estimate the national-level model with errors clustered at district level.
 
     - A panel regression model is applied at the country-wide level, estimating the expected service volume (`expect_admin_area_1`) for each indicator.
-    - The model adjusts for historical trends and seasonal variations.
-    - If a disruption (`tagged` = 1) is detected, the predicted service volume is adjusted by subtracting the estimated effect of the disruption to isolate its impact.
+    - The model controls for long-term trends and seasonal patterns in service utilization.
+    - When a disruption (`tagged = 1`) is identified, predicted service volumes are adjusted by removing the estimated disruption effect to isolate its impact.
+    
+    #### Step 3: Intermediate Subnational-Level Regression
 
-    #### Step 3: Province-Level Regression
+    For each `indicator_common_id` × `admin_area_2` combination, subnational models are estimated, with standard errors clustered at a lower administrative level.
 
-    For each `indicator_common_id` × `admin_area_2` combination, estimate province-specific models with errors clustered at district level.
+    - A fixed-effects panel regression model is applied at an intermediate subnational level, estimating expected service volumes (`expect_admin_area_2`) while accounting for time-invariant geographic characteristics.
+    - The model controls for historical trends and seasonality.
+    - When a disruption is identified, predicted volumes are adjusted to isolate the disruption effect.
 
-    - A fixed effects panel regression model is applied at the province level, estimating expected service volume (`expect_admin_area_2`) while controlling for province-specific factors.
-    - The model adjusts for historical trends and seasonal variations.
-    - If a disruption is detected, predicted volumes are adjusted to isolate the impact.
+    #### Step 4: Fine Subnational-Level Regression (if enabled)
 
-    #### Step 4: District-Level Regression (if enabled)
+    For each `indicator_common_id` × `admin_area_3` combination, subnational models are estimated, with standard errors clustered at a finer administrative level.
 
-    For each `indicator_common_id` × `admin_area_3` combination, estimate district-specific models with errors clustered at ward level.
-
-    - A fixed effects panel regression model is applied at the district level, estimating expected service volume (`expect_admin_area_3`).
-    - The model adjusts for historical trends and seasonal variations.
-    - If a disruption is detected, predicted volumes are adjusted to isolate the impact.
+    - A fixed-effects panel regression model is applied at a fine subnational level, estimating expected service volumes (`expect_admin_area_3`).
+    - The model controls for historical trends and seasonality.
+    - When a disruption is identified, predicted volumes are adjusted to isolate the disruption effect.
 
     #### Step 5: Prepare Outputs for Visualization
 
