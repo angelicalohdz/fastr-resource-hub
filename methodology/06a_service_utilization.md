@@ -131,15 +131,19 @@ Line charts by region comparing observed volumes to expected patterns.
 
 ![Actual vs expected number of services at subnational level.](resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
 
-- **Black line**: Actual (observed) service volumes
-- **Red shaded areas**: Shortfall periods (actual below expected)
-- **Green shaded areas**: Surplus periods (actual above expected)
-
 **4. Volume change due to data quality adjustments**
 
 Grouped bar chart comparing service volumes across four adjustment scenarios: no adjustment, outlier adjustment only, completeness adjustment only, and both adjustments.
 
 ![Volume change due to data quality adjustments.](resources/default_outputs/Module3_4_Volume_change_adjustments.png)
+
+**Interpretation guide**
+
+For the actual vs expected charts (outputs 2–3):
+
+- **Black line**: Actual (observed) service volumes
+- **Red shaded areas**: Shortfall periods (actual below expected)
+- **Green shaded areas**: Surplus periods (actual above expected)
 
 ---
 
