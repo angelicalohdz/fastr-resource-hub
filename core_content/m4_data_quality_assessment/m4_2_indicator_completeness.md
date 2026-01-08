@@ -4,11 +4,11 @@ theme: fastr
 paginate: true
 ---
 
-## Question 1: Are Facilities Reporting?
+## Question 1: Are facilities reporting?
 
 ---
 
-## Completeness: Did We Get Reports?
+## Completeness: Did we get reports?
 
 **What we're checking:**
 Each month, are facilities sending in their reports?
@@ -24,7 +24,7 @@ Each month, are facilities sending in their reports?
 
 ---
 
-## What's Good Completeness?
+## What's good completeness?
 
 **It depends on your health system:**
 - 90%+ is excellent
@@ -37,6 +37,6 @@ Each month, are facilities sending in their reports?
 
 ---
 
-## Completeness: FASTR Output
+## Completeness: FASTR output
 
 ![Indicator Completeness](../../resources/default_outputs/Default_2._Proportion_of_completed_records.png)

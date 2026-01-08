@@ -1,7 +1,5 @@
 # Identify questions & indicators
 
-This module guides the process of identifying the right questions and indicators for FASTR implementation.
-
 ## Overview
 
 *Full documentation content to be developed*

@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## Service Utilization Analysis
+## Service utilization analysis
 
 The Service Utilization module (Module 3 in the FASTR analytics platform) analyzes health service delivery patterns to detect and quantify disruptions in service volumes over time.
 
@@ -15,13 +15,13 @@ The Service Utilization module (Module 3 in the FASTR analytics platform) analyz
 
 ---
 
-### Two-Stage Analysis Process
+### Two-stage analysis process
 
-**Stage 1: Control Chart Analysis**
+**Part 1: Control chart analysis**
 - Model expected patterns using historical trends and seasonality
 - Detect significant deviations from expected volumes
 - Flag disrupted periods
 
-**Stage 2: Disruption Quantification**
+**Part 2: Disruption quantification**
 - Use panel regression to estimate service volume changes
 - Calculate shortfalls and surpluses in absolute numbers

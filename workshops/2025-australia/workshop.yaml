@@ -89,10 +89,12 @@ schedule:
       - time: "9:00 AM - 10:15 AM"
         session: Introduction to the FASTR Approach
         module: m0
+        speaker: ""
         duration: 75
       - time: "10:15 AM - 10:30 AM"
         session: Identify Questions & Indicators
         module: m1
+        speaker: ""
         duration: 15
       - time: "10:30 AM - 10:45 AM"
         session: Tea Break
@@ -101,9 +103,11 @@ schedule:
       - time: "10:45 AM - 11:30 AM"
         session: Identify Questions & Indicators
         module: m1
+        speaker: ""
         duration: 45
       - time: "11:30 AM - 12:30 PM"
         session: Practical Exercises
+        speaker: ""
         duration: 60
       - time: "12:30 PM - 1:30 PM"
         session: Lunch

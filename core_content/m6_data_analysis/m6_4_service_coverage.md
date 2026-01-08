@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## Service Coverage Estimates
+## Service coverage estimates
 
 The Coverage Estimates module (Module 4 in the FASTR analytics platform) estimates health service coverage by answering: **"What percentage of the target population received this health service?"**
 
@@ -15,14 +15,14 @@ The Coverage Estimates module (Module 4 in the FASTR analytics platform) estimat
 
 ---
 
-### Two-Part Process
+### Two-part process
 
-**Part 1: Denominator Calculation**
+**Part 1: Denominator calculation**
 - Calculate target populations using multiple methods (HMIS-based and population-based)
 - Compare against survey benchmarks
 - Automatically select best denominator for each indicator
 
-**Part 2: Coverage Estimation**
+**Part 2: Coverage estimation**
 - Override automatic selections based on programmatic knowledge
 - Project survey estimates forward using HMIS trends
 - Generate final coverage estimates

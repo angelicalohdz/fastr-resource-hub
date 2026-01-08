@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## Surplus and Disruption Analyses
+## Surplus and disruption analyses
 
 The module detects multiple types of service disruptions:
 
@@ -18,7 +18,7 @@ The module detects multiple types of service disruptions:
 
 ---
 
-### Quantifying Impact
+### Quantifying impact
 
 Disruption analysis quantifies shortfalls and surpluses by comparing:
 - **Predicted volumes** (what would have happened without disruption)

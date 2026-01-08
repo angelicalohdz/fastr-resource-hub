@@ -4,11 +4,11 @@ theme: fastr
 paginate: true
 ---
 
-## Question 2: Are Numbers Reasonable?
+## Question 2: Are numbers reasonable?
 
 ---
 
-## Outliers: Spotting Suspicious Numbers
+## Outliers: Spotting suspicious numbers
 
 **What we're checking:**
 Are there any values that seem way too high compared to what that facility normally reports?
@@ -24,25 +24,22 @@ Are there any values that seem way too high compared to what that facility norma
 
 ---
 
-## How We Spot Outliers
+## How we spot outliers
 
-**We use two checks:**
+Outliers are identified by assessing the within-facility variation in monthly reporting for each indicator.
 
-**Check 1: Is this value much higher than usual for this facility?**
-- Look at the facility's typical monthly values
-- If one month is extremely different, flag it
+A value is flagged as an outlier if it meets EITHER of two criteria:
 
-**Check 2: Does one month account for most of the year's total?**
-- If March has 80% of the facility's annual deliveries, something's wrong
-- Services should be spread more evenly across months
+1. A value greater than 10 times the Median Absolute Deviation (MAD) from the monthly median value for the indicator, OR
+2. A value for which the proportional contribution in volume for a facility, indicator, and time period is greater than 80%
 
-**Both checks together** help us find data entry errors or reporting problems.
+AND for which the count is greater than 100.
 
 ---
 
-## Outlier Example
+## Outlier example
 
-**Health Center B - Malaria Tests:**
+**Health Center B - Malaria tests:**
 
 | Month | Tests Reported | Normal? |
 |-------|----------------|---------|
@@ -57,6 +54,6 @@ Are there any values that seem way too high compared to what that facility norma
 
 ---
 
-## Outliers: FASTR Output
+## Outliers: FASTR output
 
 ![Outliers](../../resources/default_outputs/Default_1._Proportion_of_outliers.png)

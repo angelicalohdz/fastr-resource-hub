@@ -4,11 +4,11 @@ theme: fastr
 paginate: true
 ---
 
-## Question 3: Do Related Numbers Match Up?
+## Question 3: Do related numbers match up?
 
 ---
 
-## Consistency: Do Related Services Make Sense Together?
+## Consistency: Do related services make sense together?
 
 **What we're checking:**
 Health services are related - certain patterns are expected.
@@ -27,7 +27,7 @@ Health services are related - certain patterns are expected.
 
 ---
 
-## Why Check Consistency at District Level?
+## Why check consistency at district level?
 
 **Patients move between facilities:**
 - Woman might get ANC1 at Health Center A
@@ -43,7 +43,7 @@ This accounts for patients visiting different facilities for different services.
 
 ---
 
-## Consistency Example
+## Consistency example
 
 **District X - ANC Services:**
 
@@ -58,6 +58,6 @@ This accounts for patients visiting different facilities for different services.
 
 ---
 
-## Consistency: FASTR Output
+## Consistency: FASTR output
 
 ![Internal Consistency](../../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)

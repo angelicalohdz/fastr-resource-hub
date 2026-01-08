@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## Approach to Data Quality Adjustment
+## Approach to data quality adjustment
 
 The Data Quality Adjustment module (Module 2 in the FASTR analytics platform) systematically corrects two common problems in routine health facility data:
 
@@ -15,7 +15,7 @@ Rather than simply deleting problematic data, this module replaces questionable 
 
 ---
 
-### Four Adjustment Scenarios
+### Four adjustment scenarios
 
 The module produces four parallel versions of the data:
 

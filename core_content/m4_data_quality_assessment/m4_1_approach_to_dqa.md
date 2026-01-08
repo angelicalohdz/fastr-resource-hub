@@ -4,12 +4,12 @@ theme: fastr
 paginate: true
 ---
 
-## Data Quality Assessment
+## Data quality assessment
 
 Understanding the reliability of routine health data
 
 ---
-## Why Talk About Data Quality?
+## Why talk about data quality?
 
 **The challenge:** Health facilities report data every month, but sometimes:
 - Numbers seem too high or too low
@@ -24,7 +24,7 @@ Understanding the reliability of routine health data
 **FASTR's solution:** Check data quality systematically, fix what we can, and be transparent about limitations
 
 ---
-## Three Simple Questions About Data Quality
+## Three simple questions about data quality
 
 **1. Are facilities reporting regularly?**
 - Completeness: Did we get reports from facilities this month?

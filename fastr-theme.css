@@ -410,3 +410,65 @@ section.bg-purple {
 section.bg-purple h1, section.bg-purple h2, section.bg-purple h3 { color: var(--bg-white); border-color: var(--fastr-lime); }
 section.bg-purple strong { color: var(--fastr-lime); }
 section.bg-purple ul > li::marker { color: var(--fastr-lime); }
+
+/* ========================================
+   AGENDA SLIDE - COMPACT TABLES
+   ======================================== */
+/* Use: <!-- _class: agenda --> */
+
+section.agenda {
+  font-size: 18px;
+  padding: 40px 60px;
+}
+
+section.agenda h1 {
+  font-size: 1.8em;
+  margin-bottom: 0.3em;
+}
+
+section.agenda table {
+  margin: 0.3em 0;
+}
+
+section.agenda th,
+section.agenda td {
+  padding: 0.3em 0.6em;
+  font-size: 1em;
+}
+
+section.agenda p {
+  margin: 0.2em 0;
+}
+
+section.agenda strong {
+  font-size: 0.95em;
+}
+
+/* ========================================
+   COMPACT SLIDE - FOR DENSE CONTENT
+   ======================================== */
+/* Use: <!-- _class: compact --> */
+
+section.compact {
+  font-size: 16px;
+  line-height: 1.4;
+  padding: 40px 60px;
+}
+
+section.compact h2 {
+  font-size: 1.5em;
+  margin-bottom: 0.3em;
+}
+
+section.compact h3 {
+  font-size: 1.2em;
+  margin-bottom: 0.2em;
+}
+
+section.compact li {
+  margin-bottom: 0.2em;
+}
+
+section.compact p {
+  margin: 0.4em 0;
+}

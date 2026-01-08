@@ -188,11 +188,24 @@ This set of initiatives and technical support is referred to as **Frequent Asses
 
 ---
 
-FASTR encompasses four technical approaches:
+<div class="columns">
+<div>
+
+**FASTR encompasses four technical approaches:**
+
 1. RMNCAH-N service use monitoring using routine HMIS data
 2. Rapid-cycle health facility phone surveys
 3. High-frequency household phone surveys
-4. Follow-on analyses.
+4. Follow-on analyses
+
+</div>
+<div>
+
+![FASTR Technical Approaches](resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
+
+</div>
+</div>
+
 <!-- /SLIDE -->
 
 <!-- SLIDE:m0_2 -->
@@ -203,14 +216,25 @@ The GFF collaborates with Ministries of Health to conduct rapid-cycle analyses o
 1. **Assess data quality** at national and sub-national levels to identify and address completeness, accuracy, and consistency issues
 2. **Track service utilization changes** by measuring monthly shifts in priority RMNCAH-N health service volumes
 3. **Monitor coverage progress** by comparing service delivery trends against country-specific targets and benchmarks
+<!-- /SLIDE -->
 
----
+<!-- SLIDE:m0_2a -->
+## Implementation steps
 
-These analyses focus on priority indicators tied to national health reforms and World Bank investments, with findings informing country planning processes and project implementation cycles. During the COVID-19 pandemic, the GFF supported Ministries of Health in over 20 countries to monitor the impact of the pandemic on essential health services using this approach.
+<div class="columns">
+<div>
+
+These analyses focus on priority indicators tied to national health reforms and World Bank investments, with findings informing country planning processes and project implementation cycles.
+
+During the COVID-19 pandemic, the GFF supported Ministries of Health in over 20 countries to monitor the impact of the pandemic on essential health services using this approach.
+
+</div>
+<div>
 
 ![Steps to implement RMNCAH-N service use monitoring.](resources/diagrams/Steps%20to%20implement%20RMNCAH-N%20service%20chart.svg)
 
-*Figure 1. Steps to implement RMNCAH-N service use monitoring*
+</div>
+</div>
 <!-- /SLIDE -->
 
 <!-- SLIDE:m0_3 -->
@@ -232,21 +256,37 @@ Rapid-cycle analytic approaches provide timely, rigorous, and high-priority data
 <!-- SLIDE:m0_4 -->
 ## Technical approaches
 
-FASTR's four technical approaches, underpinned by capacity strengthening and data use support, enable countries to use rapid-cycle analytics for strengthening PHC systems and improving RMNCAH-N outcomes through the timely and high-frequency analysis and use of data.
+<!-- layout: none -->
 
-1. **Analysis of routine health management information system (HMIS) data** assesses data quality, quantifies changes in priority health service volumes, and compares trends in service coverage to country targets for priority RMNCAH-N indicators.
+<div class="columns">
+<div>
 
-2. **Rapid-cycle health facility phone surveys** assess the performance of PHC facilities, monitor the implementation of reforms, identify the impact of shocks, and track changes over time. The phone survey is administered to a representative panel sample of PHCs over four quarterly contacts a year.
+FASTR's four technical approaches enable countries to use rapid-cycle analytics for strengthening PHC systems and improving RMNCAH-N outcomes.
 
-3. **High-frequency household phone surveys** provide a snapshot of care seeking behavior, foregone care, financial protection, service coverage, and patient experience of care. Household surveys are currently done in partnership with the World Bank's Living Standards Measurement Study.
+1. **HMIS data analysis**
+2. **Health facility phone surveys**
+3. **Household phone surveys**
+4. **Follow-on analyses**
 
-4. **Follow-on analyses** employ root cause analysis and implementation research approaches to provide deeper understanding of issues uncovered by rapid-cycle analytics (e.g., explaining district-level performance variation, contextualizing the impact of health systems reforms, or investigating underlying causes of data quality issues and service delivery disruptions).
+</div>
+<div>
 
-Illustrative capacity-building activities include support to automate the extraction, cleaning, and analysis of routine data and support to institutionalize rapid phone survey data collection and analysis approaches. Data use support prioritizes the integration of rapid-cycle analytics into existing data review and feedback mechanisms at national and subnational levels to strengthen the systematic use of data for decision making.
+![Rapid-cycle analytics](resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
 
-![Rapid-cycle analytics under the Frequent Assessments and System Tools for Resilience (FASTR) initiative.](resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
+</div>
+</div>
 
-*Figure 3. Rapid-cycle analytics under the Frequent Assessments and System Tools for Resilience (FASTR) initiative*
+---
+
+## Technical approaches: Details
+
+1. **HMIS data analysis** - Assesses data quality, quantifies changes in health service volumes, and compares coverage trends to country targets
+
+2. **Health facility phone surveys** - Assesses PHC performance, monitors reforms, and tracks changes over quarterly contacts
+
+3. **Household phone surveys** - Captures care-seeking behavior, financial protection, and patient experience (with World Bank LSMS)
+
+4. **Follow-on analyses** - Root cause analysis to explain performance variation and investigate data quality issues
 <!-- /SLIDE -->
 
 <!-- SLIDE:m0_5 -->

@@ -1,7 +1,5 @@
 # The FASTR data analytics platform
 
-This module provides guidance on using the FASTR analytics platform for data analysis and visualization.
-
 ## Overview
 
 The FASTR analytics platform is a web-based tool designed to support data quality assessment, adjustment, and analysis for routine health data.

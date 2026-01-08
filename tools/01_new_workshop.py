@@ -860,6 +860,9 @@ schedule:
                     f.write(f"        module: {item['module']}\n")
                 if item.get('type') == 'break':
                     f.write(f"        type: break\n")
+                else:
+                    # Add speaker field for non-break items (edit to add presenter names)
+                    f.write(f"        speaker: \"\"\n")
                 f.write(f"        duration: {item['duration']}\n")
 
         f.write(f"""

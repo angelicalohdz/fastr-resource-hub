@@ -4,7 +4,7 @@ theme: fastr
 paginate: true
 ---
 
-## FASTR Approach to Routine Data Analysis
+## FASTR approach to routine data analysis
 
 The FASTR approach to routine data analysis takes a three-pronged approach:
 
@@ -17,12 +17,12 @@ This approach enables identification of the highest priority data quality issues
 
 ---
 
-### Focus on a Set of Core Indicators
+### Focus on a set of core indicators
 
 The FASTR approach prioritizes a core set of RMNCAH-N indicators that span the reproductive, maternal, and child health continuum and reflect priority service areas across LMICs. These indicators represent key service delivery events with relatively high reporting completeness and volumes, and they act as proxies for other services delivered during the same contact. Outpatient consultations (OPDs) are included as a proxy for overall health service use. The indicator set can be expanded to include country- or programme-specific priorities as needed.
 
 ---
 
-### Focus on a Set of Core Data Quality Metrics
+### Focus on a set of core data quality metrics
 
 FASTR also relies on a core set of data quality metrics to identify the most critical data quality issues that can be addressed through adjustment methods. In addition to these individual metrics, the approach produces an overall data quality score that synthesizes them into a single summary measure.

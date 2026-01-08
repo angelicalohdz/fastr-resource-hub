@@ -186,6 +186,7 @@ MODULES = {
         'topics': [
             ('m0_1', 'm0_1_introduction_to_fastr.md'),
             ('m0_2', 'm0_2_rmncahn_service_use_monitoring.md'),
+            ('m0_2a', 'm0_2a_implementation_steps.md'),
             ('m0_3', 'm0_3_why_rapid_cycle_analytics.md'),
             ('m0_4', 'm0_4_technical_approaches.md'),
             ('m0_5', 'm0_5_fastr_approach_to_routine_data_analysis.md'),
@@ -462,7 +463,8 @@ def prompt_for_workshop(base_dir):
 def generate_agenda_slide(config):
     """
     Generate agenda slide content from YAML config (table format).
-    For workshops > 3 days, splits into multiple slides (2 days per slide).
+    Uses compact 'agenda' class for auto-fit. One day per slide.
+    Includes optional Speaker column.
     """
     schedule = config.get('_yaml_schedule', {})
     agenda = schedule.get('agenda', {})
@@ -471,55 +473,35 @@ def generate_agenda_slide(config):
     if not agenda:
         return None
 
-    # Determine how many days per slide
-    # 1-3 days: all on one slide
-    # 4+ days: 2 days per slide
-    if num_days <= 3:
-        days_per_slide = num_days
-    else:
-        days_per_slide = 2
-
     all_slides = []
 
-    # Generate slides
-    start_day = 1
-    while start_day <= num_days:
-        end_day = min(start_day + days_per_slide - 1, num_days)
+    # Generate one slide per day
+    for day_num in range(1, num_days + 1):
+        day_key = f'day{day_num}'
+        day_items = agenda.get(day_key, [])
 
-        # Build this slide
-        if num_days <= 3:
-            slide_content = "\n# Workshop Agenda\n\n"
-        elif start_day == end_day:
-            slide_content = f"\n# Workshop Agenda (Day {start_day})\n\n"
-        else:
-            slide_content = f"\n# Workshop Agenda (Days {start_day}-{end_day})\n\n"
+        if not day_items:
+            continue
 
-        for day_num in range(start_day, end_day + 1):
-            day_key = f'day{day_num}'
-            day_items = agenda.get(day_key, [])
+        # Use compact agenda class for auto-fit
+        slide_content = "\n<!-- _class: agenda -->\n"
+        slide_content += f"# Workshop Agenda - Day {day_num}\n\n"
+        slide_content += "| Time | Session | Speaker |\n|------|--------|--------|\n"
 
-            if not day_items:
-                continue
+        for item in day_items:
+            time = item.get('time', '')
+            session = item.get('session', '')
+            speaker = item.get('speaker', '')
+            is_break = item.get('type') == 'break'
 
-            slide_content += f"**Day {day_num}**\n\n"
-            slide_content += "| Time | Session |\n|------|--------|\n"
+            if is_break:
+                # Breaks don't show speaker
+                slide_content += f"| {time} | *{session}* | |\n"
+            else:
+                slide_content += f"| {time} | **{session}** | {speaker} |\n"
 
-            for item in day_items:
-                time = item.get('time', '')
-                session = item.get('session', '')
-                is_break = item.get('type') == 'break'
-
-                if is_break:
-                    slide_content += f"| {time} | *{session}* |\n"
-                else:
-                    slide_content += f"| {time} | **{session}** |\n"
-
-            slide_content += "\n"
-
-        slide_content += "---\n"
+        slide_content += "\n---\n"
         all_slides.append(slide_content)
-
-        start_day = end_day + 1
 
     return "".join(all_slides)
 
@@ -847,11 +829,269 @@ def resolve_asset_overrides(content, workshop_id, base_dir):
     return content, overrides_applied
 
 
+def fix_image_paths_for_output(content):
+    """
+    Fix image paths for output folder.
+    Slides from core_content use ../../resources/ but output is in outputs/
+    so we need ../resources/ (one level up from outputs/).
+    """
+    # Fix ../../resources/ to ../resources/
+    content = content.replace('](../../resources/', '](../resources/')
+    content = content.replace('](../resources/', '](../resources/')  # Already correct, no change
+    return content
+
+
+# ═══════════════════════════════════════════════════════════════════════
+# AUTO-LAYOUT DETECTION AND PROCESSING
+# ═══════════════════════════════════════════════════════════════════════
+
+IMAGE_PATTERN = re.compile(r'!\[([^\]]*)\]\(([^)]+)\)')
+LAYOUT_DIRECTIVE_PATTERN = re.compile(r'<!--\s*layout:\s*(\S+)\s*-->')
+
+
+def has_manual_layout(slide_content):
+    """Check if slide already has manual layout markup."""
+    layout_markers = [
+        '<div class="columns',
+        '<div class="columns-3',
+        '<div style=',
+    ]
+    return any(marker in slide_content for marker in layout_markers)
+
+
+def count_images(slide_content):
+    """Count images in slide content."""
+    return len(IMAGE_PATTERN.findall(slide_content))
+
+
+def has_significant_text(slide_content):
+    """Check if slide has enough text content to justify columns layout."""
+    # Remove images, comments, headings, and slide breaks
+    text = slide_content
+    text = IMAGE_PATTERN.sub('', text)
+    text = re.sub(r'<!--.*?-->', '', text, flags=re.DOTALL)
+    text = re.sub(r'^#{1,6}\s+.*$', '', text, flags=re.MULTILINE)
+    text = text.replace('---', '').strip()
+
+    # Require substantial text to justify side-by-side layout
+    # At least 200 characters or 3+ bullet points
+    # Otherwise the text column will have too much whitespace
+    char_count = len(text)
+    bullet_count = len(re.findall(r'^\s*[-*]\s', text, re.MULTILINE))
+
+    return char_count > 200 or bullet_count >= 3
+
+
+def estimate_content_length(slide_content):
+    """
+    Estimate if content will overflow slide area.
+
+    Returns: ('ok' | 'warning' | 'overflow', message)
+    """
+    # Remove images - they have predictable height
+    text = IMAGE_PATTERN.sub('[IMAGE]', slide_content)
+    text = re.sub(r'<!--.*?-->', '', text, flags=re.DOTALL)
+
+    lines = text.strip().split('\n')
+    non_empty_lines = [l for l in lines if l.strip()]
+    char_count = len(text)
+    list_items = len(re.findall(r'^\s*[-*\d]+[.)]?\s', text, re.MULTILINE))
+
+    if len(non_empty_lines) > 22 or char_count > 1800:
+        return ('overflow', f'{len(non_empty_lines)} lines, {char_count} chars')
+    elif len(non_empty_lines) > 18 or char_count > 1200 or list_items > 10:
+        return ('warning', f'{len(non_empty_lines)} lines, {list_items} list items')
+    return ('ok', '')
+
+
+def get_layout_preference(slide_content):
+    """Extract layout preference from directive if present."""
+    match = LAYOUT_DIRECTIVE_PATTERN.search(slide_content)
+    if match:
+        pref = match.group(1).strip().lower()
+        if pref in ['image-left', 'image-right', 'none', 'skip']:
+            return pref
+    return None
+
+
+def apply_image_text_columns(slide_content, image_position='right'):
+    """
+    Wrap slide content with image + text in a two-column layout.
+
+    Args:
+        slide_content: Raw slide markdown
+        image_position: 'left' or 'right' (default: 'right')
+
+    Returns:
+        Transformed slide content with columns layout
+    """
+    lines = slide_content.split('\n')
+
+    # Find directive, heading, and body
+    directive_lines = []
+    heading_line = None
+    body_lines = []
+
+    in_body = False
+    for line in lines:
+        stripped = line.strip()
+        if stripped.startswith('<!--') and ('_class:' in line or 'layout:' in line):
+            directive_lines.append(line)
+        elif not in_body and stripped.startswith('#'):
+            heading_line = line
+            in_body = True
+        elif in_body:
+            body_lines.append(line)
+
+    body_content = '\n'.join(body_lines).strip()
+
+    # Find and extract the image
+    images = IMAGE_PATTERN.findall(body_content)
+    if not images:
+        return slide_content
+
+    # Use first image only
+    alt_text, image_path = images[0]
+    image_md = f'![{alt_text}]({image_path})'
+
+    # Remove image from body to get text content
+    text_content = IMAGE_PATTERN.sub('', body_content, count=1).strip()
+
+    # Remove orphaned figure captions (italicized lines that look like captions)
+    text_lines = text_content.split('\n')
+    cleaned_text_lines = []
+    for line in text_lines:
+        stripped = line.strip()
+        # Skip lines that are just italicized figure captions
+        if stripped.startswith('*') and stripped.endswith('*') and len(stripped) < 100:
+            if 'figure' in stripped.lower():
+                continue
+        cleaned_text_lines.append(line)
+
+    text_content = '\n'.join(cleaned_text_lines).strip()
+
+    # Build the columns layout
+    if image_position == 'left':
+        left_content = image_md
+        right_content = text_content
+    else:
+        left_content = text_content
+        right_content = image_md
+
+    # Assemble the new slide
+    result_parts = []
+    result_parts.extend(directive_lines)
+    if heading_line:
+        result_parts.append(heading_line)
+    result_parts.append('')
+    result_parts.append('<div class="columns">')
+    result_parts.append('<div>')
+    result_parts.append('')
+    result_parts.append(left_content)
+    result_parts.append('')
+    result_parts.append('</div>')
+    result_parts.append('<div>')
+    result_parts.append('')
+    result_parts.append(right_content)
+    result_parts.append('')
+    result_parts.append('</div>')
+    result_parts.append('</div>')
+
+    return '\n'.join(result_parts)
+
+
+def process_slide_auto_layout(slide_content, verbose=False):
+    """
+    Process a single slide for auto-layout.
+
+    Returns: (processed_content, status_message)
+    """
+    # Check for explicit skip directive
+    layout_pref = get_layout_preference(slide_content)
+    if layout_pref in ['none', 'skip']:
+        return slide_content, None
+
+    # Skip if already has manual layout
+    if has_manual_layout(slide_content):
+        return slide_content, None
+
+    # Skip if content has internal slide breaks (multiple slides in one block)
+    # This prevents wrapping slide breaks inside column divs
+    if '\n---\n' in slide_content or slide_content.strip().endswith('---'):
+        return slide_content, None
+
+    # Check content length
+    length_status, length_msg = estimate_content_length(slide_content)
+    warning_msg = None
+    if length_status == 'overflow':
+        warning_msg = f"Content overflow: {length_msg}"
+    elif length_status == 'warning':
+        warning_msg = f"Content may be tight: {length_msg}"
+
+    # Check for auto-layout opportunity: single image + significant text
+    image_count = count_images(slide_content)
+    has_text = has_significant_text(slide_content)
+
+    if image_count == 1 and has_text:
+        # Apply columns layout
+        image_pos = 'left' if layout_pref == 'image-left' else 'right'
+        processed = apply_image_text_columns(slide_content, image_pos)
+        status = f"Auto-layout applied (image {image_pos})"
+        if warning_msg:
+            status += f" [{warning_msg}]"
+        return processed, status
+
+    # No layout change, but maybe a warning
+    return slide_content, warning_msg
+
+
+def process_slides_with_auto_layout(content, verbose=True):
+    """
+    Process all slides in content for auto-layout.
+
+    NOTE: Auto-layout is currently disabled due to complexity with slide breaks.
+    This function now just returns the content unchanged.
+    """
+    # TODO: Re-enable auto-layout with proper slide break handling
+    return content
+
+    # Original implementation (disabled):
+    parts = content.split('\n---\n')
+    processed_parts = []
+    layout_stats = {'applied': 0, 'warnings': 0}
+
+    for i, slide in enumerate(parts):
+        # Skip empty slides and frontmatter
+        if not slide.strip() or slide.strip().startswith('marp:'):
+            processed_parts.append(slide)
+            continue
+
+        processed, status = process_slide_auto_layout(slide, verbose)
+        processed_parts.append(processed)
+
+        if status:
+            if 'Auto-layout applied' in status:
+                layout_stats['applied'] += 1
+                if verbose:
+                    print(f"      [slide {i+1}] {status}")
+            elif 'overflow' in status.lower() or 'warning' in status.lower():
+                layout_stats['warnings'] += 1
+                if verbose:
+                    print(f"      [slide {i+1}] ⚠️  {status}")
+
+    if verbose and (layout_stats['applied'] or layout_stats['warnings']):
+        print(f"\n   Auto-layout: {layout_stats['applied']} layouts applied, {layout_stats['warnings']} warnings")
+
+    return '\n---\n'.join(processed_parts)
+
+
 def read_markdown_file(filepath):
     """Read a markdown file and return its content"""
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
             content = f.read()
+        # Fix image paths for output folder
+        content = fix_image_paths_for_output(content)
         return content
     except FileNotFoundError:
         print(f"Warning: File not found: {filepath}")
@@ -1164,8 +1404,12 @@ paginate: true
             deck_content += closing_content + "\n"
             print(f"\nClosing slides added")
 
+    # Apply auto-layout processing
+    print(f"\nStep 3: Applying auto-layout...")
+    deck_content = process_slides_with_auto_layout(deck_content, verbose=True)
+
     # Write output file
-    print(f"\nStep 3: Writing output file...")
+    print(f"\nStep 4: Writing output file...")
     output_dir = os.path.join(base_dir, "outputs")
     os.makedirs(output_dir, exist_ok=True)
     output_path = os.path.join(output_dir, output_file)
@@ -1182,7 +1426,7 @@ paginate: true
     print(f"\nNext steps:")
     print(f"\n   OPTION 1: Convert to PDF (RECOMMENDED)")
     print(f"   " + "-" * 40)
-    print(f"   marp --no-config {output_path} --theme fastr-theme.css --pdf --allow-local-files")
+    print(f"   marp --html --no-config {output_path} --theme fastr-theme.css --pdf --allow-local-files")
     print(f"\n   Why PDF? Consistent styling, no font issues, ready to present!")
 
     print(f"\n   OPTION 2: Convert to PowerPoint")
