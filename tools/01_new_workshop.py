@@ -123,8 +123,8 @@ def discover_modules(base_dir):
             for f in sorted(os.listdir(item_path)):
                 if f.endswith('.md'):
                     topics.append(f)
-                    # Extract topic ID from filename (e.g., "m3_1_overview.md" -> "m3_1")
-                    match = re.match(r'^(m\d+_\d+)', f)
+                    # Extract topic ID from filename (e.g., "m3_1_overview.md" -> "m3_1", "m1_2a_..." -> "m1_2a")
+                    match = re.match(r'^(m\d+_\d+[a-z]?)', f)
                     if match:
                         topic_ids.append(match.group(1))
 
@@ -819,12 +819,29 @@ def main():
             day_num=day, num_days=num_days
         )
 
-    # Build deck_order from all items across all days (preserves split modules)
-    deck_order_items = ['agenda']
+    # Build deck_order with session slides at appropriate points
+    deck_order_items = ['agenda', '01_objectives.md']
+
     for day in range(1, num_days + 1):
+        # Day 1: Add opening custom slides before modules
+        if day == 1:
+            deck_order_items.append('02_country-overview.md')
+            deck_order_items.append('03_health-priorities.md')
+        else:
+            # Days 2+: Add recap slide
+            deck_order_items.append(f'day{day}_recap.md')
+
+        # Add module content for this day
         for item in days_assignment[day]:
             deck_order_items.append(item['id'])
-    deck_order_items.append('next-steps.md')
+
+        # End of day
+        if day < num_days:
+            # Not final day: wrap-up slide
+            deck_order_items.append(f'day{day}_wrapup.md')
+        else:
+            # Final day: next steps before closing
+            deck_order_items.append('99_next-steps.md')
 
     # Build config
     config = {
@@ -1024,21 +1041,27 @@ schedule:
 content:
   modules: {selected_modules}
   deck_order:
-    - agenda
-    - 01_objectives.md        # Workshop goals
 """)
-        # Add country overview after intro if m0 is included
-        if 0 in selected_modules:
-            f.write(f"    - m0\n")
-        f.write(f"    - 02_country-overview.md  # Country context\n")
-        f.write(f"    - 03_health-priorities.md # Focus areas\n")
-
-        # Add remaining modules
+        # Write deck_order items with helpful comments
         for item in deck_order_items:
-            if item not in ['agenda', 'm0', 'next-steps.md']:
-                f.write(f"    - {item}\n")
-
-        f.write(f"    - 99_next-steps.md        # Action items\n")
+            comment = ""
+            if item == 'agenda':
+                comment = "  # Auto-generated agenda"
+            elif item == '01_objectives.md':
+                comment = "  # Workshop goals"
+            elif item == '02_country-overview.md':
+                comment = "  # Country context"
+            elif item == '03_health-priorities.md':
+                comment = "  # Focus areas"
+            elif item == '99_next-steps.md':
+                comment = "  # Action items"
+            elif item.startswith('day') and '_recap' in item:
+                comment = "  # Morning recap"
+            elif item.startswith('day') and '_wrapup' in item:
+                comment = "  # End of day"
+            elif item.startswith('m'):
+                comment = "  # Module content"
+            f.write(f"    - {item}{comment}\n")
 
         f.write(f"""
   custom_slides:
@@ -1147,6 +1170,80 @@ For questions or support:
     with open(os.path.join(workshop_dir, "99_next-steps.md"), 'w') as f:
         f.write(nextsteps_content)
     print(f"   ✓ 99_next-steps.md")
+
+    # Generate session slides for each day
+    for day in range(1, num_days + 1):
+        # Get modules for this day and previous day
+        day_modules = [MODULES[item['mod_num']]['name'] for item in days_assignment[day]]
+        day_modules_list = '\n'.join([f"- {m}" for m in day_modules])
+
+        if day > 1:
+            # Get previous day's modules for recap
+            prev_day_modules = [MODULES[item['mod_num']]['name'] for item in days_assignment[day - 1]]
+            prev_modules_list = '\n'.join([f"- {m}" for m in prev_day_modules])
+
+            # Recap slide for days 2+
+            recap_content = f"""---
+marp: true
+theme: fastr
+paginate: true
+---
+
+# Day {day}: Recap & Questions
+
+## Yesterday we covered:
+
+{prev_modules_list}
+
+---
+
+## Questions & Discussion
+
+- Any questions from yesterday's sessions?
+- Points that need clarification?
+- Insights from the exercises?
+
+---
+"""
+            with open(os.path.join(workshop_dir, f"day{day}_recap.md"), 'w') as f:
+                f.write(recap_content)
+            print(f"   ✓ day{day}_recap.md")
+
+        if day < num_days:
+            # Get next day's modules for preview
+            next_day_modules = [MODULES[item['mod_num']]['name'] for item in days_assignment[day + 1]]
+            next_modules_short = ', '.join(next_day_modules[:3])
+            if len(next_day_modules) > 3:
+                next_modules_short += ', ...'
+
+            # Wrap-up slide for non-final days
+            wrapup_content = f"""---
+marp: true
+theme: fastr
+paginate: true
+---
+
+# See You Tomorrow!
+
+## Day {day} Complete
+
+We covered today:
+
+{day_modules_list}
+
+---
+
+## Tomorrow: Day {day + 1}
+
+We resume at **{start_time}**
+
+**Coming up:** {next_modules_short}
+
+---
+"""
+            with open(os.path.join(workshop_dir, f"day{day}_wrapup.md"), 'w') as f:
+                f.write(wrapup_content)
+            print(f"   ✓ day{day}_wrapup.md")
 
     # Copy remaining templates (country-overview, coverage-results, etc.)
     templates_dir = os.path.join(base_dir, "templates", "custom_slides")

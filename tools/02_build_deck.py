@@ -368,15 +368,15 @@ def resolve_module_prefix(prefix, exclude=None):
             return (files, module['name'], True)
         return ([], prefix, False)
 
-    # Pattern for topic prefix: m0_1, m4_2, etc.
-    topic_match = re.match(r'^m(\d+)_(\d+)$', prefix)
+    # Pattern for topic prefix: m0_1, m4_2, m1_2a, etc. (with optional letter suffix)
+    topic_match = re.match(r'^m(\d+)_(\d+[a-z]?)$', prefix)
     if topic_match:
         module_num = int(topic_match.group(1))
-        topic_num = int(topic_match.group(2))
+        topic_id = topic_match.group(2)  # e.g., "2" or "2a"
         if module_num in MODULES:
             module = MODULES[module_num]
             folder = module['folder']
-            # Find the topic with matching prefix
+            # First try exact match in predefined topics
             for topic_prefix, topic_file in module['topics']:
                 if topic_prefix == prefix:
                     # Skip if in exclude list
@@ -387,15 +387,28 @@ def resolve_module_prefix(prefix, exclude=None):
                     # Remove the prefix part (e.g., "m0 1 ")
                     topic_name = ' '.join(topic_name.split()[2:]).title()
                     return ([f"{folder}/{topic_file}"], topic_name, True)
+
+            # If not found in predefined list, search filesystem dynamically
+            # This handles topics like m1_2a, m1_2b, etc. not in MODULE_CONTENT
+            core_content_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "core_content", folder)
+            if os.path.exists(core_content_dir):
+                for f in os.listdir(core_content_dir):
+                    if f.startswith(prefix + '_') and f.endswith('.md'):
+                        if prefix in exclude:
+                            return ([], prefix, True)
+                        # Extract readable topic name from filename
+                        topic_name = f.replace('.md', '').replace('_', ' ')
+                        topic_name = ' '.join(topic_name.split()[2:]).title()
+                        return ([f"{folder}/{f}"], topic_name, True)
         return ([], prefix, False)
 
     return ([], prefix, False)
 
 
 def is_module_prefix(item):
-    """Check if an item looks like a module prefix (m0, m0_1, etc.)"""
+    """Check if an item looks like a module prefix (m0, m0_1, m1_2a, etc.)"""
     import re
-    return bool(re.match(r'^m\d+(_\d+)?$', item))
+    return bool(re.match(r'^m\d+(_\d+[a-z]?)?$', item))
 
 
 def list_available_workshops(base_dir):
@@ -516,6 +529,7 @@ def load_yaml_config(yaml_path):
     workshop = yaml_config.get('workshop', {})
     schedule = yaml_config.get('schedule', {})
     content = yaml_config.get('content', {})
+    country_data = yaml_config.get('country_data', {})
 
     # Convert to expected format
     config = {
@@ -540,6 +554,9 @@ def load_yaml_config(yaml_path):
         # Store original YAML schedule for agenda generation
         '_yaml_schedule': schedule,
         '_is_yaml': True,
+
+        # Country-specific data for variable substitution
+        'country_data': country_data,
     }
 
     return config
@@ -612,6 +629,76 @@ def normalize_to_module(item):
     return None
 
 
+def infer_days_from_deck_order(deck_order, yaml_schedule):
+    """
+    Infer day assignments from deck_order using session slide markers.
+
+    Uses dayN_wrapup.md and dayN_recap.md files to determine day boundaries.
+    Falls back to yaml schedule if available.
+
+    Returns: dict mapping deck_order items to their day numbers
+    """
+    import re
+
+    day_info = {}
+    current_day = 1
+
+    # First pass: identify day boundaries from session slides
+    for item in deck_order:
+        # dayN_wrapup.md marks end of day N
+        wrapup_match = re.match(r'day(\d+)_wrapup\.md', item)
+        if wrapup_match:
+            day_info[item] = int(wrapup_match.group(1))
+            continue
+
+        # dayN_recap.md marks start of day N
+        recap_match = re.match(r'day(\d+)_recap\.md', item)
+        if recap_match:
+            day_info[item] = int(recap_match.group(1))
+            continue
+
+    # Second pass: assign days to all items based on markers
+    current_day = 1
+    for item in deck_order:
+        # Check if this is a day marker
+        wrapup_match = re.match(r'day(\d+)_wrapup\.md', item)
+        recap_match = re.match(r'day(\d+)_recap\.md', item)
+
+        if recap_match:
+            # Recap marks start of a new day
+            current_day = int(recap_match.group(1))
+            day_info[item] = current_day
+        elif wrapup_match:
+            # Wrapup is at end of its day
+            day_info[item] = int(wrapup_match.group(1))
+        else:
+            # Regular items belong to current day
+            day_info[item] = current_day
+
+        # After wrapup, move to next day (for subsequent items)
+        if wrapup_match:
+            current_day = int(wrapup_match.group(1)) + 1
+
+    # Build break info from yaml schedule if available
+    if yaml_schedule and 'agenda' in yaml_schedule:
+        agenda = yaml_schedule['agenda']
+        for day_key, sessions in agenda.items():
+            day_match = re.match(r'day(\d+)', day_key)
+            if day_match:
+                day_num = int(day_match.group(1))
+                for session in sessions:
+                    if 'module' in session:
+                        module_id = session['module']
+                        # Update any items that match this module
+                        for item in deck_order:
+                            if is_module_prefix(item):
+                                item_module = item.split('_')[0] if '_' in item else item
+                                if item_module == module_id and item not in day_info:
+                                    day_info[item] = day_num
+
+    return day_info
+
+
 def generate_schedule(sessions, num_days, config):
     """Generate a schedule based on sessions and number of days"""
     preset = SCHEDULE_PRESETS.get(num_days, SCHEDULE_PRESETS[2])
@@ -675,8 +762,8 @@ def generate_schedule(sessions, num_days, config):
 def get_module_info(item):
     """Get display info for a module prefix or custom item"""
     import re
-    # Check if it's a module prefix (m0, m1, m4_2, etc.)
-    module_match = re.match(r'^m(\d+)(_\d+)?$', item)
+    # Check if it's a module prefix (m0, m1, m4_2, m1_2a, etc.)
+    module_match = re.match(r'^m(\d+)(_\d+[a-z]?)?$', item)
     if module_match:
         module_num = int(module_match.group(1))
         if module_num in MODULES:
@@ -1269,6 +1356,17 @@ def build_workshop_deck(workshop_id, base_dir, output_file=None, skip_confirmati
     break_info = {}
     for entry in schedule:
         break_info[entry['session']] = entry
+
+    # For YAML configs, also infer days from deck_order markers (dayN_wrapup.md, dayN_recap.md)
+    if config.get('_is_yaml'):
+        yaml_schedule = config.get('_yaml_schedule', {})
+        day_info = infer_days_from_deck_order(deck_order, yaml_schedule)
+        # Update break_info with inferred day info
+        for item, day_num in day_info.items():
+            if item not in break_info:
+                break_info[item] = {'day': day_num}
+            else:
+                break_info[item]['day'] = day_num
 
     # Step 5: Preview and confirm
     if not skip_confirmation:
