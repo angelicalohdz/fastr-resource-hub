@@ -8,11 +8,14 @@ This module guides the process of identifying the right questions and indicators
 
 This section will cover the complete process of:
 
-1. **Introduction to FASTR: gaps and challenges** - Identifying gaps and challenges that FASTR is well suited to support, how FASTR serves as an entry point to reduce fragmentation, and starting the conversation with government stakeholders
+1. **Introduction to FASTR: gaps and challenges**
+- Identifying gaps and challenges that FASTR is well suited to support, how FASTR serves as an entry point to reduce fragmentation, and starting the conversation with government stakeholders
 
-2. **Development of a data use case** - Co-creation workshop approach with Ministry of Health (MoH) and stakeholders, data use case development guidance, and example use cases from country implementations
+2. **Development of a data use case** 
+- Co-creation workshop approach with Ministry of Health (MoH) and stakeholders, data use case development guidance, and example use cases from country implementations
 
-3. **Defining priority questions and selecting indicators** - How to define priority questions for FASTR analysis, criteria for selecting indicators, what makes a good FASTR indicator, and aligning indicators with national strategies
+3. **Defining priority questions and selecting indicators** 
+- How to define priority questions for FASTR analysis, criteria for selecting indicators, what makes a good FASTR indicator, and aligning indicators with national strategies
 
 ## Defining priority questions
 
