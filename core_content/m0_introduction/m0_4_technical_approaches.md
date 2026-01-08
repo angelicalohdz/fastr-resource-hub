@@ -4,36 +4,24 @@ theme: fastr
 paginate: true
 ---
 
-## Technical approaches
+## Focus of the analysis
 
-<!-- layout: none -->
+### Core indicators
 
-<div class="columns">
-<div>
+FASTR prioritizes a core set of RMNCAH-N indicators that:
 
-FASTR's four technical approaches enable countries to use rapid-cycle analytics for strengthening PHC systems and improving RMNCAH-N outcomes.
+- Represent key service delivery contacts across the continuum of care
+- Have relatively high reporting completeness and volumes
+- Serve as proxies for broader service delivery performance
 
-1. **HMIS data analysis**
-2. **Health facility phone surveys**
-3. **Household phone surveys**
-4. **Follow-on analyses**
+Outpatient consultations are included as a proxy for overall health service use. The indicator set can be expanded to reflect country-specific priorities.
 
-</div>
-<div>
+### Core data quality metrics
 
-![Rapid-cycle analytics](../../resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
+Analysis is anchored in a standardized set of data quality metrics, including:
 
-</div>
-</div>
+- Reporting completeness
+- Extreme value (outlier) detection
+- Consistency across related indicators
 
----
-
-## Technical approaches: Details
-
-1. **HMIS data analysis** - Assesses data quality, quantifies changes in health service volumes, and compares coverage trends to country targets
-
-2. **Health facility phone surveys** - Assesses PHC performance, monitors reforms, and tracks changes over quarterly contacts
-
-3. **Household phone surveys** - Captures care-seeking behavior, financial protection, and patient experience (with World Bank LSMS)
-
-4. **Follow-on analyses** - Root cause analysis to explain performance variation and investigate data quality issues
+These metrics are summarized into an overall data quality score to support interpretation and comparison across areas.

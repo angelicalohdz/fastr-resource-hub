@@ -4,10 +4,28 @@ theme: fastr
 paginate: true
 ---
 
-## RMNCAH-N service use monitoring
+## What FASTR does with routine HMIS data
 
-The GFF collaborates with Ministries of Health to conduct rapid-cycle analyses of routine health management information system (HMIS) data. This approach addresses three core objectives:
+<div class="columns">
+<div>
 
-1. **Assess data quality** at national and sub-national levels to identify and address completeness, accuracy, and consistency issues
-2. **Track service utilization changes** by measuring monthly shifts in priority RMNCAH-N health service volumes
-3. **Monitor coverage progress** by comparing service delivery trends against country-specific targets and benchmarks
+FASTR works directly with Ministries of Health to transform routine HMIS data into actionable evidence for policy and program management.
+
+Using facility-level data, the approach focuses on three core analytic functions:
+
+**Assess data quality**
+Identify key issues related to completeness, outliers, and internal consistency.
+
+**Adjust for data quality limitations**
+Apply transparent, indicator-specific methods to improve the reliability of trend analysis.
+
+**Analyze service use and coverage trends**
+Track changes in priority RMNCAH-N services and compare progress against country priorities and benchmarks.
+
+</div>
+<div>
+
+![Steps to implement RMNCAH-N service use monitoring](../../resources/diagrams/Steps%20to%20implement%20RMNCAH-N%20service%20chart.svg)
+
+</div>
+</div>

@@ -11,91 +11,94 @@ paginate: true
 
 *TBD*
 
-<img src="../assets/logos/FASTR_Primary_01_FullName.png" style="position: absolute; bottom: 40px; right: 40px; width: 180px;">
+<img src="../resources/logos/FASTR_Primary_01_FullName.png" style="position: absolute; bottom: 40px; right: 40px; width: 180px;">
 
 ---
 
 
-# Workshop Agenda (Days 1-2)
+<!-- _class: agenda -->
+# Workshop Agenda - Day 1
 
-**Day 1**
-
-| Time | Session |
-|------|--------|
-| 9:00 AM - 10:15 AM | **Introduction to the FASTR Approach** |
-| 10:15 AM - 10:30 AM | **Identify Questions & Indicators** |
-| 10:30 AM - 10:45 AM | *Tea Break* |
-| 10:45 AM - 11:30 AM | **Identify Questions & Indicators** |
-| 11:30 AM - 12:30 PM | **Practical Exercises** |
-| 12:30 PM - 1:30 PM | *Lunch* |
-| 1:30 PM - 3:30 PM | **Practical Exercises** |
-| 3:30 PM - 3:45 PM | *Afternoon Tea* |
-| 3:45 PM - 4:45 PM | **Group Work & Discussion** |
-| 4:45 PM - 5:00 PM | **Day Wrap-up & Q&A** |
-
-**Day 2**
-
-| Time | Session |
-|------|--------|
-| 9:00 AM - 9:30 AM | **Data Extraction** |
-| 9:30 AM - 10:30 AM | **The FASTR Data Analytics Platform** |
-| 10:30 AM - 10:45 AM | *Tea Break* |
-| 10:45 AM - 11:45 AM | **The FASTR Data Analytics Platform** |
-| 11:45 AM - 12:30 PM | **Practical Exercises** |
-| 12:30 PM - 1:30 PM | *Lunch* |
-| 1:30 PM - 3:30 PM | **Practical Exercises** |
-| 3:30 PM - 3:45 PM | *Afternoon Tea* |
-| 3:45 PM - 4:45 PM | **Group Work & Discussion** |
-| 4:45 PM - 5:00 PM | **Day Wrap-up & Q&A** |
+| Time | Session | Speaker |
+|------|--------|--------|
+| 9:00 AM - 10:15 AM | **Introduction to the FASTR Approach** |  |
+| 10:15 AM - 10:30 AM | **Identify Questions & Indicators** |  |
+| 10:30 AM - 10:45 AM | *Tea Break* | |
+| 10:45 AM - 11:30 AM | **Identify Questions & Indicators** |  |
+| 11:30 AM - 12:30 PM | **Practical Exercises** |  |
+| 12:30 PM - 1:30 PM | *Lunch* | |
+| 1:30 PM - 3:30 PM | **Practical Exercises** |  |
+| 3:30 PM - 3:45 PM | *Afternoon Tea* | |
+| 3:45 PM - 4:45 PM | **Group Work & Discussion** |  |
+| 4:45 PM - 5:00 PM | **Day Wrap-up & Q&A** |  |
 
 ---
 
-# Workshop Agenda (Days 3-4)
+<!-- _class: agenda -->
+# Workshop Agenda - Day 2
 
-**Day 3**
-
-| Time | Session |
-|------|--------|
-| 9:00 AM - 10:15 AM | **Data Quality Assessment** |
-| 10:15 AM - 10:30 AM | **Data Quality Adjustment** |
-| 10:30 AM - 10:45 AM | *Tea Break* |
-| 10:45 AM - 11:30 AM | **Data Quality Adjustment** |
-| 11:30 AM - 12:30 PM | **Practical Exercises** |
-| 12:30 PM - 1:30 PM | *Lunch* |
-| 1:30 PM - 3:30 PM | **Practical Exercises** |
-| 3:30 PM - 3:45 PM | *Afternoon Tea* |
-| 3:45 PM - 4:45 PM | **Group Work & Discussion** |
-| 4:45 PM - 5:00 PM | **Day Wrap-up & Q&A** |
-
-**Day 4**
-
-| Time | Session |
-|------|--------|
-| 9:00 AM - 10:30 AM | **Data Analysis** |
-| 10:30 AM - 10:45 AM | *Tea Break* |
-| 10:45 AM - 12:30 PM | **Practical Exercises** |
-| 12:30 PM - 1:30 PM | *Lunch* |
-| 1:30 PM - 3:30 PM | **Practical Exercises** |
-| 3:30 PM - 3:45 PM | *Afternoon Tea* |
-| 3:45 PM - 4:45 PM | **Group Work & Discussion** |
-| 4:45 PM - 5:00 PM | **Day Wrap-up & Q&A** |
+| Time | Session | Speaker |
+|------|--------|--------|
+| 9:00 AM - 9:30 AM | **Data Extraction** |  |
+| 9:30 AM - 10:30 AM | **The FASTR Data Analytics Platform** |  |
+| 10:30 AM - 10:45 AM | *Tea Break* | |
+| 10:45 AM - 11:45 AM | **The FASTR Data Analytics Platform** |  |
+| 11:45 AM - 12:30 PM | **Practical Exercises** |  |
+| 12:30 PM - 1:30 PM | *Lunch* | |
+| 1:30 PM - 3:30 PM | **Practical Exercises** |  |
+| 3:30 PM - 3:45 PM | *Afternoon Tea* | |
+| 3:45 PM - 4:45 PM | **Group Work & Discussion** |  |
+| 4:45 PM - 5:00 PM | **Day Wrap-up & Q&A** |  |
 
 ---
 
-# Workshop Agenda (Day 5)
+<!-- _class: agenda -->
+# Workshop Agenda - Day 3
 
-**Day 5**
+| Time | Session | Speaker |
+|------|--------|--------|
+| 9:00 AM - 10:15 AM | **Data Quality Assessment** |  |
+| 10:15 AM - 10:30 AM | **Data Quality Adjustment** |  |
+| 10:30 AM - 10:45 AM | *Tea Break* | |
+| 10:45 AM - 11:30 AM | **Data Quality Adjustment** |  |
+| 11:30 AM - 12:30 PM | **Practical Exercises** |  |
+| 12:30 PM - 1:30 PM | *Lunch* | |
+| 1:30 PM - 3:30 PM | **Practical Exercises** |  |
+| 3:30 PM - 3:45 PM | *Afternoon Tea* | |
+| 3:45 PM - 4:45 PM | **Group Work & Discussion** |  |
+| 4:45 PM - 5:00 PM | **Day Wrap-up & Q&A** |  |
 
-| Time | Session |
-|------|--------|
-| 9:00 AM - 10:15 AM | **Results Communication and Data Use** |
-| 10:30 AM - 10:45 AM | *Tea Break* |
-| 10:45 AM - 12:30 PM | **Practical Exercises** |
-| 12:30 PM - 1:30 PM | *Lunch* |
-| 1:30 PM - 3:30 PM | **Practical Exercises** |
-| 3:30 PM - 3:45 PM | *Afternoon Tea* |
-| 3:45 PM - 4:45 PM | **Group Work & Discussion** |
-| 4:45 PM - 5:00 PM | **Day Wrap-up & Q&A** |
+---
+
+<!-- _class: agenda -->
+# Workshop Agenda - Day 4
+
+| Time | Session | Speaker |
+|------|--------|--------|
+| 9:00 AM - 10:30 AM | **Data Analysis** |  |
+| 10:30 AM - 10:45 AM | *Tea Break* | |
+| 10:45 AM - 12:30 PM | **Practical Exercises** |  |
+| 12:30 PM - 1:30 PM | *Lunch* | |
+| 1:30 PM - 3:30 PM | **Practical Exercises** |  |
+| 3:30 PM - 3:45 PM | *Afternoon Tea* | |
+| 3:45 PM - 4:45 PM | **Group Work & Discussion** |  |
+| 4:45 PM - 5:00 PM | **Day Wrap-up & Q&A** |  |
+
+---
+
+<!-- _class: agenda -->
+# Workshop Agenda - Day 5
+
+| Time | Session | Speaker |
+|------|--------|--------|
+| 9:00 AM - 10:15 AM | **Results Communication and Data Use** |  |
+| 10:30 AM - 10:45 AM | *Tea Break* | |
+| 10:45 AM - 12:30 PM | **Practical Exercises** |  |
+| 12:30 PM - 1:30 PM | *Lunch* | |
+| 1:30 PM - 3:30 PM | **Practical Exercises** |  |
+| 3:30 PM - 3:45 PM | *Afternoon Tea* | |
+| 3:45 PM - 4:45 PM | **Group Work & Discussion** |  |
+| 4:45 PM - 5:00 PM | **Day Wrap-up & Q&A** |  |
 
 ---
 
@@ -123,27 +126,57 @@ By the end of this workshop, participants will be able to:
 
 ## Introduction to FASTR
 
-The Global Financing Facility (GFF) supports country-led efforts to improve the timely use of data for decision-making, ultimately leading to stronger primary healthcare (PHC) systems and better reproductive, maternal, newborn, child, and adolescent health and nutrition (RMNCAH-N) outcomes. This set of initiatives and technical support is referred to as **Frequent Assessments and Health System Tools for Resilience (FASTR)**.
+<div class="columns">
+<div>
 
-FASTR encompasses four technical approaches: (1) RMNCAH-N service use monitoring using routine HMIS data, (2) rapid-cycle health facility phone surveys, (3) high-frequency household phone surveys, and (4) follow-on analyses. **This methodology documentation focuses specifically on the first approach: RMNCAH-N service use monitoring.**
+The Global Financing Facility (GFF) supports country-led efforts to strengthen the use of timely data for decision-making, with the goal of improving primary healthcare (PHC) performance and RMNCAH-N outcomes.
+
+**Frequent Assessments and Health System Tools for Resilience (FASTR)** is the GFF's rapid-cycle analytics framework for monitoring health system performance using high-frequency data.
+
+FASTR brings together four complementary technical approaches:
+
+1. Routine HMIS data analysis
+2. Health facility phone surveys
+3. High-frequency household phone surveys
+4. Follow-on, problem-driven analyses
+
+</div>
+<div>
+
+![FASTR Technical Approaches](../resources/diagrams/Technical-Rapid-cycle-analytics--V3.svg)
+
+</div>
+</div>
 
 ---
 
 
 
-## RMNCAH-N Service Use Monitoring
+## What FASTR does with routine HMIS data
 
-The GFF collaborates with Ministries of Health to conduct rapid-cycle analyses of routine health management information system (HMIS) data. This approach addresses three core objectives:
+<div class="columns">
+<div>
 
-1. **Assess data quality** at national and sub-national levels to identify and address completeness, accuracy, and consistency issues
-2. **Track service utilization changes** by measuring monthly shifts in priority RMNCAH-N health service volumes
-3. **Monitor coverage progress** by comparing service delivery trends against country-specific targets and benchmarks
+FASTR works directly with Ministries of Health to transform routine HMIS data into actionable evidence for policy and program management.
 
-These analyses focus on priority indicators tied to national health reforms and World Bank investments, with findings informing country planning processes and project implementation cycles. During the COVID-19 pandemic, the GFF supported Ministries of Health in over 20 countries to monitor the impact of the pandemic on essential health services using this approach.
+Using facility-level data, the approach focuses on three core analytic functions:
 
-![Steps to implement RMNCAH-N service use monitoring.](../../resources/default_outputs/Steps%20to%20implement%20RMNCAH-N%20service%20chart.svg)
+**Assess data quality**
+Identify key issues related to completeness, outliers, and internal consistency.
 
-*Figure 1. Steps to implement RMNCAH-N service use monitoring*
+**Adjust for data quality limitations**
+Apply transparent, indicator-specific methods to improve the reliability of trend analysis.
+
+**Analyze service use and coverage trends**
+Track changes in priority RMNCAH-N services and compare progress against country priorities and benchmarks.
+
+</div>
+<div>
+
+![Steps to implement RMNCAH-N service use monitoring](../resources/diagrams/Steps%20to%20implement%20RMNCAH-N%20service%20chart.svg)
+
+</div>
+</div>
 
 ---
 
@@ -151,65 +184,71 @@ These analyses focus on priority indicators tied to national health reforms and 
 
 ## Why rapid-cycle analytics?
 
-Existing health systems data sources are critical but often come with challenges that limit their use. Health management information system data may not be analyzed promptly or may be perceived as too low-quality to use for decision making. Traditional in-person household and facility-based surveys demand extensive resources and time, with long lags between survey design, data collection, and the availability of findings. This prevents decision-makers from using data to drive meaningful improvements in health outcomes. To fill this gap, the GFF supports countries to develop and use rapid-cycle analytic approaches.
+<div class="columns">
+<div>
 
----
+Routine health information systems are a critical source of data, but they are often underused due to concerns about data quality and long delays between data collection and analysis. Traditional household and facility surveys, while essential, are resource-intensive and infrequent.
 
-### How does it work?
+FASTR's rapid-cycle analytics address this gap by providing:
 
-Rapid-cycle analytic approaches provide timely, rigorous, and high-priority data that respond to each country's specific priorities and data use needs. This continuous cycle of analyze-learn-strengthen-act seeks to improve the systematic use of data for decision-making towards improved RMNCAH-N outcomes.
+- Timely insights aligned with country decision cycles
+- Continuous learning rather than one-off assessments
+- Direct feedback loops between data, analysis, and action
 
-![FASTR rapid-cycle analytics framework showing the continuous cycle of analyze, learn, strengthen, and act.](../../resources/default_outputs/GFF-Rapid-Cycle-Analytics-Data-Use_Figure-1.svg)
+During the COVID-19 pandemic, this approach was applied in over 20 countries to monitor disruptions to essential RMNCAH-N services and inform response and recovery planning.
 
-*Figure 2. FASTR's rapid-cycle analytics approach: Analyze, learn, strengthen, act*
+</div>
+<div>
 
----
+![FASTR rapid-cycle analytics framework](../resources/diagrams/GFF-Rapid-Cycle-Analytics-Data-Use_Figure-1.svg)
 
-
-
-## Technical Approaches
-
-FASTR's four technical approaches, underpinned by capacity strengthening and data use support, enable countries to use rapid-cycle analytics for strengthening PHC systems and improving RMNCAH-N outcomes through the timely and high-frequency analysis and use of data.
-
-1. **Analysis of routine health management information system (HMIS) data** assesses data quality, quantifies changes in priority health service volumes, and compares trends in service coverage to country targets for priority RMNCAH-N indicators.
-
-2. **Rapid-cycle health facility phone surveys** assess the performance of PHC facilities, monitor the implementation of reforms, identify the impact of shocks, and track changes over time. The phone survey is administered to a representative panel sample of PHCs over four quarterly contacts a year.
-
-3. **High-frequency household phone surveys** provide a snapshot of care seeking behavior, foregone care, financial protection, service coverage, and patient experience of care. Household surveys are currently done in partnership with the World Bank's Living Standards Measurement Study.
-
-4. **Follow-on analyses** employ root cause analysis and implementation research approaches to provide deeper understanding of issues uncovered by rapid-cycle analytics (e.g., explaining district-level performance variation, contextualizing the impact of health systems reforms, or investigating underlying causes of data quality issues and service delivery disruptions).
-
-Illustrative capacity-building activities include support to automate the extraction, cleaning, and analysis of routine data and support to institutionalize rapid phone survey data collection and analysis approaches. Data use support prioritizes the integration of rapid-cycle analytics into existing data review and feedback mechanisms at national and subnational levels to strengthen the systematic use of data for decision making.
-
-![Rapid-cycle analytics under the Frequent Assessments and System Tools for Resilience (FASTR) initiative.](../../resources/default_outputs/Technical-Rapid-cycle-analytics--V3.svg)
-
-*Figure 3. Rapid-cycle analytics under the Frequent Assessments and System Tools for Resilience (FASTR) initiative*
+</div>
+</div>
 
 ---
 
 
 
-## FASTR Approach to Routine Data Analysis
+## Focus of the analysis
 
-The FASTR approach to routine data analysis takes a three-pronged approach:
+### Core indicators
 
-1. **Identify issues in data quality**
-2. **Adjust for issues with data quality** to improve analysis accuracy
-3. **Analyze data to answer pressing country-specific policy questions** including identifying changes in priority service volumes and trends in service coverage as compared to country priorities and targets
+FASTR prioritizes a core set of RMNCAH-N indicators that:
 
-This approach enables identification of the highest priority data quality issues and subsequent necessary analytical adjustments so that data can be continually improved while appropriate analyses are conducted. Data quality assessment is conducted by indicator and can be disaggregated at sub-national level given facility-level data is used for the analysis. This is important to generate policy relevant regular reporting on data quality, service volume, and coverage estimates which provides a continual snapshot of RMNCAH-N service use.
+- Represent key service delivery contacts across the continuum of care
+- Have relatively high reporting completeness and volumes
+- Serve as proxies for broader service delivery performance
+
+Outpatient consultations are included as a proxy for overall health service use. The indicator set can be expanded to reflect country-specific priorities.
+
+### Core data quality metrics
+
+Analysis is anchored in a standardized set of data quality metrics, including:
+
+- Reporting completeness
+- Extreme value (outlier) detection
+- Consistency across related indicators
+
+These metrics are summarized into an overall data quality score to support interpretation and comparison across areas.
 
 ---
 
-### Focus on a Set of Core Indicators
 
-The FASTR approach to routine data analysis focuses on a core set of RMNCAH-N indicators that characterize the reproductive, maternal and child healthcare continuum, priority health areas across LMICs. These indicators capture key service delivery events, which have higher completeness rates and higher volume. In addition, these indicators serve as proxies for other services and interventions delivered at the same service contact. In addition, outpatient consultations (OPDs) are used as a proxy for the general use of health services. Additional, country and program-specific indicators can be added to the analysis to be responsive to country priorities.
 
----
+## FASTR approach to routine data analysis
 
-### Focus on a Set of Core Data Quality Metrics
+The FASTR approach follows a three-step workflow:
 
-The FASTR approach to routine data analysis focuses on a core set of data quality metrics which enables identification of the highest priority data quality issues for which data quality adjustments can be made. In addition to the core data quality measures, the FASTR approach generates an overall data quality score which combines the core metrics into a single summary measure.
+### 1. Assess data quality
+Identify issues related to completeness, outliers, and internal consistency at national and subnational levels.
+
+### 2. Adjust for data quality limitations
+Apply transparent, indicator-specific corrections to improve the reliability of trend analysis.
+
+### 3. Analyze service delivery
+Quantify changes in priority service volumes and compare coverage trends against country targets.
+
+This enables continuous, subnational monitoring while data quality is systematically improved.
 
 ---
 
@@ -298,7 +337,7 @@ We'll resume at 10:30 AM
 
 
 
-## Introduction to FASTR: Gaps and Challenges
+## Introduction to FASTR: gaps and challenges
 
 *Content to be developed*
 
@@ -311,7 +350,7 @@ This section will cover:
 
 
 
-## Development of a Data Use Case
+## Development of a data use case
 
 *Content to be developed*
 
@@ -324,21 +363,19 @@ This section will cover:
 
 
 
-## Defining Priority Questions and Selecting Indicators
+## What makes a good indicator for FASTR analysis?
 
-*Content to be developed*
-
-This section will cover:
-- How to define priority questions for FASTR analysis
-- Criteria for selecting indicators
-- What makes a good FASTR indicator
-- Aligning indicators with national strategies
+- **Relevance**: Does this indicator align with our priority questions and objectives?
+- **Volume**: Is this indicator collected at a high volume, improving robustness of analysis?
+- **Completeness**: Does the indicator have a high completeness rate across reporting facilities?
+- **Frequency**: Is the indicator reported frequently enough (e.g., monthly) to support rapid-cycle analysis?
+- **Type**: Is this indicator a count of services delivered?
 
 ---
 
 
 
-## Preparing for Data Extraction
+## Preparing for data extraction
 
 *Content to be developed*
 
@@ -370,11 +407,11 @@ We resume tomorrow at **9:00 AM**
 ---
 
 
-## Why Extract Data?
+## Why extract data from DHIS2?
 
-### Why Extract Data from DHIS2? Why not analyse directly inside DHIS2?
+### Data quality adjustment
 
-**The FASTR Analytics Platform applies data quality adjustments**
+The FASTR approach focuses on data quality adjustments to expand the analyses countries can do with DHIS2 data and to generate more robust estimates.
 
 The FASTR methodology includes specific approaches to:
 - Identify and adjust for outliers
@@ -383,18 +420,11 @@ The FASTR methodology includes specific approaches to:
 
 These adjustments require processing that cannot be done within DHIS2's native analytics.
 
-### What Format and Granularity is Required?
-
-Data should be extracted at the **facility-month level** to enable:
-- Facility-level data quality assessment
-- Subnational disaggregation of results
-- Longitudinal trend analysis
-
 ---
 
 
 
-## Tools for Data Extraction
+## Tools for data extraction
 
 *Content to be developed*
 
@@ -416,20 +446,19 @@ We'll resume at 10:30 AM
 ---
 
 
-## Overview of the Platform
+## Overview of the platform
 
-*Content to be developed*
+The FASTR analytics platform is a web-based tool designed to support data quality assessment, adjustment, and analysis for routine health data.
 
-This section will cover:
-- Introduction to the FASTR analytics platform
-- Key features and capabilities
-- How the platform supports the FASTR methodology
+It allows users to upload and analyze data from various sources, including DHIS2, with built-in statistical methods to generate an adjusted dataset and run priority analyses on selected indicators.
+
+The platform provides a user-friendly interface for running analyses and offers flexible options for visualizing and exporting results.
 
 ---
 
 
 
-## Accessing the Platform
+## Accessing the platform
 
 *Content to be developed*
 
@@ -442,7 +471,7 @@ This section will cover:
 
 
 
-## Setting Up the Structure
+## Setting up the structure
 
 *Content to be developed*
 
@@ -455,7 +484,7 @@ This section will cover:
 
 
 
-## Importing a Dataset
+## Importing a dataset
 
 *Content to be developed*
 
@@ -468,7 +497,7 @@ This section will cover:
 
 
 
-## Installing and Running Modules
+## Installing and running modules
 
 *Content to be developed*
 
@@ -481,7 +510,7 @@ This section will cover:
 
 
 
-## Creating a New Project
+## Creating a new project
 
 *Content to be developed*
 
@@ -494,7 +523,7 @@ This section will cover:
 
 
 
-## Creating Visualizations
+## Creating visualizations
 
 *Content to be developed*
 
@@ -507,7 +536,7 @@ This section will cover:
 
 
 
-## Creating Reports
+## Creating reports
 
 *Content to be developed*
 
@@ -538,12 +567,12 @@ We resume tomorrow at **9:00 AM**
 ---
 
 
-## Data Quality Assessment
+## Data quality assessment
 
 Understanding the reliability of routine health data
 
 ---
-## Why Talk About Data Quality?
+## Why talk about data quality?
 
 **The challenge:** Health facilities report data every month, but sometimes:
 - Numbers seem too high or too low
@@ -558,7 +587,7 @@ Understanding the reliability of routine health data
 **FASTR's solution:** Check data quality systematically, fix what we can, and be transparent about limitations
 
 ---
-## Three Simple Questions About Data Quality
+## Three simple questions about data quality
 
 **1. Are facilities reporting regularly?**
 - Completeness: Did we get reports from facilities this month?
@@ -575,11 +604,11 @@ These three questions help us understand if we can trust the data for decision-m
 
 
 
-## Question 1: Are Facilities Reporting?
+## Question 1: Are facilities reporting?
 
 ---
 
-## Completeness: Did We Get Reports?
+## Completeness: Did we get reports?
 
 **What we're checking:**
 Each month, are facilities sending in their reports?
@@ -595,7 +624,7 @@ Each month, are facilities sending in their reports?
 
 ---
 
-## What's Good Completeness?
+## What's good completeness?
 
 **It depends on your health system:**
 - 90%+ is excellent
@@ -608,19 +637,19 @@ Each month, are facilities sending in their reports?
 
 ---
 
-## Completeness: FASTR Output
+## Completeness: FASTR output
 
-![Indicator Completeness](../../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
-
----
-
-
-
-## Question 2: Are Numbers Reasonable?
+![Indicator Completeness](../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
 
 ---
 
-## Outliers: Spotting Suspicious Numbers
+
+
+## Question 2: Are numbers reasonable?
+
+---
+
+## Outliers: Spotting suspicious numbers
 
 **What we're checking:**
 Are there any values that seem way too high compared to what that facility normally reports?
@@ -636,25 +665,22 @@ Are there any values that seem way too high compared to what that facility norma
 
 ---
 
-## How We Spot Outliers
+## How we spot outliers
 
-**We use two checks:**
+Outliers are identified by assessing the within-facility variation in monthly reporting for each indicator.
 
-**Check 1: Is this value much higher than usual for this facility?**
-- Look at the facility's typical monthly values
-- If one month is extremely different, flag it
+A value is flagged as an outlier if it meets EITHER of two criteria:
 
-**Check 2: Does one month account for most of the year's total?**
-- If March has 80% of the facility's annual deliveries, something's wrong
-- Services should be spread more evenly across months
+1. A value greater than 10 times the Median Absolute Deviation (MAD) from the monthly median value for the indicator, OR
+2. A value for which the proportional contribution in volume for a facility, indicator, and time period is greater than 80%
 
-**Both checks together** help us find data entry errors or reporting problems.
+AND for which the count is greater than 100.
 
 ---
 
-## Outlier Example
+## Outlier example
 
-**Health Center B - Malaria Tests:**
+**Health Center B - Malaria tests:**
 
 | Month | Tests Reported | Normal? |
 |-------|----------------|---------|
@@ -669,19 +695,19 @@ Are there any values that seem way too high compared to what that facility norma
 
 ---
 
-## Outliers: FASTR Output
+## Outliers: FASTR output
 
-![Outliers](../../resources/default_outputs/Default_1._Proportion_of_outliers.png)
-
----
-
-
-
-## Question 3: Do Related Numbers Match Up?
+![Outliers](../resources/default_outputs/Default_1._Proportion_of_outliers.png)
 
 ---
 
-## Consistency: Do Related Services Make Sense Together?
+
+
+## Question 3: Do related numbers match up?
+
+---
+
+## Consistency: Do related services make sense together?
 
 **What we're checking:**
 Health services are related - certain patterns are expected.
@@ -700,7 +726,7 @@ Health services are related - certain patterns are expected.
 
 ---
 
-## Why Check Consistency at District Level?
+## Why check consistency at district level?
 
 **Patients move between facilities:**
 - Woman might get ANC1 at Health Center A
@@ -716,7 +742,7 @@ This accounts for patients visiting different facilities for different services.
 
 ---
 
-## Consistency Example
+## Consistency example
 
 **District X - ANC Services:**
 
@@ -731,19 +757,19 @@ This accounts for patients visiting different facilities for different services.
 
 ---
 
-## Consistency: FASTR Output
+## Consistency: FASTR output
 
-![Internal Consistency](../../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
-
----
-
-
-
-## Putting It All Together: Overall Data Quality
+![Internal Consistency](../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
 
 ---
 
-## Overall Quality Score
+
+
+## Putting it all together: Overall data quality
+
+---
+
+## Overall quality score
 
 **For each facility and month, we combine all three checks:**
 
@@ -751,8 +777,11 @@ This accounts for patients visiting different facilities for different services.
 **No outliers:** Are the numbers reasonable?
 **Consistent:** Do related numbers make sense?
 
-**If all three pass -> Quality Score = 1 (good quality)**
-**If any fail -> Quality Score = 0 (quality issue)**
+**Binary DQA Score:**
+- dqa_score = 1 if all consistency pairs pass
+- dqa_score = 0 if any consistency pair fails
+
+**DQA Mean:** Average of completeness-outlier score and consistency score
 
 **This score helps us:**
 - Decide which data to use for analysis
@@ -761,15 +790,15 @@ This accounts for patients visiting different facilities for different services.
 
 ---
 
-## Overall DQA Score: FASTR Output
+## Overall DQA score: FASTR output
 
-![Overall DQA Score](../../resources/default_outputs/Default_5._Overall_DQA_score.png)
+![Overall DQA Score](../resources/default_outputs/Default_5._Overall_DQA_score.png)
 
 ---
 
-## Mean DQA Score: FASTR Output
+## Mean DQA score: FASTR output
 
-![Mean DQA Score](../../resources/default_outputs/Default_6._Mean_DQA_score.png)
+![Mean DQA Score](../resources/default_outputs/Default_6._Mean_DQA_score.png)
 
 ---
 
@@ -783,7 +812,7 @@ We'll resume at 10:30 AM
 ---
 
 
-## Approach to Data Quality Adjustment
+## Approach to data quality adjustment
 
 The Data Quality Adjustment module (Module 2 in the FASTR analytics platform) systematically corrects two common problems in routine health facility data:
 
@@ -794,7 +823,7 @@ Rather than simply deleting problematic data, this module replaces questionable 
 
 ---
 
-### Four Adjustment Scenarios
+### Four adjustment scenarios
 
 The module produces four parallel versions of the data:
 
@@ -811,20 +840,22 @@ This allows analysts to understand how sensitive their results are to different 
 
 
 
-## Adjustment for Outliers
+## Adjustment for outliers
 
 For each value flagged as an outlier, the module calculates what the value "should have been" based on that facility's historical pattern.
 
 **Methods used (in order of preference):**
-1. Average of 3 months before and 3 months after
-2. Same month from the previous year (for seasonal indicators)
-3. Facility-specific historical average
+1. Centered 6-month rolling average (3 months before + 3 months after)
+2. Forward 6-month rolling average
+3. Backward 6-month rolling average
+4. Same month from the previous year (for seasonal indicators)
+5. Facility-specific historical mean (fallback)
 
 ---
 
-### Outlier Adjustment: FASTR Output
+### Outlier adjustment: FASTR output
 
-![Percent change in volume due to outlier adjustment.](../../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
+![Percent change in volume due to outlier adjustment.](../resources/default_outputs/Default_1._Percent_change_in_volume_due_to_outlier_adjustment.png)
 
 Heatmap showing percent change in service volumes due to outlier replacement.
 
@@ -832,7 +863,7 @@ Heatmap showing percent change in service volumes due to outlier replacement.
 
 
 
-## Adjustment for Completeness
+## Adjustment for completeness
 
 For months where data is missing or marked as incomplete, the module imputes (fills in) values using the same rolling average approach.
 
@@ -840,9 +871,9 @@ This ensures that temporary reporting gaps don't create artificial drops to zero
 
 ---
 
-### Completeness Adjustment: FASTR Output
+### Completeness adjustment: FASTR output
 
-![Percent change in volume due to completeness adjustment.](../../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
+![Percent change in volume due to completeness adjustment.](../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
 
 Heatmap showing percent change in service volumes due to missing data imputation.
 
@@ -868,7 +899,7 @@ We resume tomorrow at **9:00 AM**
 ---
 
 
-## Service Utilization Analysis
+## Service utilization analysis
 
 The Service Utilization module (Module 3 in the FASTR analytics platform) analyzes health service delivery patterns to detect and quantify disruptions in service volumes over time.
 
@@ -879,14 +910,14 @@ The Service Utilization module (Module 3 in the FASTR analytics platform) analyz
 
 ---
 
-### Two-Stage Analysis Process
+### Two-stage analysis process
 
-**Stage 1: Control Chart Analysis**
+**Part 1: Control chart analysis**
 - Model expected patterns using historical trends and seasonality
 - Detect significant deviations from expected volumes
 - Flag disrupted periods
 
-**Stage 2: Disruption Quantification**
+**Part 2: Disruption quantification**
 - Use panel regression to estimate service volume changes
 - Calculate shortfalls and surpluses in absolute numbers
 
@@ -894,7 +925,7 @@ The Service Utilization module (Module 3 in the FASTR analytics platform) analyz
 
 
 
-## Surplus and Disruption Analyses
+## Surplus and disruption analyses
 
 The module detects multiple types of service disruptions:
 
@@ -908,7 +939,7 @@ The module detects multiple types of service disruptions:
 
 ---
 
-### Quantifying Impact
+### Quantifying impact
 
 Disruption analysis quantifies shortfalls and surpluses by comparing:
 - **Predicted volumes** (what would have happened without disruption)
@@ -965,7 +996,7 @@ We resume tomorrow at **9:00 AM**
 ---
 
 
-## Analytical Thinking & Interpretation
+## Analytical thinking & interpretation
 
 *Content to be developed*
 
@@ -979,49 +1010,48 @@ This section will cover:
 
 
 
-## Data Visualization, Communication & Message Development
+## Moving from data to key messages
 
-*Content to be developed*
+### What is a result?
+Results are what the analysis found (data quality scores, coverage estimations, service utilization numbers). They are often many in number, complex, hard to understand 'at a glance', and lacking interpretation.
 
-This section will cover:
-- Principles of effective data visualization
-- Tailoring messages to different audiences
-- Creating compelling narratives from data
-- Best practices for presenting findings
+### What is a key takeaway?
+Key takeaways are what the results are telling us — why the results matter, the 'so what'. They should be few in number, simple and clear, easy to remember, and actionable.
 
 ---
 
 
 
-## Using Data for Decision-Making
+## Dissemination and data use roadmap
 
-*Content to be developed*
+A data use roadmap is a strategic plan that outlines how data will be utilized, shared, and disseminated effectively.
 
-This section will cover:
-- Translating insights into action
-- Decision-making frameworks
-- Prioritization approaches
-- Monitoring implementation of decisions
-
----
-
-
-
-## Stakeholder Engagement & Advocacy
-
-*Content to be developed*
-
-This section will cover:
-- Identifying key stakeholders
-- Engagement strategies
-- Building buy-in for data-driven decisions
-- Advocacy approaches
+### Why is it important?
+- Establishes metrics to evaluate the success of data use
+- Identifies key stakeholders, target audiences, and dissemination platforms
+- Outlines steps needed to achieve data dissemination goals
+- Anticipates potential challenges and develops strategies to solve for them
 
 ---
 
 
 
-## Generating Quarterly Reporting Products
+## End user mapping
+
+End user mapping helps ensure that our outputs will meet the real needs of our end users.
+
+### Key questions
+1. **Who is my end user?**
+2. **What does this end user need to accomplish with the report?**
+3. **What information are they most interested in?**
+4. **What do they like/not like about current reports?**
+5. **How do they like to receive their information?**
+
+---
+
+
+
+## Generating quarterly reporting products
 
 *Content to be developed*
 

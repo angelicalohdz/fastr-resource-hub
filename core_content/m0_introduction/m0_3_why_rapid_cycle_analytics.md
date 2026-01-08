@@ -6,14 +6,23 @@ paginate: true
 
 ## Why rapid-cycle analytics?
 
-Existing health systems data sources are critical but often come with challenges that limit their use. Health management information system data may not be analyzed promptly or may be perceived as too low-quality to use for decision making. Traditional in-person household and facility-based surveys demand extensive resources and time, with long lags between survey design, data collection, and the availability of findings. This prevents decision-makers from using data to drive meaningful improvements in health outcomes. To fill this gap, the GFF supports countries to develop and use rapid-cycle analytic approaches.
+<div class="columns">
+<div>
 
----
+Routine health information systems are a critical source of data, but they are often underused due to concerns about data quality and long delays between data collection and analysis. Traditional household and facility surveys, while essential, are resource-intensive and infrequent.
 
-### How does it work?
+FASTR's rapid-cycle analytics address this gap by providing:
 
-Rapid-cycle analytic approaches provide timely, rigorous, and high-priority data that respond to each country's specific priorities and data use needs. This continuous cycle of analyze-learn-strengthen-act seeks to improve the systematic use of data for decision-making towards improved RMNCAH-N outcomes.
+- Timely insights aligned with country decision cycles
+- Continuous learning rather than one-off assessments
+- Direct feedback loops between data, analysis, and action
 
-![FASTR rapid-cycle analytics framework showing the continuous cycle of analyze, learn, strengthen, and act.](../../resources/diagrams/GFF-Rapid-Cycle-Analytics-Data-Use_Figure-1.svg)
+During the COVID-19 pandemic, this approach was applied in over 20 countries to monitor disruptions to essential RMNCAH-N services and inform response and recovery planning.
 
-*Figure 2. FASTR's rapid-cycle analytics approach: Analyze, learn, strengthen, act*
+</div>
+<div>
+
+![FASTR rapid-cycle analytics framework](../../resources/diagrams/GFF-Rapid-Cycle-Analytics-Data-Use_Figure-1.svg)
+
+</div>
+</div>

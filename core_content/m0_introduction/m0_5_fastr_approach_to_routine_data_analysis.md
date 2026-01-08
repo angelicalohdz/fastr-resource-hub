@@ -6,23 +6,15 @@ paginate: true
 
 ## FASTR approach to routine data analysis
 
-The FASTR approach to routine data analysis takes a three-pronged approach:
+The FASTR approach follows a three-step workflow:
 
-1. **Identify issues in data quality**
-2. **Adjust for issues with data quality** to improve analysis accuracy
-3. **Analyze data to answer pressing country-specific policy questions** including identifying changes in priority service volumes and trends in service coverage as compared to country priorities and targets
+### 1. Assess data quality
+Identify issues related to completeness, outliers, and internal consistency at national and subnational levels.
 
----
-This approach enables identification of the highest priority data quality issues and subsequent necessary analytical adjustments so that data can be continually improved while appropriate analyses are conducted. Data quality assessment is conducted by indicator and can be disaggregated at sub-national level given facility-level data is used for the analysis. This is important to generate policy relevant regular reporting on data quality, service volume, and coverage estimates which provides a continual snapshot of RMNCAH-N service use.
+### 2. Adjust for data quality limitations
+Apply transparent, indicator-specific corrections to improve the reliability of trend analysis.
 
----
+### 3. Analyze service delivery
+Quantify changes in priority service volumes and compare coverage trends against country targets.
 
-### Focus on a set of core indicators
-
-The FASTR approach prioritizes a core set of RMNCAH-N indicators that span the reproductive, maternal, and child health continuum and reflect priority service areas across LMICs. These indicators represent key service delivery events with relatively high reporting completeness and volumes, and they act as proxies for other services delivered during the same contact. Outpatient consultations (OPDs) are included as a proxy for overall health service use. The indicator set can be expanded to include country- or programme-specific priorities as needed.
-
----
-
-### Focus on a set of core data quality metrics
-
-FASTR also relies on a core set of data quality metrics to identify the most critical data quality issues that can be addressed through adjustment methods. In addition to these individual metrics, the approach produces an overall data quality score that synthesizes them into a single summary measure.
+This enables continuous, subnational monitoring while data quality is systematically improved.

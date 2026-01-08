@@ -186,7 +186,6 @@ MODULES = {
         'topics': [
             ('m0_1', 'm0_1_introduction_to_fastr.md'),
             ('m0_2', 'm0_2_rmncahn_service_use_monitoring.md'),
-            ('m0_2a', 'm0_2a_implementation_steps.md'),
             ('m0_3', 'm0_3_why_rapid_cycle_analytics.md'),
             ('m0_4', 'm0_4_technical_approaches.md'),
             ('m0_5', 'm0_5_fastr_approach_to_routine_data_analysis.md'),
