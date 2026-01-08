@@ -1,115 +1,125 @@
 # Data extraction
 
+> **Note:** Content in this section draws on existing FASTR presentation materials and is subject to revision.
+
 ## Overview
+
+This section describes the rationale, requirements, and recommended practices for extracting routine service delivery data from DHIS2 for use in the FASTR analytical pipeline.
 
 ### Why extract data from DHIS2?
 
 **Data quality adjustment**
 
-The FASTR approach focuses on data quality adjustments to expand the analyses countries can do with DHIS2 data and to generate more robust estimates. The FASTR methodology includes specific approaches to:
-- Identify and adjust for outliers
-- Adjust for incomplete reporting
-- Apply consistent data quality metrics
+The FASTR approach prioritizes systematic data quality adjustment to enable more rigorous use of routine DHIS2 data and to generate analytically robust, policy-relevant estimates. The methodology includes standardized procedures to:
 
-These adjustments require processing that cannot be done within DHIS2's native analytics.
+- Identify and adjust for outliers  
+- Adjust for incomplete reporting  
+- Apply consistent data quality metrics across indicators and facilities  
+
+These procedures require data processing and statistical operations that cannot be implemented within DHIS2’s native analytics environment.
 
 **Analysis complexity**
 
-The FASTR approach uses more advanced statistical methods, such as regression analysis, which are not available in DHIS2. While DHIS2 can plot trends over time using raw data, FASTR can go further by:
-- Identifying significant increases or decreases in service volume
-- Adjusting for data quality issues
-- Accounting for expected seasonal variations
-- Comparing key periods, such as before and after a reform
+FASTR applies analytical methods—most notably regression-based techniques—that extend beyond the descriptive trend analysis available in DHIS2. While DHIS2 supports visualization of raw service delivery trends, FASTR enables additional analytical capabilities, including:
 
-The choice between DHIS2 and the FASTR approach should be guided by the specific purpose of your analysis. Select the tool that best aligns with your analytical needs.
+- Identification of statistically significant increases or decreases in service volumes  
+- Adjustment for data quality limitations  
+- Explicit accounting for expected seasonal variation  
+- Comparison of service delivery across key periods, such as before and after policy reforms, shocks, or disruptions  
+
+The choice between relying solely on DHIS2 analytics and applying the FASTR approach should be guided by the intended analytical purpose. FASTR is designed for analyses that require greater statistical rigor, comparability over time, and consistency across geographic levels.
 
 ### What format and granularity is required?
 
-Data should be downloaded for each **indicator of interest**, at **facility level**, and **monthly** for the **period of interest**.
+Data should be extracted for each **indicator of interest**, at **facility level**, and at a **monthly** time step for the **period of analysis**.
 
-- Data should be saved in **long format** meaning each row represents a single observation or measurement
-- Data should be saved in **.csv format** and can be saved in either a single .csv file or multiple .csv files which will be combined when uploading to the analysis platform
+- Data must be stored in **long format**, with one row per observation  
+- Data should be saved in **.csv format**  
+- Data may be stored in a single file or split across multiple files, which can be combined during upload to the analysis platform  
 
-**Why monthly facility level data?**
+**Why monthly facility-level data?**
 
-We want to use the most granular data we have access to in order to make more fine tuned assessments for data quality and adjustments for data quality. We also want to be able to look at trends over time, accounting for things like seasonality. Using monthly facility level data allows us to conduct the most robust analysis.
+Using the most granular data available enables more precise assessment of reporting patterns and data quality issues. Monthly, facility-level data allow for robust adjustment of reporting completeness, identification of facility-specific anomalies, and estimation of trends over time while accounting for seasonal variation. This level of granularity supports full implementation of the FASTR methodology.
 
 ### Key variables
 
-The data extracted should include the following required elements:
+The extracted dataset should include the following minimum set of variables:
 
 | Element | Description |
-|---------|-------------|
+|--------|-------------|
 | Org units | Organizational unit identifier |
-| Period | Time period of the data |
+| Period | Time period of the observation |
 | Indicator name | Name of the indicator |
-| Total/count | The aggregated value |
+| Total / count | Aggregated indicator value |
 
 **Organisational unit terms**
 
 | Term | Description |
 |------|-------------|
-| `orgunitlevel1` | Usually the top level, such as a country |
-| `orgunitlevel2` | Could be a state or province |
-| `orgunitlevel3` | Could be a district |
-| `orgunitlevel4` | Could be a sub-district or health facility |
-| `orgunitlevel5` | Could be a department or unit within a facility |
-| `organisationunitid` | A unique identifier assigned to each organizational unit within DHIS2 |
-| `organisationunitname` | The name of the organizational unit, like "Central Hospital" or "District A" |
-| `organisationunitcode` | A code assigned to an organizational unit (shortened or standardized representation) |
-| `organisationunitdescription` | A detailed description of the organizational unit |
+| `orgunitlevel1` | Highest administrative level (e.g., country) |
+| `orgunitlevel2` | Intermediate administrative level (e.g., state or province) |
+| `orgunitlevel3` | District or equivalent |
+| `orgunitlevel4` | Sub-district or health facility |
+| `orgunitlevel5` | Unit or department within a facility |
+| `organisationunitid` | Unique DHIS2 identifier for the organizational unit |
+| `organisationunitname` | Name of the organizational unit |
+| `organisationunitcode` | Standardized organizational unit code |
+| `organisationunitdescription` | Description of the organizational unit |
 
 **Period terms**
 
 | Term | Description |
 |------|-------------|
-| `periodid` | A unique identifier for a specific time period in DHIS2 |
-| `periodname` | The name of the period, such as "January 2024" or "Q1 2024" |
-| `periodcode` | A standardized code representing a period, such as "202411" for January 2024 |
-| `perioddescription` | A more detailed description of the period with exact start and end dates |
+| `periodid` | Unique identifier for the reporting period |
+| `periodname` | Human-readable period label (e.g., January 2024, Q1 2024) |
+| `periodcode` | Standardized period code (e.g., 202401) |
+| `perioddescription` | Description including period start and end dates |
 
 **Data element terms**
 
 | Term | Description |
 |------|-------------|
-| `dataid` | A unique identifier for a specific data element within DHIS2 |
-| `dataname` | The name of the data element, such as "Number of Malaria Cases" |
-| `datacode` | A code assigned to a data element (e.g., "MAL_CASES" for malaria cases) |
-| `datadescription` | A detailed description of the data element |
+| `dataid` | Unique identifier for the data element |
+| `dataname` | Name of the data element |
+| `datacode` | Standardized data element code |
+| `datadescription` | Description of the data element |
 
 **Other terms**
 
 | Term | Description |
 |------|-------------|
-| `Total` | The aggregated sum of a specific data element within a given organizational unit and period |
-| `date_downloaded` | The date when the data was extracted from DHIS2 (useful for auditing and version control) |
+| `total` | Aggregated value for the data element by organizational unit and period |
+| `date_downloaded` | Date of data extraction, for audit and version control |
 
 ### How much data?
 
 **Initial FASTR analysis**
 
-- Generally recommended to download approximately **five years** of historical data
-- The exact period should be determined based on:
-  - Data availability
-  - Consistency in indicator definitions over time
-  - The specifics of a country's routine data system
-- Ideally, using at least five years of historical data allows for a thorough assessment of trends over time
+For initial implementation, it is generally recommended to extract approximately **five years of historical data**. The appropriate time window should be determined based on:
+
+- Data availability and completeness  
+- Consistency of indicator definitions over time  
+- Characteristics of the national routine data system  
+
+A multi-year time series improves the reliability of trend estimation and seasonal adjustment.
 
 **Routine update to FASTR analysis**
 
-- Start with the existing database and download new data covering the most recent months not previously included – this is usually a **three-month period** when the FASTR analysis is being implemented on a quarterly basis
-- Additionally, include the **three preceding months** to the new data time period, as this relatively recent data is often subject to changes due to late reporting or data quality adjustments
-- If you have reason to believe there have been substantial changes to the historical data, you can always choose to redownload a longer time period
+For routine updates (e.g., quarterly implementation):
+
+- Begin with the existing FASTR database and extract data for the most recent months not yet included (typically a **three-month period**)  
+- Re-extract the **three preceding months** to account for late reporting or revisions to recent data  
+- If substantial revisions to historical data are suspected, consider re-extracting a longer historical period  
 
 ### Tools for data extraction
 
-*Full documentation content to be developed*
+*Full documentation content to be developed.*
 
 This section will cover:
-- DHIS2 data export options
-- API-based extraction methods
-- Data transformation requirements
-- Quality checks on extracted data
+- DHIS2 data export options  
+- API-based extraction methods  
+- Data transformation requirements  
+- Quality assurance checks on extracted data  
 
 ---
 

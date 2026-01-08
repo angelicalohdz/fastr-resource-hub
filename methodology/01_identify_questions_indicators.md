@@ -1,114 +1,162 @@
-# Identify questions & indicators
+ # Identify questions & indicators
+
+> **Note:** Content in this section draws on existing FASTR presentation materials and is subject to revision.
 
 ## Overview
 
-*Full documentation content to be developed*
+This section outlines the process for identifying priority policy and programmatic questions and selecting appropriate indicators for FASTR analysis. It provides a structured approach to ensuring that FASTR analyses are demand-driven, analytically feasible, and aligned with national priorities.
 
-This section will cover the complete process of:
+Specifically, this section covers:
 
-1. **Introduction to FASTR: gaps and challenges**
-- Identifying gaps and challenges that FASTR is well suited to support, how FASTR serves as an entry point to reduce fragmentation, and starting the conversation with government stakeholders
+1. **Introduction to FASTR: gaps and challenges**  
+   An overview of the analytical gaps FASTR is designed to address, its role in reducing fragmentation in routine data analysis, and how FASTR can be positioned as an entry point for engagement with government stakeholders.
 
-2. **Development of a data use case** 
-- Co-creation workshop approach with Ministry of Health (MoH) and stakeholders, data use case development guidance, and example use cases from country implementations
+2. **Development of a data use case**  
+   Guidance on co-developing data use cases through workshops with the Ministry of Health and other stakeholders, including practical examples from country implementations.
 
-3. **Defining priority questions and selecting indicators** 
-- How to define priority questions for FASTR analysis, criteria for selecting indicators, what makes a good FASTR indicator, and aligning indicators with national strategies
+3. **Defining priority questions and selecting indicators**  
+   A framework for formulating priority analytical questions, selecting suitable indicators, and aligning FASTR analysis with national strategies and decision-making needs.
+
+4. **Preparing for data extraction**  
+   A high-level overview of pre-extraction considerations, including understanding the DHIS2 configuration, mapping indicators to data elements, and planning the extraction timeline.
+
+---
 
 ## Defining priority questions
 
-Effective data use relies on well-defined questions. Priority questions will guide the FASTR analysis and can enhance decision making support.
+Effective use of routine data depends on well-defined analytical questions. Priority questions provide direction for FASTR analyses and help ensure that outputs are relevant and actionable for decision makers.
 
-**Qualities of a good question include:**
+**Characteristics of a good priority question include:**
 
-- **Addresses a priority issue**: Select a topic of interest to you and policy makers
-- **Relevant**: Important enough to be worth answering
-- **Related to experiences that are alive**: Connected to current issues and concerns
-- **Important to individuals/groups**: Matters to stakeholders
-- **Answerable**: Can be addressed with available data and methods
+- **Addresses a priority issue**  
+  Focuses on topics of clear interest to policy makers and program managers.
 
-### Is my question a relevant priority? 5+ Ws to consider
+- **Relevant**  
+  Important enough to warrant analysis and to inform decision making.
 
-- **Who** is your audience?
-- **What** do they need and want to know?
-- **When** do they need to know it by?
-- **When** is the event/intervention/period they are interested in?
-- **Why** do they need to know?
-- **How** will they use the findings?
+- **Grounded in current realities**  
+  Connected to ongoing challenges, reforms, or shocks affecting service delivery.
 
-### What do we mean by answerable?
+- **Meaningful to stakeholders**  
+  Addresses issues that matter to specific individuals or groups involved in planning or implementation.
 
-**We have the data**
-- Type, quantity, quality sufficient for the question
+- **Answerable**  
+  Can be addressed using available data, methods, and timeframes.
 
-**We have the analysis tools/methods**
-- Statistically valid; feasible to use
+### Assessing relevance: key questions to consider
 
-**We have the time**
-- We can answer the question on a quarterly basis
+When assessing whether a question is a priority, the following considerations are useful:
 
-### PICO framework for identifying answerable questions
+- **Who** is the intended audience?  
+- **What** do they need or want to know?  
+- **When** do they need the information?  
+- **Which period or event** is of interest?  
+- **Why** is this information needed?  
+- **How** will the findings be used?
 
-> **Note:** This content was hidden in the original presentation but may be useful to include.
+### What do we mean by “answerable”?
 
-The PICO framework is a standard tool from evidence-based medicine and public health research for formulating clear, answerable questions.
+A question is considered answerable if the following conditions are met:
+
+**Data availability**  
+- The required data exist and are of sufficient type, quantity, and quality.
+
+**Analytical feasibility**  
+- Appropriate and statistically valid methods are available and feasible to apply.
+
+**Timeliness**  
+- The analysis can be completed within the required timeframe (e.g., quarterly reporting cycles).
+
+### PICO framework for formulating answerable questions
+
+> **Note:** This framework was included in the original presentation material and is retained here as an optional tool.
+
+The PICO framework, commonly used in public health and evidence-based research, provides a structured way to formulate clear and answerable questions.
 
 | Component | Description |
-|-----------|-------------|
-| **P**opulation | Who is being investigated - define the target group |
-| **I**ntervention | What is being investigated - focus on services or public health actions |
-| **C**omparison | What is baseline/non-intervention - relevant comparisons if applicable |
-| **O**utcome | What is public health objective - expected changes or impacts |
+|----------|-------------|
+| **Population** | The population or group of interest |
+| **Intervention** | The service, program, or action being examined |
+| **Comparison** | The relevant baseline or comparison condition, if applicable |
+| **Outcome** | The expected change or public health objective |
 
-## Selecting indicators: what makes a good indicator for FASTR analysis?
+---
 
-When selecting indicators for FASTR analysis, consider the following criteria:
+## Selecting indicators: what makes a good FASTR indicator?
 
-- **Relevance**: Does this indicator provide data that aligns with our priority questions and objectives?
-- **Volume**: Is this indicator collected at a high volume, which improves the robustness of analysis?
-- **Completeness**: Does the indicator have a high completeness rate across reporting facilities?
-- **Frequency**: Is the indicator reported frequently enough (e.g., monthly) to support rapid-cycle analysis?
-- **Type**: Is this indicator a count of services delivered?
+Indicator selection is critical to the quality and usefulness of FASTR analysis. Indicators should be chosen based on the following criteria:
 
-### Why focus on high volume indicators?
+- **Relevance**  
+  The indicator aligns with priority questions and policy objectives.
 
-One key added-value of the FASTR approach is making adjustments for data quality. Low-volume indicators are challenging to adjust:
+- **Volume**  
+  The indicator is reported at sufficiently high volumes to support robust analysis.
 
-- **Greater sensitivity to outliers**: In low-volume data, a single unusually high or low data point can disproportionately impact the overall analysis. Adjusting for outliers in low-volume indicators may result in artificial fluctuations that do not accurately reflect real trends.
-- **Unstable estimates**: Low-volume indicators are often less reliable because small variations can lead to large percentage changes, making it harder to distinguish genuine trends from random variability.
-- **Difficulty in identifying true outliers**: In low-volume indicators, it's challenging to determine whether a data point is genuinely an outlier or simply part of the natural variability. This uncertainty complicates the adjustment process and may lead to incorrect assumptions.
+- **Completeness**  
+  Reporting completeness is high across facilities and over time.
 
-Count indicators allow for ongoing data quality checks, including improved precision in identifying outliers or data issues and flexibility to validate counts before deriving proportions externally.
+- **Frequency**  
+  The indicator is reported frequently enough (typically monthly) to support rapid-cycle analysis.
 
-### Why focus on high completeness indicators?
+- **Type**  
+  The indicator represents a count of services delivered.
 
-High completeness indicators are recommended because they improve data quality, reduce bias, and enable more accurate, timely, and actionable insights, ultimately leading to better-informed public health decisions.
+### Why focus on high-volume indicators?
 
-- **Data reliability**: High completeness ensures that data is representative of the full picture across facilities, regions, or populations, reducing the risk of biased insights. This reliability is essential for making confident decisions based on the data.
-- **Consistency in analysis**: With high completeness, you have data points from most or all reporting units, allowing for a more consistent analysis across time periods and locations. This consistency is necessary for identifying accurate trends and making meaningful comparisons.
-- **Reduced risk of misinterpretation**: Incomplete data can lead to incorrect conclusions. For example, low completeness might falsely suggest a drop in service utilization when, in reality, it's due to missing data. High completeness helps avoid these misinterpretations.
+One of the core strengths of the FASTR approach is its ability to adjust for data quality issues. High-volume indicators are better suited to this process because:
 
-Statistical methods such as imputation can be used to adjust for incomplete data; however, this requires making assumptions about the missing data. See [Data Quality Adjustment](05_data_quality_adjustment.md) for details.
+- **Reduced sensitivity to outliers**  
+  In low-volume indicators, individual data points can disproportionately affect trends.
+
+- **More stable estimates**  
+  High-volume data reduce random variability and improve the reliability of trend detection.
+
+- **Clearer identification of true anomalies**  
+  Larger counts make it easier to distinguish genuine outliers from natural variation.
+
+Count indicators also allow for ongoing validation and adjustment before proportions or coverage measures are derived externally.
+
+### Why focus on high-completeness indicators?
+
+Indicators with high reporting completeness are preferred because they:
+
+- **Improve data reliability**  
+  More complete data reduce bias and provide a more representative picture of service delivery.
+
+- **Support consistent analysis**  
+  High completeness enables meaningful comparisons across time and geographic areas.
+
+- **Reduce misinterpretation**  
+  Incomplete data can falsely suggest changes in service utilization when changes are driven by reporting gaps rather than real trends.
+
+While statistical methods such as imputation can be used to address incomplete data, these methods require assumptions about missing values. Further detail is provided in [Data Quality Adjustment](05_data_quality_adjustment.md).
 
 ### Why focus on count indicators?
 
-**Challenges with proportion indicators:**
+**Limitations of proportion indicators**
 
-- Proportions limit our ability to apply adjustments to account for data quality challenges
-- Numerators may have data quality challenges, skewing actual coverage levels
-- Denominators may be outdated or inaccurate
-- Utilizing numerators and denominators separately to generate proportions allows us to make adjustments to both numerator and denominator
+- Proportions limit the ability to adjust numerators and denominators separately for data quality issues.  
+- Numerators and denominators may each be affected by different sources of error.  
+- Separating counts from denominator estimation allows for more transparent and flexible adjustment.
 
-**Mortality as a rare event:**
+**Mortality as a rare event**
 
-- Mortality indicators are inherently low-frequency, making proportional adjustments unreliable
-- Mortality and similar rare events are better suited for annual reviews than frequent (e.g., monthly or quarterly) updates
+- Mortality indicators are typically low-frequency and not well suited to frequent adjustment.  
+- These indicators are generally better analyzed using annual rather than monthly or quarterly data.
 
-### FASTR core indicators
+---
 
-The FASTR approach to routine data analysis focuses on a core set of RMNCAH-N indicators that characterize the reproductive, maternal and child healthcare continuum across LMICs. These indicators capture key service delivery events with higher completeness rates and higher volume, and serve as proxies for other services and interventions delivered at the same service contact. Outpatient consultations (OPDs) are also used as a proxy for the general use of health services. Additional country and program-specific indicators can be added to the analysis to be responsive to country priorities
+## FASTR core indicators
 
-4. **Preparing for data extraction** - Pre-extraction checklist, understanding your DHIS2 configuration, mapping indicators to data elements, and planning your extraction timeline
+The FASTR approach focuses on a core set of RMNCAH-N indicators that represent key points along the reproductive, maternal, newborn, child, and adolescent health and nutrition continuum in low- and middle-income countries. These indicators typically have higher reporting volumes and completeness and serve as proxies for broader service delivery patterns.
+
+Outpatient consultations are also included as a proxy for overall health service utilization. Country- or program-specific indicators may be added as needed to reflect national priorities.
+
+---
+
+## Preparing for data extraction
+
+This step includes a pre-extraction checklist, review of the DHIS2 configuration, mapping of indicators to data elements, and planning of the extraction timeline. These steps ensure that downstream analyses are based on consistent, well-understood inputs.
 
 ---
 

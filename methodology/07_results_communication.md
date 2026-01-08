@@ -1,6 +1,6 @@
 # Results communication and data use
 
-This module covers how to interpret, communicate, and use FASTR results for decision-making.
+> **Note:** Content in this section draws on existing FASTR presentation materials and is subject to revision.
 
 ## Overview
 
