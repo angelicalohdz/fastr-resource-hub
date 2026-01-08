@@ -4,8 +4,7 @@
 
 ### Objective of the module
 
-This module estimates health service coverage by integrating three core data sources: adjusted administrative service volumes from the health management information system (HMIS; Module 2), population projections from the United Nations World Population Prospects (UN WPP), and household survey data from the Multiple Indicator Cluster Surveys (MICS) and Demographic and Health Surveys (DHS). It addresses the question of what proportion of the target population received a given health service.
-
+The Coverage Estimates module quantifies health service coverage by integrating adjusted administrative service volumes from the Health Management Information System (HMIS), population projections from the United Nations World Population Prospects (UN WPP), and household survey data. While the module currently draws on Demographic and Health Surveys (DHS) and Multiple Indicator Cluster Surveys (MICS), it is designed to accommodate other nationally representative survey sources as they become available. The module estimates the share of the target population that received a given health service, providing a standardized measure of service reach for use in monitoring, comparison, and downstream analysis.
 The module is structured in two components.
 
 **Part 1** constructs target population denominators using multiple methodological approaches and evaluates their performance by comparing resulting coverage estimates with available survey reference values for each health indicator.
