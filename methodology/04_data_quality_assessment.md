@@ -141,21 +141,27 @@ Heatmap table with zones as rows and time periods as columns, color-coded by ave
 
 **Interpretation guide**
 
-For the heatmaps (outputs 1, 2, 4):
+For the heatmaps (outputs 1, 2, 4, 5, 6):
 
 - **Rows**: Geographic areas (zones/regions)
-- **Columns**: Health indicators
+- **Columns**: Health indicators or time periods
 
 For the outliers heatmap (output 1):
 
 - **Values**: Percentage of facility-months flagged as outliers
 - Lower percentages indicate fewer extreme values
 
-For the indicator completeness heatmaps (outputs 2–3):
+For the indicator completeness heatmap (output 2):
 
 - **Values**: Percentage of facility-months with complete reporting
 - Higher percentages indicate more complete reporting
-- Output 3 shows trends over time for each indicator
+
+For the indicator completeness over time chart (output 3):
+
+- **Horizontal timeline chart** showing completeness trends by indicator
+- **X-axis**: Time period
+- **Y-axis**: Completeness percentage
+- Shows whether reporting is improving, declining, or stable
 
 For the internal consistency heatmap (output 4):
 
