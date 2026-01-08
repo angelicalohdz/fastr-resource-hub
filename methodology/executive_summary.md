@@ -14,37 +14,37 @@ Traditional household surveys (DHS, MICS) provide validated coverage estimates b
 
 ## The FASTR methodology
 
-### Identify questions and indicators
+### Identification of priority questions and indicators
 
-The process begins with defining priority questions for FASTR analysis and selecting appropriate indicators. This involves working with Ministries of Health and stakeholders to develop data use cases, aligning indicators with national health strategies, and preparing for data extraction from DHIS2 systems.
+The FASTR methodology begins with the identification of priority analytical questions and the selection of corresponding indicators. This step is undertaken in collaboration with Ministries of Health and relevant stakeholders to define policy-relevant use cases, ensure alignment with national health strategies, and specify requirements for data extraction from DHIS2 systems.
 
 ### Data extraction
 
-Data is extracted from DHIS2 at the facility-month level to enable facility-level data quality assessment, subnational disaggregation of results, and longitudinal trend analysis. The FASTR methodology requires specific data transformations that cannot be done within DHIS2's native analytics.
+Facility-level data are extracted directly from DHIS2 via APIs at monthly resolution and structured within the platform to support data quality assessment, subnational analysis, and trend monitoring.
 
 ### The FASTR analytics platform
 
-The FASTR analytics platform provides a structured environment for running the four core analytical modules. Users configure administrative areas and facilities, import prepared datasets, and run modules to generate data quality metrics, service utilization estimates, and coverage indicators.
+These structured data are processed within the FASTR analytics platform, which provides a standardized environment for implementing a modular set of analytical components. Users configure administrative hierarchies and facility mappings and execute analytical modules to generate data quality metrics, service utilization analyses, and coverage estimates in a consistent and reproducible manner.
 
-### Platform module 1: Data quality assessment
+### Platform module 1: Data Quality Assessment
 
-Applies statistical methods to identify outliers using median absolute deviation, tracks reporting completeness at facility and indicator levels, and validates logical consistency between related indicators (e.g., ANC1 ≥ ANC4). Generates facility-level quality scores and flags for downstream use in data adjustment and analysis.
+This module applies statistical methods to assess the reliability of routine health facility data. It identifies extreme values using median absolute deviation, evaluates reporting completeness at facility and indicator levels, and checks internal consistency across related indicators (for example, ensuring that ANC1 values are not lower than ANC4). Outputs include facility-level data quality scores and flags for use in subsequent data adjustment and analysis.
 
-### Platform module 2: Data quality adjustment
+### Platform module 2: Data Quality Adjustment
 
-Generates four parallel versions of the dataset: (1) original unadjusted data, (2) outlier-adjusted data only, (3) missing data imputed only, and (4) both adjustments applied. Outlier adjustment replaces flagged values with 6-month rolling medians. Missing data imputation follows the same hierarchical approach. All four versions are retained to support sensitivity analysis.
+The Data Quality Adjustment module produces four parallel versions of the dataset: (i) unadjusted data, (ii) data adjusted for outliers only, (iii) data adjusted for missing values only, and (iv) data adjusted for both outliers and missing values. Outlier adjustment replaces flagged observations with six-month rolling medians, while missing values are imputed using the same hierarchical approach. Retaining all four versions supports transparency and sensitivity analysis.
 
-### Platform module 3: Service utilization analysis
+### Platform module 3: Service Utilization Analysis
 
-Applies statistical process control methods to identify months where service volumes deviate significantly from expected patterns after accounting for seasonality and trends. Uses panel regression models at national, regional, and district levels to quantify the magnitude of service shortfalls or surpluses during disruption periods.
+This module applies statistical process control techniques to detect deviations in service volumes from expected patterns after accounting for seasonality and long-term trends. Panel regression models are estimated at national, regional, and district levels to quantify the magnitude and statistical significance of service shortfalls or surpluses during identified disruption periods.
 
-### Platform module 4: Coverage estimation
+### Platform module 4: Coverage Estimation
 
-Calculates target population denominators by combining HMIS service counts with survey-reported coverage rates. Multiple denominator options are derived from different HMIS indicators and UN population estimates, adjusted for biological factors. Generates coverage projections for years beyond the most recent survey by applying annual percent changes observed in HMIS data to survey baselines.
+The Coverage Estimates module derives target population denominators by combining HMIS service volumes with household survey coverage information and population projections. Multiple denominator series are generated using alternative HMIS indicators and demographic assumptions, including adjustments for biological factors. Coverage projections for post-survey years are produced by applying HMIS-derived annual changes to survey baselines.
 
 ### Results communication
 
-Translates analytical outputs into actionable insights for decision-makers. This includes interpreting FASTR results, developing effective data visualizations, tailoring messages to different audiences, and generating quarterly reporting products for ongoing monitoring.
+Analytical outputs are translated into policy-relevant insights through structured interpretation and visualization. Results are tailored to different audiences and compiled into routine reporting products to support ongoing monitoring, planning, and decision-making.
 
 ## Key features
 
