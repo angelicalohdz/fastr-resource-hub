@@ -1173,13 +1173,25 @@ For questions or support:
 
     # Generate session slides for each day
     for day in range(1, num_days + 1):
-        # Get modules for this day and previous day
-        day_modules = [MODULES[item['mod_num']]['name'] for item in days_assignment[day]]
+        # Get unique module names for this day (preserve order, deduplicate)
+        seen = set()
+        day_modules = []
+        for item in days_assignment[day]:
+            name = MODULES[item['mod_num']]['name']
+            if name not in seen:
+                seen.add(name)
+                day_modules.append(name)
         day_modules_list = '\n'.join([f"- {m}" for m in day_modules])
 
         if day > 1:
-            # Get previous day's modules for recap
-            prev_day_modules = [MODULES[item['mod_num']]['name'] for item in days_assignment[day - 1]]
+            # Get unique module names for previous day
+            seen = set()
+            prev_day_modules = []
+            for item in days_assignment[day - 1]:
+                name = MODULES[item['mod_num']]['name']
+                if name not in seen:
+                    seen.add(name)
+                    prev_day_modules.append(name)
             prev_modules_list = '\n'.join([f"- {m}" for m in prev_day_modules])
 
             # Recap slide for days 2+
@@ -1210,8 +1222,14 @@ paginate: true
             print(f"   ✓ day{day}_recap.md")
 
         if day < num_days:
-            # Get next day's modules for preview
-            next_day_modules = [MODULES[item['mod_num']]['name'] for item in days_assignment[day + 1]]
+            # Get unique module names for next day preview
+            seen = set()
+            next_day_modules = []
+            for item in days_assignment[day + 1]:
+                name = MODULES[item['mod_num']]['name']
+                if name not in seen:
+                    seen.add(name)
+                    next_day_modules.append(name)
             next_modules_short = ', '.join(next_day_modules[:3])
             if len(next_day_modules) > 3:
                 next_modules_short += ', ...'
