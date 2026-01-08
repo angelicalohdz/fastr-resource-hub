@@ -1565,28 +1565,171 @@ Same as national, plus:
 
 ### Code examples
 
-*Content to be developed*
+??? "Example 1: Running Part 1 with default settings"
 
-This section will include R code examples demonstrating:
+    ```r
+    # Set working directory
+    setwd("/path/to/module/directory")
 
-- Running the module with default settings
-- Customizing denominator selections
-- Working with coverage outputs programmatically
+    # Load required libraries
+    library(dplyr)
+    library(tidyr)
+    library(zoo)
+    library(stringr)
+    library(purrr)
+
+    # Configure country
+    COUNTRY_ISO3 <- "KEN"  # Replace with your country code
+
+    # Use default analysis level (national + admin2)
+    ANALYSIS_LEVEL <- "NATIONAL_PLUS_AA2"
+
+    # Run Part 1
+    source("05_module_coverage_estimates_part1.R")
+    ```
+
+    Part 1 generates denominator estimates and selects the best denominator for each indicator based on survey comparison.
+
+??? "Example 2: Adjusting mortality parameters"
+
+    ```r
+    # Use country-specific mortality rates from DHS or other sources
+    PREGNANCY_LOSS_RATE <- 0.04      # Default: 0.03
+    TWIN_RATE <- 0.02                # Default: 0.015
+    STILLBIRTH_RATE <- 0.025         # Default: 0.02
+    P1_NMR <- 0.045                  # Default: 0.039
+    P2_PNMR <- 0.030                 # Default: 0.028
+    INFANT_MORTALITY_RATE <- 0.070   # Default: 0.063
+    UNDER5_MORTALITY_RATE <- 0.110   # Default: 0.103
+
+    # These parameters affect survival-adjusted denominators
+    source("05_module_coverage_estimates_part1.R")
+    ```
+
+    **Sources for country-specific rates**: DHS final reports, UN Inter-agency Group for Child Mortality Estimation (UN IGME), or national vital statistics.
+
+??? "Example 3: Running Part 2 with custom denominator selections"
+
+    ```r
+    # Override automatic "best" selection for specific indicators
+    DENOM_ANC1 <- "danc1_pregnancy"      # Use ANC1-based denominator
+    DENOM_PENTA3 <- "dwpp_dpt"           # Use WPP population estimate
+    DENOM_MEASLES1 <- "best"             # Keep automatic selection
+
+    # Run Part 2
+    source("06_module_coverage_estimates_part2.R")
+    ```
+
+    **Use case**: When programmatic knowledge suggests a specific denominator is more appropriate than the statistically selected option.
+
+??? "Example 4: National-only analysis for rapid assessment"
+
+    ```r
+    # Part 1: Run national level only (faster)
+    ANALYSIS_LEVEL <- "NATIONAL_ONLY"
+    source("05_module_coverage_estimates_part1.R")
+
+    # Part 2: Will automatically skip subnational levels
+    source("06_module_coverage_estimates_part2.R")
+    ```
+
+    **Use case**: Initial exploratory analysis, or when subnational survey data is unavailable.
+
+??? "Example 5: Full subnational analysis"
+
+    ```r
+    # Part 1: Include admin3 level
+    ANALYSIS_LEVEL <- "NATIONAL_PLUS_AA2_AA3"
+    source("05_module_coverage_estimates_part1.R")
+
+    # Part 2: Will process all available levels
+    source("06_module_coverage_estimates_part2.R")
+    ```
+
+    **Use case**: Detailed district-level analysis where subnational survey data exists.
+
+??? "Example 6: Programmatic use of outputs"
+
+    ```r
+    # Load coverage outputs
+    coverage_national <- read.csv("M5_coverage_estimation_national.csv")
+    coverage_admin2 <- read.csv("M5_coverage_estimation_admin2.csv")
+
+    # Filter to specific indicator
+    penta3_national <- coverage_national %>%
+      filter(indicator_common_id == "penta3")
+
+    # Compare HMIS-based and survey-projected coverage
+    coverage_comparison <- penta3_national %>%
+      select(year, coverage_cov, coverage_avgsurveyprojection, coverage_original_estimate) %>%
+      mutate(
+        hmis_survey_gap = coverage_cov - coverage_avgsurveyprojection,
+        data_source = case_when(
+          !is.na(coverage_original_estimate) ~ "Survey",
+          !is.na(coverage_avgsurveyprojection) ~ "Projected",
+          TRUE ~ "HMIS only"
+        )
+      )
+
+    # Identify admin2 areas with coverage below threshold
+    low_coverage_areas <- coverage_admin2 %>%
+      filter(indicator_common_id == "penta3", year == max(year)) %>%
+      filter(coverage_avgsurveyprojection < 80) %>%
+      arrange(coverage_avgsurveyprojection)
+    ```
 
 
 ### Usage notes
 
-*Content to be developed*
+??? "Output file columns"
 
-This section will cover:
+    **Part 2 output files** (`M5_coverage_estimation_*.csv`) contain:
 
-- Recommendations for selecting denominators
-- Interpreting coverage estimates
-- Best practices for subnational analysis
+    | Column | Description |
+    |--------|-------------|
+    | `admin_area_1` | Country name |
+    | `admin_area_2` / `admin_area_3` | Subnational area (where applicable) |
+    | `year` | Calendar year |
+    | `indicator_common_id` | Health indicator code |
+    | `denominator` | Selected denominator type |
+    | `coverage_cov` | HMIS-derived coverage (numerator ÷ denominator × 100) |
+    | `coverage_original_estimate` | Survey value where available |
+    | `coverage_avgsurveyprojection` | Survey value projected using HMIS trends |
+    | `survey_raw_source` | Survey source (DHS/MICS) |
+    | `survey_raw_source_detail` | Specific survey name and year |
+
+??? "Reviewing denominator options"
+
+    Part 1 output files (`M4_combined_results_*.csv`) contain coverage estimates from all denominator options. To review:
+
+    1. Open the combined results file
+    2. Filter to indicator of interest
+    3. Compare `value` column across different `denominator_best_or_survey` entries
+    4. The row marked `best` shows the automatically selected denominator
+    5. Rows marked `survey` show actual survey observations
+
+    To override automatic selection in Part 2, set the `DENOM_*` parameters to a specific denominator name instead of `"best"`.
+
+??? "Subnational data requirements"
+
+    The module checks for subnational data availability:
+
+    - If `ANALYSIS_LEVEL` is set to include admin2 or admin3, the module validates that matching survey data exists
+    - If no matching subnational survey data is found, the module falls back to a higher geographic level
+    - Console messages indicate which analysis levels are being processed
+
+??? "Validation checks"
+
+    After running both parts, review outputs for:
+
+    1. Coverage values outside expected range (negative or >100%)
+    2. Gaps in time series (missing years)
+    3. Consistency between `coverage_cov` and `coverage_avgsurveyprojection`
+    4. Denominator selections in Part 1 output
 
 ---
 
-**Last updated**: 07-01-2026
+**Last updated**: 08-01-2026
 **Contact**: FASTR Project Team
 
 ---

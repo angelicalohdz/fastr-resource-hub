@@ -721,13 +721,144 @@ For the volume change chart (output 4):
 
 ### Code examples
 
-*Content to be developed*
+??? "Example 1: Running the module with default settings"
 
-This section will include R code examples demonstrating:
+    ```r
+    # Set working directory
+    setwd("/path/to/module/directory")
 
-- Running the module with default settings
-- Adjusting sensitivity parameters
-- Working with outputs programmatically
+    # Load required libraries
+    library(data.table)
+    library(lubridate)
+    library(zoo)
+    library(MASS)
+    library(fixest)
+    library(stringr)
+    library(dplyr)
+    library(tidyr)
+
+    # Configure country
+    COUNTRY_ISO3 <- "SLE"
+    PROJECT_DATA_HMIS <- "hmis_SLE.csv"
+
+    # Use default settings (admin_area_2 level analysis)
+    RUN_DISTRICT_MODEL <- FALSE
+    RUN_ADMIN_AREA_4_ANALYSIS <- FALSE
+
+    # Run the module
+    source("03_module_service_utilization.R")
+    ```
+
+    With default settings, the module runs control chart analysis at admin_area_2 level and produces disruption estimates for national and regional levels.
+
+??? "Example 2: Adjusting disruption detection sensitivity"
+
+    ```r
+    # Make disruption detection more sensitive (lower thresholds)
+    MADS_THRESHOLD <- 1.0        # Flag at 1 MAD (default: 1.5)
+    DIP_THRESHOLD <- 0.95        # Flag if <95% of expected (default: 0.90)
+    SMOOTH_K <- 5                # Smaller smoothing window (default: 7)
+
+    # Make disruption detection less sensitive (higher thresholds)
+    MADS_THRESHOLD <- 2.0        # Flag only at 2 MADs
+    DIP_THRESHOLD <- 0.80        # Flag only if <80% of expected
+    SMOOTH_K <- 9                # Larger smoothing window
+
+    source("03_module_service_utilization.R")
+    ```
+
+    **Use case**: Adjust sensitivity based on data quality. Noisier data may require less sensitive thresholds to avoid false positives.
+
+??? "Example 3: Running district-level analysis"
+
+    ```r
+    # Enable district-level analysis (slower but more detailed)
+    RUN_DISTRICT_MODEL <- TRUE
+    RUN_ADMIN_AREA_4_ANALYSIS <- FALSE
+
+    source("03_module_service_utilization.R")
+    ```
+
+    **Use case**: When district-level disruption patterns are needed for sub-national programme planning.
+
+    **Note**: District-level analysis increases runtime substantially. For large countries, consider running overnight.
+
+??? "Example 4: Selecting adjustment scenario for analysis"
+
+    ```r
+    # Use unadjusted data for sensitivity analysis
+    SELECTEDCOUNT <- "count_final_none"
+    VISUALIZATIONCOUNT <- "count_final_none"
+
+    # Use outlier-adjusted only
+    SELECTEDCOUNT <- "count_final_outliers"
+    VISUALIZATIONCOUNT <- "count_final_outliers"
+
+    # Use fully adjusted data (default)
+    SELECTEDCOUNT <- "count_final_both"
+    VISUALIZATIONCOUNT <- "count_final_both"
+
+    source("03_module_service_utilization.R")
+    ```
+
+    **Use case**: Compare disruption estimates across different data quality adjustment scenarios.
+
+??? "Example 5: Memory optimization for large datasets"
+
+    ```r
+    # Reduce batch sizes for memory-constrained environments
+    BATCH_SIZE_CC <- 50      # Control chart batches (default: 100)
+    BATCH_SIZE_IND <- 3      # Indicator batches (default: 5)
+    BATCH_SIZE_PROV <- 10    # Province batches (default: 20)
+    BATCH_SIZE_DIST <- 10    # District batches (default: 15)
+
+    # Disable memory-intensive analyses
+    RUN_DISTRICT_MODEL <- FALSE
+    RUN_ADMIN_AREA_4_ANALYSIS <- FALSE
+
+    source("03_module_service_utilization.R")
+    ```
+
+    **Use case**: Running on machines with limited RAM (<8GB).
+
+??? "Example 6: Programmatic use of outputs"
+
+    ```r
+    # Load disruption analysis outputs
+    disruptions_national <- read.csv("M3_disruptions_analysis_admin_area_1.csv")
+    shortfalls_national <- read.csv("M3_all_indicators_shortfalls_admin_area_1.csv")
+
+    # Calculate total service shortfall by indicator
+    annual_shortfalls <- shortfalls_national %>%
+      mutate(year = period_id %/% 100) %>%
+      group_by(indicator_common_id, year) %>%
+      summarise(
+        total_expected = sum(count_expect_sum, na.rm = TRUE),
+        total_actual = sum(count_sum, na.rm = TRUE),
+        total_shortfall = sum(shortfall_absolute, na.rm = TRUE),
+        avg_shortfall_pct = mean(shortfall_percent, na.rm = TRUE),
+        .groups = "drop"
+      )
+
+    # Identify months with largest disruptions
+    worst_months <- shortfalls_national %>%
+      filter(shortfall_percent > 10) %>%
+      arrange(desc(shortfall_percent)) %>%
+      head(20)
+
+    # Load control chart results for detailed analysis
+    control_chart <- read.csv("M3_chartout.csv")
+
+    # Count tagged periods by indicator
+    tagged_summary <- control_chart %>%
+      group_by(indicator_common_id) %>%
+      summarise(
+        total_periods = n(),
+        tagged_periods = sum(tagged, na.rm = TRUE),
+        pct_tagged = 100 * tagged_periods / total_periods,
+        .groups = "drop"
+      )
+    ```
 
 
 ### Troubleshooting
