@@ -164,17 +164,22 @@ MODULES = {}
 # HELPER FUNCTIONS
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def get_input(prompt, default=None):
-    """Get user input with optional default."""
-    if default:
-        result = input(f"{prompt} [{default}]: ").strip()
+def get_input(prompt, default=None, required=True):
+    """Get user input with optional default. If default is provided (even empty string), field is optional."""
+    if default is not None:
+        if default:
+            result = input(f"{prompt} [{default}]: ").strip()
+        else:
+            result = input(f"{prompt}: ").strip()
         return result if result else default
-    else:
+    elif required:
         while True:
             result = input(f"{prompt}: ").strip()
             if result:
                 return result
             print("   This field is required.")
+    else:
+        return input(f"{prompt}: ").strip()
 
 
 def create_workshop_id(country):
@@ -303,32 +308,30 @@ def auto_assign_modules_to_days(selected_modules, num_days):
     return days, split_modules
 
 
-def build_daily_schedule(day_items, start_time_mins, tea_time_mins, lunch_time_mins, afternoon_tea_mins, day_num=1):
+def build_daily_schedule(day_items, start_time_mins, tea_time_mins, lunch_time_mins, afternoon_tea_mins, day_num=1, num_days=1):
     """
-    Build a FULL DAY schedule (9 AM - 5 PM) with content, exercises, and breaks.
-    Consolidates consecutive topics from the same module into single entries.
+    Build a FULL DAY schedule with content, exercises, and breaks.
 
-    Args:
-        day_items: list of dicts with 'id', 'duration', 'mod_num', 'label'
-        day_num: which day (1, 2, etc.) for labeling
+    Key features:
+    - Day 1: Registration, Welcome, Introductions before content
+    - Days 2+: Recap & Questions at start
+    - Max 60 min content sessions
+    - Smart placeholders when content runs out
     """
-    END_OF_DAY = 17 * 60  # 5:00 PM in minutes
+    MAX_SESSION = 60  # Max minutes for a single content session
+    END_OF_DAY = 17 * 60  # 5:00 PM
 
-    # First, consolidate consecutive items from the same module
+    # Consolidate consecutive items from same module
     consolidated = []
     i = 0
     while i < len(day_items):
         item = day_items[i]
         mod_num = item['mod_num']
         total_duration = item['duration']
-
-        # Look ahead for more items from same module
         j = i + 1
         while j < len(day_items) and day_items[j]['mod_num'] == mod_num:
             total_duration += day_items[j]['duration']
             j += 1
-
-        # Create consolidated entry
         consolidated.append({
             'mod_num': mod_num,
             'duration': total_duration,
@@ -340,159 +343,148 @@ def build_daily_schedule(day_items, start_time_mins, tea_time_mins, lunch_time_m
     current_time = start_time_mins
     content_idx = 0
 
-    # Morning session until tea
-    while current_time < tea_time_mins and content_idx < len(consolidated):
-        item = consolidated[content_idx]
-        duration = min(item['duration'], tea_time_mins - current_time)
+    # Track modules covered for exercise naming
+    modules_covered = []
 
+    def add_session(name, duration, module=None, is_break=False):
+        nonlocal current_time
         start_str = format_time(current_time)
         end_time = current_time + duration
         end_str = format_time(end_time)
-
-        schedule.append({
+        entry = {
             'time': f"{start_str} - {end_str}",
-            'session': item['name'],
-            'module': f"m{item['mod_num']}",
+            'session': name,
             'duration': duration
-        })
+        }
+        if module:
+            entry['module'] = module
+            entry['speaker'] = ""
+        if is_break:
+            entry['type'] = 'break'
+        else:
+            entry['speaker'] = ""
+        schedule.append(entry)
         current_time = end_time
 
-        # If we used the full duration, move to next item
-        if duration >= item['duration']:
-            content_idx += 1
+    def add_content(max_duration):
+        """Add content sessions up to max_duration, respecting MAX_SESSION limit."""
+        nonlocal content_idx
+        time_remaining = max_duration
+
+        while time_remaining > 0 and content_idx < len(consolidated):
+            item = consolidated[content_idx]
+            # Don't start a new module if we have less than 15 min
+            if time_remaining < 15:
+                break
+            # Limit session to MAX_SESSION
+            session_duration = min(item['duration'], time_remaining, MAX_SESSION)
+
+            add_session(item['name'], session_duration, f"m{item['mod_num']}")
+            if item['mod_num'] not in modules_covered:
+                modules_covered.append(item['mod_num'])
+
+            item['duration'] -= session_duration
+            time_remaining -= session_duration
+
+            if item['duration'] <= 0:
+                content_idx += 1
+
+        return time_remaining
+
+    def add_placeholder(duration, slot_type='exercise'):
+        """Add appropriate placeholder activity."""
+        if duration < 10:
+            return
+
+        if slot_type == 'exercise' and modules_covered:
+            last_mod = modules_covered[-1]
+            mod_name = MODULE_SHORT_NAMES.get(last_mod, f'Module {last_mod}')
+            add_session(f"Hands-on Practice: {mod_name}", duration)
+        elif slot_type == 'group':
+            add_session("Group Work & Discussion", duration)
+        elif slot_type == 'analysis':
+            add_session("Country Data Analysis", duration)
+        elif slot_type == 'planning':
+            add_session("Action Planning", duration)
         else:
-            # Partial - reduce remaining duration
-            consolidated[content_idx]['duration'] -= duration
+            add_session("Practical Exercises", duration)
+
+    # ═══════════════════════════════════════════════════════════════════════
+    # DAY 1: Opening ceremony
+    # ═══════════════════════════════════════════════════════════════════════
+    if day_num == 1:
+        # Registration (30 min before official start)
+        reg_start = start_time_mins - 30
+        schedule.append({
+            'time': f"{format_time(reg_start)} - {format_time(start_time_mins)}",
+            'session': 'Registration',
+            'duration': 30
+        })
+
+        # Welcome & Opening Remarks
+        add_session("Welcome & Opening Remarks", 15)
+
+        # Participant Introductions
+        add_session("Participant Introductions", 30)
+
+    # ═══════════════════════════════════════════════════════════════════════
+    # DAYS 2+: Recap
+    # ═══════════════════════════════════════════════════════════════════════
+    else:
+        add_session("Recap & Questions", 15)
+
+    # ═══════════════════════════════════════════════════════════════════════
+    # MORNING SESSION (until tea)
+    # ═══════════════════════════════════════════════════════════════════════
+    time_until_tea = tea_time_mins - current_time
+    remaining = add_content(time_until_tea)
+    if remaining > 10:
+        add_placeholder(remaining, 'exercise')
 
     # Tea break
-    tea_end = tea_time_mins + 15
-    schedule.append({
-        'time': f"{format_time(tea_time_mins)} - {format_time(tea_end)}",
-        'session': 'Tea Break',
-        'type': 'break',
-        'duration': 15
-    })
-    current_time = tea_end
+    add_session("Tea Break", 15, is_break=True)
 
-    # Late morning session until lunch
-    while current_time < lunch_time_mins and content_idx < len(consolidated):
-        item = consolidated[content_idx]
-        duration = min(item['duration'], lunch_time_mins - current_time)
-
-        start_str = format_time(current_time)
-        end_time = current_time + duration
-        end_str = format_time(end_time)
-
-        schedule.append({
-            'time': f"{start_str} - {end_str}",
-            'session': item['name'],
-            'module': f"m{item['mod_num']}",
-            'duration': duration
-        })
-        current_time = end_time
-
-        if duration >= item['duration']:
-            content_idx += 1
-        else:
-            consolidated[content_idx]['duration'] -= duration
-
-    # If time before lunch, add exercises
-    if current_time < lunch_time_mins:
-        schedule.append({
-            'time': f"{format_time(current_time)} - {format_time(lunch_time_mins)}",
-            'session': 'Practical Exercises',
-            'duration': lunch_time_mins - current_time
-        })
-        current_time = lunch_time_mins
+    # ═══════════════════════════════════════════════════════════════════════
+    # LATE MORNING (until lunch)
+    # ═══════════════════════════════════════════════════════════════════════
+    time_until_lunch = lunch_time_mins - current_time
+    remaining = add_content(time_until_lunch)
+    if remaining > 10:
+        add_placeholder(remaining, 'exercise')
 
     # Lunch
-    lunch_end = lunch_time_mins + 60
-    schedule.append({
-        'time': f"{format_time(lunch_time_mins)} - {format_time(lunch_end)}",
-        'session': 'Lunch',
-        'type': 'break',
-        'duration': 60
-    })
-    current_time = lunch_end
+    add_session("Lunch", 60, is_break=True)
 
-    # Afternoon session until afternoon tea
-    while current_time < afternoon_tea_mins and content_idx < len(consolidated):
-        item = consolidated[content_idx]
-        duration = min(item['duration'], afternoon_tea_mins - current_time)
-
-        start_str = format_time(current_time)
-        end_time = current_time + duration
-        end_str = format_time(end_time)
-
-        schedule.append({
-            'time': f"{start_str} - {end_str}",
-            'session': item['name'],
-            'module': f"m{item['mod_num']}",
-            'duration': duration
-        })
-        current_time = end_time
-
-        if duration >= item['duration']:
-            content_idx += 1
-        else:
-            consolidated[content_idx]['duration'] -= duration
-
-    # If time before afternoon tea, add exercises
-    if current_time < afternoon_tea_mins:
-        schedule.append({
-            'time': f"{format_time(current_time)} - {format_time(afternoon_tea_mins)}",
-            'session': 'Practical Exercises',
-            'duration': afternoon_tea_mins - current_time
-        })
-        current_time = afternoon_tea_mins
+    # ═══════════════════════════════════════════════════════════════════════
+    # AFTERNOON (until afternoon tea)
+    # ═══════════════════════════════════════════════════════════════════════
+    time_until_pm_tea = afternoon_tea_mins - current_time
+    remaining = add_content(time_until_pm_tea)
+    if remaining > 10:
+        add_placeholder(remaining, 'group')
 
     # Afternoon tea
-    tea_end = afternoon_tea_mins + 15
-    schedule.append({
-        'time': f"{format_time(afternoon_tea_mins)} - {format_time(tea_end)}",
-        'session': 'Afternoon Tea',
-        'type': 'break',
-        'duration': 15
-    })
-    current_time = tea_end
+    add_session("Afternoon Tea", 15, is_break=True)
 
-    # Late afternoon until end of day
-    while current_time < END_OF_DAY - 15 and content_idx < len(consolidated):
-        item = consolidated[content_idx]
-        duration = min(item['duration'], END_OF_DAY - 15 - current_time)
+    # ═══════════════════════════════════════════════════════════════════════
+    # LATE AFTERNOON (until end of day)
+    # ═══════════════════════════════════════════════════════════════════════
+    time_until_wrapup = END_OF_DAY - 15 - current_time
+    remaining = add_content(time_until_wrapup)
 
-        start_str = format_time(current_time)
-        end_time = current_time + duration
-        end_str = format_time(end_time)
-
-        schedule.append({
-            'time': f"{start_str} - {end_str}",
-            'session': item['name'],
-            'module': f"m{item['mod_num']}",
-            'duration': duration
-        })
-        current_time = end_time
-
-        if duration >= item['duration']:
-            content_idx += 1
-        else:
-            consolidated[content_idx]['duration'] -= duration
-
-    # Fill remaining time with exercises/group work
-    if current_time < END_OF_DAY - 15:
-        schedule.append({
-            'time': f"{format_time(current_time)} - {format_time(END_OF_DAY - 15)}",
-            'session': 'Group Work & Discussion',
-            'duration': END_OF_DAY - 15 - current_time
-        })
-        current_time = END_OF_DAY - 15
+    # Fill remaining time with varied activities
+    if remaining > 0:
+        if remaining > 60:
+            # Long time remaining - mix of activities
+            add_placeholder(45, 'analysis')
+            remaining -= 45
+        if remaining > 30:
+            add_placeholder(remaining, 'group')
+        elif remaining > 10:
+            add_placeholder(remaining, 'planning')
 
     # Day wrap-up
-    schedule.append({
-        'time': f"{format_time(current_time)} - {format_time(END_OF_DAY)}",
-        'session': 'Day Wrap-up & Q&A',
-        'duration': 15
-    })
+    add_session("Day Wrap-up & Q&A", 15)
 
     return schedule
 
@@ -690,6 +682,83 @@ def main():
                     days_assignment[day] = new_items
 
     # ─────────────────────────────────────────────────────────────────────────
+    # STEP 5: Country Data
+    # ─────────────────────────────────────────────────────────────────────────
+    print("\n" + "─" * 70)
+    print("STEP 5: Country Data (optional - press Enter to skip)")
+    print("─" * 70 + "\n")
+
+    print("   Fill in country statistics for your slides.\n")
+
+    total_population = get_input("   Total population", "")
+    total_facilities = get_input("   Total health facilities", "")
+    facilities_reporting = get_input("   Facilities reporting to DHIS2", "")
+    reporting_rate = get_input("   DHIS2 reporting rate", "")
+    women_reproductive_age = get_input("   Women of reproductive age", "")
+    under5_population = get_input("   Children under 5", "")
+    expected_pregnancies = get_input("   Expected pregnancies/year", "")
+    expected_births = get_input("   Expected live births/year", "")
+    last_survey = get_input("   Last survey (e.g., DHS 2022)", "")
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # STEP 6: Workshop Content
+    # ─────────────────────────────────────────────────────────────────────────
+    print("\n" + "─" * 70)
+    print("STEP 6: Workshop Content (optional - press Enter for defaults)")
+    print("─" * 70 + "\n")
+
+    # Objectives
+    print("   Workshop objectives (enter each objective, empty line to finish):")
+    print("   Example: 'Understand FASTR methodology'\n")
+    objectives = []
+    while True:
+        obj = input(f"   Objective {len(objectives)+1}: ").strip()
+        if not obj:
+            break
+        objectives.append(obj)
+    if not objectives:
+        objectives = [
+            "Understand the FASTR approach to routine data analysis",
+            "Learn to assess and adjust for data quality issues",
+            "Apply methods to analyze service utilization and coverage",
+            "Practice interpreting and communicating results"
+        ]
+
+    # Health priorities
+    print("\n   Health priorities to focus on (enter each, empty line to finish):")
+    print("   Example: 'Maternal mortality reduction'\n")
+    health_priorities = []
+    while True:
+        hp = input(f"   Priority {len(health_priorities)+1}: ").strip()
+        if not hp:
+            break
+        health_priorities.append(hp)
+    if not health_priorities:
+        health_priorities = [
+            "Maternal health services (ANC, skilled birth attendance)",
+            "Child immunization coverage",
+            "Family planning services",
+            "Data quality improvement"
+        ]
+
+    # Next steps
+    print("\n   Next steps / action items (enter each, empty line to finish):")
+    print("   Example: 'Conduct monthly data review meetings'\n")
+    next_steps = []
+    while True:
+        ns = input(f"   Action {len(next_steps)+1}: ").strip()
+        if not ns:
+            break
+        next_steps.append(ns)
+    if not next_steps:
+        next_steps = [
+            "Apply FASTR methods to your country data",
+            "Share findings with stakeholders",
+            "Establish regular data review processes",
+            "Identify areas for data quality improvement"
+        ]
+
+    # ─────────────────────────────────────────────────────────────────────────
     # BUILD CONFIG
     # ─────────────────────────────────────────────────────────────────────────
     print("\n" + "─" * 70)
@@ -700,7 +769,8 @@ def main():
     daily_schedules = {}
     for day, items in days_assignment.items():
         daily_schedules[f'day{day}'] = build_daily_schedule(
-            items, start_time_mins, tea_time_mins, lunch_time_mins, afternoon_tea_mins
+            items, start_time_mins, tea_time_mins, lunch_time_mins, afternoon_tea_mins,
+            day_num=day, num_days=num_days
         )
 
     # Build deck_order from all items across all days (preserves split modules)
@@ -740,17 +810,27 @@ def main():
             ]
         },
         # Country-specific data for {{variable}} substitution in slides
-        # Edit these values to customize your workshop
         'country_data': {
-            'total_facilities': '[number of facilities]',
-            'facilities_reporting': '[facilities reporting to DHIS2]',
-            'reporting_rate': '[XX%]',
-            'total_population': '[X million]',
-            'women_reproductive_age': '[X million]',
-            'under5_population': '[X million]',
-            'expected_pregnancies': '[X per year]',
-            'expected_births': '[X per year]',
-            'last_survey': '[DHS YYYY or MICS YYYY]',
+            'LOCATION': location,
+            'COUNTRY': country,
+            'WORKSHOP_NAME': f"FASTR Workshop - {country}",
+            'DATE': date_str,
+            'FACILITATORS': facilitators,
+            'total_facilities': total_facilities or '[number of facilities]',
+            'facilities_reporting': facilities_reporting or '[facilities reporting to DHIS2]',
+            'reporting_rate': reporting_rate or '[XX%]',
+            'total_population': total_population or '[X million]',
+            'women_reproductive_age': women_reproductive_age or '[X million]',
+            'under5_population': under5_population or '[X million]',
+            'expected_pregnancies': expected_pregnancies or '[X per year]',
+            'expected_births': expected_births or '[X per year]',
+            'last_survey': last_survey or '[DHS YYYY or MICS YYYY]',
+        },
+        # Workshop content
+        'workshop_content': {
+            'objectives': objectives,
+            'health_priorities': health_priorities,
+            'next_steps': next_steps,
         }
     }
 
@@ -850,9 +930,13 @@ schedule:
         # Write each day's schedule
         for day_key, day_items in daily_schedules.items():
             f.write(f"    {day_key}:\n")
-            # Add a hint for day 1 about optional opening sessions
+            # Add hints for specific days
             if day_key == 'day1':
-                f.write(f"      # TIP: Add opening ceremony items here (see optional sessions above)\n")
+                f.write(f"      # TIP: Registration, Welcome & Introductions are included.\n")
+                f.write(f"      # Add ministerial address or other opening items as needed.\n")
+            elif day_key == f'day{num_days}':
+                f.write(f"      # TIP: This is the final day. Consider adding closing ceremony\n")
+                f.write(f"      # items (see CLOSING CEREMONY in optional sessions above).\n")
             for item in day_items:
                 f.write(f"      - time: \"{item['time']}\"\n")
                 f.write(f"        session: {item['session']}\n")
@@ -927,22 +1011,102 @@ content:
 # ───────────────────────────────────────────────────────────────────────
 
 country_data:
-  total_facilities: "[number of facilities]"
-  facilities_reporting: "[facilities reporting to DHIS2]"
-  reporting_rate: "[XX%]"
-  total_population: "[X million]"
-  women_reproductive_age: "[X million]"
-  under5_population: "[X million]"
-  expected_pregnancies: "[X per year]"
-  expected_births: "[X per year]"
-  last_survey: "[DHS YYYY or MICS YYYY]"
+  # Auto-filled from workshop info
+  LOCATION: "{location}"
+  COUNTRY: "{country}"
+  WORKSHOP_NAME: "{config['workshop']['name']}"
+  DATE: "{date_str}"
+  FACILITATORS: "{facilitators}"
+
+  # Health system data
+  total_facilities: "{total_facilities or '[number of facilities]'}"
+  facilities_reporting: "{facilities_reporting or '[facilities reporting to DHIS2]'}"
+  reporting_rate: "{reporting_rate or '[XX%]'}"
+  total_population: "{total_population or '[X million]'}"
+  women_reproductive_age: "{women_reproductive_age or '[X million]'}"
+  under5_population: "{under5_population or '[X million]'}"
+  expected_pregnancies: "{expected_pregnancies or '[X per year]'}"
+  expected_births: "{expected_births or '[X per year]'}"
+  last_survey: "{last_survey or '[DHS YYYY or MICS YYYY]'}"
 """)
     print(f"   ✓ workshop.yaml")
 
-    # Copy custom slide templates
+    # Generate custom slides with user content
+    # 01_objectives.md
+    obj_bullets = '\n'.join([f"- {obj}" for obj in objectives])
+    objectives_content = f"""---
+marp: true
+theme: fastr
+paginate: true
+---
+
+# Workshop Objectives
+
+By the end of this workshop, participants will be able to:
+
+{obj_bullets}
+
+---
+"""
+    with open(os.path.join(workshop_dir, "01_objectives.md"), 'w') as f:
+        f.write(objectives_content)
+    print(f"   ✓ 01_objectives.md")
+
+    # 03_health-priorities.md
+    hp_bullets = '\n'.join([f"- {hp}" for hp in health_priorities])
+    priorities_content = f"""---
+marp: true
+theme: fastr
+paginate: true
+---
+
+# Health Priorities
+
+## Focus areas for {country}
+
+{hp_bullets}
+
+---
+"""
+    with open(os.path.join(workshop_dir, "03_health-priorities.md"), 'w') as f:
+        f.write(priorities_content)
+    print(f"   ✓ 03_health-priorities.md")
+
+    # 99_next-steps.md
+    ns_bullets = '\n'.join([f"- {ns}" for ns in next_steps])
+    nextsteps_content = f"""---
+marp: true
+theme: fastr
+paginate: true
+---
+
+# Next Steps
+
+## Action items
+
+{ns_bullets}
+
+---
+
+## Contact
+
+For questions or support:
+- **Email:** fastr@worldbank.org
+- **Resources:** [FASTR Resource Hub](https://fastr-analytics.github.io/fastr-resource-hub/)
+
+---
+"""
+    with open(os.path.join(workshop_dir, "99_next-steps.md"), 'w') as f:
+        f.write(nextsteps_content)
+    print(f"   ✓ 99_next-steps.md")
+
+    # Copy remaining templates (country-overview, coverage-results, etc.)
     templates_dir = os.path.join(base_dir, "templates", "custom_slides")
     if os.path.exists(templates_dir):
         for tmpl in Path(templates_dir).glob("*.md"):
+            # Skip ones we already generated
+            if tmpl.name in ['01_objectives.md', '03_health-priorities.md', '99_next-steps.md']:
+                continue
             dest = os.path.join(workshop_dir, tmpl.name)
             if not os.path.exists(dest):
                 shutil.copy2(tmpl, dest)

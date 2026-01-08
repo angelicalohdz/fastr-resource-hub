@@ -4,11 +4,11 @@
 
 ### Objective of the module
 
-The Service Utilization module analyzes health service delivery patterns to detect and quantify disruptions in service volumes over time. It identifies when health services deviate significantly from expected patterns and measures the magnitude of these disruptions at national, provincial, and district levels.
+The Service Utilization module analyzes health service delivery patterns to detect and quantify disruptions in service volumes over time. It identifies deviations from expected service delivery patterns and estimates the magnitude of these disruptions at national, provincial, and district levels.
 
-Using statistical process control and regression analysis, the module compares observed service volumes with expected levels based on historical trends and seasonal patterns. This allows routine, predictable variation (such as seasonal increases in malaria cases) to be distinguished from true service disruptions that warrant further investigation, including abrupt declines in antenatal care (ANC) visits during periods of conflict or public health emergencies.
+Using statistical process control and regression-based methods, the module compares observed service volumes with expected levels derived from historical trends and seasonal patterns. This enables routine, predictable variation (such as seasonal increases in malaria cases) to be distinguished from substantive service disruptions, including sudden declines in RMNCAH-N services—such as immunization and maternal or child health care—during periods of conflict or public health emergencies.
 
-The analysis yields quantified estimates of service shortfalls and surpluses, allowing changes in service delivery to be measured and compared across time and geographic levels.
+The analysis produces quantified estimates of service shortfalls and surpluses, enabling changes in service delivery to be systematically measured and compared across time and geographic levels.
 
 ### Analytical rationale
 
