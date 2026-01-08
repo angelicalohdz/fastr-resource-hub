@@ -308,18 +308,34 @@ def auto_assign_modules_to_days(selected_modules, num_days):
     return days, split_modules
 
 
-def build_daily_schedule(day_items, start_time_mins, tea_time_mins, lunch_time_mins, afternoon_tea_mins, day_num=1, num_days=1):
+def build_daily_schedule(day_items, start_time_mins, tea_time_mins, lunch_time_mins, afternoon_tea_mins, day_num=1, num_days=1, custom_slides=None):
     """
     Build a FULL DAY schedule with content, exercises, and breaks.
 
     Key features:
-    - Day 1: Registration, Welcome, Introductions before content
+    - Day 1: Registration, Welcome, Introductions, then custom slides (objectives, country overview)
     - Days 2+: Recap & Questions at start
+    - Final day: Next steps before wrap-up
     - Max 60 min content sessions
     - Smart placeholders when content runs out
+
+    custom_slides: dict with 'opening' (Day 1) and 'closing' (Final day) lists
     """
     MAX_SESSION = 60  # Max minutes for a single content session
     END_OF_DAY = 17 * 60  # 5:00 PM
+
+    # Default custom slides with durations
+    if custom_slides is None:
+        custom_slides = {
+            'opening': [
+                ('Workshop Objectives', 15),
+                ('Country Overview', 20),
+                ('Health Priorities', 15),
+            ],
+            'closing': [
+                ('Next Steps & Action Planning', 20),
+            ]
+        }
 
     # Consolidate consecutive items from same module
     consolidated = []
@@ -376,8 +392,27 @@ def build_daily_schedule(day_items, start_time_mins, tea_time_mins, lunch_time_m
             # Don't start a new module if we have less than 15 min
             if time_remaining < 15:
                 break
-            # Limit session to MAX_SESSION
-            session_duration = min(item['duration'], time_remaining, MAX_SESSION)
+
+            # Calculate session duration
+            # If module fits entirely, use full duration
+            if item['duration'] <= time_remaining:
+                session_duration = item['duration']
+            # If module is longer than time remaining, take what we can
+            elif item['duration'] <= MAX_SESSION:
+                # Module fits in one session but not in remaining time
+                # Take what we can, it will continue after break
+                session_duration = min(item['duration'], time_remaining)
+            else:
+                # Module needs multiple sessions
+                # If remaining module time after this session would be small (< 20 min),
+                # extend this session to avoid awkward tiny follow-ups
+                potential_session = min(item['duration'], time_remaining, MAX_SESSION)
+                remaining_after = item['duration'] - potential_session
+                if 0 < remaining_after < 20:
+                    # Extend session to include the small remainder (up to 75 min max)
+                    session_duration = min(item['duration'], time_remaining, MAX_SESSION + 15)
+                else:
+                    session_duration = potential_session
 
             add_session(item['name'], session_duration, f"m{item['mod_num']}")
             if item['mod_num'] not in modules_covered:
@@ -410,7 +445,7 @@ def build_daily_schedule(day_items, start_time_mins, tea_time_mins, lunch_time_m
             add_session("Practical Exercises", duration)
 
     # ═══════════════════════════════════════════════════════════════════════
-    # DAY 1: Opening ceremony
+    # DAY 1: Opening ceremony + custom opening slides
     # ═══════════════════════════════════════════════════════════════════════
     if day_num == 1:
         # Registration (30 min before official start)
@@ -426,6 +461,10 @@ def build_daily_schedule(day_items, start_time_mins, tea_time_mins, lunch_time_m
 
         # Participant Introductions
         add_session("Participant Introductions", 30)
+
+        # Opening custom slides (objectives, country overview, health priorities)
+        for slide_name, slide_duration in custom_slides.get('opening', []):
+            add_session(slide_name, slide_duration)
 
     # ═══════════════════════════════════════════════════════════════════════
     # DAYS 2+: Recap
@@ -482,6 +521,13 @@ def build_daily_schedule(day_items, start_time_mins, tea_time_mins, lunch_time_m
             add_placeholder(remaining, 'group')
         elif remaining > 10:
             add_placeholder(remaining, 'planning')
+
+    # ═══════════════════════════════════════════════════════════════════════
+    # FINAL DAY: Closing slides before wrap-up
+    # ═══════════════════════════════════════════════════════════════════════
+    if day_num == num_days:
+        for slide_name, slide_duration in custom_slides.get('closing', []):
+            add_session(slide_name, slide_duration)
 
     # Day wrap-up
     add_session("Day Wrap-up & Q&A", 15)
@@ -939,7 +985,9 @@ schedule:
                 f.write(f"      # items (see CLOSING CEREMONY in optional sessions above).\n")
             for item in day_items:
                 f.write(f"      - time: \"{item['time']}\"\n")
-                f.write(f"        session: {item['session']}\n")
+                # Quote session names to handle colons and special chars
+                session_name = item['session'].replace('"', '\\"')
+                f.write(f"        session: \"{session_name}\"\n")
                 if 'module' in item:
                     f.write(f"        module: {item['module']}\n")
                 if item.get('type') == 'break':
