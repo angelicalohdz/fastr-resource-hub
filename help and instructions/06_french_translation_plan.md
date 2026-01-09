@@ -1,132 +1,71 @@
-# Plan: French Translation & Multi-language Support
+# French Translation & Multi-language Support
 
-## Summary
-Add French language support using:
-- `mkdocs-static-i18n` plugin for methodology docs (language toggle)
-- AI-assisted translation with human review
-- French slides only for specific workshops (per-workshop config)
+**Status: IMPLEMENTED**
+
+See **[09_translation_workflow.md](09_translation_workflow.md)** for the complete user guide.
 
 ---
 
-## Step 1: Install i18n Plugin
+## What Was Implemented
 
-**File: `requirements.txt`**
-```
-mkdocs-static-i18n>=1.0.0
-```
+### 1. Site Translation (mkdocs-static-i18n)
+
+- Plugin configured in `methodology/mkdocs.yml`
+- Language toggle (EN ↔ FR) in site header
+- French nav labels configured
+- French search enabled
+- Fallback to English when French doesn't exist
+
+### 2. Translation Tools
+
+| Tool | Purpose |
+|------|---------|
+| `tools/translate.py` | Core DeepL translation module with caching |
+| `tools/translate_docs.py` | Translate methodology docs with REVIEWED protection |
+| `tools/02_build_deck.py --lang fr` | Build workshop decks in French |
+
+### 3. REVIEWED Marker System
+
+Files marked with `<!-- REVIEWED -->` are protected:
+- Existing content never overwritten
+- New English sections auto-translated and appended
 
 ---
 
-## Step 2: Configure MkDocs for i18n
+## Quick Reference
 
-**File: `methodology/mkdocs.yml`**
+```bash
+# Check translation status
+python3 tools/translate_docs.py --lang fr --status
 
-Add to plugins section:
-```yaml
-plugins:
-  - i18n:
-      docs_structure: suffix  # Uses .fr.md suffix
-      fallback_to_default: true
-      languages:
-        - locale: en
-          name: English
-          default: true
-          build: true
-        - locale: fr
-          name: Français
-          build: true
-  - strip-slides  # existing
-  - search        # existing
-  # ... rest of plugins
-```
+# Translate methodology docs
+python3 tools/translate_docs.py --lang fr
 
-Update theme language handling:
-```yaml
-extra:
-  alternate:
-    - name: English
-      link: /en/
-      lang: en
-    - name: Français
-      link: /fr/
-      lang: fr
+# Build French workshop deck
+python3 tools/02_build_deck.py --workshop 2026-countryname --lang fr
+
+# Check DeepL API quota
+python3 tools/translate.py --check
 ```
 
 ---
 
-## Step 3: Create French Translation Files
+## File Structure
 
-For each methodology file, create a `.fr.md` version:
 ```
 methodology/
-├── index.md                    # English
-├── index.fr.md                 # French
-├── executive_summary.md
-├── executive_summary.fr.md
-├── 00_introduction.md
-├── 00_introduction.fr.md
+├── executive_summary.md        # English (source)
+├── executive_summary.fr.md     # French (translated)
 └── ...
-```
 
-**Translation workflow:**
-1. Use Claude to generate draft French translation
-2. Human review for technical accuracy and terminology
-3. Add translation status comment at top of file
-
----
-
-## Step 4: Update Slide Build for Language Support
-
-**File: `tools/02_build_deck.py`**
-
-Add optional `--lang` parameter:
-- Default: builds `deck.md` (English)
-- With `--lang fr`: builds `deck.fr.md` if exists
-
-**File: Workshop `config.yml`**
-Add optional languages field:
-```yaml
-name: "2025-example"
-languages: ["en", "fr"]  # Optional - defaults to ["en"]
+translations/
+└── glossary.yml                # FASTR terminology (EN → FR)
 ```
 
 ---
 
-## Step 5: Update npm Scripts
+## Next Steps
 
-**File: `package.json`**
-```json
-"scripts": {
-  "build": "python3 tools/02_build_deck.py",
-  "build:fr": "python3 tools/02_build_deck.py --lang fr",
-  "translate": "python3 tools/translate.py"  # Optional helper
-}
-```
-
----
-
-## Files to Modify
-
-| File | Change |
-|------|--------|
-| `requirements.txt` | Add `mkdocs-static-i18n` |
-| `methodology/mkdocs.yml` | Add i18n plugin config |
-| `tools/02_build_deck.py` | Add `--lang` parameter |
-| `package.json` | Add French build script |
-
-## New Files to Create
-
-| File | Purpose |
-|------|---------|
-| `methodology/*.fr.md` | French translations (incremental) |
-| `workshops/*/deck.fr.md` | French slides (specific workshops only) |
-
----
-
-## Implementation Order
-
-1. Install plugin and configure mkdocs.yml
-2. Test with one translated file (e.g., executive_summary.fr.md)
-3. Verify language toggle works
-4. Update build script for slides
-5. Translate remaining files incrementally
+1. Translate remaining 11 methodology docs
+2. Review each file and add `<!-- REVIEWED -->` marker
+3. Keep English as source of truth, run translation when updated

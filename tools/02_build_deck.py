@@ -1386,8 +1386,13 @@ def add_custom_slides_at_position(position, config, workshop_dir, base_dir):
     return content
 
 
-def build_workshop_deck(workshop_id, base_dir, output_file=None, skip_confirmation=False, override_days=None):
-    """Build a complete slide deck for a workshop"""
+def build_workshop_deck(workshop_id, base_dir, output_file=None, skip_confirmation=False, override_days=None, target_lang='en'):
+    """Build a complete slide deck for a workshop.
+
+    Args:
+        target_lang: Output language ('en', 'fr', 'es', etc.). Default 'en'.
+                     Non-English requires DeepL API key.
+    """
 
     print("\n" + "=" * 70)
     print(f"       BUILDING WORKSHOP: {workshop_id}")
@@ -1667,8 +1672,47 @@ paginate: true
     print(f"\nStep 3: Applying auto-layout...")
     deck_content = process_slides_with_auto_layout(deck_content, verbose=True)
 
+    # Step 4: Translate if non-English
+    if target_lang and target_lang.lower() != 'en':
+        print(f"\nStep 4: Translating to {target_lang.upper()}...")
+        try:
+            from translate import translate_content, get_api_key, validate_api_key
+
+            # Check API key
+            api_key = get_api_key()
+            if not api_key:
+                print("   ❌ DeepL API key not found.")
+                print("   Set DEEPL_API_KEY environment variable or create .env file.")
+                print("   Sign up at: https://www.deepl.com/pro-api (free tier available)")
+                sys.exit(1)
+
+            # Validate key
+            is_valid, msg = validate_api_key(api_key)
+            if not is_valid:
+                print(f"   ❌ {msg}")
+                sys.exit(1)
+
+            # Translate content
+            print(f"   Translating... (this may take a minute)")
+            deck_content = translate_content(deck_content, target_lang.upper())
+            print(f"   ✓ Translation complete")
+
+            # Update output filename
+            if not output_file:
+                output_file = f"{workshop_id}_deck.{target_lang.lower()}.md"
+            elif not output_file.endswith(f'.{target_lang.lower()}.md'):
+                # Insert language before .md
+                output_file = output_file.replace('.md', f'.{target_lang.lower()}.md')
+
+        except ImportError:
+            print("   ❌ Translation module not found. Check tools/translate.py exists.")
+            sys.exit(1)
+        except Exception as e:
+            print(f"   ❌ Translation failed: {e}")
+            sys.exit(1)
+
     # Write output file
-    print(f"\nStep 4: Writing output file...")
+    print(f"\nStep 5: Writing output file..." if target_lang and target_lang.lower() != 'en' else "\nStep 4: Writing output file...")
     output_dir = os.path.join(base_dir, "outputs")
     os.makedirs(output_dir, exist_ok=True)
     output_path = os.path.join(output_dir, output_file)
@@ -1740,10 +1784,19 @@ For more help, see: docs/building-decks.md
             help='Number of workshop days (default: 2)'
         )
 
+        parser.add_argument(
+            '--lang',
+            type=str,
+            choices=['en', 'fr', 'es', 'de', 'pt'],
+            default='en',
+            help='Output language (default: en). Requires DeepL API key for non-English.'
+        )
+
         args = parser.parse_args()
 
         build_workshop_deck(args.workshop, base_dir, args.output,
-                           skip_confirmation=True, override_days=args.days)
+                           skip_confirmation=True, override_days=args.days,
+                           target_lang=args.lang)
 
     else:
         # Interactive mode

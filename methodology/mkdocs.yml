@@ -100,10 +100,39 @@ theme:
 
 # Plugins
 plugins:
+  - i18n:
+      docs_structure: suffix  # Uses .fr.md suffix for French files
+      fallback_to_default: true
+      languages:
+        - locale: en
+          name: English
+          default: true
+          build: true
+        - locale: fr
+          name: Français
+          build: true
+          site_name: FASTR Suivi de l'utilisation des services SRMNIA-N
+          theme:
+            language: fr
+          nav_translations:
+            Overview: Vue d'ensemble
+            Executive Summary: Résumé exécutif
+            Introduction: Introduction
+            Identify Questions & Indicators: Identifier les questions et indicateurs
+            Data Extraction: Extraction des données
+            The FASTR Data Analytics Platform: La plateforme d'analyse FASTR
+            Data Quality Assessment: Évaluation de la qualité des données
+            Data Quality Adjustment: Ajustement de la qualité des données
+            Service Utilization Analysis: Analyse de l'utilisation des services
+            Coverage Estimates: Estimations de couverture
+            Results Communication: Communication des résultats
+            Disclaimer: Avertissement
   - strip-slides  # Remove slide content from docs (content between <!-- SLIDE:xxx --> markers)
   - search:
       separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
-      lang: en
+      lang:
+        - en
+        - fr
   - bibtex:
       bib_file: "references.bib"
       csl_file: "https://raw.githubusercontent.com/citation-style-language/styles/master/apa.csl"
@@ -165,6 +194,15 @@ markdown_extensions:
 
 # Extra Configuration
 extra:
+  # Language Toggle
+  alternate:
+    - name: English
+      link: /en/
+      lang: en
+    - name: Français
+      link: /fr/
+      lang: fr
+
   # Social Links
   social:
     - icon: fontawesome/solid/house

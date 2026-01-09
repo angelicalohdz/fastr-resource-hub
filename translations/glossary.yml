@@ -1,0 +1,100 @@
+# ═══════════════════════════════════════════════════════════════════════════
+# FASTR Translation Glossary
+# ═══════════════════════════════════════════════════════════════════════════
+# This file defines consistent translations for key terms.
+# DeepL will use these terms when translating content.
+#
+# Format:
+#   English term: Translated term
+#
+# Note: DeepL's glossary feature requires Pro account.
+# For Free tier, this serves as a reference for manual review.
+# ═══════════════════════════════════════════════════════════════════════════
+
+# ───────────────────────────────────────────────────────────────────────────
+# French (FR)
+# ───────────────────────────────────────────────────────────────────────────
+fr:
+  # Program names and acronyms (keep as-is or use official translations)
+  "FASTR": "FASTR"
+  "RMNCAH-N": "SRMNIA-N"
+  "Global Financing Facility": "Mécanisme de Financement Mondial"
+  "GFF": "GFF"
+
+  # Health system terms
+  "Health Management Information System": "Système d'information de gestion de la santé"
+  "HMIS": "SIGS"
+  "DHIS2": "DHIS2"
+  "routine data": "données de routine"
+  "facility": "établissement"
+  "health facility": "établissement de santé"
+  "district": "district"
+  "region": "région"
+  "subnational": "infranational"
+
+  # Service delivery indicators
+  "coverage": "couverture"
+  "coverage estimate": "estimation de couverture"
+  "service utilization": "utilisation des services"
+  "service delivery": "prestation de services"
+  "indicator": "indicateur"
+
+  # Maternal health
+  "ANC": "CPN"
+  "ANC1": "CPN1"
+  "ANC4": "CPN4"
+  "antenatal care": "soins prénataux"
+  "postnatal care": "soins postnataux"
+  "skilled birth attendance": "accouchement assisté par un personnel qualifié"
+  "institutional delivery": "accouchement en établissement"
+  "facility delivery": "accouchement en établissement"
+
+  # Child health
+  "immunization": "vaccination"
+  "vaccination": "vaccination"
+  "DPT": "DTC"
+  "Penta": "Penta"
+  "BCG": "BCG"
+  "measles": "rougeole"
+  "OPV": "VPO"
+
+  # Data quality terms
+  "Data Quality Assessment": "Évaluation de la qualité des données"
+  "Data Quality Adjustment": "Ajustement de la qualité des données"
+  "data quality": "qualité des données"
+  "outlier": "valeur aberrante"
+  "outliers": "valeurs aberrantes"
+  "missing data": "données manquantes"
+  "completeness": "complétude"
+  "reporting rate": "taux de rapportage"
+  "internal consistency": "cohérence interne"
+  "median absolute deviation": "écart absolu médian"
+
+  # Analysis terms
+  "denominator": "dénominateur"
+  "numerator": "numérateur"
+  "baseline": "valeur de référence"
+  "trend": "tendance"
+  "disruption": "perturbation"
+  "seasonality": "saisonnalité"
+
+  # Survey references
+  "Demographic and Health Survey": "Enquête Démographique et de Santé"
+  "DHS": "EDS"
+  "MICS": "MICS"
+  "household survey": "enquête ménages"
+
+  # Platform/technical terms
+  "platform": "plateforme"
+  "analytics platform": "plateforme analytique"
+  "module": "module"
+  "dashboard": "tableau de bord"
+  "visualization": "visualisation"
+
+  # Workshop terms
+  "workshop": "atelier"
+  "participant": "participant"
+  "facilitator": "facilitateur"
+  "hands-on": "pratique"
+  "exercise": "exercice"
+  "group work": "travail de groupe"
