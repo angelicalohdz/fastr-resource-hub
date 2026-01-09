@@ -5,11 +5,11 @@ paginate: true
 ---
 
 
-# FASTR Workshop - TestCountry
+# FASTR Workshop - Test Country
 
-**January 15-17, 2026** | **TestCity**
+**January 15-17, 2026** | **Test Country**
 
-*Test Facilitator*
+*Workshop Facilitator*
 
 <img src="../resources/logos/FASTR_Primary_01_FullName.png" style="position: absolute; bottom: 40px; right: 40px; width: 180px;">
 
@@ -29,32 +29,10 @@ paginate: true
 | 10:20 AM - 10:35 AM | **Health Priorities** |  |
 | 10:35 AM - 10:50 AM | *Tea Break* | |
 | 10:50 AM - 12:05 PM | **Introduction to the FASTR Approach** |  |
-| 12:05 PM - 12:30 PM | **Identify Questions & Indicators** |  |
+| 12:05 PM - 12:30 PM | **Data Extraction** |  |
 | 12:30 PM - 1:30 PM | *Lunch* | |
-| 1:30 PM - 2:30 PM | **Identify Questions & Indicators** |  |
-| 2:30 PM - 3:30 PM | **Identify Questions & Indicators** |  |
-| 3:30 PM - 3:45 PM | *Afternoon Tea* | |
-| 3:45 PM - 4:20 PM | **Identify Questions & Indicators** |  |
-| 4:20 PM - 4:45 PM | **Action Planning** |  |
-| 4:45 PM - 5:00 PM | **Day Wrap-up & Q&A** |  |
-
----
-
-<!-- _class: agenda -->
-# Workshop Agenda - Day 2
-
-| Time | Session | Speaker |
-|------|--------|--------|
-| 9:00 AM - 9:15 AM | **Recap & Questions** |  |
-| 9:15 AM - 10:15 AM | **Data Extraction** |  |
-| 10:15 AM - 10:30 AM | **Data Extraction** |  |
-| 10:30 AM - 10:45 AM | *Tea Break* | |
-| 10:45 AM - 11:00 AM | **Data Extraction** |  |
-| 11:00 AM - 12:00 PM | **The FASTR Data Analytics Platform** |  |
-| 12:00 PM - 12:30 PM | **The FASTR Data Analytics Platform** |  |
-| 12:30 PM - 1:30 PM | *Lunch* | |
-| 1:30 PM - 2:00 PM | **The FASTR Data Analytics Platform** |  |
-| 2:00 PM - 3:30 PM | **Group Work & Discussion** |  |
+| 1:30 PM - 2:35 PM | **Data Extraction** |  |
+| 2:35 PM - 3:30 PM | **Group Work & Discussion** |  |
 | 3:30 PM - 3:45 PM | *Afternoon Tea* | |
 | 3:45 PM - 4:45 PM | **Group Work & Discussion** |  |
 | 4:45 PM - 5:00 PM | **Day Wrap-up & Q&A** |  |
@@ -62,7 +40,7 @@ paginate: true
 ---
 
 <!-- _class: agenda -->
-# Workshop Agenda - Day 3
+# Workshop Agenda - Day 2
 
 | Time | Session | Speaker |
 |------|--------|--------|
@@ -75,8 +53,44 @@ paginate: true
 | 1:30 PM - 3:30 PM | **Group Work & Discussion** |  |
 | 3:30 PM - 3:45 PM | *Afternoon Tea* | |
 | 3:45 PM - 4:45 PM | **Group Work & Discussion** |  |
+| 4:45 PM - 5:00 PM | **Day Wrap-up & Q&A** |  |
+
+---
+
+<!-- _class: agenda -->
+# Workshop Agenda - Day 3
+
+| Time | Session | Speaker |
+|------|--------|--------|
+| 9:00 AM - 9:15 AM | **Recap & Questions** |  |
+| 9:15 AM - 10:15 AM | **Data Analysis** |  |
+| 10:15 AM - 10:30 AM | **Data Analysis** |  |
+| 10:30 AM - 10:45 AM | *Tea Break* | |
+| 10:45 AM - 11:00 AM | **Data Analysis** |  |
+| 11:00 AM - 12:30 PM | **Hands-on Practice: Analysis** |  |
+| 12:30 PM - 1:30 PM | *Lunch* | |
+| 1:30 PM - 3:30 PM | **Group Work & Discussion** |  |
+| 3:30 PM - 3:45 PM | *Afternoon Tea* | |
+| 3:45 PM - 4:45 PM | **Group Work & Discussion** |  |
 | 4:45 PM - 5:05 PM | **Next Steps & Action Planning** |  |
 | 5:05 PM - 5:20 PM | **Day Wrap-up & Q&A** |  |
+
+---
+
+<!-- _class: agenda -->
+# Workshop Agenda - Day 4
+
+| Time | Session | Speaker |
+|------|--------|--------|
+| 9:00 AM - 9:15 AM | **Recap & Questions** |  |
+| 9:15 AM - 10:30 AM | **Results Communication** |  |
+| 10:30 AM - 10:45 AM | *Tea Break* | |
+| 10:45 AM - 12:30 PM | **Group Presentations** |  |
+| 12:30 PM - 1:30 PM | *Lunch* | |
+| 1:30 PM - 3:30 PM | **Action Planning** |  |
+| 3:30 PM - 3:45 PM | *Afternoon Tea* | |
+| 3:45 PM - 4:30 PM | **Next Steps** |  |
+| 4:30 PM - 5:00 PM | **Closing Ceremony** |  |
 
 ---
 
@@ -86,10 +100,9 @@ paginate: true
 
 By the end of this workshop, participants will be able to:
 
-- Understand the FASTR approach to routine data analysis
-- Learn to assess and adjust for data quality issues
-- Apply methods to analyze service utilization and coverage
-- Practice interpreting and communicating results
+- Learn FASTR methodology
+- Apply data quality techniques
+- Build analysis skills
 
 ---
 
@@ -97,7 +110,7 @@ By the end of this workshop, participants will be able to:
 
 # Country Health System Overview
 
-**TestCity**
+**Test Country**
 
 ---
 
@@ -108,9 +121,9 @@ By the end of this workshop, participants will be able to:
 | National | [Ministry of Health] |
 | Regional | [X provinces/regions] |
 | District | [X districts] |
-| Facility | 5000 health facilities |
+| Facility | 500 health facilities |
 
-**Reporting to DHIS2:** 4500 (90%)
+**Reporting to DHIS2:** 400 (80)
 
 ---
 
@@ -118,18 +131,18 @@ By the end of this workshop, participants will be able to:
 
 | Group | Estimate |
 |-------|----------|
-| Total population | 50000000 |
-| Women of reproductive age | 12000000 |
-| Children under 5 | 8000000 |
-| Expected pregnancies/year | 1500000 |
-| Expected live births/year | 1400000 |
+| Total population | 1000000 |
+| Women of reproductive age | 200000 |
+| Children under 5 | 150000 |
+| Expected pregnancies/year | 50000 |
+| Expected live births/year | 40000 |
 
 ---
 
 ## Data Sources
 
 **Routine data:**
-- DHIS2 (reporting rate: 90%)
+- DHIS2 (reporting rate: 80)
 
 **Survey data:**
 - DHS 2023
@@ -140,10 +153,22 @@ By the end of this workshop, participants will be able to:
 
 # Health Priorities
 
-## Focus areas for TestCountry
+## Focus areas for Test Country
 
-- Improve data quality in RMNCAH indicators
-- Strengthen routine data use
+- Maternal health services (ANC, skilled birth attendance)
+- Child immunization coverage
+- Family planning services
+- Data quality improvement
+
+---
+
+---
+
+# ☕ Tea Break
+
+**15 minutes**
+
+Back at 10:50 AM
 
 ---
 
@@ -278,221 +303,43 @@ This enables continuous, subnational monitoring while data quality is systematic
 ---
 
 
-# Tea Break
 
-**15 minutes**
+## Why extract data from DHIS2?
 
-We'll resume at 10:30 AM
+### Data quality adjustment
+
+The FASTR approach focuses on data quality adjustments to expand the analyses countries can do with DHIS2 data and to generate more robust estimates.
+
+The FASTR methodology includes specific approaches to:
+- Identify and adjust for outliers
+- Adjust for incomplete reporting
+- Apply consistent data quality metrics
+
+These adjustments require processing that cannot be done within DHIS2's native analytics.
 
 ---
 
 
-## Introduction to FASTR: gaps and challenges
+
+## Tools for data extraction
 
 *Content to be developed*
 
 This section will cover:
-- Identifying gaps and challenges that FASTR is well suited to support
-- How FASTR serves as an entry point to reduce fragmentation
-- Starting the conversation with government stakeholders
+- DHIS2 data export options
+- API-based extraction methods
+- Data transformation requirements
+- Quality checks on extracted data
 
 ---
 
-
-
-## Development of a data use case
-
-*Content to be developed*
-
-This section will cover:
-- Co-creation workshop approach with MoH and stakeholders
-- Data use case development guidance
-- Example use cases from country implementations
-
 ---
 
+# 🍽️ Lunch Break
 
+**60 minutes**
 
-## Defining priority questions
-
-Effective data use relies on well-defined questions. Priority questions will guide the FASTR analysis and enhance decision making support.
-
-**Qualities of a good question:**
-
-- **Addresses a priority issue**: A topic of interest to you and policy makers
-- **Relevant**: Important enough to be worth answering
-- **Related to experiences that are alive**: Connected to current issues
-- **Important to individuals/groups**: Matters to stakeholders
-- **Answerable**: Can be addressed with available data and methods
-
----
-
-
-
-## Is my question a relevant priority? 5+ Ws to consider
-
-- **Who** is your audience?
-- **What** do they need and want to know?
-- **When** do they need to know it by?
-- **When** is the event/intervention/period they are interested in?
-- **Why** do they need to know?
-- **How** will they use the findings?
-
----
-
-
-
-## What do we mean by answerable?
-
-**We have the data**
-- Type, quantity, quality sufficient for the question
-
-**We have the analysis tools/methods**
-- Statistically valid; feasible to use
-
-**We have the time**
-- We can answer the question on a quarterly basis
-
----
-
-
-
-<!-- Note: This slide was hidden in the original presentation but may be useful to include -->
-## PICO framework for identifying answerable questions
-
-A standard tool from evidence-based medicine and public health research for formulating clear, answerable questions.
-
-| Component | Description |
-|-----------|-------------|
-| **P**opulation | Who is being investigated |
-| **I**ntervention | What is being investigated |
-| **C**omparison | What is baseline/non-intervention |
-| **O**utcome | What is public health objective |
-
----
-
-
-
-## What makes a good indicator for FASTR analysis?
-
-- **Relevance**: Does this indicator align with our priority questions and objectives?
-- **Volume**: Is this indicator collected at a high volume, improving robustness of analysis?
-- **Completeness**: Does the indicator have a high completeness rate across reporting facilities?
-- **Frequency**: Is the indicator reported frequently enough (e.g., monthly) to support rapid-cycle analysis?
-- **Type**: Is this indicator a count of services delivered?
-
----
-
-
-
-## Why focus on high volume indicators?
-
-One key added-value of the FASTR approach is making adjustments for data quality. Low-volume indicators are challenging to adjust:
-
-- **Greater sensitivity to outliers**: A single unusually high or low data point can disproportionately impact overall analysis
-- **Unstable estimates**: Small variations can lead to large percentage changes, making it harder to distinguish genuine trends from random variability
-- **Difficulty identifying true outliers**: Challenging to determine whether a data point is genuinely an outlier or part of natural variability
-
-Count indicators allow for ongoing data quality checks with improved precision in identifying outliers.
-
----
-
-
-
-## Why focus on high completeness indicators?
-
-High completeness indicators improve data quality, reduce bias, and enable more accurate insights:
-
-- **Data reliability**: Data is representative of the full picture across facilities, regions, or populations
-- **Consistency in analysis**: Data points from most or all reporting units allow for consistent analysis across time periods and locations
-- **Reduced risk of misinterpretation**: Incomplete data can lead to incorrect conclusions (e.g., low completeness might falsely suggest a drop in service utilization)
-
-Statistical methods such as imputation can adjust for incomplete data, but this requires assumptions about the missing data.
-
----
-
-
-
-## Why focus on count indicators?
-
-**Challenges with proportion indicators:**
-- Proportions limit our ability to apply adjustments for data quality challenges
-- Numerators may have data quality challenges, skewing actual coverage levels
-- Denominators may be outdated or inaccurate
-- Using numerators and denominators separately allows adjustments to both
-
-**Mortality as a rare event:**
-- Mortality indicators are inherently low-frequency, making proportional adjustments unreliable
-- Better suited for annual reviews than monthly or quarterly updates
-
----
-
-
-
-## FASTR core indicators
-
-The FASTR approach focuses on a core set of RMNCAH-N indicators that:
-- Characterize the reproductive, maternal and child healthcare continuum
-- Capture key service delivery events with higher completeness rates and higher volume
-- Serve as proxies for other services delivered at the same contact
-
-Outpatient consultations (OPDs) are used as a proxy for general use of health services.
-
-Additional country and program-specific indicators can be added to be responsive to country priorities.
-
----
-
-
-
-## Preparing for data extraction
-
-*Content to be developed*
-
-This section will cover:
-- Pre-extraction checklist
-- Understanding your DHIS2 configuration
-- Mapping indicators to data elements
-- Planning your extraction timeline
-
----
-
-
-
-# See You Tomorrow!
-
-## Day 1 Complete
-
-We covered today:
-
-- Introduction to the FASTR Approach
-- Identify Questions & Indicators
-
----
-
-## Tomorrow: Day 2
-
-We resume at **9:00 AM**
-
-**Coming up:** Data Extraction, The FASTR Data Analytics Platform
-
----
-
-
-
-# Day 2: Recap & Questions
-
-## Yesterday we covered:
-
-- Introduction to the FASTR Approach
-- Identify Questions & Indicators
-
----
-
-## Questions & Discussion
-
-- Any questions from yesterday's sessions?
-- Points that need clarification?
-- Insights from the exercises?
+Back at 1:30 PM
 
 ---
 
@@ -527,114 +374,13 @@ This section will cover:
 
 ---
 
-
-# Lunch Break
-
-**60 minutes**
-
-We'll resume at 12:30 PM
-
 ---
 
+# ☕ Afternoon Tea
 
-## Overview of the platform
+**15 minutes**
 
-The FASTR analytics platform is a web-based tool designed to support data quality assessment, adjustment, and analysis for routine health data.
-
-It allows users to upload and analyze data from various sources, including DHIS2, with built-in statistical methods to generate an adjusted dataset and run priority analyses on selected indicators.
-
-The platform provides a user-friendly interface for running analyses and offers flexible options for visualizing and exporting results.
-
----
-
-
-
-## Accessing the platform
-
-*Content to be developed*
-
-This section will cover:
-- Creating accounts
-- Signing in
-- User permissions and roles
-
----
-
-
-
-## Setting up the structure
-
-*Content to be developed*
-
-This section will cover:
-- Configuring admin areas (regions, districts)
-- Setting up facilities
-- Defining indicators
-
----
-
-
-
-## Importing a dataset
-
-*Content to be developed*
-
-This section will cover:
-- Data format requirements
-- Import process
-- Validation and error handling
-
----
-
-
-
-## Installing and running modules
-
-*Content to be developed*
-
-This section will cover:
-- Available analysis modules
-- Module installation
-- Running analyses
-
----
-
-
-
-## Creating a new project
-
-*Content to be developed*
-
-This section will cover:
-- Project setup workflow
-- Configuration options
-- Best practices
-
----
-
-
-
-## Creating visualizations
-
-*Content to be developed*
-
-This section will cover:
-- Available chart types
-- Customization options
-- Exporting visualizations
-
----
-
-
-
-## Creating reports
-
-*Content to be developed*
-
-This section will cover:
-- Report templates
-- Automated report generation
-- Customizing reports
+Back at 3:45 PM
 
 ---
 
@@ -642,16 +388,16 @@ This section will cover:
 
 # See You Tomorrow!
 
-## Day 2 Complete
+## Day 1 Complete
 
 We covered today:
 
+- Introduction to the FASTR Approach
 - Data Extraction
-- The FASTR Data Analytics Platform
 
 ---
 
-## Tomorrow: Day 3
+## Tomorrow: Day 2
 
 We resume at **9:00 AM**
 
@@ -661,12 +407,12 @@ We resume at **9:00 AM**
 
 
 
-# Day 3: Recap & Questions
+# Day 2: Recap & Questions
 
 ## Yesterday we covered:
 
+- Introduction to the FASTR Approach
 - Data Extraction
-- The FASTR Data Analytics Platform
 
 ---
 
@@ -915,22 +661,16 @@ This accounts for patients visiting different facilities for different services.
 
 ---
 
+---
 
-# Afternoon Break
+# ☕ Tea Break
 
 **15 minutes**
 
-We'll resume at 3:30 PM
+Back at 10:45 AM
 
 ---
 
-# See You Tomorrow!
-
-**Day 3 Complete**
-
-We resume tomorrow at **9:00 AM**
-
----
 
 
 ## Approach to data quality adjustment
@@ -1000,30 +740,482 @@ Heatmap showing percent change in service volumes due to missing data imputation
 
 ---
 
+---
 
-# Tea Break
+# 🍽️ Lunch Break
+
+**60 minutes**
+
+Back at 1:30 PM
+
+---
+
+---
+
+# ☕ Afternoon Tea
 
 **15 minutes**
 
-We'll resume at 10:30 AM
+Back at 3:45 PM
 
 ---
+
+
 
 # See You Tomorrow!
 
-**Day 3 Complete**
+## Day 2 Complete
 
-We resume tomorrow at **9:00 AM**
+We covered today:
+
+- Data Quality Assessment
+- Data Quality Adjustment
 
 ---
+
+## Tomorrow: Day 3
+
+We resume at **9:00 AM**
+
+**Coming up:** Data Analysis
+
+---
+
+
+
+# Day 3: Recap & Questions
+
+## Yesterday we covered:
+
+- Data Quality Assessment
+- Data Quality Adjustment
+
+---
+
+## Questions & Discussion
+
+- Any questions from yesterday's sessions?
+- Points that need clarification?
+- Insights from the exercises?
+
+---
+
+
+
+## Service utilization analysis
+
+The Service Utilization module (Module 3 in the FASTR analytics platform) analyzes health service delivery patterns to detect and quantify disruptions in service volumes over time.
+
+**Key capabilities:**
+- Identifies when health services deviate significantly from expected patterns
+- Measures magnitude of disruptions at national, provincial, and district levels
+- Distinguishes normal fluctuations from genuine disruptions requiring investigation
+
+---
+
+### Two-stage analysis process
+
+**Part 1: Control chart analysis**
+- Model expected patterns using historical trends and seasonality
+- Detect significant deviations from expected volumes
+- Flag disrupted periods
+
+**Part 2: Disruption quantification**
+- Use panel regression to estimate service volume changes
+- Calculate shortfalls and surpluses in absolute numbers
+
+---
+
+
+
+## Surplus and disruption analyses
+
+The module detects multiple types of service disruptions:
+
+| Disruption Type | Description |
+|----------------|-------------|
+| **Sharp disruptions** | Single months with extreme deviations |
+| **Sustained drops** | Gradual declines over several months |
+| **Sustained dips** | Periods consistently below expected levels |
+| **Sustained rises** | Periods consistently above expected levels |
+| **Missing data patterns** | Gaps in reporting that may signal problems |
+
+---
+
+### Quantifying impact
+
+Disruption analysis quantifies shortfalls and surpluses by comparing:
+- **Predicted volumes** (what would have happened without disruption)
+- **Actual volumes** (what was observed)
+
+Results are reported in absolute numbers and percentages at each geographic level.
+
+---
+
+
+
+## Service Coverage Estimates
+
+This module estimates health service coverage by answering: **"What percentage of the target population received this health service?"**
+
+**Three data sources integrated:**
+1. Adjusted health service volumes from HMIS
+2. Population projections from United Nations
+3. Household survey data from MICS/DHS
+
+---
+
+### Two-Part Process
+
+**Part 1: Denominator Calculation**
+- Calculate target populations using multiple methods (HMIS-based and population-based)
+- Compare against survey benchmarks
+- Automatically select best denominator for each indicator
+
+**Part 2: Coverage Estimation**
+- Override automatic selections based on programmatic knowledge
+- Project survey estimates forward using HMIS trends
+- Generate final coverage estimates
+
+---
+
+
+
+## Service utilization analysis
+
+The Service Utilization module (Module 3 in the FASTR analytics platform) analyzes health service delivery patterns to detect and quantify disruptions in service volumes over time.
+
+**Key capabilities:**
+- Identifies when health services deviate significantly from expected patterns
+- Measures magnitude of disruptions at national, provincial, and district levels
+- Distinguishes normal fluctuations from genuine disruptions requiring investigation
+
+---
+
+### Two-stage analysis process
+
+**Part 1: Control chart analysis**
+- Model expected patterns using historical trends and seasonality
+- Detect significant deviations from expected volumes
+- Flag disrupted periods
+
+**Part 2: Disruption quantification**
+- Use panel regression to estimate service volume changes
+- Calculate shortfalls and surpluses in absolute numbers
+
+---
+
+
+
+## Surplus and disruption analyses
+
+The module detects multiple types of service disruptions:
+
+| Disruption Type | Description |
+|----------------|-------------|
+| **Sharp disruptions** | Single months with extreme deviations |
+| **Sustained drops** | Gradual declines over several months |
+| **Sustained dips** | Periods consistently below expected levels |
+| **Sustained rises** | Periods consistently above expected levels |
+| **Missing data patterns** | Gaps in reporting that may signal problems |
+
+---
+
+### Quantifying impact
+
+Disruption analysis quantifies shortfalls and surpluses by comparing:
+- **Predicted volumes** (what would have happened without disruption)
+- **Actual volumes** (what was observed)
+
+Results are reported in absolute numbers and percentages at each geographic level.
+
+---
+
+
+
+## Service Coverage Estimates
+
+This module estimates health service coverage by answering: **"What percentage of the target population received this health service?"**
+
+**Three data sources integrated:**
+1. Adjusted health service volumes from HMIS
+2. Population projections from United Nations
+3. Household survey data from MICS/DHS
+
+---
+
+### Two-Part Process
+
+**Part 1: Denominator Calculation**
+- Calculate target populations using multiple methods (HMIS-based and population-based)
+- Compare against survey benchmarks
+- Automatically select best denominator for each indicator
+
+**Part 2: Coverage Estimation**
+- Override automatic selections based on programmatic knowledge
+- Project survey estimates forward using HMIS trends
+- Generate final coverage estimates
+
+---
+
+---
+
+# ☕ Tea Break
+
+**15 minutes**
+
+Back at 10:45 AM
+
+---
+
+
+
+## Service utilization analysis
+
+The Service Utilization module (Module 3 in the FASTR analytics platform) analyzes health service delivery patterns to detect and quantify disruptions in service volumes over time.
+
+**Key capabilities:**
+- Identifies when health services deviate significantly from expected patterns
+- Measures magnitude of disruptions at national, provincial, and district levels
+- Distinguishes normal fluctuations from genuine disruptions requiring investigation
+
+---
+
+### Two-stage analysis process
+
+**Part 1: Control chart analysis**
+- Model expected patterns using historical trends and seasonality
+- Detect significant deviations from expected volumes
+- Flag disrupted periods
+
+**Part 2: Disruption quantification**
+- Use panel regression to estimate service volume changes
+- Calculate shortfalls and surpluses in absolute numbers
+
+---
+
+
+
+## Surplus and disruption analyses
+
+The module detects multiple types of service disruptions:
+
+| Disruption Type | Description |
+|----------------|-------------|
+| **Sharp disruptions** | Single months with extreme deviations |
+| **Sustained drops** | Gradual declines over several months |
+| **Sustained dips** | Periods consistently below expected levels |
+| **Sustained rises** | Periods consistently above expected levels |
+| **Missing data patterns** | Gaps in reporting that may signal problems |
+
+---
+
+### Quantifying impact
+
+Disruption analysis quantifies shortfalls and surpluses by comparing:
+- **Predicted volumes** (what would have happened without disruption)
+- **Actual volumes** (what was observed)
+
+Results are reported in absolute numbers and percentages at each geographic level.
+
+---
+
+
+
+## Service Coverage Estimates
+
+This module estimates health service coverage by answering: **"What percentage of the target population received this health service?"**
+
+**Three data sources integrated:**
+1. Adjusted health service volumes from HMIS
+2. Population projections from United Nations
+3. Household survey data from MICS/DHS
+
+---
+
+### Two-Part Process
+
+**Part 1: Denominator Calculation**
+- Calculate target populations using multiple methods (HMIS-based and population-based)
+- Compare against survey benchmarks
+- Automatically select best denominator for each indicator
+
+**Part 2: Coverage Estimation**
+- Override automatic selections based on programmatic knowledge
+- Project survey estimates forward using HMIS trends
+- Generate final coverage estimates
+
+---
+
+---
+
+# 🍽️ Lunch Break
+
+**60 minutes**
+
+Back at 1:30 PM
+
+---
+
+---
+
+# ☕ Afternoon Tea
+
+**15 minutes**
+
+Back at 3:45 PM
+
+---
+
 
 
 # Next Steps
 
 ## Action items
 
-- Maternal health
-- Child nutrition
+- Apply FASTR methods to your country data
+- Share findings with stakeholders
+- Establish regular data review processes
+- Identify areas for data quality improvement
+
+---
+
+## Contact
+
+For questions or support:
+- **Email:** fastr@worldbank.org
+- **Resources:** [FASTR Resource Hub](https://fastr-analytics.github.io/fastr-resource-hub/)
+
+---
+
+
+
+# Day 4: Final Day
+
+## Recap from Yesterday
+
+- Data Analysis techniques
+- Visualization and interpretation
+- Group discussions
+
+## Today's Focus
+
+- Results Communication
+- Group Presentations
+- Action Planning
+- Closing Ceremony
+
+---
+
+
+
+## Analytical thinking & interpretation
+
+*Content to be developed*
+
+This section will cover:
+- Frameworks for interpreting FASTR outputs
+- Connecting data patterns to programmatic meaning
+- Common interpretation pitfalls to avoid
+- Building analytical thinking skills
+
+---
+
+
+
+## Moving from data to key messages
+
+### What is a result?
+Results are what the analysis found (data quality scores, coverage estimations, service utilization numbers). They are often many in number, complex, hard to understand 'at a glance', and lacking interpretation.
+
+### What is a key takeaway?
+Key takeaways are what the results are telling us — why the results matter, the 'so what'. They should be few in number, simple and clear, easy to remember, and actionable.
+
+---
+
+
+
+## Dissemination and data use roadmap
+
+A data use roadmap is a strategic plan that outlines how data will be utilized, shared, and disseminated effectively.
+
+### Why is it important?
+- Establishes metrics to evaluate the success of data use
+- Identifies key stakeholders, target audiences, and dissemination platforms
+- Outlines steps needed to achieve data dissemination goals
+- Anticipates potential challenges and develops strategies to solve for them
+
+---
+
+
+
+## End user mapping
+
+End user mapping helps ensure that our outputs will meet the real needs of our end users.
+
+### Key questions
+1. **Who is my end user?**
+2. **What does this end user need to accomplish with the report?**
+3. **What information are they most interested in?**
+4. **What do they like/not like about current reports?**
+5. **How do they like to receive their information?**
+
+---
+
+
+
+## Generating quarterly reporting products
+
+*Content to be developed*
+
+This section will cover:
+- Quarterly reporting workflow
+- Using the FASTR platform for automated reports
+- Quality assurance for reports
+- Distribution and feedback mechanisms
+
+---
+
+---
+
+# ☕ Tea Break
+
+**15 minutes**
+
+Back at 10:45 AM
+
+---
+
+---
+
+# 🍽️ Lunch Break
+
+**60 minutes**
+
+Back at 1:30 PM
+
+---
+
+---
+
+# ☕ Afternoon Tea
+
+**15 minutes**
+
+Back at 3:45 PM
+
+---
+
+
+
+# Next Steps
+
+## Action items
+
+- Apply FASTR methods to your country data
+- Share findings with stakeholders
+- Establish regular data review processes
+- Identify areas for data quality improvement
 
 ---
 

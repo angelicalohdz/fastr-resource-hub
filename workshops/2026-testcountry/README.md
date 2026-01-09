@@ -1,8 +1,8 @@
-# FASTR Workshop - TestCountry
+# FASTR Workshop - Test Country
 
-**Location:** TestCity
+**Location:** Test Country
 **Date:** January 15-17, 2026
-**Facilitators:** Test Facilitator
+**Facilitators:** Workshop Facilitator
 
 ## Files
 

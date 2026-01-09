@@ -8,8 +8,8 @@ paginate: true
 
 ## Yesterday we covered:
 
-- Data Extraction
-- The FASTR Data Analytics Platform
+- Data Quality Assessment
+- Data Quality Adjustment
 
 ---
 

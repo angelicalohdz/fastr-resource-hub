@@ -8,8 +8,10 @@ paginate: true
 
 ## Action items
 
-- Maternal health
-- Child nutrition
+- Apply FASTR methods to your country data
+- Share findings with stakeholders
+- Establish regular data review processes
+- Identify areas for data quality improvement
 
 ---
 

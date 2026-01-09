@@ -318,22 +318,24 @@ def build_daily_schedule(day_items, start_time_mins, tea_time_mins, lunch_time_m
     - Final day: Next steps before wrap-up
     - Max 60 min content sessions
     - Smart placeholders when content runs out
+    - Each session includes 'slides' or 'module' field for unified deck building
 
     custom_slides: dict with 'opening' (Day 1) and 'closing' (Final day) lists
+                   Each item is (session_name, duration, slide_files_list)
     """
     MAX_SESSION = 60  # Max minutes for a single content session
     END_OF_DAY = 17 * 60  # 5:00 PM
 
-    # Default custom slides with durations
+    # Default custom slides with durations and slide files
     if custom_slides is None:
         custom_slides = {
             'opening': [
-                ('Workshop Objectives', 15),
-                ('Country Overview', 20),
-                ('Health Priorities', 15),
+                ('Workshop Objectives', 15, ['01_objectives.md']),
+                ('Country Overview', 20, ['02_country-overview.md']),
+                ('Health Priorities', 15, ['03_health-priorities.md']),
             ],
             'closing': [
-                ('Next Steps & Action Planning', 20),
+                ('Next Steps & Action Planning', 20, ['99_next-steps.md']),
             ]
         }
 
@@ -362,7 +364,7 @@ def build_daily_schedule(day_items, start_time_mins, tea_time_mins, lunch_time_m
     # Track modules covered for exercise naming
     modules_covered = []
 
-    def add_session(name, duration, module=None, is_break=False):
+    def add_session(name, duration, module=None, slides=None, is_break=False):
         nonlocal current_time
         start_str = format_time(current_time)
         end_time = current_time + duration
@@ -374,10 +376,11 @@ def build_daily_schedule(day_items, start_time_mins, tea_time_mins, lunch_time_m
         }
         if module:
             entry['module'] = module
-            entry['speaker'] = ""
+        if slides:
+            entry['slides'] = slides
         if is_break:
             entry['type'] = 'break'
-        else:
+        if not is_break:
             entry['speaker'] = ""
         schedule.append(entry)
         current_time = end_time
@@ -453,24 +456,25 @@ def build_daily_schedule(day_items, start_time_mins, tea_time_mins, lunch_time_m
         schedule.append({
             'time': f"{format_time(reg_start)} - {format_time(start_time_mins)}",
             'session': 'Registration',
+            'speaker': '',
             'duration': 30
         })
 
-        # Welcome & Opening Remarks
-        add_session("Welcome & Opening Remarks", 15)
+        # Welcome & Opening Remarks (includes agenda slide)
+        add_session("Welcome & Opening Remarks", 15, slides=['agenda'])
 
         # Participant Introductions
         add_session("Participant Introductions", 30)
 
         # Opening custom slides (objectives, country overview, health priorities)
-        for slide_name, slide_duration in custom_slides.get('opening', []):
-            add_session(slide_name, slide_duration)
+        for slide_name, slide_duration, slide_files in custom_slides.get('opening', []):
+            add_session(slide_name, slide_duration, slides=slide_files)
 
     # ═══════════════════════════════════════════════════════════════════════
     # DAYS 2+: Recap
     # ═══════════════════════════════════════════════════════════════════════
     else:
-        add_session("Recap & Questions", 15)
+        add_session("Recap & Questions", 15, slides=[f'day{day_num}_recap.md'])
 
     # ═══════════════════════════════════════════════════════════════════════
     # MORNING SESSION (until tea)
@@ -526,11 +530,14 @@ def build_daily_schedule(day_items, start_time_mins, tea_time_mins, lunch_time_m
     # FINAL DAY: Closing slides before wrap-up
     # ═══════════════════════════════════════════════════════════════════════
     if day_num == num_days:
-        for slide_name, slide_duration in custom_slides.get('closing', []):
-            add_session(slide_name, slide_duration)
+        for slide_name, slide_duration, slide_files in custom_slides.get('closing', []):
+            add_session(slide_name, slide_duration, slides=slide_files)
 
-    # Day wrap-up
-    add_session("Day Wrap-up & Q&A", 15)
+    # Day wrap-up (with slide for non-final days)
+    if day_num < num_days:
+        add_session("Day Wrap-up & Q&A", 15, slides=[f'day{day_num}_wrapup.md'])
+    else:
+        add_session("Day Wrap-up & Q&A", 15)
 
     return schedule
 
@@ -811,37 +818,13 @@ def main():
     print("Creating workshop...")
     print("─" * 70 + "\n")
 
-    # Build full schedule
+    # Build full unified schedule (combines agenda + deck_order)
     daily_schedules = {}
     for day, items in days_assignment.items():
-        daily_schedules[f'day{day}'] = build_daily_schedule(
+        daily_schedules[day] = build_daily_schedule(
             items, start_time_mins, tea_time_mins, lunch_time_mins, afternoon_tea_mins,
             day_num=day, num_days=num_days
         )
-
-    # Build deck_order with session slides at appropriate points
-    deck_order_items = ['agenda', '01_objectives.md']
-
-    for day in range(1, num_days + 1):
-        # Day 1: Add opening custom slides before modules
-        if day == 1:
-            deck_order_items.append('02_country-overview.md')
-            deck_order_items.append('03_health-priorities.md')
-        else:
-            # Days 2+: Add recap slide
-            deck_order_items.append(f'day{day}_recap.md')
-
-        # Add module content for this day
-        for item in days_assignment[day]:
-            deck_order_items.append(item['id'])
-
-        # End of day
-        if day < num_days:
-            # Not final day: wrap-up slide
-            deck_order_items.append(f'day{day}_wrapup.md')
-        else:
-            # Final day: next steps before closing
-            deck_order_items.append('99_next-steps.md')
 
     # Build config
     config = {
@@ -860,16 +843,15 @@ def main():
             'tea_time': tea_time,
             'lunch_time': lunch_time,
             'afternoon_tea': afternoon_tea,
-            'agenda': daily_schedules,
+            # Daily schedules are added below as day1, day2, etc.
         },
         'content': {
             'modules': selected_modules,
-            'deck_order': deck_order_items,
             'custom_slides': [
-                'objectives.md',
-                'country-overview.md',
-                'health-priorities.md',
-                'next-steps.md',
+                '01_objectives.md',
+                '02_country-overview.md',
+                '03_health-priorities.md',
+                '99_next-steps.md',
             ]
         },
         # Country-specific data for {{variable}} substitution in slides
@@ -988,82 +970,117 @@ schedule:
   #     duration: 15
   # ─────────────────────────────────────────────────────────────────────
 
-  agenda:
 """)
-        # Write each day's schedule
-        for day_key, day_items in daily_schedules.items():
-            f.write(f"    {day_key}:\n")
+        # Write each day's schedule directly under schedule (unified structure)
+        for day_num_key in sorted(daily_schedules.keys()):
+            day_items = daily_schedules[day_num_key]
+            f.write(f"\n  day{day_num_key}:\n")
             # Add hints for specific days
-            if day_key == 'day1':
-                f.write(f"      # TIP: Registration, Welcome & Introductions are included.\n")
-                f.write(f"      # Add ministerial address or other opening items as needed.\n")
-            elif day_key == f'day{num_days}':
-                f.write(f"      # TIP: This is the final day. Consider adding closing ceremony\n")
-                f.write(f"      # items (see CLOSING CEREMONY in optional sessions above).\n")
+            if day_num_key == 1:
+                f.write(f"    # ─── DAY 1: Opening ───\n")
+            elif day_num_key == num_days:
+                f.write(f"    # ─── DAY {day_num_key}: Final Day ───\n")
+            else:
+                f.write(f"    # ─── DAY {day_num_key} ───\n")
+
             for item in day_items:
-                f.write(f"      - time: \"{item['time']}\"\n")
+                f.write(f"    - time: \"{item['time']}\"\n")
                 # Quote session names to handle colons and special chars
                 session_name = item['session'].replace('"', '\\"')
-                f.write(f"        session: \"{session_name}\"\n")
-                if 'module' in item:
-                    f.write(f"        module: {item['module']}\n")
-                if item.get('type') == 'break':
-                    f.write(f"        type: break\n")
-                else:
-                    # Add speaker field for non-break items (edit to add presenter names)
-                    f.write(f"        speaker: \"\"\n")
-                f.write(f"        duration: {item['duration']}\n")
+                f.write(f"      session: \"{session_name}\"\n")
 
+                # Module field (for content sessions)
+                if 'module' in item:
+                    f.write(f"      module: {item['module']}\n")
+
+                # Slides field (for custom slides)
+                if 'slides' in item and item['slides']:
+                    if len(item['slides']) == 1:
+                        f.write(f"      slides: [{item['slides'][0]}]\n")
+                    else:
+                        f.write(f"      slides:\n")
+                        for slide in item['slides']:
+                            f.write(f"        - {slide}\n")
+
+                # Break type
+                if item.get('type') == 'break':
+                    f.write(f"      type: break\n")
+
+                # Speaker field for non-break items
+                if not item.get('type') == 'break':
+                    speaker = item.get('speaker', '')
+                    f.write(f"      speaker: \"{speaker}\"\n")
+
+                f.write(f"      duration: {item['duration']}\n")
+
+        # Write template for adding extra days
+        next_day = num_days + 1
         f.write(f"""
+  # ─────────────────────────────────────────────────────────────────────
+  # TO ADD A DAY: Uncomment the template below and customize
+  # ─────────────────────────────────────────────────────────────────────
+  # 1. Change 'days: {num_days}' above to 'days: {next_day}'
+  # 2. Uncomment day{next_day} below and edit sessions
+  # 3. Create slide files: day{num_days}_wrapup.md, day{next_day}_recap.md
+  # ─────────────────────────────────────────────────────────────────────
+  #
+  # day{next_day}:
+  #   # ─── DAY {next_day} ───
+  #   - time: "9:00 AM - 9:15 AM"
+  #     session: "Recap & Questions"
+  #     slides: [day{next_day}_recap.md]
+  #     duration: 15
+  #   - time: "9:15 AM - 10:30 AM"
+  #     session: "[Module Name]"
+  #     module: m7
+  #     duration: 75
+  #   - time: "10:30 AM - 10:45 AM"
+  #     session: "Tea Break"
+  #     type: break
+  #     duration: 15
+  #   - time: "10:45 AM - 12:30 PM"
+  #     session: "[Session Name]"
+  #     duration: 105
+  #   - time: "12:30 PM - 1:30 PM"
+  #     session: "Lunch"
+  #     type: break
+  #     duration: 60
+  #   - time: "1:30 PM - 3:30 PM"
+  #     session: "Group Work"
+  #     duration: 120
+  #   - time: "3:30 PM - 3:45 PM"
+  #     session: "Afternoon Tea"
+  #     type: break
+  #     duration: 15
+  #   - time: "3:45 PM - 4:45 PM"
+  #     session: "[Session Name]"
+  #     duration: 60
+  #   - time: "4:45 PM - 5:00 PM"
+  #     session: "Day Wrap-up"
+  #     slides: [day{next_day}_wrapup.md]
+  #     duration: 15
+
 # ───────────────────────────────────────────────────────────────────────
-# CONTENT - What slides appear in the deck
+# CONTENT - Module selection and custom slides
 # ───────────────────────────────────────────────────────────────────────
-# deck_order controls what appears and in what order:
-#   - 'agenda'          → Generated agenda slide(s)
-#   - 'm0', 'm1'        → All slides from that module
-#   - 'm3_1'            → Single topic (for splitting long modules)
-#   - '01_objectives.md' → Custom slide from this workshop folder
+# The schedule above controls what slides appear in the deck:
+#   - 'module: m0'     → All slides from that module
+#   - 'slides: [...]'  → Specific custom slide files
+#   - 'type: break'    → Generates a break slide
 #
 # CUSTOM SLIDES (edit these in your workshop folder):
-#   01_objectives.md       - Workshop objectives (after agenda)
-#   02_country-overview.md - Country context (before data modules)
+#   01_objectives.md       - Workshop objectives
+#   02_country-overview.md - Country context
 #   03_health-priorities.md - Health priorities to focus on
-#   04_coverage-results.md - Coverage analysis results
-#   05_disruption-local.md - Local disruption analysis
-#   06_dq-findings.md      - Data quality findings
 #   99_next-steps.md       - Action items (at end)
 #
-# TO MOVE A SLIDE: Cut and paste it to a new position in deck_order
-# TO REMOVE: Delete the line from deck_order (file stays for later use)
-# TO ADD NEW: Create a .md file and add it to deck_order
+# TO MOVE CONTENT: Cut and paste sessions between days
+# TO ADD A BREAK: Add a session with 'type: break'
+# TO ADD CUSTOM SLIDE: Add 'slides: [filename.md]' to a session
 # ───────────────────────────────────────────────────────────────────────
 
 content:
   modules: {selected_modules}
-  deck_order:
-""")
-        # Write deck_order items with helpful comments
-        for item in deck_order_items:
-            comment = ""
-            if item == 'agenda':
-                comment = "  # Auto-generated agenda"
-            elif item == '01_objectives.md':
-                comment = "  # Workshop goals"
-            elif item == '02_country-overview.md':
-                comment = "  # Country context"
-            elif item == '03_health-priorities.md':
-                comment = "  # Focus areas"
-            elif item == '99_next-steps.md':
-                comment = "  # Action items"
-            elif item.startswith('day') and '_recap' in item:
-                comment = "  # Morning recap"
-            elif item.startswith('day') and '_wrapup' in item:
-                comment = "  # End of day"
-            elif item.startswith('m'):
-                comment = "  # Module content"
-            f.write(f"    - {item}{comment}\n")
-
-        f.write(f"""
   custom_slides:
     - 01_objectives.md
     - 02_country-overview.md

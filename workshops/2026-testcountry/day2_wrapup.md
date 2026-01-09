@@ -10,8 +10,8 @@ paginate: true
 
 We covered today:
 
-- Data Extraction
-- The FASTR Data Analytics Platform
+- Data Quality Assessment
+- Data Quality Adjustment
 
 ---
 
@@ -19,6 +19,6 @@ We covered today:
 
 We resume at **9:00 AM**
 
-**Coming up:** Data Quality Assessment, Data Quality Adjustment
+**Coming up:** Data Analysis
 
 ---

@@ -6,9 +6,11 @@ paginate: true
 
 # Health Priorities
 
-## Focus areas for TestCountry
+## Focus areas for Test Country
 
-- Improve data quality in RMNCAH indicators
-- Strengthen routine data use
+- Maternal health services (ANC, skilled birth attendance)
+- Child immunization coverage
+- Family planning services
+- Data quality improvement
 
 ---

@@ -8,9 +8,8 @@ paginate: true
 
 By the end of this workshop, participants will be able to:
 
-- Understand the FASTR approach to routine data analysis
-- Learn to assess and adjust for data quality issues
-- Apply methods to analyze service utilization and coverage
-- Practice interpreting and communicating results
+- Learn FASTR methodology
+- Apply data quality techniques
+- Build analysis skills
 
 ---

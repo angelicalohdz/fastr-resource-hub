@@ -11,7 +11,7 @@ paginate: true
 We covered today:
 
 - Introduction to the FASTR Approach
-- Identify Questions & Indicators
+- Data Extraction
 
 ---
 
@@ -19,6 +19,6 @@ We covered today:
 
 We resume at **9:00 AM**
 
-**Coming up:** Data Extraction, The FASTR Data Analytics Platform
+**Coming up:** Data Quality Assessment, Data Quality Adjustment
 
 ---

@@ -477,20 +477,27 @@ def generate_agenda_slide(config):
     Generate agenda slide content from YAML config (table format).
     Uses compact 'agenda' class for auto-fit. One day per slide.
     Includes optional Speaker column.
+
+    Supports both:
+    - New unified format: schedule.day1, schedule.day2, etc.
+    - Old format: schedule.agenda.day1, schedule.agenda.day2, etc.
     """
     schedule = config.get('_yaml_schedule', {})
-    agenda = schedule.get('agenda', {})
     num_days = schedule.get('days', 1)
-
-    if not agenda:
-        return None
+    is_unified = config.get('_is_unified_format', False)
 
     all_slides = []
 
     # Generate one slide per day
     for day_num in range(1, num_days + 1):
         day_key = f'day{day_num}'
-        day_items = agenda.get(day_key, [])
+
+        # Get day items from unified or old format
+        if is_unified:
+            day_items = schedule.get(day_key, [])
+        else:
+            agenda = schedule.get('agenda', {})
+            day_items = agenda.get(day_key, [])
 
         if not day_items:
             continue
@@ -531,6 +538,10 @@ def load_yaml_config(yaml_path):
     content = yaml_config.get('content', {})
     country_data = yaml_config.get('country_data', {})
 
+    # Check if using new unified format (schedule.day1, schedule.day2, etc.)
+    # vs old format (schedule.agenda.day1, content.deck_order)
+    is_unified_format = 'day1' in schedule and 'agenda' not in schedule
+
     # Convert to expected format
     config = {
         'workshop_id': workshop.get('id', ''),
@@ -554,12 +565,80 @@ def load_yaml_config(yaml_path):
         # Store original YAML schedule for agenda generation
         '_yaml_schedule': schedule,
         '_is_yaml': True,
+        '_is_unified_format': is_unified_format,
 
         # Country-specific data for variable substitution
         'country_data': country_data,
     }
 
     return config
+
+
+def generate_break_slide_content(session_name, duration, return_time):
+    """Generate markdown content for a break slide."""
+    # Determine emoji based on session name
+    name_lower = session_name.lower()
+    if 'lunch' in name_lower:
+        emoji = '🍽️'
+        title = 'Lunch Break'
+    elif 'afternoon' in name_lower:
+        emoji = '☕'
+        title = 'Afternoon Tea'
+    else:
+        emoji = '☕'
+        title = 'Tea Break'
+
+    return f"""---
+
+# {emoji} {title}
+
+**{duration} minutes**
+
+Back at {return_time}
+
+---
+"""
+
+
+def extract_unified_schedule(config):
+    """
+    Extract deck-building info from unified schedule format.
+
+    Returns list of items for each day:
+    [
+        {
+            'day': 1,
+            'session': 'Welcome',
+            'module': 'm0' or None,
+            'slides': ['agenda', '01_objectives.md'] or None,
+            'is_break': True/False,
+            'duration': 15,
+            'time': '9:00 AM - 9:15 AM',
+        },
+        ...
+    ]
+    """
+    schedule = config.get('_yaml_schedule', {})
+    num_days = config.get('workshop_days', 2)
+
+    items = []
+    for day_num in range(1, num_days + 1):
+        day_key = f'day{day_num}'
+        day_sessions = schedule.get(day_key, [])
+
+        for session in day_sessions:
+            item = {
+                'day': day_num,
+                'session': session.get('session', ''),
+                'module': session.get('module'),
+                'slides': session.get('slides'),
+                'is_break': session.get('type') == 'break',
+                'duration': session.get('duration', 0),
+                'time': session.get('time', ''),
+            }
+            items.append(item)
+
+    return items
 
 
 def load_workshop_config(workshop_id, base_dir):
@@ -1325,8 +1404,9 @@ def build_workshop_deck(workshop_id, base_dir, output_file=None, skip_confirmati
         print("\n   Build cancelled due to errors. Please fix the issues above.")
         sys.exit(1)
 
-    # Check if using new deck_order format
-    deck_order = config.get('deck_order')
+    # Check format and get build configuration
+    is_unified = config.get('_is_unified_format', False)
+    deck_order = config.get('deck_order', [])
     exclude_list = config.get('exclude', [])
 
     # Step 2: Determine number of days
@@ -1339,34 +1419,41 @@ def build_workshop_deck(workshop_id, base_dir, output_file=None, skip_confirmati
         elif num_days is None:
             num_days = 2  # Default for non-interactive mode
 
-    # Step 3: Get sessions list for schedule generation
-    if not deck_order:
-        print("\nError: 'deck_order' is required in config.py")
-        print("   Please define which modules to include using module prefixes (m0, m1, etc.)")
-        print("   Example: 'deck_order': ['agenda', 'm0', 'm2', 'm4', 'm5', 'm6']")
-        sys.exit(1)
+    # Step 3: Get schedule info based on format
+    if is_unified:
+        # New unified format - extract schedule from day1, day2, etc.
+        unified_items = extract_unified_schedule(config)
+        schedule = []  # Not used for unified format
+        break_info = {}  # Not used for unified format
+    else:
+        # Old format - use deck_order
+        if not deck_order:
+            print("\nError: 'deck_order' is required in config.py")
+            print("   Please define which modules to include using module prefixes (m0, m1, etc.)")
+            print("   Example: 'deck_order': ['agenda', 'm0', 'm2', 'm4', 'm5', 'm6']")
+            sys.exit(1)
 
-    # Extract module items from deck_order (non-.md items except 'agenda')
-    sessions = [item for item in deck_order if not item.endswith('.md') and item != 'agenda']
+        # Extract module items from deck_order (non-.md items except 'agenda')
+        sessions = [item for item in deck_order if not item.endswith('.md') and item != 'agenda']
 
-    # Step 4: Generate schedule (for break placement)
-    schedule = generate_schedule(sessions, num_days, config)
+        # Step 4: Generate schedule (for break placement)
+        schedule = generate_schedule(sessions, num_days, config)
 
-    # Build a lookup for break info by session
-    break_info = {}
-    for entry in schedule:
-        break_info[entry['session']] = entry
+        # Build a lookup for break info by session
+        break_info = {}
+        for entry in schedule:
+            break_info[entry['session']] = entry
 
-    # For YAML configs, also infer days from deck_order markers (dayN_wrapup.md, dayN_recap.md)
-    if config.get('_is_yaml'):
-        yaml_schedule = config.get('_yaml_schedule', {})
-        day_info = infer_days_from_deck_order(deck_order, yaml_schedule)
-        # Update break_info with inferred day info
-        for item, day_num in day_info.items():
-            if item not in break_info:
-                break_info[item] = {'day': day_num}
-            else:
-                break_info[item]['day'] = day_num
+        # For YAML configs, also infer days from deck_order markers (dayN_wrapup.md, dayN_recap.md)
+        if config.get('_is_yaml'):
+            yaml_schedule = config.get('_yaml_schedule', {})
+            day_info = infer_days_from_deck_order(deck_order, yaml_schedule)
+            # Update break_info with inferred day info
+            for item, day_num in day_info.items():
+                if item not in break_info:
+                    break_info[item] = {'day': day_num}
+                else:
+                    break_info[item]['day'] = day_num
 
     # Step 5: Preview and confirm
     if not skip_confirmation:
@@ -1404,92 +1491,167 @@ paginate: true
     core_content_dir = os.path.join(base_dir, "core_content")
 
     # ═══════════════════════════════════════════════════════════════════════
-    # BUILD DECK FROM deck_order
+    # BUILD DECK
     # ═══════════════════════════════════════════════════════════════════════
     print(f"\nAdding slides in order:")
     current_day = 0
 
-    for item in deck_order:
-        # Check what type of item this is
-        if item == 'agenda':
-            # Agenda slide - generate from YAML config or use template
-            if config.get('_is_yaml'):
-                # Generate agenda from YAML schedule
-                agenda_content = generate_agenda_slide(config)
-                if agenda_content:
-                    deck_content += ensure_slide_break(agenda_content) + "\n"
-                    print(f"   Agenda (generated from config)")
-            else:
-                # Fall back to template for Python config
-                agenda_path = os.path.join(base_dir, "templates", "agenda.md")
-                agenda_content = read_markdown_file(agenda_path)
-                if agenda_content:
-                    agenda_content = strip_frontmatter(agenda_content)
-                    agenda_content = substitute_variables(agenda_content, config)
-                    deck_content += ensure_slide_break(agenda_content) + "\n"
-                    print(f"   Agenda (from template)")
-
-        elif item.endswith('.md'):
-            # Custom slide from workshop folder
-            custom_path = os.path.join(workshop_dir, item)
-            content = read_markdown_file(custom_path)
-            if content:
-                content = strip_frontmatter(content)
-                content = substitute_variables(content, config)
-                deck_content += "\n" + ensure_slide_break(content) + "\n"
-                print(f"   {item} (custom)")
-
-        elif is_module_prefix(item):
-            # Module prefix (m0, m0_1, m4_2, etc.)
-            files, name, is_valid = resolve_module_prefix(item, exclude=exclude_list)
-            entry = break_info.get(item, {})
-
-            # Day separator (for multi-day)
-            if entry.get('day', 1) != current_day:
-                current_day = entry.get('day', 1)
+    if is_unified:
+        # ═══════════════════════════════════════════════════════════════════
+        # UNIFIED FORMAT: Build from schedule.day1, schedule.day2, etc.
+        # ═══════════════════════════════════════════════════════════════════
+        for item in unified_items:
+            # Day separator
+            if item['day'] != current_day:
+                current_day = item['day']
                 if num_days > 1:
                     print(f"\n   DAY {current_day}:")
 
-            if is_valid and files:
-                # Add all files for this module/topic
-                module_overrides = []
-                for filename in files:
-                    filepath = os.path.join(core_content_dir, filename)
-                    content = read_markdown_file(filepath)
-                    if content:
-                        content = strip_frontmatter(content)
-                        content = substitute_variables(content, config)
-                        content, overrides = resolve_asset_overrides(content, workshop_id, base_dir)
-                        module_overrides.extend(overrides)
-                        deck_content += "\n" + ensure_slide_break(content) + "\n"
+            session_name = item['session']
 
-                print(f"   [{item}] {name}")
-                if module_overrides:
-                    print(f"      📊 {len(module_overrides)} custom asset(s)")
+            # Handle breaks
+            if item['is_break']:
+                # Extract return time from time field (e.g., "10:30 AM - 10:45 AM" -> "10:45 AM")
+                time_parts = item['time'].split(' - ')
+                return_time = time_parts[1] if len(time_parts) > 1 else ''
+                break_content = generate_break_slide_content(session_name, item['duration'], return_time)
+                deck_content += break_content + "\n"
+                # Determine emoji
+                if 'lunch' in session_name.lower():
+                    print(f"   🍽️  {session_name}")
+                else:
+                    print(f"   ☕ {session_name}")
+                continue
 
-                # Add breaks after module
-                if entry.get('tea_after'):
-                    deck_content += generate_break_slide('tea', config)
-                    print(f"      ☕ Tea break")
+            # Handle module content
+            if item['module']:
+                module_id = item['module']
+                files, name, is_valid = resolve_module_prefix(module_id, exclude=exclude_list)
 
-                if entry.get('lunch_after'):
-                    deck_content += generate_break_slide('lunch', config)
-                    print(f"      🍽️  Lunch break")
+                if is_valid and files:
+                    module_overrides = []
+                    for filename in files:
+                        filepath = os.path.join(core_content_dir, filename)
+                        content = read_markdown_file(filepath)
+                        if content:
+                            content = strip_frontmatter(content)
+                            content = substitute_variables(content, config)
+                            content, overrides = resolve_asset_overrides(content, workshop_id, base_dir)
+                            module_overrides.extend(overrides)
+                            deck_content += "\n" + ensure_slide_break(content) + "\n"
 
-                if entry.get('afternoon_tea_after'):
-                    deck_content += generate_break_slide('afternoon_tea', config)
-                    print(f"      ☕ Afternoon break")
+                    print(f"   [{module_id}] {name}")
+                    if module_overrides:
+                        print(f"      📊 {len(module_overrides)} custom asset(s)")
+                else:
+                    print(f"   Warning: Unknown module '{module_id}'")
 
-                # Add end-of-day slide
-                if entry.get('end_of_day') and config.get('include_day_end_slides', True):
-                    next_day_sessions = [e['session'] for e in schedule if e['day'] == current_day + 1]
-                    deck_content += generate_day_end_slide(current_day, next_day_sessions, config)
-                    print(f"      🌙 End of Day {current_day}")
+            # Handle custom slides
+            if item['slides']:
+                for slide_file in item['slides']:
+                    if slide_file == 'agenda':
+                        # Generate agenda slides
+                        agenda_content = generate_agenda_slide(config)
+                        if agenda_content:
+                            deck_content += ensure_slide_break(agenda_content) + "\n"
+                            print(f"   {session_name}: agenda")
+                    else:
+                        # Custom slide from workshop folder
+                        custom_path = os.path.join(workshop_dir, slide_file)
+                        content = read_markdown_file(custom_path)
+                        if content:
+                            content = strip_frontmatter(content)
+                            content = substitute_variables(content, config)
+                            deck_content += "\n" + ensure_slide_break(content) + "\n"
+                            print(f"   {session_name}: {slide_file}")
+                        else:
+                            print(f"   Warning: Could not read {slide_file}")
+
+    else:
+        # ═══════════════════════════════════════════════════════════════════
+        # OLD FORMAT: Build from deck_order list
+        # ═══════════════════════════════════════════════════════════════════
+        for item in deck_order:
+            # Check what type of item this is
+            if item == 'agenda':
+                # Agenda slide - generate from YAML config or use template
+                if config.get('_is_yaml'):
+                    # Generate agenda from YAML schedule
+                    agenda_content = generate_agenda_slide(config)
+                    if agenda_content:
+                        deck_content += ensure_slide_break(agenda_content) + "\n"
+                        print(f"   Agenda (generated from config)")
+                else:
+                    # Fall back to template for Python config
+                    agenda_path = os.path.join(base_dir, "templates", "agenda.md")
+                    agenda_content = read_markdown_file(agenda_path)
+                    if agenda_content:
+                        agenda_content = strip_frontmatter(agenda_content)
+                        agenda_content = substitute_variables(agenda_content, config)
+                        deck_content += ensure_slide_break(agenda_content) + "\n"
+                        print(f"   Agenda (from template)")
+
+            elif item.endswith('.md'):
+                # Custom slide from workshop folder
+                custom_path = os.path.join(workshop_dir, item)
+                content = read_markdown_file(custom_path)
+                if content:
+                    content = strip_frontmatter(content)
+                    content = substitute_variables(content, config)
+                    deck_content += "\n" + ensure_slide_break(content) + "\n"
+                    print(f"   {item} (custom)")
+
+            elif is_module_prefix(item):
+                # Module prefix (m0, m0_1, m4_2, etc.)
+                files, name, is_valid = resolve_module_prefix(item, exclude=exclude_list)
+                entry = break_info.get(item, {})
+
+                # Day separator (for multi-day)
+                if entry.get('day', 1) != current_day:
+                    current_day = entry.get('day', 1)
+                    if num_days > 1:
+                        print(f"\n   DAY {current_day}:")
+
+                if is_valid and files:
+                    # Add all files for this module/topic
+                    module_overrides = []
+                    for filename in files:
+                        filepath = os.path.join(core_content_dir, filename)
+                        content = read_markdown_file(filepath)
+                        if content:
+                            content = strip_frontmatter(content)
+                            content = substitute_variables(content, config)
+                            content, overrides = resolve_asset_overrides(content, workshop_id, base_dir)
+                            module_overrides.extend(overrides)
+                            deck_content += "\n" + ensure_slide_break(content) + "\n"
+
+                    print(f"   [{item}] {name}")
+                    if module_overrides:
+                        print(f"      📊 {len(module_overrides)} custom asset(s)")
+
+                    # Add breaks after module
+                    if entry.get('tea_after'):
+                        deck_content += generate_break_slide('tea', config)
+                        print(f"      ☕ Tea break")
+
+                    if entry.get('lunch_after'):
+                        deck_content += generate_break_slide('lunch', config)
+                        print(f"      🍽️  Lunch break")
+
+                    if entry.get('afternoon_tea_after'):
+                        deck_content += generate_break_slide('afternoon_tea', config)
+                        print(f"      ☕ Afternoon break")
+
+                    # Add end-of-day slide
+                    if entry.get('end_of_day') and config.get('include_day_end_slides', True):
+                        next_day_sessions = [e['session'] for e in schedule if e['day'] == current_day + 1]
+                        deck_content += generate_day_end_slide(current_day, next_day_sessions, config)
+                        print(f"      🌙 End of Day {current_day}")
+                else:
+                    print(f"   Warning: Unknown module prefix '{item}'")
+
             else:
-                print(f"   Warning: Unknown module prefix '{item}'")
-
-        else:
-            print(f"   Warning: Unknown item '{item}'")
+                print(f"   Warning: Unknown item '{item}'")
 
     # Add closing slide
     if config.get('include_closing', True):

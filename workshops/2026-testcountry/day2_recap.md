@@ -9,7 +9,7 @@ paginate: true
 ## Yesterday we covered:
 
 - Introduction to the FASTR Approach
-- Identify Questions & Indicators
+- Data Extraction
 
 ---
 
