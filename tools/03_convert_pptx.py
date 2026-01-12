@@ -80,6 +80,7 @@ class Colors:
     CORAL = RGBColor(0xFF, 0x64, 0x62)        # #FF6462
 
     TEXT_DARK = RGBColor(0x2C, 0x3E, 0x50)    # #2c3e50
+    DARK_GRAY = RGBColor(0x33, 0x33, 0x33)    # #333333 - body text
     WHITE = RGBColor(0xFF, 0xFF, 0xFF)
     BLACK = RGBColor(0x00, 0x00, 0x00)
 
@@ -142,6 +143,8 @@ def parse_markdown(content):
             'raw': raw,
             'headers': [],
             'bullets': [],
+            'paragraphs': [],  # Plain text lines (not headers, bullets, or tables)
+            'content': [],     # Ordered list of ('paragraph', text) or ('bullet', text)
             'table': None,
             'images': [],
             'columns': None,
@@ -160,10 +163,6 @@ def parse_markdown(content):
             level = len(match.group(1))
             text = match.group(2).strip()
             slide['headers'].append((level, text))
-
-        # Extract bullets (- or *)
-        for match in re.finditer(r'^[-*]\s+(.+)$', raw, re.MULTILINE):
-            slide['bullets'].append(match.group(1).strip())
 
         # Extract images ![alt](path)
         for match in re.finditer(r'!\[([^\]]*)\]\(([^)]+)\)', raw):
@@ -202,6 +201,51 @@ def parse_markdown(content):
         # Check for other HTML content (like styled img tags)
         if '<img' in raw:
             slide['html_content'] = raw
+
+        # Extract content IN ORDER - headers (H3+), bullets, numbered lists, and paragraphs
+        for line in raw.split('\n'):
+            line_stripped = line.strip()
+            if not line_stripped:
+                continue
+            # Include H3+ headers in content flow (H1/H2 rendered separately at top)
+            header_match = re.match(r'^(#{3,6})\s+(.+)$', line_stripped)
+            if header_match:
+                level = len(header_match.group(1))
+                text = header_match.group(2).strip()
+                slide['content'].append(('header', (level, text)))
+                continue
+            # Skip H1/H2 headers (rendered at top)
+            if line_stripped.startswith('#'):
+                continue
+            # Skip table lines
+            if line_stripped.startswith('|'):
+                continue
+            # Skip HTML
+            if line_stripped.startswith('<') or line_stripped.startswith('!'):
+                continue
+            # Skip comments
+            if line_stripped.startswith('<!--'):
+                continue
+
+            # Check for bullet
+            bullet_match = re.match(r'^[-*]\s+(.+)$', line_stripped)
+            if bullet_match:
+                text = bullet_match.group(1).strip()
+                slide['bullets'].append(text)
+                slide['content'].append(('bullet', text))
+                continue
+
+            # Check for numbered list
+            num_match = re.match(r'^\d+\.\s+(.+)$', line_stripped)
+            if num_match:
+                text = num_match.group(1).strip()
+                slide['bullets'].append(text)
+                slide['content'].append(('bullet', text))
+                continue
+
+            # It's a paragraph
+            slide['paragraphs'].append(line_stripped)
+            slide['content'].append(('paragraph', line_stripped))
 
         slides.append(slide)
 
@@ -768,7 +812,7 @@ def build_content_slide(prs, data, base_dir, md_dir):
 
     current_top = Layout.MARGIN_TOP
 
-    # Add headers
+    # Add H1/H2 headers at top (H3+ are in content flow)
     for level, text in data['headers']:
         if level == 1:
             add_h1_with_underline(slide, text, current_top)
@@ -776,22 +820,48 @@ def build_content_slide(prs, data, base_dir, md_dir):
         elif level == 2:
             add_h2_with_underline(slide, text, current_top)
             current_top += Inches(0.75)
-        else:
-            add_text_box(
-                slide,
-                Layout.MARGIN_LEFT, current_top,
-                Layout.CONTENT_WIDTH, Inches(0.5),
-                text, Fonts.H3_SIZE, Colors.PURPLE, bold=True
-            )
-            current_top += Inches(0.5)
+        # H3+ handled in content loop below
 
-    # Add bullets
-    if data['bullets']:
-        add_bullet_list(
-            slide, data['bullets'],
-            Layout.MARGIN_LEFT, current_top + Inches(0.2),
-            Layout.CONTENT_WIDTH
+    # Render ALL content (H3+, paragraphs, bullets) in ONE text box
+    content = data.get('content', [])
+    if content:
+        # Calculate height based on content
+        height = Inches(0.35 * len(content) + 0.5)
+        shape = slide.shapes.add_textbox(
+            Layout.MARGIN_LEFT, current_top + Inches(0.1),
+            Layout.CONTENT_WIDTH, height
         )
+        tf = shape.text_frame
+        tf.word_wrap = True
+
+        first_para = True
+        for item_type, text in content:
+            if first_para:
+                p = tf.paragraphs[0]
+                first_para = False
+            else:
+                p = tf.add_paragraph()
+
+            if item_type == 'header':
+                level, header_text = text
+                p.text = header_text
+                style_paragraph(p, Fonts.H3_SIZE, Colors.PURPLE, bold=True)
+
+            elif item_type == 'bullet':
+                # Clean markdown formatting
+                clean_text = re.sub(r'\*\*([^*]+)\*\*', r'\1', text)
+                clean_text = re.sub(r'\*([^*]+)\*', r'\1', clean_text)
+                p.text = f"• {clean_text}"
+                style_paragraph(p, Fonts.BODY_SIZE, Colors.TEXT_DARK)
+
+            elif item_type == 'paragraph':
+                display_text = text
+                is_bold = False
+                if text.startswith('**') and text.endswith('**'):
+                    display_text = text[2:-2]
+                    is_bold = True
+                p.text = display_text
+                style_paragraph(p, Fonts.BODY_SIZE, Colors.DARK_GRAY, bold=is_bold)
 
     # Add image if present (to the right)
     if data['images']:
