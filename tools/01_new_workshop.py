@@ -563,7 +563,8 @@ def main():
     print("\n" + "═" * 70)
     print("              FASTR WORKSHOP SETUP WIZARD")
     print("═" * 70)
-    print("\nI'll help you set up your workshop step by step.\n")
+    print("\nI'll help you set up your workshop step by step.")
+    print("All responses are saved to files you can edit later.\n")
 
     # ─────────────────────────────────────────────────────────────────────────
     # STEP 1: Basic Info
@@ -738,10 +739,11 @@ def main():
     # STEP 5: Country Data
     # ─────────────────────────────────────────────────────────────────────────
     print("\n" + "─" * 70)
-    print("STEP 5: Country Data (optional - press Enter to skip)")
+    print("STEP 5: Country Data (optional)")
     print("─" * 70 + "\n")
 
-    print("   Fill in country statistics for your slides.\n")
+    print("   Fill in country statistics for your slides.")
+    print("   Press Enter to skip - you can add these later in workshop.yaml\n")
 
     total_population = get_input("   Total population", "")
     total_facilities = get_input("   Total health facilities", "")
@@ -757,8 +759,9 @@ def main():
     # STEP 6: Workshop Content
     # ─────────────────────────────────────────────────────────────────────────
     print("\n" + "─" * 70)
-    print("STEP 6: Workshop Content (optional - press Enter for defaults)")
+    print("STEP 6: Workshop Content (optional)")
     print("─" * 70 + "\n")
+    print("   Press Enter for defaults - edit the .md files in your workshop folder later.\n")
 
     # Objectives
     print("   Workshop objectives (enter each objective, empty line to finish):")
@@ -1339,10 +1342,18 @@ Add your FASTR platform outputs to `media/outputs/` to include them in slides.
     print("                    SUCCESS!")
     print("═" * 70)
     print(f"\n   Workshop created: workshops/{workshop_id}/")
-    print(f"\n   Next steps:")
-    print(f"   1. Edit custom slides in workshops/{workshop_id}/")
-    print(f"   2. Add country outputs to workshops/{workshop_id}/media/outputs/")
-    print(f"   3. Build: python3 tools/02_build_deck.py --workshop {workshop_id}")
+
+    print(f"\n   Files you can edit:")
+    print(f"   ─────────────────────────────────────────────────────")
+    print(f"   workshop.yaml          → Schedule, modules, country data")
+    print(f"   01_objectives.md       → Workshop objectives")
+    print(f"   02_country-overview.md → Country context")
+    print(f"   03_health-priorities.md → Health priorities")
+    print(f"   99_next-steps.md       → Action items")
+    print(f"   media/outputs/         → Add FASTR charts here")
+
+    print(f"\n   To build your deck:")
+    print(f"   python3 tools/02_build_deck.py --workshop {workshop_id}")
     print("\n" + "═" * 70 + "\n")
 
 

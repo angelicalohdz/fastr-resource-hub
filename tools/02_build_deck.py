@@ -895,6 +895,41 @@ def preview_schedule(schedule, config):
     print("")
 
 
+def preview_unified_schedule(config):
+    """Display a visual preview of the unified schedule format"""
+    schedule_config = config.get('schedule', {})
+    num_days = schedule_config.get('days', 1)
+
+    print("\n" + "=" * 70)
+    print("   WORKSHOP SCHEDULE PREVIEW")
+    print("=" * 70)
+
+    for day_num in range(1, num_days + 1):
+        day_key = f'day{day_num}'
+        day_items = schedule_config.get(day_key, [])
+
+        if not day_items:
+            continue
+
+        print(f"\n   DAY {day_num}")
+        print("   " + "-" * 50)
+
+        for item in day_items:
+            time_slot = item.get('time', '')
+            session = item.get('session', '')
+            is_break = item.get('type') == 'break'
+
+            if is_break:
+                print(f"   {time_slot:20} ☕ {session}")
+            else:
+                print(f"   {time_slot:20} {session}")
+
+    print("\n" + "=" * 70)
+    print("   Edit schedule in: workshops/{}/workshop.yaml".format(config.get('workshop_id', '')))
+    print("=" * 70)
+    print("")
+
+
 def confirm_schedule():
     """Ask user to confirm the schedule"""
     print("-" * 70)
@@ -1462,9 +1497,12 @@ def build_workshop_deck(workshop_id, base_dir, output_file=None, skip_confirmati
 
     # Step 5: Preview and confirm
     if not skip_confirmation:
-        preview_schedule(schedule, config)
+        if is_unified:
+            preview_unified_schedule(config)
+        else:
+            preview_schedule(schedule, config)
         if not confirm_schedule():
-            print("\nBuild cancelled. Please adjust your config.py and try again.")
+            print("\nBuild cancelled. Edit workshop.yaml and try again.")
             sys.exit(0)
 
     # Step 6: Set output filename
