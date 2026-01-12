@@ -366,37 +366,51 @@ img {
    LANGUAGE SELECTOR
    ======================================== */
 /* Language selector dropdown container */
+.md-header .md-select__inner,
 .md-select__inner {
   background-color: #ffffff !important;
-  border: 1px solid var(--fastr-light-blue);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--fastr-light-blue) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
 }
 
-/* Language selector items - always visible */
-.md-select__link {
+/* Language selector items - force dark text on white background */
+.md-header .md-select__link,
+.md-select__link,
+.md-select__inner a,
+.md-header .md-select__inner a {
   color: var(--fastr-navy) !important;
   background-color: #ffffff !important;
 }
 
+/* Hover state */
+.md-header .md-select__link:hover,
+.md-header .md-select__link:focus,
 .md-select__link:hover,
-.md-select__link:focus {
+.md-select__link:focus,
+.md-select__inner a:hover,
+.md-header .md-select__inner a:hover {
   color: #ffffff !important;
   background-color: var(--fastr-deep-green) !important;
 }
 
 /* Dark mode language selector */
+[data-md-color-scheme="slate"] .md-header .md-select__inner,
 [data-md-color-scheme="slate"] .md-select__inner {
   background-color: #2e303e !important;
-  border: 1px solid var(--fastr-dark-green);
+  border: 1px solid var(--fastr-dark-green) !important;
 }
 
-[data-md-color-scheme="slate"] .md-select__link {
+[data-md-color-scheme="slate"] .md-header .md-select__link,
+[data-md-color-scheme="slate"] .md-select__link,
+[data-md-color-scheme="slate"] .md-select__inner a,
+[data-md-color-scheme="slate"] .md-header .md-select__inner a {
   color: #ffffff !important;
   background-color: #2e303e !important;
 }
 
+[data-md-color-scheme="slate"] .md-header .md-select__link:hover,
 [data-md-color-scheme="slate"] .md-select__link:hover,
-[data-md-color-scheme="slate"] .md-select__link:focus {
+[data-md-color-scheme="slate"] .md-select__inner a:hover {
   color: #ffffff !important;
   background-color: var(--fastr-deep-green) !important;
 }
