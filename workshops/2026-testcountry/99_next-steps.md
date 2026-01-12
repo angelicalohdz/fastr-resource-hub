@@ -14,11 +14,3 @@ paginate: true
 - Identify areas for data quality improvement
 
 ---
-
-## Contact
-
-For questions or support:
-- **Email:** fastr@worldbank.org
-- **Resources:** [FASTR Resource Hub](https://fastr-analytics.github.io/fastr-resource-hub/)
-
----

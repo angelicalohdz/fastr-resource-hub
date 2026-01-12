@@ -77,32 +77,16 @@ paginate: true
 
 ---
 
-<!-- _class: agenda -->
-# Workshop Agenda - Day 4
-
-| Time | Session | Speaker |
-|------|--------|--------|
-| 9:00 AM - 9:15 AM | **Recap & Questions** |  |
-| 9:15 AM - 10:30 AM | **Results Communication** |  |
-| 10:30 AM - 10:45 AM | *Tea Break* | |
-| 10:45 AM - 12:30 PM | **Group Presentations** |  |
-| 12:30 PM - 1:30 PM | *Lunch* | |
-| 1:30 PM - 3:30 PM | **Action Planning** |  |
-| 3:30 PM - 3:45 PM | *Afternoon Tea* | |
-| 3:45 PM - 4:30 PM | **Next Steps** |  |
-| 4:30 PM - 5:00 PM | **Closing Ceremony** |  |
-
----
-
 
 
 # Workshop Objectives
 
 By the end of this workshop, participants will be able to:
 
-- Learn FASTR methodology
-- Apply data quality techniques
-- Build analysis skills
+- EPI, MCH
+- English
+- 10
+- 4
 
 ---
 
@@ -134,8 +118,8 @@ By the end of this workshop, participants will be able to:
 | Total population | 1000000 |
 | Women of reproductive age | 200000 |
 | Children under 5 | 150000 |
-| Expected pregnancies/year | 50000 |
-| Expected live births/year | 40000 |
+| Expected pregnancies/year | [X per year] |
+| Expected live births/year | [X per year] |
 
 ---
 
@@ -145,7 +129,7 @@ By the end of this workshop, participants will be able to:
 - DHIS2 (reporting rate: 80)
 
 **Survey data:**
-- DHS 2023
+- DHIS2 Monthly
 
 ---
 
@@ -1077,153 +1061,6 @@ Back at 3:45 PM
 - Share findings with stakeholders
 - Establish regular data review processes
 - Identify areas for data quality improvement
-
----
-
-## Contact
-
-For questions or support:
-- **Email:** fastr@worldbank.org
-- **Resources:** [FASTR Resource Hub](https://fastr-analytics.github.io/fastr-resource-hub/)
-
----
-
-
-
-# Day 4: Final Day
-
-## Recap from Yesterday
-
-- Data Analysis techniques
-- Visualization and interpretation
-- Group discussions
-
-## Today's Focus
-
-- Results Communication
-- Group Presentations
-- Action Planning
-- Closing Ceremony
-
----
-
-
-
-## Analytical thinking & interpretation
-
-*Content to be developed*
-
-This section will cover:
-- Frameworks for interpreting FASTR outputs
-- Connecting data patterns to programmatic meaning
-- Common interpretation pitfalls to avoid
-- Building analytical thinking skills
-
----
-
-
-
-## Moving from data to key messages
-
-### What is a result?
-Results are what the analysis found (data quality scores, coverage estimations, service utilization numbers). They are often many in number, complex, hard to understand 'at a glance', and lacking interpretation.
-
-### What is a key takeaway?
-Key takeaways are what the results are telling us — why the results matter, the 'so what'. They should be few in number, simple and clear, easy to remember, and actionable.
-
----
-
-
-
-## Dissemination and data use roadmap
-
-A data use roadmap is a strategic plan that outlines how data will be utilized, shared, and disseminated effectively.
-
-### Why is it important?
-- Establishes metrics to evaluate the success of data use
-- Identifies key stakeholders, target audiences, and dissemination platforms
-- Outlines steps needed to achieve data dissemination goals
-- Anticipates potential challenges and develops strategies to solve for them
-
----
-
-
-
-## End user mapping
-
-End user mapping helps ensure that our outputs will meet the real needs of our end users.
-
-### Key questions
-1. **Who is my end user?**
-2. **What does this end user need to accomplish with the report?**
-3. **What information are they most interested in?**
-4. **What do they like/not like about current reports?**
-5. **How do they like to receive their information?**
-
----
-
-
-
-## Generating quarterly reporting products
-
-*Content to be developed*
-
-This section will cover:
-- Quarterly reporting workflow
-- Using the FASTR platform for automated reports
-- Quality assurance for reports
-- Distribution and feedback mechanisms
-
----
-
----
-
-# ☕ Tea Break
-
-**15 minutes**
-
-Back at 10:45 AM
-
----
-
----
-
-# 🍽️ Lunch Break
-
-**60 minutes**
-
-Back at 1:30 PM
-
----
-
----
-
-# ☕ Afternoon Tea
-
-**15 minutes**
-
-Back at 3:45 PM
-
----
-
-
-
-# Next Steps
-
-## Action items
-
-- Apply FASTR methods to your country data
-- Share findings with stakeholders
-- Establish regular data review processes
-- Identify areas for data quality improvement
-
----
-
-## Contact
-
-For questions or support:
-- **Email:** fastr@worldbank.org
-- **Resources:** [FASTR Resource Hub](https://fastr-analytics.github.io/fastr-resource-hub/)
 
 ---
 

@@ -24,7 +24,7 @@ workshop:
 # ───────────────────────────────────────────────────────────────────────
 
 schedule:
-  days: 4
+  days: 3
   start_time: "9:00 AM"
   tea_time: "10:30 AM"
   lunch_time: "12:30 PM"
@@ -258,41 +258,49 @@ schedule:
       speaker: ""
       duration: 15
 
-  day4:
-    # ─── DAY 4: Presentations & Closing ───
-    - time: "9:00 AM - 9:15 AM"
-      session: "Recap & Questions"
-      slides: [day4_recap.md]
-      duration: 15
-    - time: "9:15 AM - 10:30 AM"
-      session: "Results Communication"
-      module: m7
-      duration: 75
-    - time: "10:30 AM - 10:45 AM"
-      session: "Tea Break"
-      type: break
-      duration: 15
-    - time: "10:45 AM - 12:30 PM"
-      session: "Group Presentations"
-      duration: 105
-    - time: "12:30 PM - 1:30 PM"
-      session: "Lunch"
-      type: break
-      duration: 60
-    - time: "1:30 PM - 3:30 PM"
-      session: "Action Planning"
-      duration: 120
-    - time: "3:30 PM - 3:45 PM"
-      session: "Afternoon Tea"
-      type: break
-      duration: 15
-    - time: "3:45 PM - 4:30 PM"
-      session: "Next Steps"
-      slides: [99_next-steps.md]
-      duration: 45
-    - time: "4:30 PM - 5:00 PM"
-      session: "Closing Ceremony"
-      duration: 30
+  # ─────────────────────────────────────────────────────────────────────
+  # TO ADD A DAY: Uncomment the template below and customize
+  # ─────────────────────────────────────────────────────────────────────
+  # 1. Change 'days: 3' above to 'days: 4'
+  # 2. Uncomment day4 below and edit sessions
+  # 3. Create slide files: day3_wrapup.md, day4_recap.md
+  # ─────────────────────────────────────────────────────────────────────
+  #
+  # day4:
+  #   # ─── DAY 4 ───
+  #   - time: "9:00 AM - 9:15 AM"
+  #     session: "Recap & Questions"
+  #     slides: [day4_recap.md]
+  #     duration: 15
+  #   - time: "9:15 AM - 10:30 AM"
+  #     session: "[Module Name]"
+  #     module: m7
+  #     duration: 75
+  #   - time: "10:30 AM - 10:45 AM"
+  #     session: "Tea Break"
+  #     type: break
+  #     duration: 15
+  #   - time: "10:45 AM - 12:30 PM"
+  #     session: "[Session Name]"
+  #     duration: 105
+  #   - time: "12:30 PM - 1:30 PM"
+  #     session: "Lunch"
+  #     type: break
+  #     duration: 60
+  #   - time: "1:30 PM - 3:30 PM"
+  #     session: "Group Work"
+  #     duration: 120
+  #   - time: "3:30 PM - 3:45 PM"
+  #     session: "Afternoon Tea"
+  #     type: break
+  #     duration: 15
+  #   - time: "3:45 PM - 4:45 PM"
+  #     session: "[Session Name]"
+  #     duration: 60
+  #   - time: "4:45 PM - 5:00 PM"
+  #     session: "Day Wrap-up"
+  #     slides: [day4_wrapup.md]
+  #     duration: 15
 
 # ───────────────────────────────────────────────────────────────────────
 # CONTENT - Module selection and custom slides
@@ -347,6 +355,6 @@ country_data:
   total_population: "1000000"
   women_reproductive_age: "200000"
   under5_population: "150000"
-  expected_pregnancies: "50000"
-  expected_births: "40000"
-  last_survey: "DHS 2023"
+  expected_pregnancies: "[X per year]"
+  expected_births: "[X per year]"
+  last_survey: "DHIS2 Monthly"
