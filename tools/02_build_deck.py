@@ -897,7 +897,7 @@ def preview_schedule(schedule, config):
 
 def preview_unified_schedule(config):
     """Display a visual preview of the unified schedule format"""
-    schedule_config = config.get('schedule', {})
+    schedule_config = config.get('_yaml_schedule', {})
     num_days = schedule_config.get('days', 1)
 
     print("\n" + "=" * 70)
