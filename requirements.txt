@@ -20,5 +20,7 @@ mkdocs-static-i18n>=1.0.0
 # - tools/02_build_deck.py
 # - tools/03_convert_pptx.py
 
-# Optional: for PPTX conversion (libreoffice required separately)
-# LibreOffice must be installed on the system for PDF to PPTX conversion
+# PowerPoint conversion
+python-pptx>=0.6.21
+Pillow>=9.0.0
+cairosvg>=2.7.0  # Optional: for SVG to PNG conversion

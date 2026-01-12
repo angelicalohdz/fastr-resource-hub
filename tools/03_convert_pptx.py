@@ -1,101 +1,34 @@
 #!/usr/bin/env python3
 """
 ═══════════════════════════════════════════════════════════════════════
-              FASTR POWERPOINT CONVERTER (Alternative Method)
+              FASTR POWERPOINT CONVERTER
 ═══════════════════════════════════════════════════════════════════════
 
-⚠️  IMPORTANT: PDF is the RECOMMENDED export format!
+Converts Marp markdown decks to branded PowerPoint presentations.
 
-This tool converts markdown to PowerPoint, but be aware:
-  ❌ Fonts may need manual adjustment
-  ❌ Layouts may not match perfectly
-  ❌ Requires editing Slide Master for best results
+USAGE:
+    python3 tools/03_convert_pptx.py                           # Interactive
+    python3 tools/03_convert_pptx.py outputs/workshop_deck.md  # Direct
 
-✅ PDF export is easier and more consistent!
-
-However, PowerPoint is useful when:
-  ✓ You need to make last-minute edits
-  ✓ Your team prefers PowerPoint
-  ✓ You need editable text boxes
-
-═══════════════════════════════════════════════════════════════════════
-                         HOW TO USE
-═══════════════════════════════════════════════════════════════════════
-
-OPTION 1: Interactive Mode (Easiest!)
---------------------------------------
-Just run without arguments and follow the prompts:
-
-    python3 tools/03_convert_pptx.py
-
-The script will:
-  - Show you all available markdown decks
-  - Ask which one to convert
-  - Convert to PowerPoint
-  - Tell you where to find it!
-
-
-OPTION 2: Command Line (For Experts)
--------------------------------------
-Specify the markdown file directly:
-
-    python3 tools/03_convert_pptx.py outputs/2025-01-nigeria_deck.md
-
-Or with custom template:
-
-    python3 tools/03_convert_pptx.py outputs/deck.md --reference custom.pptx
-
-
-═══════════════════════════════════════════════════════════════════════
-                      BEFORE YOU START
-═══════════════════════════════════════════════════════════════════════
-
-1. Install Pandoc (if not already installed):
-
-   Mac:     brew install pandoc
-   Windows: See https://pandoc.org/installing.html
-   Linux:   apt install pandoc
-
-2. Build your deck first:
-
-   python3 tools/02_build_deck.py --workshop YOUR-WORKSHOP
-
-3. You should have a markdown file:
-
-   outputs/YOUR-WORKSHOP_deck.md
-
-
-═══════════════════════════════════════════════════════════════════════
-                    BETTER ALTERNATIVE: USE PDF!
-═══════════════════════════════════════════════════════════════════════
-
-We STRONGLY recommend using PDF instead:
-
-    marp outputs/YOUR-WORKSHOP_deck.md --no-config --theme fastr-theme.css --pdf --allow-local-files
-
-Why PDF is better:
-  ✅ Perfect FASTR styling (teal colors, correct fonts)
-  ✅ Works on any computer
-  ✅ No layout issues
-  ✅ Smaller file size
-  ✅ Ready to present immediately
-
-PowerPoint requires manual adjustments after export!
+FEATURES:
+  ✓ FASTR brand colors and styling
+  ✓ Proper slide layouts (title, content, agenda, two-column)
+  ✓ Tables with styled headers
+  ✓ Images embedded correctly
+  ✓ Break slides with centered text
 
 ═══════════════════════════════════════════════════════════════════════
 """
 
 import argparse
 import os
-import subprocess
-import shutil
-import sys
 import re
+import sys
 from pathlib import Path
 
-# ═══════════════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════════════════════
 # AUTO-DETECT AND USE VENV
-# ═══════════════════════════════════════════════════════════════════════
+# ═══════════════════════════════════════════════════════════════════════════════
 
 def ensure_venv():
     """Re-execute with venv Python if not already in venv."""
@@ -110,78 +43,867 @@ def ensure_venv():
 
 ensure_venv()
 
+# Now import python-pptx (after venv activation)
+try:
+    from pptx import Presentation
+    from pptx.util import Inches, Pt
+    from pptx.dml.color import RGBColor
+    from pptx.enum.text import PP_ALIGN, MSO_ANCHOR
+    from pptx.enum.shapes import MSO_SHAPE
+except ImportError:
+    print("Error: python-pptx not installed.")
+    print("Run: pip install python-pptx Pillow")
+    sys.exit(1)
 
-# ═══════════════════════════════════════════════════════════════════════
-# HELPER FUNCTIONS
-# ═══════════════════════════════════════════════════════════════════════
+try:
+    from PIL import Image
+except ImportError:
+    Image = None
 
-def check_pandoc_installed():
+# ═══════════════════════════════════════════════════════════════════════════════
+# FASTR BRAND CONSTANTS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+class Colors:
+    """FASTR brand colors from fastr-theme.css"""
+    DEEP_GREEN = RGBColor(0x09, 0x54, 0x4F)   # #09544F - H1
+    DARK_GREEN = RGBColor(0x0C, 0x71, 0x6B)   # #0C716B
+    GREEN = RGBColor(0x1F, 0x9A, 0x9C)        # #1F9A9C
+    LIME = RGBColor(0xD0, 0xCB, 0x17)         # #D0CB17 - H1 underline
+    NAVY = RGBColor(0x21, 0x56, 0x8C)         # #21568C - H2
+    BLUE = RGBColor(0x1A, 0x90, 0xC0)         # #1A90C0 - H2 underline
+    LIGHT_BLUE = RGBColor(0xCA, 0xE6, 0xE9)   # #CAE6E9 - table headers
+
+    GOLD = RGBColor(0xD8, 0xA8, 0x22)         # #D8A822
+    PURPLE = RGBColor(0x7A, 0x1F, 0x6E)       # #7A1F6E
+    ORCHID = RGBColor(0xBD, 0x50, 0x91)       # #BD5091
+    CORAL = RGBColor(0xFF, 0x64, 0x62)        # #FF6462
+
+    TEXT_DARK = RGBColor(0x2C, 0x3E, 0x50)    # #2c3e50
+    WHITE = RGBColor(0xFF, 0xFF, 0xFF)
+    BLACK = RGBColor(0x00, 0x00, 0x00)
+
+
+class Fonts:
+    """Font settings"""
+    FAMILY = 'Arial'  # Universal fallback
+    H1_SIZE = Pt(40)
+    H2_SIZE = Pt(32)
+    H3_SIZE = Pt(24)
+    BODY_SIZE = Pt(18)
+    TABLE_SIZE = Pt(14)
+    SMALL_SIZE = Pt(12)
+
+
+class Layout:
+    """Slide dimensions and margins (16:9)"""
+    WIDTH = Inches(13.333)
+    HEIGHT = Inches(7.5)
+    MARGIN_LEFT = Inches(0.5)
+    MARGIN_RIGHT = Inches(0.5)
+    MARGIN_TOP = Inches(0.5)
+    MARGIN_BOTTOM = Inches(0.5)
+    CONTENT_WIDTH = Inches(12.333)
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# MARKDOWN PARSER
+# ═══════════════════════════════════════════════════════════════════════════════
+
+def parse_markdown(content):
     """
-    Check if Pandoc is installed and available
+    Parse Marp markdown into slide data structures.
 
-    Returns True if installed, False otherwise
+    Returns list of dicts with:
+    - raw: original markdown
+    - headers: [(level, text), ...]
+    - bullets: [text, ...]
+    - table: [[row], ...] or None
+    - images: [{'alt': str, 'path': str}, ...]
+    - columns: {'left': str, 'right': str} or None
+    - css_class: from <!-- _class: xxx -->
     """
-    return shutil.which('pandoc') is not None
+    # Strip YAML frontmatter
+    if content.startswith('---'):
+        match = re.match(r'^---\n.*?\n---\n?', content, re.DOTALL)
+        if match:
+            content = content[match.end():]
+
+    # Split into slides
+    raw_slides = re.split(r'\n---\s*\n', content)
+
+    slides = []
+    for raw in raw_slides:
+        raw = raw.strip()
+        if not raw:
+            continue
+
+        slide = {
+            'raw': raw,
+            'headers': [],
+            'bullets': [],
+            'table': None,
+            'images': [],
+            'columns': None,
+            'css_class': None,
+            'html_content': None,
+        }
+
+        # Extract CSS class directive
+        class_match = re.search(r'<!--\s*_class:\s*(\w+)\s*-->', raw)
+        if class_match:
+            slide['css_class'] = class_match.group(1)
+            raw = re.sub(r'<!--\s*_class:\s*\w+\s*-->', '', raw)
+
+        # Extract headers
+        for match in re.finditer(r'^(#{1,6})\s+(.+)$', raw, re.MULTILINE):
+            level = len(match.group(1))
+            text = match.group(2).strip()
+            slide['headers'].append((level, text))
+
+        # Extract bullets (- or *)
+        for match in re.finditer(r'^[-*]\s+(.+)$', raw, re.MULTILINE):
+            slide['bullets'].append(match.group(1).strip())
+
+        # Extract images ![alt](path)
+        for match in re.finditer(r'!\[([^\]]*)\]\(([^)]+)\)', raw):
+            slide['images'].append({
+                'alt': match.group(1),
+                'path': match.group(2).split()[0]  # Remove any title
+            })
+
+        # Extract table
+        table_lines = []
+        in_table = False
+        for line in raw.split('\n'):
+            if '|' in line and line.strip().startswith('|'):
+                in_table = True
+                # Skip separator line
+                if re.match(r'^\|[\s\-:|]+\|$', line.strip()):
+                    continue
+                cells = [c.strip() for c in line.strip().strip('|').split('|')]
+                table_lines.append(cells)
+            elif in_table:
+                break
+        if table_lines:
+            slide['table'] = table_lines
+
+        # Extract columns div
+        cols_match = re.search(
+            r'<div\s+class="columns[^"]*">\s*<div>(.*?)</div>\s*<div>(.*?)</div>\s*</div>',
+            raw, re.DOTALL
+        )
+        if cols_match:
+            slide['columns'] = {
+                'left': cols_match.group(1).strip(),
+                'right': cols_match.group(2).strip()
+            }
+
+        # Check for other HTML content (like styled img tags)
+        if '<img' in raw:
+            slide['html_content'] = raw
+
+        slides.append(slide)
+
+    return slides
 
 
-def install_pandoc():
+# ═══════════════════════════════════════════════════════════════════════════════
+# SLIDE TYPE DETECTOR
+# ═══════════════════════════════════════════════════════════════════════════════
+
+def detect_slide_type(slide, index):
     """
-    Attempt to auto-install Pandoc based on the operating system
+    Detect slide type from content.
 
-    Returns True if installation successful, False otherwise
+    Returns: 'title', 'agenda', 'break', 'two_column', 'table', 'image', 'content'
     """
-    import platform
+    headers = slide['headers']
+    h1_text = headers[0][1] if headers and headers[0][0] == 1 else ''
 
-    system = platform.system().lower()
+    # Title slide: first slide with logo
+    if index == 0:
+        for img in slide['images']:
+            if 'logo' in img['path'].lower() or 'fastr' in img['path'].lower():
+                return 'title'
 
-    print("\n" + "=" * 70)
-    print("              INSTALLING PANDOC")
-    print("=" * 70)
+    # Agenda slide
+    if slide['css_class'] == 'agenda' or (slide['table'] and 'agenda' in h1_text.lower()):
+        return 'agenda'
+
+    # Break slide: emoji or "break" in H1
+    break_emojis = ['☕', '🍽', '🌙', '🎉', '👋', '⏰']
+    if any(emoji in h1_text for emoji in break_emojis):
+        return 'break'
+    if re.search(r'\b(break|lunch|tea)\b', h1_text, re.IGNORECASE):
+        return 'break'
+
+    # Two-column slide
+    if slide['columns']:
+        return 'two_column'
+
+    # Table slide (non-agenda)
+    if slide['table']:
+        return 'table'
+
+    # Image-heavy slide
+    if slide['images'] and len(slide['bullets']) < 2:
+        return 'image'
+
+    # Default: content slide
+    return 'content'
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# IMAGE HANDLING
+# ═══════════════════════════════════════════════════════════════════════════════
+
+def resolve_image_path(img_path, base_dir, md_dir):
+    """
+    Resolve relative image path to absolute path.
+    Tries multiple locations.
+    """
+    if img_path.startswith(('http://', 'https://')):
+        return None  # Skip URLs
+
+    # Clean up the path
+    img_path = img_path.replace('%20', ' ')
+
+    paths_to_try = [
+        os.path.join(md_dir, img_path),
+        os.path.join(base_dir, img_path.lstrip('../')),
+        os.path.join(base_dir, 'resources', 'logos', os.path.basename(img_path)),
+        os.path.join(base_dir, 'resources', 'diagrams', os.path.basename(img_path)),
+        os.path.join(base_dir, 'resources', 'default_outputs', os.path.basename(img_path)),
+        os.path.join(base_dir, 'assets', os.path.basename(img_path)),
+    ]
+
+    # Handle ../resources/... paths from outputs/ folder
+    if '../resources/' in img_path:
+        clean_path = img_path.replace('../', '')
+        paths_to_try.insert(0, os.path.join(base_dir, clean_path))
+
+    for path in paths_to_try:
+        if os.path.exists(path):
+            return os.path.abspath(path)
+
+    return None
+
+
+def convert_svg_to_png(svg_path, temp_dir):
+    """Convert SVG to PNG for PowerPoint compatibility."""
+    try:
+        import cairosvg
+        png_path = os.path.join(temp_dir, Path(svg_path).stem + '.png')
+        cairosvg.svg2png(url=svg_path, write_to=png_path, scale=2.0)
+        return png_path
+    except ImportError:
+        return None
+    except Exception:
+        return None
+
+
+def add_image_to_slide(slide, img_path, left, top, width=None, height=None):
+    """Add image to slide, handling SVG conversion if needed."""
+    if not img_path or not os.path.exists(img_path):
+        return None
+
+    # Convert SVG if needed
+    if img_path.lower().endswith('.svg'):
+        import tempfile
+        with tempfile.TemporaryDirectory() as temp_dir:
+            png_path = convert_svg_to_png(img_path, temp_dir)
+            if png_path:
+                img_path = png_path
+            else:
+                return None  # SVG conversion failed
 
     try:
-        if system == 'linux':
-            # Linux (including Codespaces)
-            print("\nDetected Linux - installing via apt...")
-            subprocess.run(['sudo', 'apt', 'update', '-y'], check=True, capture_output=True)
-            subprocess.run(['sudo', 'apt', 'install', '-y', 'pandoc'], check=True)
-            print("   Pandoc installed successfully!")
-            return True
-
-        elif system == 'darwin':
-            # macOS
-            if shutil.which('brew'):
-                print("\nDetected macOS - installing via Homebrew...")
-                subprocess.run(['brew', 'install', 'pandoc'], check=True)
-                print("   Pandoc installed successfully!")
-                return True
-            else:
-                print("\nHomebrew not found. Please install pandoc manually:")
-                print("   brew install pandoc")
-                return False
-
+        if width and height:
+            return slide.shapes.add_picture(img_path, left, top, width, height)
+        elif width:
+            return slide.shapes.add_picture(img_path, left, top, width=width)
+        elif height:
+            return slide.shapes.add_picture(img_path, left, top, height=height)
         else:
-            # Windows or other
-            print(f"\nAuto-install not supported on {system}.")
-            print("Please install pandoc manually:")
-            print("   https://pandoc.org/installing.html")
-            return False
-
-    except subprocess.CalledProcessError as e:
-        print(f"\nInstallation failed: {e}")
-        return False
+            return slide.shapes.add_picture(img_path, left, top)
     except Exception as e:
-        print(f"\nError during installation: {e}")
+        print(f"   Warning: Could not add image: {e}")
+        return None
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TEXT STYLING HELPERS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+def style_paragraph(para, font_size, color, bold=False, italic=False):
+    """Apply styling to a paragraph."""
+    para.font.size = font_size
+    para.font.color.rgb = color
+    para.font.bold = bold
+    para.font.italic = italic
+    para.font.name = Fonts.FAMILY
+
+
+def add_text_box(slide, left, top, width, height, text, font_size, color,
+                 bold=False, align=PP_ALIGN.LEFT, anchor=MSO_ANCHOR.TOP):
+    """Add a styled text box to slide."""
+    shape = slide.shapes.add_textbox(left, top, width, height)
+    tf = shape.text_frame
+    tf.word_wrap = True
+    tf.auto_size = None
+
+    # Set vertical alignment
+    try:
+        tf.anchor = anchor
+    except:
+        pass
+
+    p = tf.paragraphs[0]
+    p.text = text
+    p.alignment = align
+    style_paragraph(p, font_size, color, bold)
+
+    return shape
+
+
+def add_h1_with_underline(slide, text, top=None):
+    """Add H1 header with lime underline."""
+    if top is None:
+        top = Layout.MARGIN_TOP
+
+    # Add title text
+    title_shape = add_text_box(
+        slide,
+        Layout.MARGIN_LEFT, top,
+        Layout.CONTENT_WIDTH, Inches(0.8),
+        text, Fonts.H1_SIZE, Colors.DEEP_GREEN, bold=True
+    )
+
+    # Add underline
+    underline = slide.shapes.add_shape(
+        MSO_SHAPE.RECTANGLE,
+        Layout.MARGIN_LEFT, top + Inches(0.7),
+        Inches(6), Inches(0.06)
+    )
+    underline.fill.solid()
+    underline.fill.fore_color.rgb = Colors.LIME
+    underline.line.fill.background()
+
+    return title_shape
+
+
+def add_h2_with_underline(slide, text, top):
+    """Add H2 header with blue underline."""
+    title_shape = add_text_box(
+        slide,
+        Layout.MARGIN_LEFT, top,
+        Layout.CONTENT_WIDTH, Inches(0.6),
+        text, Fonts.H2_SIZE, Colors.NAVY, bold=True
+    )
+
+    underline = slide.shapes.add_shape(
+        MSO_SHAPE.RECTANGLE,
+        Layout.MARGIN_LEFT, top + Inches(0.55),
+        Inches(5), Inches(0.04)
+    )
+    underline.fill.solid()
+    underline.fill.fore_color.rgb = Colors.BLUE
+    underline.line.fill.background()
+
+    return title_shape
+
+
+def add_bullet_list(slide, bullets, left, top, width, font_size=None):
+    """Add a bullet list to slide."""
+    if not bullets:
+        return None
+
+    if font_size is None:
+        font_size = Fonts.BODY_SIZE
+
+    height = Inches(0.4 * len(bullets) + 0.2)
+    shape = slide.shapes.add_textbox(left, top, width, height)
+    tf = shape.text_frame
+    tf.word_wrap = True
+
+    for i, bullet in enumerate(bullets):
+        if i == 0:
+            p = tf.paragraphs[0]
+        else:
+            p = tf.add_paragraph()
+
+        # Clean up bullet text (remove markdown formatting)
+        text = re.sub(r'\*\*([^*]+)\*\*', r'\1', bullet)  # Bold
+        text = re.sub(r'\*([^*]+)\*', r'\1', text)  # Italic
+        text = re.sub(r'`([^`]+)`', r'\1', text)  # Code
+
+        p.text = f"• {text}"
+        p.level = 0
+        style_paragraph(p, font_size, Colors.TEXT_DARK)
+
+    return shape
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SLIDE BUILDERS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+def build_title_slide(prs, data, base_dir, md_dir):
+    """Build title slide with centered content and logo."""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])  # Blank
+
+    # Get title
+    title = data['headers'][0][1] if data['headers'] else 'FASTR Workshop'
+
+    # Centered title
+    add_text_box(
+        slide,
+        Inches(1), Inches(2),
+        Inches(11.333), Inches(1.2),
+        title, Fonts.H1_SIZE, Colors.DEEP_GREEN,
+        bold=True, align=PP_ALIGN.CENTER
+    )
+
+    # Underline
+    underline = slide.shapes.add_shape(
+        MSO_SHAPE.RECTANGLE,
+        Inches(3), Inches(3.2),
+        Inches(7.333), Inches(0.06)
+    )
+    underline.fill.solid()
+    underline.fill.fore_color.rgb = Colors.LIME
+    underline.line.fill.background()
+
+    # Extract subtitle info from raw content
+    raw = data['raw']
+
+    # Look for date/location line (bold text)
+    date_match = re.search(r'\*\*([^*]+)\*\*\s*\|\s*\*\*([^*]+)\*\*', raw)
+    if date_match:
+        subtitle = f"{date_match.group(1)} | {date_match.group(2)}"
+        add_text_box(
+            slide,
+            Inches(1), Inches(3.5),
+            Inches(11.333), Inches(0.5),
+            subtitle, Fonts.H2_SIZE, Colors.NAVY,
+            align=PP_ALIGN.CENTER
+        )
+
+    # Look for facilitator (italic text)
+    fac_match = re.search(r'\*([^*]+)\*(?!\*)', raw)
+    if fac_match and 'Facilitator' in fac_match.group(1) or fac_match:
+        add_text_box(
+            slide,
+            Inches(1), Inches(4.2),
+            Inches(11.333), Inches(0.4),
+            fac_match.group(1) if fac_match else '', Fonts.BODY_SIZE, Colors.TEXT_DARK,
+            align=PP_ALIGN.CENTER
+        )
+
+    # Add logo
+    for img in data['images']:
+        img_path = resolve_image_path(img['path'], base_dir, md_dir)
+        if img_path and ('logo' in img_path.lower() or 'fastr' in img_path.lower()):
+            add_image_to_slide(
+                slide, img_path,
+                Inches(10.5), Inches(6.2),
+                width=Inches(2.3)
+            )
+            break
+
+    return slide
+
+
+def build_agenda_slide(prs, data, base_dir, md_dir):
+    """Build agenda slide with compact table."""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])  # Blank
+
+    # Title
+    title = data['headers'][0][1] if data['headers'] else 'Workshop Agenda'
+    add_h1_with_underline(slide, title)
+
+    # Table
+    if data['table']:
+        table_data = data['table']
+        rows = len(table_data)
+        cols = len(table_data[0]) if table_data else 3
+
+        table = slide.shapes.add_table(
+            rows, cols,
+            Layout.MARGIN_LEFT, Inches(1.3),
+            Inches(12), Inches(0.35 * rows)
+        ).table
+
+        # Set column widths
+        if cols >= 3:
+            table.columns[0].width = Inches(2.5)   # Time
+            table.columns[1].width = Inches(7)     # Session
+            table.columns[2].width = Inches(2.5)   # Speaker
+
+        # Fill table
+        for r_idx, row in enumerate(table_data):
+            is_header = r_idx == 0
+            for c_idx, cell_text in enumerate(row):
+                cell = table.cell(r_idx, c_idx)
+
+                # Clean text
+                text = re.sub(r'\*\*([^*]+)\*\*', r'\1', cell_text)
+                text = re.sub(r'\*([^*]+)\*', r'\1', text)
+
+                cell.text = text
+
+                # Style cell
+                para = cell.text_frame.paragraphs[0]
+                para.font.size = Fonts.TABLE_SIZE
+                para.font.name = Fonts.FAMILY
+
+                if is_header:
+                    cell.fill.solid()
+                    cell.fill.fore_color.rgb = Colors.LIGHT_BLUE
+                    para.font.color.rgb = Colors.NAVY
+                    para.font.bold = True
+                else:
+                    para.font.color.rgb = Colors.TEXT_DARK
+
+    return slide
+
+
+def build_break_slide(prs, data, base_dir, md_dir):
+    """Build break slide with large centered text."""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])  # Blank
+
+    # Get title (with emoji)
+    title = data['headers'][0][1] if data['headers'] else 'Break'
+
+    # Large centered title
+    add_text_box(
+        slide,
+        Inches(1), Inches(2.8),
+        Inches(11.333), Inches(1.5),
+        title, Pt(56), Colors.DEEP_GREEN,
+        bold=True, align=PP_ALIGN.CENTER, anchor=MSO_ANCHOR.MIDDLE
+    )
+
+    # Look for time info in raw content
+    raw = data['raw']
+    time_match = re.search(r'(\d+)\s*minutes?', raw, re.IGNORECASE)
+    resume_match = re.search(r'(?:resume|back|return)[^\d]*(\d+[:\d]*\s*(?:AM|PM)?)', raw, re.IGNORECASE)
+
+    subtitle_parts = []
+    if time_match:
+        subtitle_parts.append(f"{time_match.group(1)} minutes")
+    if resume_match:
+        subtitle_parts.append(f"Back at {resume_match.group(1)}")
+
+    if subtitle_parts:
+        add_text_box(
+            slide,
+            Inches(1), Inches(4.3),
+            Inches(11.333), Inches(0.6),
+            " • ".join(subtitle_parts), Fonts.H2_SIZE, Colors.NAVY,
+            align=PP_ALIGN.CENTER
+        )
+
+    return slide
+
+
+def build_two_column_slide(prs, data, base_dir, md_dir):
+    """Build two-column slide with text and image."""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])  # Blank
+
+    # Title
+    if data['headers']:
+        title = data['headers'][0][1]
+        if data['headers'][0][0] == 1:
+            add_h1_with_underline(slide, title)
+        else:
+            add_h2_with_underline(slide, title, Layout.MARGIN_TOP)
+
+    # Parse column content
+    left_content = data['columns']['left']
+    right_content = data['columns']['right']
+
+    # Determine which side has image
+    left_has_image = '![' in left_content or '<img' in left_content
+    right_has_image = '![' in right_content or '<img' in right_content
+
+    content_top = Inches(1.4)
+    col_width = Inches(5.8)
+    col_height = Inches(5.5)
+
+    # Left column
+    if left_has_image:
+        # Add image
+        img_match = re.search(r'!\[[^\]]*\]\(([^)]+)\)', left_content)
+        if img_match:
+            img_path = resolve_image_path(img_match.group(1).split()[0], base_dir, md_dir)
+            if img_path:
+                add_image_to_slide(
+                    slide, img_path,
+                    Layout.MARGIN_LEFT, content_top,
+                    width=col_width
+                )
+    else:
+        # Add bullets
+        bullets = re.findall(r'^[-*]\s+(.+)$', left_content, re.MULTILINE)
+        if bullets:
+            add_bullet_list(slide, bullets, Layout.MARGIN_LEFT, content_top, col_width)
+
+    # Right column
+    right_left = Inches(7)
+    if right_has_image:
+        img_match = re.search(r'!\[[^\]]*\]\(([^)]+)\)', right_content)
+        if img_match:
+            img_path = resolve_image_path(img_match.group(1).split()[0], base_dir, md_dir)
+            if img_path:
+                add_image_to_slide(
+                    slide, img_path,
+                    right_left, content_top,
+                    width=col_width
+                )
+    else:
+        bullets = re.findall(r'^[-*]\s+(.+)$', right_content, re.MULTILINE)
+        if bullets:
+            add_bullet_list(slide, bullets, right_left, content_top, col_width)
+
+    return slide
+
+
+def build_table_slide(prs, data, base_dir, md_dir):
+    """Build slide with table."""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])  # Blank
+
+    # Title
+    if data['headers']:
+        title = data['headers'][0][1]
+        if data['headers'][0][0] == 1:
+            add_h1_with_underline(slide, title)
+        else:
+            add_h2_with_underline(slide, title, Layout.MARGIN_TOP)
+
+    # Table
+    if data['table']:
+        table_data = data['table']
+        rows = len(table_data)
+        cols = len(table_data[0]) if table_data else 2
+
+        # Calculate table dimensions
+        table_width = min(Inches(12), Inches(2.5 * cols))
+        row_height = Inches(0.4)
+
+        table = slide.shapes.add_table(
+            rows, cols,
+            Layout.MARGIN_LEFT, Inches(1.4),
+            table_width, row_height * rows
+        ).table
+
+        # Fill table
+        for r_idx, row in enumerate(table_data):
+            is_header = r_idx == 0
+            for c_idx, cell_text in enumerate(row):
+                if c_idx >= cols:
+                    continue
+                cell = table.cell(r_idx, c_idx)
+
+                # Clean text
+                text = re.sub(r'\*\*([^*]+)\*\*', r'\1', cell_text)
+                text = re.sub(r'\*([^*]+)\*', r'\1', text)
+
+                cell.text = text
+
+                para = cell.text_frame.paragraphs[0]
+                para.font.size = Fonts.BODY_SIZE
+                para.font.name = Fonts.FAMILY
+
+                if is_header:
+                    cell.fill.solid()
+                    cell.fill.fore_color.rgb = Colors.LIGHT_BLUE
+                    para.font.color.rgb = Colors.NAVY
+                    para.font.bold = True
+                else:
+                    para.font.color.rgb = Colors.TEXT_DARK
+
+    return slide
+
+
+def build_image_slide(prs, data, base_dir, md_dir):
+    """Build image-focused slide."""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])  # Blank
+
+    # Title
+    if data['headers']:
+        title = data['headers'][0][1]
+        if data['headers'][0][0] == 1:
+            add_h1_with_underline(slide, title)
+        else:
+            add_h2_with_underline(slide, title, Layout.MARGIN_TOP)
+
+    # Add main image
+    if data['images']:
+        img = data['images'][0]
+        img_path = resolve_image_path(img['path'], base_dir, md_dir)
+        if img_path:
+            # Center the image
+            add_image_to_slide(
+                slide, img_path,
+                Inches(1.5), Inches(1.5),
+                width=Inches(10)
+            )
+
+    # Add any bullets below
+    if data['bullets']:
+        add_bullet_list(
+            slide, data['bullets'],
+            Layout.MARGIN_LEFT, Inches(5.5),
+            Layout.CONTENT_WIDTH, Fonts.BODY_SIZE
+        )
+
+    return slide
+
+
+def build_content_slide(prs, data, base_dir, md_dir):
+    """Build standard content slide with headers and bullets."""
+    slide = prs.slides.add_slide(prs.slide_layouts[6])  # Blank
+
+    current_top = Layout.MARGIN_TOP
+
+    # Add headers
+    for level, text in data['headers']:
+        if level == 1:
+            add_h1_with_underline(slide, text, current_top)
+            current_top += Inches(0.9)
+        elif level == 2:
+            add_h2_with_underline(slide, text, current_top)
+            current_top += Inches(0.75)
+        else:
+            add_text_box(
+                slide,
+                Layout.MARGIN_LEFT, current_top,
+                Layout.CONTENT_WIDTH, Inches(0.5),
+                text, Fonts.H3_SIZE, Colors.PURPLE, bold=True
+            )
+            current_top += Inches(0.5)
+
+    # Add bullets
+    if data['bullets']:
+        add_bullet_list(
+            slide, data['bullets'],
+            Layout.MARGIN_LEFT, current_top + Inches(0.2),
+            Layout.CONTENT_WIDTH
+        )
+
+    # Add image if present (to the right)
+    if data['images']:
+        img = data['images'][0]
+        img_path = resolve_image_path(img['path'], base_dir, md_dir)
+        if img_path:
+            add_image_to_slide(
+                slide, img_path,
+                Inches(8), Inches(1.5),
+                width=Inches(4.5)
+            )
+
+    return slide
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# MAIN CONVERTER
+# ═══════════════════════════════════════════════════════════════════════════════
+
+def convert_to_pptx(md_file, base_dir, output_path=None):
+    """
+    Convert Marp markdown to PowerPoint.
+
+    Returns True on success, False on failure.
+    """
+    # Validate input
+    if not os.path.exists(md_file):
+        print(f"Error: File not found: {md_file}")
         return False
 
+    print("\n" + "=" * 70)
+    print("           CONVERTING TO POWERPOINT")
+    print("=" * 70)
+
+    # Read markdown
+    print(f"\n   Reading: {os.path.basename(md_file)}")
+    with open(md_file, 'r', encoding='utf-8') as f:
+        content = f.read()
+
+    # Parse markdown
+    print("   Parsing slides...")
+    slides_data = parse_markdown(content)
+    print(f"   Found {len(slides_data)} slides")
+
+    # Create presentation
+    prs = Presentation()
+    prs.slide_width = Layout.WIDTH
+    prs.slide_height = Layout.HEIGHT
+
+    # Get paths
+    md_dir = os.path.dirname(os.path.abspath(md_file))
+
+    # Build each slide
+    print("   Building slides...")
+    builders = {
+        'title': build_title_slide,
+        'agenda': build_agenda_slide,
+        'break': build_break_slide,
+        'two_column': build_two_column_slide,
+        'table': build_table_slide,
+        'image': build_image_slide,
+        'content': build_content_slide,
+    }
+
+    type_counts = {}
+    for i, data in enumerate(slides_data):
+        slide_type = detect_slide_type(data, i)
+        type_counts[slide_type] = type_counts.get(slide_type, 0) + 1
+
+        builder = builders.get(slide_type, build_content_slide)
+        try:
+            builder(prs, data, base_dir, md_dir)
+        except Exception as e:
+            print(f"   Warning: Error building slide {i+1}: {e}")
+            # Build as content slide fallback
+            try:
+                build_content_slide(prs, data, base_dir, md_dir)
+            except:
+                pass
+
+    # Show type breakdown
+    print("   Slide types:")
+    for stype, count in sorted(type_counts.items()):
+        print(f"      {stype}: {count}")
+
+    # Save
+    if output_path is None:
+        output_path = md_file.replace('.md', '.pptx')
+
+    print(f"\n   Saving: {os.path.basename(output_path)}")
+    prs.save(output_path)
+
+    file_size = os.path.getsize(output_path) / 1024
+
+    print("\n" + "=" * 70)
+    print("                    SUCCESS!")
+    print("=" * 70)
+    print(f"\n   Output: {output_path}")
+    print(f"   Size: {file_size:.1f} KB")
+    print(f"   Slides: {len(prs.slides)}")
+    print("\n" + "=" * 70 + "\n")
+
+    return True
+
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CLI INTERFACE
+# ═══════════════════════════════════════════════════════════════════════════════
 
 def list_available_decks(base_dir):
-    """
-    Show all available markdown decks in outputs/ folder
-
-    Returns list of .md files ready to convert
-    """
+    """List markdown decks in outputs/ folder."""
     outputs_dir = os.path.join(base_dir, "outputs")
-
     if not os.path.exists(outputs_dir):
         return []
 
@@ -194,380 +916,81 @@ def list_available_decks(base_dir):
 
 
 def prompt_for_deck(base_dir):
-    """
-    Interactive mode: Ask user which deck to convert
-
-    Shows list of available decks and lets user choose
-    """
-    print("\n" + "═" * 70)
-    print("              AVAILABLE DECKS TO CONVERT")
-    print("═" * 70 + "\n")
+    """Interactive mode: ask user which deck to convert."""
+    print("\n" + "=" * 70)
+    print("              AVAILABLE DECKS")
+    print("=" * 70 + "\n")
 
     decks = list_available_decks(base_dir)
 
     if not decks:
-        print("❌ No decks found in outputs/ folder!")
-        print("\n💡 Build a deck first:")
+        print("No decks found in outputs/ folder!")
+        print("\nBuild a deck first:")
         print("   python3 tools/02_build_deck.py --workshop YOUR-WORKSHOP")
         sys.exit(1)
 
     for i, deck in enumerate(decks, 1):
-        # Show file size
         deck_path = os.path.join(base_dir, "outputs", deck)
-        size = os.path.getsize(deck_path)
-        size_kb = size / 1024
-        print(f"  {i}. {deck} ({size_kb:.1f} KB)")
+        size = os.path.getsize(deck_path) / 1024
+        print(f"  {i}. {deck} ({size:.1f} KB)")
 
-    print(f"\n  Total: {len(decks)} deck(s) available")
-    print("\n" + "─" * 70)
+    print("\n" + "-" * 70)
 
     while True:
         try:
-            choice = input("\nWhich deck do you want to convert to PowerPoint? (enter number or name): ").strip()
+            choice = input("\nWhich deck to convert? (number or name): ").strip()
 
-            # Try as number first
             if choice.isdigit():
                 idx = int(choice) - 1
                 if 0 <= idx < len(decks):
                     return decks[idx]
 
-            # Try as name
             if choice in decks:
                 return choice
 
-            # Try with .md extension added
             if not choice.endswith('.md'):
-                choice_with_ext = choice + '.md'
-                if choice_with_ext in decks:
-                    return choice_with_ext
+                if choice + '.md' in decks:
+                    return choice + '.md'
 
-            print(f"❌ Invalid choice. Please enter 1-{len(decks)} or a deck name.")
+            print(f"Invalid choice. Enter 1-{len(decks)} or a deck name.")
 
         except KeyboardInterrupt:
-            print("\n\n👋 Cancelled by user")
+            print("\n\nCancelled.")
             sys.exit(0)
 
 
-def strip_marp_frontmatter(content):
-    """
-    Remove Marp YAML frontmatter that confuses pandoc
-
-    Marp uses frontmatter for styling, but Pandoc doesn't need it
-    """
-    lines = content.split('\n')
-    if lines[0].strip() == '---':
-        # Find closing ---
-        for i in range(1, min(len(lines), 20)):  # Check first 20 lines
-            if lines[i].strip() == '---':
-                # Remove frontmatter, keep rest
-                return '\n'.join(lines[i+1:])
-    return content
-
-
-def convert_slide_breaks(content):
-    """
-    Convert Marp slide breaks (---) to pandoc slide breaks
-
-    Ensures proper slide separation in PowerPoint
-    """
-    lines = content.split('\n')
-    result = []
-
-    for i, line in enumerate(lines):
-        # If line is just --- (slide separator)
-        if line.strip() == '---':
-            # Add proper pandoc slide break (horizontal rule with blank lines)
-            result.append('')
-            result.append('---')
-            result.append('')
-        else:
-            result.append(line)
-
-    return '\n'.join(result)
-
-
-def fix_image_paths(content, base_dir):
-    """
-    Convert relative image paths to absolute paths for pandoc
-    Removes images that can't be found to prevent conversion errors
-
-    Pandoc needs absolute paths to find images correctly
-    """
-    missing_images = []
-
-    def replace_path(match):
-        alt_text = match.group(1)
-        img_path = match.group(2)
-
-        # Skip URLs
-        if img_path.startswith('http://') or img_path.startswith('https://'):
-            return match.group(0)
-
-        # List of paths to try
-        paths_to_try = [
-            os.path.join(base_dir, img_path),
-            os.path.join(base_dir, img_path.lstrip('../')),
-            os.path.join(base_dir, 'assets', os.path.basename(img_path)),
-            os.path.join(base_dir, 'outputs', img_path),
-            os.path.join(base_dir, 'outputs', img_path.lstrip('../')),
-        ]
-
-        # Also try relative to outputs folder
-        if img_path.startswith('../'):
-            paths_to_try.append(os.path.join(base_dir, img_path.replace('../', '')))
-
-        for test_path in paths_to_try:
-            if os.path.exists(test_path):
-                abs_path = os.path.abspath(test_path)
-                return f'![{alt_text}]({abs_path})'
-
-        # Image not found - remove it to prevent pandoc error
-        missing_images.append(img_path)
-        return f'<!-- Image not found: {img_path} -->'
-
-    result = re.sub(r'!\[([^\]]*)\]\(([^)]+)\)', replace_path, content)
-
-    if missing_images:
-        print(f"   Note: {len(missing_images)} image(s) not found and skipped")
-
-    return result
-
-
-def convert_to_pptx(md_file, base_dir, reference_template=None, skip_confirmation=False):
-    """
-    MAIN FUNCTION: Convert markdown file to PowerPoint using pandoc
-
-    This is the converter that creates editable PowerPoint files
-    """
-
-    # Check if pandoc is installed
-    if not check_pandoc_installed():
-        print("\n" + "=" * 70)
-        print("              PANDOC NOT FOUND")
-        print("=" * 70)
-        print("\nPandoc is required to convert to PowerPoint.")
-
-        # Offer to install automatically
-        try:
-            response = input("\nWould you like me to install it now? [Y/n]: ").strip().lower()
-            if response in ['', 'y', 'yes']:
-                if install_pandoc():
-                    # Check again after installation
-                    if check_pandoc_installed():
-                        print("\nPandoc ready! Continuing with conversion...\n")
-                    else:
-                        print("\nInstallation completed but pandoc not found in PATH.")
-                        print("Please restart your terminal and try again.")
-                        return False
-                else:
-                    print("\n" + "-" * 70)
-                    print("\nManual installation options:")
-                    print("   Mac:     brew install pandoc")
-                    print("   Linux:   sudo apt install pandoc")
-                    print("   Windows: https://pandoc.org/installing.html")
-                    print("\nOR use PDF export instead (recommended!):")
-                    print("   marp outputs/your-deck.md --no-config --theme fastr-theme.css --pdf --allow-local-files")
-                    return False
-            else:
-                print("\nOR use PDF export instead (recommended!):")
-                print("   marp outputs/your-deck.md --no-config --theme fastr-theme.css --pdf --allow-local-files")
-                return False
-        except KeyboardInterrupt:
-            print("\n\nCancelled.")
-            return False
-
-    # Get full path to markdown file
-    if not md_file.startswith('/'):
-        md_file = os.path.join(base_dir, md_file)
-
-    # Check if markdown file exists
-    if not os.path.exists(md_file):
-        print(f"\n❌ Error: File not found: {md_file}")
-        print(f"\n💡 Make sure you've built a deck first:")
-        print(f"   python3 tools/02_build_deck.py --workshop YOUR-WORKSHOP")
-        return False
-
-    # Show what we're converting
-    print("\n" + "═" * 70)
-    print("           CONVERTING TO POWERPOINT")
-    print("═" * 70)
-
-    file_size = os.path.getsize(md_file) / 1024
-    print(f"\n📄 Input:  {os.path.basename(md_file)} ({file_size:.1f} KB)")
-
-    # Confirm conversion (unless skipped)
-    if not skip_confirmation:
-        print("\n⚠️  Reminder: PDF export is recommended for better results!")
-        print("   PowerPoint may require manual font/layout adjustments.")
-        print("\n" + "─" * 70)
-        response = input("\n➤ Continue with PowerPoint conversion? [y/N]: ").strip().lower()
-        if response not in ['y', 'yes']:
-            print("\n💡 Using PDF instead:")
-            print(f"   marp {md_file} --no-config --theme fastr-theme.css --pdf --allow-local-files")
-            print("\n👋 Conversion cancelled")
-            return False
-
-    # Read and process markdown
-    print(f"\n🔧 Step 1: Processing markdown...")
-    with open(md_file, 'r', encoding='utf-8') as f:
-        content = f.read()
-
-    # Get absolute directory for fixing paths
-    md_dir = os.path.dirname(os.path.abspath(md_file))
-
-    # Strip frontmatter, convert slide breaks, and fix image paths
-    print(f"   ✓ Removing Marp frontmatter")
-    cleaned_content = strip_marp_frontmatter(content)
-
-    print(f"   ✓ Converting slide breaks")
-    cleaned_content = convert_slide_breaks(cleaned_content)
-
-    print(f"   ✓ Fixing image paths")
-    cleaned_content = fix_image_paths(cleaned_content, base_dir)
-
-    # Create temp file without frontmatter
-    temp_file = md_file.replace('.md', '_temp.md')
-    with open(temp_file, 'w', encoding='utf-8') as f:
-        f.write(cleaned_content)
-
-    # Build output filename
-    pptx_file = md_file.replace('.md', '.pptx')
-
-    # Determine which reference template to use
-    reference_msg = ""
-    if reference_template and os.path.exists(reference_template):
-        reference_doc = reference_template
-        reference_msg = f"custom template: {os.path.basename(reference_template)}"
-    else:
-        reference_doc = None
-        reference_msg = "default Pandoc styling"
-
-    print(f"\n🎨 Step 2: Applying template...")
-    print(f"   ✓ Using {reference_msg}")
-
-    # Build pandoc command
-    cmd = [
-        'pandoc', temp_file,
-        '-f', 'markdown-yaml_metadata_block',
-        '-t', 'pptx',
-        '--resource-path', md_dir,
-        '-o', pptx_file
-    ]
-
-    if reference_doc:
-        cmd.extend(['--reference-doc', reference_doc])
-
-    # Run conversion
-    print(f"\n🔨 Step 3: Converting to PowerPoint...")
-    try:
-        result = subprocess.run(cmd, check=True, capture_output=True, text=True)
-
-        output_size = os.path.getsize(pptx_file) / 1024
-
-        print("\n" + "═" * 70)
-        print("                    ✅ SUCCESS!")
-        print("═" * 70)
-        print(f"\n📊 Output: {os.path.basename(pptx_file)} ({output_size:.1f} KB)")
-        print(f"   Location: {pptx_file}")
-
-        print(f"\n⚠️  IMPORTANT: Check your PowerPoint file!")
-        print(f"   You may need to:")
-        print(f"   1. Adjust font sizes (View → Slide Master)")
-        print(f"   2. Fix any layout issues")
-        print(f"   3. Verify FASTR teal color (#0f706d)")
-
-        print(f"\n💡 To avoid manual fixes, use PDF:")
-        print(f"   marp {md_file} --no-config --theme fastr-theme.css --pdf --allow-local-files")
-
-        print("\n" + "═" * 70 + "\n")
-
-        return True
-
-    except subprocess.CalledProcessError as e:
-        print(f"\n❌ Conversion failed!")
-        if e.stderr:
-            print(f"   Error: {e.stderr}")
-        print(f"\n💡 Try PDF export instead:")
-        print(f"   marp {md_file} --no-config --theme fastr-theme.css --pdf --allow-local-files")
-        return False
-
-    finally:
-        # Clean up temp file
-        if os.path.exists(temp_file):
-            os.remove(temp_file)
-
-
 def main():
-    """
-    Main entry point
-
-    Handles both interactive mode and command-line arguments
-    """
-
-    # Determine base directory (parent of tools/)
+    """Main entry point."""
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    base_dir = os.path.dirname(script_dir)  # Go up one level from tools/
+    base_dir = os.path.dirname(script_dir)
 
-    # Check if user provided command-line arguments
     if len(sys.argv) > 1 and not sys.argv[1].startswith('-'):
-        # ═══════════════════════════════════════════════════════════════
-        # COMMAND LINE MODE
-        # ═══════════════════════════════════════════════════════════════
-
+        # Command line mode
         parser = argparse.ArgumentParser(
-            description="Convert markdown to editable PowerPoint using pandoc",
-            formatter_class=argparse.RawDescriptionHelpFormatter,
-            epilog="""
-Examples:
-  python3 tools/03_convert_pptx.py outputs/example_deck.md
-  python3 tools/03_convert_pptx.py outputs/my_deck.md --reference custom.pptx
-
-Note: PDF export is recommended over PowerPoint!
-  marp outputs/deck.md --no-config --theme fastr-theme.css --pdf --allow-local-files
-
-For more help, see: docs/building-decks.md
-            """
+            description="Convert Marp markdown to PowerPoint with FASTR styling"
         )
-
-        parser.add_argument(
-            'markdown_file',
-            help='Markdown file to convert to PowerPoint'
-        )
-
-        parser.add_argument(
-            '--reference',
-            type=str,
-            help='Custom PowerPoint reference template for styling'
-        )
+        parser.add_argument('markdown_file', help='Markdown file to convert')
+        parser.add_argument('--output', '-o', help='Output PPTX filename')
 
         args = parser.parse_args()
 
-        # Convert the file (skip confirmation in command-line mode)
-        success = convert_to_pptx(args.markdown_file, base_dir, args.reference, skip_confirmation=True)
+        md_file = args.markdown_file
+        if not md_file.startswith('/'):
+            md_file = os.path.join(base_dir, md_file)
+
+        success = convert_to_pptx(md_file, base_dir, args.output)
         sys.exit(0 if success else 1)
 
     else:
-        # ═══════════════════════════════════════════════════════════════
-        # INTERACTIVE MODE (No file specified)
-        # ═══════════════════════════════════════════════════════════════
-
-        print("\n" + "═" * 70)
+        # Interactive mode
+        print("\n" + "=" * 70)
         print("         FASTR POWERPOINT CONVERTER")
-        print("            (Interactive Mode)")
-        print("═" * 70)
+        print("=" * 70)
 
-        # Remind about PDF
-        print("\n⚠️  Reminder: PDF is the RECOMMENDED export format!")
-        print("   PowerPoint requires manual adjustments after export.")
-        print("\n💡 To use PDF instead (easier, better results):")
-        print("   marp outputs/your-deck.md --no-config --theme fastr-theme.css --pdf --allow-local-files")
-
-        # Prompt user to select a deck
         deck_file = prompt_for_deck(base_dir)
+        deck_path = os.path.join(base_dir, "outputs", deck_file)
 
-        # Convert it!
-        deck_path = os.path.join("outputs", deck_file)
-        success = convert_to_pptx(deck_path, base_dir, skip_confirmation=False)
+        success = convert_to_pptx(deck_path, base_dir)
         sys.exit(0 if success else 1)
 
 
