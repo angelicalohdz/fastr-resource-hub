@@ -3,7 +3,6 @@
 
 # Résumé exécutif
 
-Need Review
 
 ## Suivi de l'utilisation des services SRMNIA-N avec FASTR
 
