@@ -2,6 +2,8 @@
 
 # Executive summary
 
+> **Note:** Content in this section is subject to revision.
+
 ## FASTR RMNCAH-N service use monitoring
 
 This documentation describes the FASTR approach to monitoring reproductive, maternal, newborn, child, and adolescent health and nutrition (RMNCAH-N) service delivery using routine health management information system (HMIS) data. The methodology guides users through an end-to-end process: from defining priority questions and extracting data, through platform-based analysis, to communicating results for decision-making.
