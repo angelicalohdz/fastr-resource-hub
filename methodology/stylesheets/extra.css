@@ -363,6 +363,37 @@ img {
 }
 
 /* ========================================
+   LANGUAGE SELECTOR
+   ======================================== */
+/* Language selector dropdown */
+.md-select__inner {
+  background-color: #ffffff;
+}
+
+.md-select__link {
+  color: var(--fastr-navy) !important;
+}
+
+.md-select__link:hover {
+  color: var(--fastr-deep-green) !important;
+  background-color: var(--fastr-light-blue);
+}
+
+/* Dark mode language selector */
+[data-md-color-scheme="slate"] .md-select__inner {
+  background-color: #2e303e;
+}
+
+[data-md-color-scheme="slate"] .md-select__link {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+[data-md-color-scheme="slate"] .md-select__link:hover {
+  color: #ffffff !important;
+  background-color: var(--fastr-deep-green);
+}
+
+/* ========================================
    SEARCH
    ======================================== */
 mark {
