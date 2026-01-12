@@ -1178,14 +1178,6 @@ paginate: true
 {ns_bullets}
 
 ---
-
-## Contact
-
-For questions or support:
-- **Email:** fastr@worldbank.org
-- **Resources:** [FASTR Resource Hub](https://fastr-analytics.github.io/fastr-resource-hub/)
-
----
 """
     with open(os.path.join(workshop_dir, "99_next-steps.md"), 'w') as f:
         f.write(nextsteps_content)

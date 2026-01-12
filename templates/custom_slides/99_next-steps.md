@@ -40,11 +40,3 @@ paginate: true
 - **Institutionalization:** [How to make this sustainable]
 
 ---
-
-## Questions & Discussion
-
-**Contact:** {{CONTACT_EMAIL}}
-
-**Resources:** {{WEBSITE}}
-
----
