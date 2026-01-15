@@ -6,7 +6,6 @@ paginate: true
 
 ## Preparing for data extraction
 
-*Content to be developed*
 
 This section will cover:
 - Pre-extraction checklist
