@@ -8,23 +8,45 @@ It allows users to upload and analyze data from various sources, including DHIS2
 
 The platform provides a user-friendly interface for running analyses and offers flexible options for visualizing and exporting results.
 
-This section will cover the complete process of working with the FASTR analytics platform:
+This section will cover the complete process of working with the FASTR analytics platform.
 
-1. **Overview of the platform** - Introduction to the FASTR analytics platform, key features and capabilities, how the platform supports the FASTR methodology
+### FASTR User Guide:
 
-2. **Accessing the platform** - Creating accounts, signing in, user permissions and roles
+#### 0.1 Platform overview
+Introduction to the FASTR analytics platform, key features and capabilities
 
-3. **Setting up the structure** - Configuring admin areas (regions, districts), setting up facilities, defining indicators
+0.1 Landing page tour <iframe src="https://scribehow.com/embed/01_Landing_page_tour__Ixq2SHWYShuwaxBwQMJWMA" width="800" height="679" allow="fullscreen" style="aspect-ratio: 1 / 1; border: 0; min-height: 480px"></iframe>
 
-4. **Importing a dataset** - Data format requirements, import process, validation and error handling
+#### 1.0 Accessing the FASTR analytics platform
+Creating accounts, signing in, user permissions and roles
 
-5. **Installing and running modules** - Available analysis modules, module installation, running analyses
+1.1 Requesting a country instance 
+To request a country instance, contact Ashley Sheffel at asheffel@worldbank.org  
+1.2 Creating a FASTR Analytics platform account <iframe src="https://scribehow.com/embed/12_Creating_a_FASTR_Analytics_platform_account__9Av54dcqRTK1XkP1mYAc_g" width="800" height="679" allow="fullscreen" style="aspect-ratio: 1 / 1; border: 0; min-height: 480px"></iframe>
+1.3 Signing into the platform <iframe src="https://scribehow.com/embed/13_Signing_into_the_platform__ICDGCqyIQ6SxAcK4RKou7g" width="800" height="679" allow="fullscreen" style="aspect-ratio: 1 / 1; border: 0; min-height: 480px"></iframe>
+1.4 Access FAQ
 
-6. **Creating a new project** - Project setup workflow, configuration options, best practices
+#### 2.0 Modules
+Understanding modules, Available analysis modules, module installation, running analyses
 
-7. **Creating visualizations** - Available chart types, customization options, exporting visualizations
+#### 3.0 Visualizations
+Available chart types, customization options, exporting visualizations
 
-8. **Creating reports** - Report templates, automated report generation, customizing reports
+#### 4.0 Reports
+Report templates, automated report generation, customizing reports
+
+#### 5.0 Administration: General
+Configuring admin areas (regions, districts), setting up facilities, defining indicators 
+
+#### 6.0 Administration: Data management
+Data format requirements, import process, validation and error handling
+
+#### 7.0  Administration: Projects
+Project setup workflow, configuration options, best practices
+
+#### 8.0  Administration: Modules
+Available analysis modules, module installation, running analyses
+
 
 ---
 
