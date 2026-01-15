@@ -188,13 +188,9 @@ This section will cover:
 
 <!-- SLIDE:m1_2 -->
 ## Development of a data use case
-
-
-
 This section will cover:
-- Co-creation workshop approach with MoH and stakeholders
 - Data use case development guidance
-- Example use cases from country implementations
+- Example use cases
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_2a -->
