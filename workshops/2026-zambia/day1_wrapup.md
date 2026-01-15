@@ -14,13 +14,3 @@ Today we covered:
 - Initial platform configuration for Zambia
 
 ---
-
-# Looking Ahead to Day 2
-
-Tomorrow we will focus on:
-
-- Creating your first project in the platform
-- Building visualizations from your data
-- Generating reports for decision-making
-
----

@@ -14,14 +14,3 @@ Today we covered:
 - Action planning for continued platform use
 
 ---
-
-# Looking Ahead to Day 4
-
-Tomorrow we will focus on:
-
-- Overview of the FASTR HFA phone survey
-- Reviewing the questionnaire structure
-- Adapting the questionnaire for Zambia
-- Planning HFA priorities and data use
-
----

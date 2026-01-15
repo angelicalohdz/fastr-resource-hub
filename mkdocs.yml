@@ -100,6 +100,11 @@ theme:
 # Plugins
 plugins:
   - strip-slides  # Remove slide content from docs (content between <!-- SLIDE:xxx --> markers)
+  - exclude:
+      glob:
+        - 07_results_communication.md
+        - 08_survey_hfa.md
+        - executive_summary*.md
   - search:
       separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
       lang: en

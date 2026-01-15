@@ -10,17 +10,28 @@ paginate: true
 
 ## Outliers: Spotting suspicious numbers
 
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1; font-size: 0.75em;">
+
 **What we're checking:**
 Are there any values that seem way too high compared to what that facility normally reports?
 
 **Real example:**
 - Health Center A normally reports 20-25 deliveries per month
 - In March, they reported 450 deliveries
-- **This is likely a data entry error** (maybe they typed an extra digit, or reported cumulative instead of monthly)
+- **This is likely a data entry error**
 
 **Why it matters:**
 - One extreme value can make it look like there was a huge service increase
-- Skews totals and trends for the whole district or province
+- Skews totals and trends for the whole region
+
+</div>
+<div style="flex: 2;">
+
+![Outlier Impact](../../resources/diagrams/outlier_impact.svg)
+
+</div>
+</div>
 
 ---
 

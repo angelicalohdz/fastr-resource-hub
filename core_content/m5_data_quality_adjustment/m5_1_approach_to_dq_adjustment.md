@@ -6,24 +6,20 @@ paginate: true
 
 ## Approach to data quality adjustment
 
-The Data Quality Adjustment module (Module 2 in the FASTR analytics platform) systematically corrects two common problems in routine health facility data:
-
-1. **Outliers** - extreme values caused by reporting errors or data entry mistakes
-2. **Missing data** - from incomplete reporting
-
-Rather than simply deleting problematic data, this module replaces questionable values with statistically sound estimates based on each facility's own historical patterns.
+The FASTR analytics platform provides an option for adjusting data for outliers, indicator completeness, or both.
 
 ---
 
-### Four adjustment scenarios
+## Adjustment for outliers
 
-The module produces four parallel versions of the data:
+The FASTR approach makes adjustment to service volume to replace outlier values (recommended).
 
-| Scenario | Description |
-|----------|-------------|
-| **None** | Original data, no adjustments |
-| **Outliers only** | Only outlier corrections applied |
-| **Completeness only** | Only missing data filled in |
-| **Both** | Both types of corrections applied |
+Each individual outlier is replaced by the mean volume, excluding any outlier values, of services delivered for the same indicator and the same month but amongst facilities of the same type within the same admin area (province, district, and/or state).
 
-This allows analysts to understand how sensitive their results are to different data quality assumptions.
+---
+
+## Adjustment for completeness
+
+The FASTR approach allows for adjustment to service volume to replace missing/incomplete values (optional).
+
+Each incomplete/missing value is replaced by the mean volume of services delivered for the same indicator and same facility, calculated as a rolling average of the 12 months surrounding the missing point and excluding any outliers or missing values.

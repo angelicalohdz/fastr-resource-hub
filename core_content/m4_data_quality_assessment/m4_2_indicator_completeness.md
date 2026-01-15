@@ -10,17 +10,23 @@ paginate: true
 
 ## Completeness: Did we get reports?
 
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1; font-size: 0.75em;">
+
 **What we're checking:**
 Each month, are facilities sending in their reports?
-
-**Example:**
-- District has 20 health centers
-- In March, only 15 sent ANC data
-- **Completeness = 75%** (15 out of 20 reported)
 
 **Why it matters:**
 - If many facilities don't report, we're missing part of the picture
 - Trends might look like services dropped, when really facilities just didn't report
+
+</div>
+<div style="flex: 2;">
+
+![Completeness Illustration](../../resources/diagrams/completeness_illustration.svg)
+
+</div>
+</div>
 
 ---
 

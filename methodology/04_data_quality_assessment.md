@@ -1518,6 +1518,14 @@ The module follows this sequence:
 ////////////////////////////////////////////////////////////////////
 -->
 
+<!-- SLIDE:m4_0 -->
+## FASTR Analytical Pipeline
+
+![Analytical Pipeline](resources/diagrams/analytical_pipeline.svg)
+
+The components are interdependent: first assess data quality, then apply adjustments, then use the adjusted data for analysis.
+<!-- /SLIDE -->
+
 <!-- SLIDE:m4_1 -->
 ## Data quality assessment
 
@@ -1537,6 +1545,21 @@ Understanding the reliability of routine health data
 - Resources might go to the wrong places
 
 **FASTR's solution:** Check data quality systematically, fix what we can, and be transparent about limitations
+
+---
+
+## Objectives of FASTR Data Quality Assessment
+
+**Objective 1: Analytical adjustment**
+
+Assessing data quality allows you to adjust for data quality issues, improving the ability to use DHIS2 data for decision-making
+
+**Objective 2: Monitor data quality over time**
+
+Key learning questions include:
+- **What is the quality of data for different indicators in DHIS2?** (can inform indicators you select for analysis)
+- **Which areas report higher vs. lower quality data?** (can inform targeted data quality validation and supportive supervision)
+- **How has data quality improved over time?** (can assess the result of data quality investments, training, etc.)
 
 ---
 ## Three simple questions about data quality
@@ -1560,17 +1583,23 @@ These three questions help us understand if we can trust the data for decision-m
 
 ## Completeness: Did we get reports?
 
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1; font-size: 0.75em;">
+
 **What we're checking:**
 Each month, are facilities sending in their reports?
-
-**Example:**
-- District has 20 health centers
-- In March, only 15 sent ANC data
-- **Completeness = 75%** (15 out of 20 reported)
 
 **Why it matters:**
 - If many facilities don't report, we're missing part of the picture
 - Trends might look like services dropped, when really facilities just didn't report
+
+</div>
+<div style="flex: 2;">
+
+![Completeness Illustration](../resources/diagrams/completeness_illustration.svg)
+
+</div>
+</div>
 
 ---
 
@@ -1599,17 +1628,28 @@ Each month, are facilities sending in their reports?
 
 ## Outliers: Spotting suspicious numbers
 
+<div style="display: flex; gap: 1em;">
+<div style="flex: 1; font-size: 0.75em;">
+
 **What we're checking:**
 Are there any values that seem way too high compared to what that facility normally reports?
 
 **Real example:**
 - Health Center A normally reports 20-25 deliveries per month
 - In March, they reported 450 deliveries
-- **This is likely a data entry error** (maybe they typed an extra digit, or reported cumulative instead of monthly)
+- **This is likely a data entry error**
 
 **Why it matters:**
 - One extreme value can make it look like there was a huge service increase
-- Skews totals and trends for the whole district or province
+- Skews totals and trends for the whole region
+
+</div>
+<div style="flex: 2;">
+
+![Outlier Impact](resources/diagrams/outlier_impact.svg)
+
+</div>
+</div>
 
 ---
 

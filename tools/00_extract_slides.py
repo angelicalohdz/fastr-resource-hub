@@ -102,6 +102,7 @@ TOPIC_NAMES = {
     'm3_8': 'creating_reports',
 
     # m4 - Data Quality Assessment (from 04_data_quality_assessment.md)
+    'm4_0': 'fastr_methods_overview',
     'm4_1': 'approach_to_dqa',
     'm4_2': 'indicator_completeness',
     'm4_3': 'outliers',

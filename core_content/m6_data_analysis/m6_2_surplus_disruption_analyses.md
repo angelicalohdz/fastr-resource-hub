@@ -4,24 +4,30 @@ theme: fastr
 paginate: true
 ---
 
-## Surplus and disruption analyses
+## Disruption analysis
 
-The module detects multiple types of service disruptions:
+Beyond simple trends, FASTR can detect and quantify service disruptions.
 
-| Disruption Type | Description |
-|----------------|-------------|
-| **Sharp disruptions** | Single months with extreme deviations |
-| **Sustained drops** | Gradual declines over several months |
-| **Sustained dips** | Periods consistently below expected levels |
-| **Sustained rises** | Periods consistently above expected levels |
-| **Missing data patterns** | Gaps in reporting that may signal problems |
+**How it works:**
+1. Model expected service volumes based on historical patterns and seasonality
+2. Compare actual volumes to expected volumes
+3. Quantify shortfalls or surpluses in absolute numbers
 
 ---
 
-### Quantifying impact
+## Types of disruptions detected
 
-Disruption analysis quantifies shortfalls and surpluses by comparing:
-- **Predicted volumes** (what would have happened without disruption)
-- **Actual volumes** (what was observed)
+| Type | What it captures |
+|------|------------------|
+| **Sharp disruptions** | Single months with extreme deviations |
+| **Sustained drops** | Gradual declines over several months |
+| **Sustained dips** | Periods consistently below expected |
+| **Sustained rises** | Periods consistently above expected |
 
-Results are reported in absolute numbers and percentages at each geographic level.
+---
+
+## Disruption outputs
+
+**Actual vs expected at national level**
+
+![Actual vs expected national](../../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)

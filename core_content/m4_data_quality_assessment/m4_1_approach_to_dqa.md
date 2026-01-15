@@ -24,6 +24,21 @@ Understanding the reliability of routine health data
 **FASTR's solution:** Check data quality systematically, fix what we can, and be transparent about limitations
 
 ---
+
+## Objectives of FASTR Data Quality Assessment
+
+**Objective 1: Analytical adjustment**
+
+Assessing data quality allows you to adjust for data quality issues, improving the ability to use DHIS2 data for decision-making
+
+**Objective 2: Monitor data quality over time**
+
+Key learning questions include:
+- **What is the quality of data for different indicators in DHIS2?** (can inform indicators you select for analysis)
+- **Which areas report higher vs. lower quality data?** (can inform targeted data quality validation and supportive supervision)
+- **How has data quality improved over time?** (can assess the result of data quality investments, training, etc.)
+
+---
 ## Three simple questions about data quality
 
 **1. Are facilities reporting regularly?**

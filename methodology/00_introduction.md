@@ -154,10 +154,6 @@ The FASTR analytics platform includes four automated modules:
 - [**Service utilization analysis**](06a_service_utilization.md) - Module 3 in the platform. Analysis of health service usage patterns to detect and quantify disruptions
 - [**Coverage estimates**](06b_coverage_estimates.md) - Module 4 in the platform. Methods for estimating service coverage and comparing trends to country targets
 
-### Results & communication
-
-- [**Results communication and data use**](07_results_communication.md) - Interpreting findings, data visualization, and using data for decision-making
-
 ## References
 
 \full_bibliography

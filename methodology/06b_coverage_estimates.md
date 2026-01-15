@@ -1774,6 +1774,56 @@ The Coverage Estimates module (Module 4 in the FASTR analytics platform) estimat
 - Generate final coverage estimates
 <!-- /SLIDE -->
 
+<!-- SLIDE:m6_4a -->
+## What is service coverage?
+
+**Coverage** answers: *What percentage of the target population received this health service?*
+
+![Coverage equation](resources/diagrams/coverage_equation.svg)
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_4b -->
+## Types of denominators for FASTR core analysis
+
+| Type of service | Denominator |
+|-----------------|-------------|
+| ANC | Pregnancies |
+| Delivery | Live births |
+| BCG | Live births |
+| Penta1 | Infants eligible for Penta (infants surviving 1+ months) |
+| Penta3 | Infants eligible for Penta (infants surviving 1+ months) |
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_4c -->
+## Expected relationships which help with estimating denominators
+
+Starting from pregnancies, apply demographic factors to estimate other denominators:
+
+![Denominator cascade flowchart](resources/diagrams/denominator_cascade.svg)
+<!-- /SLIDE -->
+
+<!-- SLIDE:m6_4d -->
+## Estimating denominators from ANC-1
+
+If ANC-1 coverage is known from survey data, we can derive other denominators:
+
+**Example calculation:**
+- ANC-1 count from DHIS2: **100,000**
+- Survey ANC-1 coverage: **95%**
+- Estimated pregnancies = 100,000 ÷ 0.95 = **105,263**
+
+**Applying the cascade:**
+
+| Step | Calculation | Result |
+|------|-------------|--------|
+| Pregnancies | 100,000 ÷ 0.95 | 105,263 |
+| Deliveries | 105,263 × (1 - 0.03) | 102,105 |
+| Births | 102,105 × (1 + 0.015) | 103,637 |
+| Live births | 103,637 × (1 - 0.02) | 101,564 |
+| DPT-eligible | 101,564 × (1 - 0.03) | 98,517 |
+| Measles-eligible | 98,517 × (1 - 0.02) | 96,547 |
+<!-- /SLIDE -->
+
 <!-- SLIDE:m6_5 -->
 ## Coverage estimates: FASTR outputs
 

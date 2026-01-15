@@ -6,22 +6,45 @@ paginate: true
 
 ## Service utilization analysis
 
-The Service Utilization module (Module 3 in the FASTR analytics platform) analyzes health service delivery patterns to detect and quantify disruptions in service volumes over time.
+Monitoring changes in the volume of priority health services over time.
 
-**Key capabilities:**
-- Identifies when health services deviate significantly from expected patterns
-- Measures magnitude of disruptions at national, provincial, and district levels
-- Distinguishes normal fluctuations from genuine disruptions requiring investigation
+> **Example question:** How has ANC1 utilization changed from 2020 to 2024? Which regions have seen the greatest increases or declines?
 
 ---
 
-### Two-stage analysis process
+## What we assess
 
-**Part 1: Control chart analysis**
-- Model expected patterns using historical trends and seasonality
-- Detect significant deviations from expected volumes
-- Flag disrupted periods
+**Service utilization trends:**
+- Absolute yearly/quarterly volume for selected services
+- Percent change over time
+- Comparison across regions
 
-**Part 2: Disruption quantification**
-- Use panel regression to estimate service volume changes
-- Calculate shortfalls and surpluses in absolute numbers
+Any year with more than a **10% change** compared to the previous year is flagged for review.
+
+Data can use: raw values, outlier-adjusted, completeness-adjusted, or both adjustments.
+
+---
+
+## Service utilization: FASTR outputs
+
+**Change in service volume over time**
+
+![Change in service volume](../../resources/default_outputs/Module3_1_Change_in_service_volume.png)
+
+---
+
+## Service utilization: Subnational
+
+**Comparing volumes across regions**
+
+![Actual vs expected subnational](../../resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
+
+---
+
+## DHIS2 vs FASTR comparison
+
+| Aspect | DHIS2 | FASTR |
+|--------|-------|-------|
+| **Data quality** | Raw data | Adjusts for outliers and/or completeness |
+| **Visualization** | Standard trend charts | Percent change to flag meaningful fluctuations |
+| **Analysis** | Trends only | Trends + disruption quantification |

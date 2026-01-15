@@ -88,10 +88,10 @@ class Colors:
 class Fonts:
     """Font settings"""
     FAMILY = 'Arial'  # Universal fallback
-    H1_SIZE = Pt(40)
-    H2_SIZE = Pt(32)
-    H3_SIZE = Pt(24)
-    BODY_SIZE = Pt(18)
+    H1_SIZE = Pt(32)   # Reduced from Pt(40) to prevent underline overlap
+    H2_SIZE = Pt(26)   # Reduced from Pt(32) to prevent underline overlap
+    H3_SIZE = Pt(22)
+    BODY_SIZE = Pt(16)
     TABLE_SIZE = Pt(14)
     SMALL_SIZE = Pt(12)
 
@@ -158,10 +158,12 @@ def parse_markdown(content):
             slide['css_class'] = class_match.group(1)
             raw = re.sub(r'<!--\s*_class:\s*\w+\s*-->', '', raw)
 
-        # Extract headers
+        # Extract headers (strip HTML tags like <img>)
         for match in re.finditer(r'^(#{1,6})\s+(.+)$', raw, re.MULTILINE):
             level = len(match.group(1))
             text = match.group(2).strip()
+            # Strip HTML tags from headers
+            text = re.sub(r'<[^>]+>', '', text).strip()
             slide['headers'].append((level, text))
 
         # Extract images ![alt](path)
@@ -169,6 +171,13 @@ def parse_markdown(content):
             slide['images'].append({
                 'alt': match.group(1),
                 'path': match.group(2).split()[0]  # Remove any title
+            })
+
+        # Extract HTML images <img src="path">
+        for match in re.finditer(r'<img\s+[^>]*src=["\']([^"\']+)["\']', raw):
+            slide['images'].append({
+                'alt': '',
+                'path': match.group(1)
             })
 
         # Extract table
@@ -389,6 +398,57 @@ def style_paragraph(para, font_size, color, bold=False, italic=False):
     para.font.name = Fonts.FAMILY
 
 
+def strip_html_tags(text):
+    """Remove HTML tags from text (img, div, span, etc.)."""
+    # Remove <img ...> tags
+    text = re.sub(r'<img\s+[^>]*/?>', '', text)
+    # Remove other common HTML tags but keep content
+    text = re.sub(r'</?(?:div|span|p|br|a)[^>]*>', '', text)
+    return text.strip()
+
+
+def add_formatted_text(paragraph, text, font_size, color):
+    """
+    Parse markdown formatting and add styled runs to paragraph.
+    Handles **bold**, *italic*, and `code` formatting.
+    """
+    # Clear any existing text
+    paragraph.clear()
+
+    # Strip HTML tags first (icons show as <img...> otherwise)
+    text = strip_html_tags(text)
+
+    # Pattern to match **bold**, *italic*, `code`, or plain text
+    # Use non-greedy matching
+    pattern = r'(\*\*[^*]+\*\*|\*[^*]+\*|`[^`]+`|[^*`]+)'
+
+    for match in re.finditer(pattern, text):
+        segment = match.group(1)
+        if not segment:
+            continue
+
+        run = paragraph.add_run()
+        run.font.size = font_size
+        run.font.color.rgb = color
+        run.font.name = Fonts.FAMILY
+
+        if segment.startswith('**') and segment.endswith('**'):
+            # Bold text
+            run.text = segment[2:-2]
+            run.font.bold = True
+        elif segment.startswith('*') and segment.endswith('*') and not segment.startswith('**'):
+            # Italic text
+            run.text = segment[1:-1]
+            run.font.italic = True
+        elif segment.startswith('`') and segment.endswith('`'):
+            # Code text
+            run.text = segment[1:-1]
+            run.font.name = 'Courier New'
+        else:
+            # Plain text
+            run.text = segment
+
+
 def add_text_box(slide, left, top, width, height, text, font_size, color,
                  bold=False, align=PP_ALIGN.LEFT, anchor=MSO_ANCHOR.TOP):
     """Add a styled text box to slide."""
@@ -420,15 +480,15 @@ def add_h1_with_underline(slide, text, top=None):
     title_shape = add_text_box(
         slide,
         Layout.MARGIN_LEFT, top,
-        Layout.CONTENT_WIDTH, Inches(0.8),
+        Layout.CONTENT_WIDTH, Inches(0.55),
         text, Fonts.H1_SIZE, Colors.DEEP_GREEN, bold=True
     )
 
-    # Add underline
+    # Add underline - positioned below the text box
     underline = slide.shapes.add_shape(
         MSO_SHAPE.RECTANGLE,
-        Layout.MARGIN_LEFT, top + Inches(0.7),
-        Inches(6), Inches(0.06)
+        Layout.MARGIN_LEFT, top + Inches(0.5),
+        Inches(5), Inches(0.05)
     )
     underline.fill.solid()
     underline.fill.fore_color.rgb = Colors.LIME
@@ -442,14 +502,14 @@ def add_h2_with_underline(slide, text, top):
     title_shape = add_text_box(
         slide,
         Layout.MARGIN_LEFT, top,
-        Layout.CONTENT_WIDTH, Inches(0.6),
+        Layout.CONTENT_WIDTH, Inches(0.45),
         text, Fonts.H2_SIZE, Colors.NAVY, bold=True
     )
 
     underline = slide.shapes.add_shape(
         MSO_SHAPE.RECTANGLE,
-        Layout.MARGIN_LEFT, top + Inches(0.55),
-        Inches(5), Inches(0.04)
+        Layout.MARGIN_LEFT, top + Inches(0.42),
+        Inches(4), Inches(0.04)
     )
     underline.fill.solid()
     underline.fill.fore_color.rgb = Colors.BLUE
@@ -459,14 +519,14 @@ def add_h2_with_underline(slide, text, top):
 
 
 def add_bullet_list(slide, bullets, left, top, width, font_size=None):
-    """Add a bullet list to slide."""
+    """Add a bullet list to slide with proper markdown formatting."""
     if not bullets:
         return None
 
     if font_size is None:
         font_size = Fonts.BODY_SIZE
 
-    height = Inches(0.4 * len(bullets) + 0.2)
+    height = Inches(0.35 * len(bullets) + 0.2)
     shape = slide.shapes.add_textbox(left, top, width, height)
     tf = shape.text_frame
     tf.word_wrap = True
@@ -477,14 +537,9 @@ def add_bullet_list(slide, bullets, left, top, width, font_size=None):
         else:
             p = tf.add_paragraph()
 
-        # Clean up bullet text (remove markdown formatting)
-        text = re.sub(r'\*\*([^*]+)\*\*', r'\1', bullet)  # Bold
-        text = re.sub(r'\*([^*]+)\*', r'\1', text)  # Italic
-        text = re.sub(r'`([^`]+)`', r'\1', text)  # Code
-
-        p.text = f"• {text}"
+        # Use formatted text to preserve bold/italic
+        add_formatted_text(p, f"• {bullet}", font_size, Colors.TEXT_DARK)
         p.level = 0
-        style_paragraph(p, font_size, Colors.TEXT_DARK)
 
     return shape
 
@@ -573,42 +628,44 @@ def build_agenda_slide(prs, data, base_dir, md_dir):
         rows = len(table_data)
         cols = len(table_data[0]) if table_data else 3
 
+        # Use smaller font for agendas with many rows
+        font_size = Fonts.SMALL_SIZE if rows > 10 else Fonts.TABLE_SIZE
+        row_height = Inches(0.28) if rows > 10 else Inches(0.32)
+
         table = slide.shapes.add_table(
             rows, cols,
-            Layout.MARGIN_LEFT, Inches(1.3),
-            Inches(12), Inches(0.35 * rows)
+            Layout.MARGIN_LEFT, Inches(1.0),
+            Inches(12.3), row_height * rows
         ).table
 
-        # Set column widths
+        # Set column widths - Time | Session | Speaker
         if cols >= 3:
-            table.columns[0].width = Inches(2.5)   # Time
-            table.columns[1].width = Inches(7)     # Session
-            table.columns[2].width = Inches(2.5)   # Speaker
+            table.columns[0].width = Inches(2.0)   # Time
+            table.columns[1].width = Inches(8.0)   # Session
+            table.columns[2].width = Inches(2.3)   # Speaker
 
-        # Fill table
+        # Fill table with formatted text
         for r_idx, row in enumerate(table_data):
             is_header = r_idx == 0
             for c_idx, cell_text in enumerate(row):
+                if c_idx >= cols:
+                    continue
                 cell = table.cell(r_idx, c_idx)
+                cell.text_frame.word_wrap = True
 
-                # Clean text
-                text = re.sub(r'\*\*([^*]+)\*\*', r'\1', cell_text)
-                text = re.sub(r'\*([^*]+)\*', r'\1', text)
-
-                cell.text = text
-
-                # Style cell
                 para = cell.text_frame.paragraphs[0]
-                para.font.size = Fonts.TABLE_SIZE
-                para.font.name = Fonts.FAMILY
 
                 if is_header:
                     cell.fill.solid()
                     cell.fill.fore_color.rgb = Colors.LIGHT_BLUE
+                    clean_text = re.sub(r'\*+([^*]+)\*+', r'\1', cell_text)
+                    para.text = clean_text
+                    para.font.size = font_size
+                    para.font.name = Fonts.FAMILY
                     para.font.color.rgb = Colors.NAVY
                     para.font.bold = True
                 else:
-                    para.font.color.rgb = Colors.TEXT_DARK
+                    add_formatted_text(para, cell_text, font_size, Colors.TEXT_DARK)
 
     return slide
 
@@ -715,7 +772,7 @@ def build_two_column_slide(prs, data, base_dir, md_dir):
 
 
 def build_table_slide(prs, data, base_dir, md_dir):
-    """Build slide with table."""
+    """Build slide with table - auto-fit columns based on content."""
     slide = prs.slides.add_slide(prs.slide_layouts[6])  # Blank
 
     # Title
@@ -732,41 +789,57 @@ def build_table_slide(prs, data, base_dir, md_dir):
         rows = len(table_data)
         cols = len(table_data[0]) if table_data else 2
 
-        # Calculate table dimensions
-        table_width = min(Inches(12), Inches(2.5 * cols))
-        row_height = Inches(0.4)
+        # Use full width and smaller font for wide tables
+        table_width = Inches(12.3)
+        font_size = Fonts.TABLE_SIZE if cols <= 4 else Fonts.SMALL_SIZE
+        row_height = Inches(0.35) if cols <= 4 else Inches(0.3)
 
         table = slide.shapes.add_table(
             rows, cols,
-            Layout.MARGIN_LEFT, Inches(1.4),
+            Layout.MARGIN_LEFT, Inches(1.2),
             table_width, row_height * rows
         ).table
 
-        # Fill table
+        # Calculate column widths proportionally based on max content length
+        col_max_chars = []
+        for c_idx in range(cols):
+            max_len = 5  # minimum width
+            for row in table_data:
+                if c_idx < len(row):
+                    # Strip markdown for length calculation
+                    clean = re.sub(r'\*+([^*]+)\*+', r'\1', str(row[c_idx]))
+                    max_len = max(max_len, len(clean))
+            col_max_chars.append(max_len)
+
+        total_chars = sum(col_max_chars)
+        for c_idx in range(cols):
+            proportion = col_max_chars[c_idx] / total_chars
+            table.columns[c_idx].width = int(table_width * proportion)
+
+        # Fill table with formatted text
         for r_idx, row in enumerate(table_data):
             is_header = r_idx == 0
             for c_idx, cell_text in enumerate(row):
                 if c_idx >= cols:
                     continue
                 cell = table.cell(r_idx, c_idx)
-
-                # Clean text
-                text = re.sub(r'\*\*([^*]+)\*\*', r'\1', cell_text)
-                text = re.sub(r'\*([^*]+)\*', r'\1', text)
-
-                cell.text = text
+                cell.text_frame.word_wrap = True
 
                 para = cell.text_frame.paragraphs[0]
-                para.font.size = Fonts.BODY_SIZE
-                para.font.name = Fonts.FAMILY
 
                 if is_header:
                     cell.fill.solid()
                     cell.fill.fore_color.rgb = Colors.LIGHT_BLUE
+                    # Headers: use bold, no markdown parsing needed
+                    clean_text = re.sub(r'\*+([^*]+)\*+', r'\1', cell_text)
+                    para.text = clean_text
+                    para.font.size = font_size
+                    para.font.name = Fonts.FAMILY
                     para.font.color.rgb = Colors.NAVY
                     para.font.bold = True
                 else:
-                    para.font.color.rgb = Colors.TEXT_DARK
+                    # Body: use formatted text for bold/italic
+                    add_formatted_text(para, cell_text, font_size, Colors.TEXT_DARK)
 
     return slide
 
@@ -816,19 +889,19 @@ def build_content_slide(prs, data, base_dir, md_dir):
     for level, text in data['headers']:
         if level == 1:
             add_h1_with_underline(slide, text, current_top)
-            current_top += Inches(0.9)
+            current_top += Inches(0.75)  # Space after H1 (reduced since font is smaller)
         elif level == 2:
             add_h2_with_underline(slide, text, current_top)
-            current_top += Inches(0.75)
+            current_top += Inches(0.65)  # Space after H2
         # H3+ handled in content loop below
 
     # Render ALL content (H3+, paragraphs, bullets) in ONE text box
     content = data.get('content', [])
     if content:
         # Calculate height based on content
-        height = Inches(0.35 * len(content) + 0.5)
+        height = Inches(0.3 * len(content) + 0.5)
         shape = slide.shapes.add_textbox(
-            Layout.MARGIN_LEFT, current_top + Inches(0.1),
+            Layout.MARGIN_LEFT, current_top + Inches(0.15),  # Gap between title and content
             Layout.CONTENT_WIDTH, height
         )
         tf = shape.text_frame
@@ -848,20 +921,12 @@ def build_content_slide(prs, data, base_dir, md_dir):
                 style_paragraph(p, Fonts.H3_SIZE, Colors.PURPLE, bold=True)
 
             elif item_type == 'bullet':
-                # Clean markdown formatting
-                clean_text = re.sub(r'\*\*([^*]+)\*\*', r'\1', text)
-                clean_text = re.sub(r'\*([^*]+)\*', r'\1', clean_text)
-                p.text = f"• {clean_text}"
-                style_paragraph(p, Fonts.BODY_SIZE, Colors.TEXT_DARK)
+                # Use formatted text to handle bold/italic within bullets
+                add_formatted_text(p, f"• {text}", Fonts.BODY_SIZE, Colors.TEXT_DARK)
 
             elif item_type == 'paragraph':
-                display_text = text
-                is_bold = False
-                if text.startswith('**') and text.endswith('**'):
-                    display_text = text[2:-2]
-                    is_bold = True
-                p.text = display_text
-                style_paragraph(p, Fonts.BODY_SIZE, Colors.DARK_GRAY, bold=is_bold)
+                # Use formatted text to handle inline bold/italic
+                add_formatted_text(p, text, Fonts.BODY_SIZE, Colors.DARK_GRAY)
 
     # Add image if present (to the right)
     if data['images']:
