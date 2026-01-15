@@ -585,7 +585,7 @@ def load_yaml_config(yaml_path):
         'location': workshop.get('location', ''),
         'facilitators': workshop.get('facilitators', ''),
         'contact_email': workshop.get('contact_email', ''),
-        'website': workshop.get('website', 'https://fastr.org'),
+        'website': workshop.get('website', 'https://www.globalfinancingfacility.org/'),
 
         'workshop_days': schedule.get('days', 2),
         'tea_time': schedule.get('tea_time', '10:30 AM'),

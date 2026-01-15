@@ -1,22 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400">
   <defs>
     <style>
-      .title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 14px; font-weight: 700; fill: #09544F; }
-      .subtitle { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 11px; fill: #21568C; }
-      .axis-label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 10px; fill: #666; }
+      .title { font-family: Inter, sans-serif; font-size: 18px; font-weight: 700; fill: #09544F; }
+      .subtitle { font-family: Inter, sans-serif; font-size: 14px; fill: #21568C; }
+      .axis-label { font-family: Inter, sans-serif; font-size: 12px; fill: #666; }
       .axis-line { stroke: #ccc; stroke-width: 1; }
       .grid-line { stroke: #eee; stroke-width: 1; }
-      .legend-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 10px; fill: #333; }
-      .callout { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 9px; fill: #c0392b; font-weight: 600; }
+      .legend-text { font-family: Inter, sans-serif; font-size: 13px; fill: #333; }
+      .callout { font-family: Inter, sans-serif; font-size: 12px; fill: #c0392b; font-weight: 600; }
       .callout-box { fill: #ffeaa7; stroke: #f39c12; stroke-width: 1; rx: 3; }
-      .note-text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; font-size: 10px; fill: #27ae60; font-style: italic; }
+      .note-text { font-family: Inter, sans-serif; font-size: 13px; fill: #27ae60; font-style: italic; }
     </style>
   </defs>
 
   <!-- LEFT CHART: Before outlier removal -->
   <g transform="translate(40, 30)">
     <text class="title" x="160" y="0" text-anchor="middle">Before outlier adjustment</text>
-    <text class="subtitle" x="160" y="16" text-anchor="middle">(Region A shows apparent spike)</text>
+    <text class="subtitle" x="160" y="16" text-anchor="middle">(Region A shows spike in February)</text>
 
     <!-- Y-axis -->
     <line class="axis-line" x1="40" y1="40" x2="40" y2="260"/>
@@ -36,12 +36,11 @@
     <text class="axis-label" x="35" y="265" text-anchor="end">0</text>
 
     <!-- X-axis labels -->
-    <text class="axis-label" x="75" y="278" text-anchor="middle">Q1</text>
-    <text class="axis-label" x="130" y="278" text-anchor="middle">Q2</text>
-    <text class="axis-label" x="185" y="278" text-anchor="middle">Q3</text>
-    <text class="axis-label" x="240" y="278" text-anchor="middle">Q4</text>
-    <text class="axis-label" x="295" y="278" text-anchor="middle">Q1</text>
-    <text class="axis-label" x="180" y="295" text-anchor="middle">2024                    2025</text>
+    <text class="axis-label" x="75" y="278" text-anchor="middle">Jan</text>
+    <text class="axis-label" x="130" y="278" text-anchor="middle">Feb</text>
+    <text class="axis-label" x="185" y="278" text-anchor="middle">Mar</text>
+    <text class="axis-label" x="240" y="278" text-anchor="middle">Apr</text>
+    <text class="axis-label" x="295" y="278" text-anchor="middle">May</text>
 
     <!-- Luapula line (with outlier spike in Q2) - Blue -->
     <polyline fill="none" stroke="#1A90C0" stroke-width="2.5"
@@ -107,12 +106,11 @@
     <text class="axis-label" x="35" y="265" text-anchor="end">0</text>
 
     <!-- X-axis labels -->
-    <text class="axis-label" x="75" y="278" text-anchor="middle">Q1</text>
-    <text class="axis-label" x="130" y="278" text-anchor="middle">Q2</text>
-    <text class="axis-label" x="185" y="278" text-anchor="middle">Q3</text>
-    <text class="axis-label" x="240" y="278" text-anchor="middle">Q4</text>
-    <text class="axis-label" x="295" y="278" text-anchor="middle">Q1</text>
-    <text class="axis-label" x="180" y="295" text-anchor="middle">2024                    2025</text>
+    <text class="axis-label" x="75" y="278" text-anchor="middle">Jan</text>
+    <text class="axis-label" x="130" y="278" text-anchor="middle">Feb</text>
+    <text class="axis-label" x="185" y="278" text-anchor="middle">Mar</text>
+    <text class="axis-label" x="240" y="278" text-anchor="middle">Apr</text>
+    <text class="axis-label" x="295" y="278" text-anchor="middle">May</text>
 
     <!-- Luapula line (corrected - no spike) - Blue -->
     <polyline fill="none" stroke="#1A90C0" stroke-width="2.5"

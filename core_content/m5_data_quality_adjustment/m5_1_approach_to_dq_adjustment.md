@@ -12,14 +12,30 @@ The FASTR analytics platform provides an option for adjusting data for outliers,
 
 ## Adjustment for outliers
 
-The FASTR approach makes adjustment to service volume to replace outlier values (recommended).
+Each outlier is replaced using the facility's own historical data through a **6-month rolling average**.
 
-Each individual outlier is replaced by the mean volume, excluding any outlier values, of services delivered for the same indicator and the same month but amongst facilities of the same type within the same admin area (province, district, and/or state).
+**Method depends on position in time series:**
+
+| Position | Method | Example (outlier in June) |
+|----------|--------|---------------------------|
+| **Middle** | Centered average | Average of Mar-Apr-May + Jul-Aug-Sep |
+| **End** | Backward average | Average of Jan-Feb-Mar-Apr-May-Jun (excluding outlier) |
+| **Start** | Forward average | Average of Jul-Aug-Sep-Oct-Nov-Dec |
+
+If rolling averages unavailable: same month from previous year, then facility mean.
 
 ---
 
 ## Adjustment for completeness
 
-The FASTR approach allows for adjustment to service volume to replace missing/incomplete values (optional).
+Missing values are imputed using the same 6-month rolling average approach.
 
-Each incomplete/missing value is replaced by the mean volume of services delivered for the same indicator and same facility, calculated as a rolling average of the 12 months surrounding the missing point and excluding any outliers or missing values.
+**Method depends on position in time series:**
+
+| Position | Method | Example (missing in June) |
+|----------|--------|---------------------------|
+| **Middle** | Centered average | Average of Mar-Apr-May + Jul-Aug-Sep |
+| **End** | Backward average | Average of Jan-Feb-Mar-Apr-May |
+| **Start** | Forward average | Average of Jul-Aug-Sep-Oct-Nov-Dec |
+
+This prevents reporting gaps from creating artificial drops to zero.

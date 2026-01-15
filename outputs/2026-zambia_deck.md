@@ -78,8 +78,6 @@ paginate: true
 | 14:00-15:00 | Continue report creation with country context | GFF FASTR team |
 | **Session 10: Presenting reports** | | |
 | 14:30-15:30 | Present reports, group feedback | GFF FASTR team |
-| **Session 11: Action planning** | | |
-| 15:30-16:30 | Activity: Action planning | GFF FASTR team |
 
 ---
 
@@ -102,7 +100,8 @@ paginate: true
 | 14:30-15:30 | Discuss adapted questionnaire in plenary | GFF FASTR team |
 | **Session 16: Discussion: HFA priorities and data use** | | |
 | 15:30-16:30 | HFA priorities and data use case in Zambia | GFF FASTR team |
-| 16:30-17:00 | Key messages and wrap-up |  |
+| **Session 17: Action planning and wrap-up** | | |
+| 16:30-17:00 | Key messages and wrap-up | GFF FASTR team |
 
 ---
 
@@ -595,15 +594,15 @@ These three questions help us understand if we can trust the data for decision-m
 
 ## Completeness: Did we get reports?
 
-<div style="display: flex; gap: 1em;">
-<div style="flex: 1; font-size: 0.75em;">
+<div style="display: flex; gap: 1.5em; align-items: center;">
+<div style="flex: 1;">
 
 **What we're checking:**
 Each month, are facilities sending in their reports?
 
 **Why it matters:**
-- If many facilities don't report, we're missing part of the picture
-- Trends might look like services dropped, when really facilities just didn't report
+- Missing reports = incomplete picture
+- Apparent drops may just be missing data
 
 </div>
 <div style="flex: 2;">
@@ -630,7 +629,7 @@ Each month, are facilities sending in their reports?
 
 ## Completeness: FASTR output
 
-![Indicator Completeness](../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
+![h:420 Indicator Completeness](../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
 
 ---
 
@@ -642,20 +641,13 @@ Each month, are facilities sending in their reports?
 
 ## Outliers: Spotting suspicious numbers
 
-<div style="display: flex; gap: 1em;">
-<div style="flex: 1; font-size: 0.75em;">
+<div style="display: flex; gap: 1.5em; align-items: center;">
+<div style="flex: 1;">
 
-**What we're checking:**
-Are there any values that seem way too high compared to what that facility normally reports?
+**In this example:**
+Region A shows a spike in February that's far higher than the other regions.
 
-**Real example:**
-- Health Center A normally reports 20-25 deliveries per month
-- In March, they reported 450 deliveries
-- **This is likely a data entry error**
-
-**Why it matters:**
-- One extreme value can make it look like there was a huge service increase
-- Skews totals and trends for the whole region
+This is likely a data entry error - after adjustment, all regions show similar gradual trends.
 
 </div>
 <div style="flex: 2;">
@@ -699,7 +691,7 @@ AND for which the count is greater than 100.
 
 ## Outliers: FASTR output
 
-![Outliers](../resources/default_outputs/Default_1._Proportion_of_outliers.png)
+![h:420 Outliers](../resources/default_outputs/Default_1._Proportion_of_outliers.png)
 
 ---
 
@@ -746,22 +738,28 @@ This accounts for patients visiting different facilities for different services.
 
 ## Consistency example
 
-**District X - ANC Services:**
+<div style="display: flex; gap: 1em; align-items: center;">
+<div style="flex: 1; font-size: 0.75em;">
 
-| Indicator | District Total | Expected Relationship |
-|-----------|----------------|----------------------|
-| ANC1 | 5,200 visits | Should be higher |
-| ANC4 | 4,100 visits | Should be lower |
+**This passes the consistency check:**
+- More women started ANC (5,200) than completed 4 visits (4,100)
+- This is logical - not everyone completes all visits
 
-**This passes the consistency check** - more women started ANC (5,200) than completed 4 visits (4,100).
+**If it was reversed** (ANC4 > ANC1), we'd know there's a data quality problem.
 
-**If it was reversed** (more ANC4 than ANC1), we'd know there's a data quality problem.
+</div>
+<div style="flex: 2;">
+
+![Consistency Illustration](../resources/diagrams/consistency_illustration.svg)
+
+</div>
+</div>
 
 ---
 
 ## Consistency: FASTR output
 
-![Internal Consistency](../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
+![h:420 Internal Consistency](../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
 
 ---
 
@@ -775,32 +773,31 @@ This accounts for patients visiting different facilities for different services.
 
 **For each facility and month, we combine all three checks:**
 
-**Complete:** Did the facility report?
-**No outliers:** Are the numbers reasonable?
-**Consistent:** Do related numbers make sense?
+1. **Complete:** Did the facility report?
+2. **No outliers:** Are the numbers reasonable?
+3. **Consistent:** Do related numbers make sense?
 
 **Binary DQA Score:**
-- dqa_score = 1 if all consistency pairs pass
-- dqa_score = 0 if any consistency pair fails
+- dqa_score = 1 if ALL three checks pass
+- dqa_score = 0 if ANY check fails
 
 **DQA Mean:** Average of completeness-outlier score and consistency score
 
-**This score helps us:**
+**This helps us:**
 - Decide which data to use for analysis
-- Identify facilities that need support
-- Track if data quality is improving over time
+- Identify facilities needing support
 
 ---
 
 ## Overall DQA score: FASTR output
 
-![Overall DQA Score](../resources/default_outputs/Default_5._Overall_DQA_score.png)
+![h:420 Overall DQA Score](../resources/default_outputs/Default_5._Overall_DQA_score.png)
 
 ---
 
 ## Mean DQA score: FASTR output
 
-![Mean DQA Score](../resources/default_outputs/Default_6._Mean_DQA_score.png)
+![h:420 Mean DQA Score](../resources/default_outputs/Default_6._Mean_DQA_score.png)
 
 ---
 
@@ -814,17 +811,33 @@ The FASTR analytics platform provides an option for adjusting data for outliers,
 
 ## Adjustment for outliers
 
-The FASTR approach makes adjustment to service volume to replace outlier values (recommended).
+Each outlier is replaced using the facility's own historical data through a **6-month rolling average**.
 
-Each individual outlier is replaced by the mean volume, excluding any outlier values, of services delivered for the same indicator and the same month but amongst facilities of the same type within the same admin area (province, district, and/or state).
+**Method depends on position in time series:**
+
+| Position | Method | Example (outlier in June) |
+|----------|--------|---------------------------|
+| **Middle** | Centered average | Average of Mar-Apr-May + Jul-Aug-Sep |
+| **End** | Backward average | Average of Jan-Feb-Mar-Apr-May-Jun (excluding outlier) |
+| **Start** | Forward average | Average of Jul-Aug-Sep-Oct-Nov-Dec |
+
+If rolling averages unavailable: same month from previous year, then facility mean.
 
 ---
 
 ## Adjustment for completeness
 
-The FASTR approach allows for adjustment to service volume to replace missing/incomplete values (optional).
+Missing values are imputed using the same 6-month rolling average approach.
 
-Each incomplete/missing value is replaced by the mean volume of services delivered for the same indicator and same facility, calculated as a rolling average of the 12 months surrounding the missing point and excluding any outliers or missing values.
+**Method depends on position in time series:**
+
+| Position | Method | Example (missing in June) |
+|----------|--------|---------------------------|
+| **Middle** | Centered average | Average of Mar-Apr-May + Jul-Aug-Sep |
+| **End** | Backward average | Average of Jan-Feb-Mar-Apr-May |
+| **Start** | Forward average | Average of Jul-Aug-Sep-Oct-Nov-Dec |
+
+This prevents reporting gaps from creating artificial drops to zero.
 
 ---
 
@@ -833,8 +846,6 @@ Each incomplete/missing value is replaced by the mean volume of services deliver
 ## Service utilization analysis
 
 Monitoring changes in the volume of priority health services over time.
-
-> **Example question:** How has ANC1 utilization changed from 2020 to 2024? Which regions have seen the greatest increases or declines?
 
 ---
 
@@ -853,17 +864,13 @@ Data can use: raw values, outlier-adjusted, completeness-adjusted, or both adjus
 
 ## Service utilization: FASTR outputs
 
-**Change in service volume over time**
-
-![Change in service volume](../resources/default_outputs/Module3_1_Change_in_service_volume.png)
+![h:420 Change in service volume](../resources/default_outputs/Module3_1_Change_in_service_volume.png)
 
 ---
 
 ## Service utilization: Subnational
 
-**Comparing volumes across regions**
-
-![Actual vs expected subnational](../resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
+![h:420 Actual vs expected subnational](../resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
 
 ---
 
@@ -890,22 +897,9 @@ Beyond simple trends, FASTR can detect and quantify service disruptions.
 
 ---
 
-## Types of disruptions detected
-
-| Type | What it captures |
-|------|------------------|
-| **Sharp disruptions** | Single months with extreme deviations |
-| **Sustained drops** | Gradual declines over several months |
-| **Sustained dips** | Periods consistently below expected |
-| **Sustained rises** | Periods consistently above expected |
-
----
-
 ## Disruption outputs
 
-**Actual vs expected at national level**
-
-![Actual vs expected national](../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
+![h:420 Actual vs expected national](../resources/default_outputs/Module3_2_Actual_vs_expected_national.png)
 
 ---
 
@@ -974,23 +968,33 @@ Starting from pregnancies, apply demographic factors to estimate other denominat
 
 ## Estimating denominators from ANC-1
 
-If ANC-1 coverage is known from survey data, we can derive other denominators:
+Using survey coverage + DHIS2 counts to derive denominators:
 
-**Example calculation:**
-- ANC-1 count from DHIS2: **100,000**
-- Survey ANC-1 coverage: **95%**
-- Estimated pregnancies = 100,000 ÷ 0.95 = **105,263**
+| Step | Formula | Example |
+|------|---------|---------|
+| Pregnancies | ANC1 count ÷ ANC1 coverage | 100,000 ÷ 0.95 = 105,263 |
+| Deliveries | Pregnancies × (1 - stillbirth rate) | 105,263 × 0.97 = 102,105 |
+| Live births | Deliveries × survival rate | 102,105 × 0.98 = 100,063 |
 
-**Applying the cascade:**
+---
 
-| Step | Calculation | Result |
-|------|-------------|--------|
-| Pregnancies | 100,000 ÷ 0.95 | 105,263 |
-| Deliveries | 105,263 × (1 - 0.03) | 102,105 |
-| Births | 102,105 × (1 + 0.015) | 103,637 |
-| Live births | 103,637 × (1 - 0.02) | 101,564 |
-| DPT-eligible | 101,564 × (1 - 0.03) | 98,517 |
-| Measles-eligible | 98,517 × (1 - 0.02) | 96,547 |
+
+
+## Coverage estimates: National level
+
+![h:420 Coverage calculated from HMIS data at national level.](../resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
+
+---
+
+## Coverage estimates: Admin area 2
+
+![h:420 Coverage calculated from HMIS data at admin area 2 level.](../resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
+
+---
+
+## Coverage estimates: Admin area 3
+
+![h:420 Coverage calculated from HMIS data at admin area 3 level.](../resources/default_outputs/Module4_3_Coverage_HMIS_Admin3.png)
 
 ---
 
@@ -1147,41 +1151,6 @@ End user mapping helps ensure that our outputs will meet the real needs of our e
 3. **What information are they most interested in?**
 4. **What do they like/not like about current reports?**
 5. **How do they like to receive their information?**
-
----
-
-
-
-# Next Steps & Action Planning
-
-Key actions to take after this working session:
-
-- Finalize adapted phone survey questionnaire
-- Complete first quarterly report draft
-- Train remaining MoH team on data downloader tools
-- Prepare roadmap for participation in Abuja workshop
-
----
-
-# Quarterly Reporting Cycle
-
-Establish a sustainable reporting rhythm:
-
-- Define quarterly report timeline and responsibilities
-- Set up data extraction schedule
-- Establish review and approval process
-- Plan dissemination to stakeholders
-
----
-
-# Continued Platform Usage
-
-Maintain momentum with the FASTR platform:
-
-- Regular data updates and quality checks
-- Expanding analysis to additional indicators
-- Building capacity across MoH teams
-- Documentation of lessons learned
 
 ---
 
@@ -1560,7 +1529,7 @@ Lusaka
 
 <img src="../resources/icons/email.png" class="icon" style="height: 1em; vertical-align: middle;"> **Email:** 
 
-<img src="../resources/icons/globe.png" class="icon" style="height: 1em; vertical-align: middle;"> **Website:** https://fastr.org
+<img src="../resources/icons/globe.png" class="icon" style="height: 1em; vertical-align: middle;"> **Website:** https://www.globalfinancingfacility.org/
 
 ---
 

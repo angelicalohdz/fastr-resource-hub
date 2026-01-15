@@ -110,7 +110,7 @@ schedule:
 
     - time: "09:15-10:15"
       session: "Data quality, service utilization, coverage"
-      topics: [m4_0, m4_1, m4_2, m4_3, m4_4, m4_5, m5_1, m6_1, m6_2, m6_4, m6_4a, m6_4b, m6_4c, m6_4d]
+      topics: [m4_0, m4_1, m4_2, m4_3, m4_4, m4_5, m5_1, m6_1, m6_2, m6_4, m6_4a, m6_4b, m6_4c, m6_4d, m6_5]
       speaker: "GFF FASTR team"
       duration: 60
 
@@ -196,15 +196,6 @@ schedule:
       speaker: "GFF FASTR team"
       duration: 60
 
-    - type: section
-      session: "Session 11: Action planning"
-
-    - time: "15:30-16:30"
-      session: "Activity: Action planning"
-      slides: [99_next-steps.md]
-      speaker: "GFF FASTR team"
-      duration: 60
-
   # ═══════════════════════════════════════════════════════════════════════
   # DAY 4: Designing the Health Facility Assessment
   # ═══════════════════════════════════════════════════════════════════════
@@ -263,10 +254,13 @@ schedule:
       speaker: "GFF FASTR team"
       duration: 60
 
+    - type: section
+      session: "Session 17: Action planning and wrap-up"
+
     - time: "16:30-17:00"
       session: "Key messages and wrap-up"
       slides: [99_next-steps.md, closing.md]
-      speaker: ""
+      speaker: "GFF FASTR team"
       duration: 30
 
 # ═══════════════════════════════════════════════════════════════════════

@@ -14,6 +14,4 @@ This ensures that temporary reporting gaps don't create artificial drops to zero
 
 ### Completeness adjustment: FASTR output
 
-![Percent change in volume due to completeness adjustment.](../../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)
-
-Heatmap showing percent change in service volumes due to missing data imputation.
+![h:420 Percent change in volume due to completeness adjustment.](../../resources/default_outputs/Default_2._Percent_change_in_volume_due_to_completeness_adjustment.png)

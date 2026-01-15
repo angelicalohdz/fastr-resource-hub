@@ -1128,8 +1128,6 @@ For the volume change chart (output 4):
 
 Monitoring changes in the volume of priority health services over time.
 
-> **Example question:** How has ANC1 utilization changed from 2020 to 2024? Which regions have seen the greatest increases or declines?
-
 ---
 
 ## What we assess

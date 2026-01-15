@@ -1583,15 +1583,15 @@ These three questions help us understand if we can trust the data for decision-m
 
 ## Completeness: Did we get reports?
 
-<div style="display: flex; gap: 1em;">
-<div style="flex: 1; font-size: 0.75em;">
+<div style="display: flex; gap: 1.5em; align-items: center;">
+<div style="flex: 1;">
 
 **What we're checking:**
 Each month, are facilities sending in their reports?
 
 **Why it matters:**
-- If many facilities don't report, we're missing part of the picture
-- Trends might look like services dropped, when really facilities just didn't report
+- Missing reports = incomplete picture
+- Apparent drops may just be missing data
 
 </div>
 <div style="flex: 2;">
@@ -1628,20 +1628,13 @@ Each month, are facilities sending in their reports?
 
 ## Outliers: Spotting suspicious numbers
 
-<div style="display: flex; gap: 1em;">
-<div style="flex: 1; font-size: 0.75em;">
+<div style="display: flex; gap: 1.5em; align-items: center;">
+<div style="flex: 1;">
 
-**What we're checking:**
-Are there any values that seem way too high compared to what that facility normally reports?
+**In this example:**
+Region A shows a spike in February that's far higher than the other regions.
 
-**Real example:**
-- Health Center A normally reports 20-25 deliveries per month
-- In March, they reported 450 deliveries
-- **This is likely a data entry error**
-
-**Why it matters:**
-- One extreme value can make it look like there was a huge service increase
-- Skews totals and trends for the whole region
+This is likely a data entry error - after adjustment, all regions show similar gradual trends.
 
 </div>
 <div style="flex: 2;">
@@ -1730,16 +1723,22 @@ This accounts for patients visiting different facilities for different services.
 
 ## Consistency example
 
-**District X - ANC Services:**
+<div style="display: flex; gap: 1em; align-items: center;">
+<div style="flex: 1; font-size: 0.75em;">
 
-| Indicator | District Total | Expected Relationship |
-|-----------|----------------|----------------------|
-| ANC1 | 5,200 visits | Should be higher |
-| ANC4 | 4,100 visits | Should be lower |
+**This passes the consistency check:**
+- More women started ANC (5,200) than completed 4 visits (4,100)
+- This is logical - not everyone completes all visits
 
-**This passes the consistency check** - more women started ANC (5,200) than completed 4 visits (4,100).
+**If it was reversed** (ANC4 > ANC1), we'd know there's a data quality problem.
 
-**If it was reversed** (more ANC4 than ANC1), we'd know there's a data quality problem.
+</div>
+<div style="flex: 2;">
+
+![Consistency Illustration](../resources/diagrams/consistency_illustration.svg)
+
+</div>
+</div>
 
 ---
 
@@ -1757,20 +1756,19 @@ This accounts for patients visiting different facilities for different services.
 
 **For each facility and month, we combine all three checks:**
 
-**Complete:** Did the facility report?
-**No outliers:** Are the numbers reasonable?
-**Consistent:** Do related numbers make sense?
+1. **Complete:** Did the facility report?
+2. **No outliers:** Are the numbers reasonable?
+3. **Consistent:** Do related numbers make sense?
 
 **Binary DQA Score:**
-- dqa_score = 1 if all consistency pairs pass
-- dqa_score = 0 if any consistency pair fails
+- dqa_score = 1 if ALL three checks pass
+- dqa_score = 0 if ANY check fails
 
 **DQA Mean:** Average of completeness-outlier score and consistency score
 
-**This score helps us:**
+**This helps us:**
 - Decide which data to use for analysis
-- Identify facilities that need support
-- Track if data quality is improving over time
+- Identify facilities needing support
 
 ---
 

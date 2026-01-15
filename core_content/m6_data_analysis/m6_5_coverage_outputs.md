@@ -4,18 +4,18 @@ theme: fastr
 paginate: true
 ---
 
-## Coverage estimates: FASTR outputs
+## Coverage estimates: National level
 
-The FASTR analysis generates coverage estimate visualizations at multiple geographic levels:
+![h:420 Coverage calculated from HMIS data at national level.](../../resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
 
-**1. Coverage calculated from HMIS data (national)**
+---
 
-![Coverage calculated from HMIS data at national level.](../../resources/default_outputs/Module4_1_Coverage_HMIS_National.png)
+## Coverage estimates: Admin area 2
 
-**2. Coverage calculated from HMIS data (admin area 2)**
+![h:420 Coverage calculated from HMIS data at admin area 2 level.](../../resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
 
-![Coverage calculated from HMIS data at admin area 2 level.](../../resources/default_outputs/Module4_2_Coverage_HMIS_Admin2.png)
+---
 
-**3. Coverage calculated from HMIS data (admin area 3)**
+## Coverage estimates: Admin area 3
 
-![Coverage calculated from HMIS data at admin area 3 level.](../../resources/default_outputs/Module4_3_Coverage_HMIS_Admin3.png)
+![h:420 Coverage calculated from HMIS data at admin area 3 level.](../../resources/default_outputs/Module4_3_Coverage_HMIS_Admin3.png)

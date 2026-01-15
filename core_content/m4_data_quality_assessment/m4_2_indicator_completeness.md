@@ -10,15 +10,15 @@ paginate: true
 
 ## Completeness: Did we get reports?
 
-<div style="display: flex; gap: 1em;">
-<div style="flex: 1; font-size: 0.75em;">
+<div style="display: flex; gap: 1.5em; align-items: center;">
+<div style="flex: 1;">
 
 **What we're checking:**
 Each month, are facilities sending in their reports?
 
 **Why it matters:**
-- If many facilities don't report, we're missing part of the picture
-- Trends might look like services dropped, when really facilities just didn't report
+- Missing reports = incomplete picture
+- Apparent drops may just be missing data
 
 </div>
 <div style="flex: 2;">
@@ -45,4 +45,4 @@ Each month, are facilities sending in their reports?
 
 ## Completeness: FASTR output
 
-![Indicator Completeness](../../resources/default_outputs/Default_2._Proportion_of_completed_records.png)
+![h:420 Indicator Completeness](../../resources/default_outputs/Default_2._Proportion_of_completed_records.png)

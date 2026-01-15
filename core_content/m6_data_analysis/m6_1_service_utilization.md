@@ -8,8 +8,6 @@ paginate: true
 
 Monitoring changes in the volume of priority health services over time.
 
-> **Example question:** How has ANC1 utilization changed from 2020 to 2024? Which regions have seen the greatest increases or declines?
-
 ---
 
 ## What we assess
@@ -27,17 +25,13 @@ Data can use: raw values, outlier-adjusted, completeness-adjusted, or both adjus
 
 ## Service utilization: FASTR outputs
 
-**Change in service volume over time**
-
-![Change in service volume](../../resources/default_outputs/Module3_1_Change_in_service_volume.png)
+![h:420 Change in service volume](../../resources/default_outputs/Module3_1_Change_in_service_volume.png)
 
 ---
 
 ## Service utilization: Subnational
 
-**Comparing volumes across regions**
-
-![Actual vs expected subnational](../../resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
+![h:420 Actual vs expected subnational](../../resources/default_outputs/Module3_3_Actual_vs_expected_subnational.png)
 
 ---
 

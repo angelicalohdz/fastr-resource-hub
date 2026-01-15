@@ -45,19 +45,25 @@ This accounts for patients visiting different facilities for different services.
 
 ## Consistency example
 
-**District X - ANC Services:**
+<div style="display: flex; gap: 1em; align-items: center;">
+<div style="flex: 1; font-size: 0.75em;">
 
-| Indicator | District Total | Expected Relationship |
-|-----------|----------------|----------------------|
-| ANC1 | 5,200 visits | Should be higher |
-| ANC4 | 4,100 visits | Should be lower |
+**This passes the consistency check:**
+- More women started ANC (5,200) than completed 4 visits (4,100)
+- This is logical - not everyone completes all visits
 
-**This passes the consistency check** - more women started ANC (5,200) than completed 4 visits (4,100).
+**If it was reversed** (ANC4 > ANC1), we'd know there's a data quality problem.
 
-**If it was reversed** (more ANC4 than ANC1), we'd know there's a data quality problem.
+</div>
+<div style="flex: 2;">
+
+![Consistency Illustration](../../resources/diagrams/consistency_illustration.svg)
+
+</div>
+</div>
 
 ---
 
 ## Consistency: FASTR output
 
-![Internal Consistency](../../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
+![h:420 Internal Consistency](../../resources/default_outputs/Default_4._Proportion_of_sub-national_areas_meeting_consistency_criteria.png)
