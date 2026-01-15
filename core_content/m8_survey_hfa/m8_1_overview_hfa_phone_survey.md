@@ -10,6 +10,40 @@ Complementing routine data with facility-level insights
 
 ---
 
+## Survey Objectives
+
+The FASTR HFA phone survey is designed to:
+
+1. **Monitor** service availability, readiness, and functioning of PHC facilities over time (with emphasis on RMNCAH-N services)
+
+2. **Characterize** and assess effect of shocks on PHC functioning
+
+3. **Inform** and assess implementation of interventions for resilient PHC systems
+
+4. **Enhance timeliness** by supplementing large-scale in-person surveys with a rapid-cycle phone approach
+
+---
+
+## Tool Design
+
+**Framework alignment:**
+- Aligned with WHO/UNICEF Primary Health Care Measurement Framework (2022)
+
+**Question sources:**
+- WHO Harmonized Health Facility Assessment
+- WHO Service Availability and Readiness Assessment (SARA)
+- World Bank Service Delivery Indicators (SDI)
+- DHS Service Provision Assessment (SPA)
+- USAID MOMENTUM
+
+**Implementation:**
+- Phone-based survey to facility managers/Officers in Charge
+- Target duration: 30 minutes
+- Quarterly contacts
+- Modular design for flexibility
+
+---
+
 ## Why phone surveys?
 
 **Routine HMIS data tells us *what* is happening:**
@@ -24,17 +58,6 @@ Complementing routine data with facility-level insights
 - What challenges are facilities facing?
 
 **Phone surveys fill this gap** by contacting facilities directly to understand context.
-
----
-
-## FASTR HFA approach
-
-**Rapid:** 15-30 minute phone calls
-**Low-cost:** No travel required
-**Regular:** Can be repeated quarterly
-**Linked:** Connected to routine HMIS data
-
-The goal is timely, actionable information that helps interpret routine data patterns.
 
 ---
 

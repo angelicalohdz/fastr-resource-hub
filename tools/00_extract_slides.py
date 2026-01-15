@@ -89,6 +89,7 @@ TOPIC_NAMES = {
     # m2 - Data Extraction (from 02_data_extraction.md)
     'm2_1': 'why_extract_data',
     'm2_2': 'tools_for_data_extraction',
+    'm2_2a': 'data_downloader',
 
     # m3 - FASTR Analytics Platform (from 03_fastr_analytics_platform.md)
     'm3_1': 'overview_of_platform',

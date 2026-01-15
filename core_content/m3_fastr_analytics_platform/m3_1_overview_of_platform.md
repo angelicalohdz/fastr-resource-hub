@@ -4,10 +4,15 @@ theme: fastr
 paginate: true
 ---
 
-## Overview of the platform
+## Introduction to the FASTR Analytics Platform
 
-The FASTR analytics platform is a web-based tool designed to support data quality assessment, adjustment, and analysis for routine health data.
+The FASTR analytics platform is a web-based tool for data quality assessment, adjustment, and analysis of routine health data.
 
-It allows users to upload and analyze data from various sources, including DHIS2, with built-in statistical methods to generate an adjusted dataset and run priority analyses on selected indicators.
+**Key features:**
 
-The platform provides a user-friendly interface for running analyses and offers flexible options for visualizing and exporting results.
+- Upload and analyze data from DHIS2 and other sources
+- Built-in statistical methods for data quality adjustment
+- User-friendly interface for running analyses
+- Flexible visualization and export options
+
+**In this session, we will provide a conceptual walkthrough of the platform and its capabilities.**

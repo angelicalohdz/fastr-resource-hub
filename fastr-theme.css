@@ -56,8 +56,8 @@ section {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: var(--text-dark);
   padding: 60px 80px;
-  font-size: 20px;
-  line-height: 1;
+  font-size: 21px;
+  line-height: 1.4;
 }
 
 
@@ -474,22 +474,27 @@ section.bg-purple ul > li::marker { color: var(--fastr-lime); }
 /* Use: <!-- _class: agenda --> */
 
 section.agenda {
-  font-size: 18px;
-  padding: 40px 60px;
+  font-size: 16px;
+  padding: 30px 25px;
 }
 
 section.agenda h1 {
-  font-size: 1.8em;
+  font-size: 1.6em;
   margin-bottom: 0.3em;
 }
 
 section.agenda table {
-  margin: 0.3em 0;
+  width: 100%;
+  margin: 0;
+}
+
+section.agenda > p:first-of-type {
+  margin-bottom: 0.3em;
 }
 
 section.agenda th,
 section.agenda td {
-  padding: 0.3em 0.6em;
+  padding: 0.2em 0.5em;
   font-size: 1em;
 }
 

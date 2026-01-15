@@ -4,11 +4,12 @@ theme: fastr
 paginate: true
 ---
 
-## Installing and running modules
+## Activity: Installing and Running Modules
 
-*Content to be developed*
+**In this hands-on session, we will:**
 
-This section will cover:
-- Available analysis modules
-- Module installation
-- Running analyses
+- Review available analysis modules
+- Install required modules
+- Run initial analyses
+
+*Participants will configure and run modules on their data*

@@ -4,11 +4,12 @@ theme: fastr
 paginate: true
 ---
 
-## Creating reports
+## Activity: Creating Reports
 
-*Content to be developed*
+**In this hands-on session, we will:**
 
-This section will cover:
-- Report templates
-- Automated report generation
-- Customizing reports
+- Use report templates
+- Generate automated reports
+- Customize report content and layout
+
+*Participants will create their first quarterly report draft*

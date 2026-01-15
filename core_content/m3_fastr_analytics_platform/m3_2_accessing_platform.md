@@ -4,11 +4,13 @@ theme: fastr
 paginate: true
 ---
 
-## Accessing the platform
+## Live Demo: Platform Access & Roles
 
-*Content to be developed*
+**In this demo, we will:**
 
-This section will cover:
-- Creating accounts
-- Signing in
-- User permissions and roles
+- Navigate to the FASTR platform
+- Explore user roles: Administrator, Editor, Viewer
+- Review user management and permissions
+- Understand the workflow for uploading data and making analytical decisions
+
+*Facilitator will demonstrate in the live platform*

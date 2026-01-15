@@ -4,11 +4,13 @@ theme: fastr
 paginate: true
 ---
 
-## Creating a new project
+## Activity: Creating a Project
 
-*Content to be developed*
+**In this hands-on session, we will:**
 
-This section will cover:
-- Project setup workflow
-- Configuration options
-- Best practices
+- Set up a new project
+- Configure project settings
+- Select indicators and time periods
+- Apply best practices for project organization
+
+*Participants will create their first project*

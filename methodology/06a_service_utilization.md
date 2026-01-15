@@ -779,7 +779,7 @@ For the volume change chart (output 4):
     source("03_module_service_utilization.R")
     ```
 
-    **Use case**: When district-level disruption patterns are needed for sub-national programme planning.
+    **Use case**: When district-level disruption patterns are needed for sub-national program planning.
 
     **Note**: District-level analysis increases runtime substantially. For large countries, consider running overnight.
 

@@ -14,7 +14,7 @@ paginate: true
 
 **FASTR Team**
 
-📧 Email: {{CONTACT_EMAIL}}
-🌐 Website: {{WEBSITE}}
+**Email:** {{CONTACT_EMAIL}}
+**Website:** {{WEBSITE}}
 
 ---

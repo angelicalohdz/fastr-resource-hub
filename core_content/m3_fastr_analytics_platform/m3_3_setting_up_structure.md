@@ -4,11 +4,12 @@ theme: fastr
 paginate: true
 ---
 
-## Setting up the structure
+## Activity: Setting Up Admin Areas
 
-*Content to be developed*
+**In this hands-on session, we will configure:**
 
-This section will cover:
-- Configuring admin areas (regions, districts)
-- Setting up facilities
-- Defining indicators
+- Admin areas (regions, districts)
+- Facility structure
+- Indicator definitions
+
+*Participants will work directly in the platform*

@@ -207,15 +207,37 @@ The data extracted should include the following required elements:
 <!-- /SLIDE -->
 
 <!-- SLIDE:m2_2 -->
-## Tools for data extraction
+## Data extraction tools
 
-*Content to be developed*
+We offer two tools for bulk DHIS2 data extraction:
 
-This section will cover:
-- DHIS2 data export options
-- API-based extraction methods
-- Data transformation requirements
-- Quality checks on extracted data
+**API Script** (Google Colab)
+- Input login credentials, specify timeframes, indicators, and administrative levels
+- Download data as a .csv file
+
+**Data Downloader**
+- More intuitive, streamlined interface
+- Recommended for most users
+
+Both tools enable efficient data extraction, and we provide training resources to support their use.
+<!-- /SLIDE -->
+
+<!-- SLIDE:m2_2a -->
+## DHIS2 Data Downloader
+
+The Data Downloader is a desktop application for extracting data from DHIS2.
+
+**Key features:**
+- Connect to any DHIS2 instance
+- Browse and select data elements and indicators
+- Download facility-level data in CSV format
+- Maintain download history
+
+**Download from GitHub:**
+
+https://github.com/worldbank/DHIS2-Downloader/releases/
+
+*Facilitator will demonstrate the Data Downloader*
 <!-- /SLIDE -->
 
 ---

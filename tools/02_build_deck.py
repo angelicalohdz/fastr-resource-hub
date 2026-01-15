@@ -206,7 +206,12 @@ MODULES = {
         'folder': 'm2_data_extraction',
         'topics': [
             ('m2_1', 'm2_1_why_extract_data.md'),
+            ('m2_1a', 'm2_1a_why_extract_data_continued.md'),
+            ('m2_1b', 'm2_1b_why_extract_data_continued.md'),
+            ('m2_1c', 'm2_1c_why_extract_data_continued.md'),
+            ('m2_1d', 'm2_1d_why_extract_data_continued.md'),
             ('m2_2', 'm2_2_tools_for_data_extraction.md'),
+            ('m2_2a', 'm2_2a_data_downloader.md'),
         ],
     },
     3: {
@@ -487,7 +492,11 @@ def generate_agenda_slide(config):
     """
     Generate agenda slide content from YAML config (table format).
     Uses compact 'agenda' class for auto-fit. One day per slide.
-    Includes optional Speaker column.
+
+    Supports:
+    - Day titles (optional 'title' field in day config)
+    - Section headers (type: section)
+    - Regular items with Time | Agenda | Facilitator
 
     Supports both:
     - New unified format: schedule.day1, schedule.day2, etc.
@@ -496,6 +505,7 @@ def generate_agenda_slide(config):
     schedule = config.get('_yaml_schedule', {})
     num_days = schedule.get('days', 1)
     is_unified = config.get('_is_unified_format', False)
+    day_titles = schedule.get('day_titles', {})
 
     all_slides = []
 
@@ -513,22 +523,36 @@ def generate_agenda_slide(config):
         if not day_items:
             continue
 
+        # Get day title if specified
+        day_title = day_titles.get(day_num, '')
+
         # Use compact agenda class for auto-fit
         slide_content = "\n<!-- _class: agenda -->\n"
-        slide_content += f"# Workshop Agenda - Day {day_num}\n\n"
-        slide_content += "| Time | Session | Speaker |\n|------|--------|--------|\n"
+        slide_content += "# Agenda\n\n"
+
+        # Add day title with theme if specified
+        if day_title:
+            slide_content += f"**Day {day_num} -- {day_title}**\n\n"
+        else:
+            slide_content += f"**Day {day_num}**\n\n"
+
+        slide_content += "| Time | Agenda | Facilitator/Presenter |\n|------|--------|--------|\n"
 
         for item in day_items:
+            item_type = item.get('type', '')
             time = item.get('time', '')
             session = item.get('session', '')
             speaker = item.get('speaker', '')
-            is_break = item.get('type') == 'break'
 
-            if is_break:
-                # Breaks don't show speaker
+            if item_type == 'section':
+                # Section header - spans all columns (bold, no time)
+                slide_content += f"| **{session}** | | |\n"
+            elif item_type == 'break':
+                # Breaks - italicized, no speaker
                 slide_content += f"| {time} | *{session}* | |\n"
             else:
-                slide_content += f"| {time} | **{session}** | {speaker} |\n"
+                # Regular item
+                slide_content += f"| {time} | {session} | {speaker} |\n"
 
         slide_content += "\n---\n"
         all_slides.append(slide_content)
@@ -599,8 +623,8 @@ def generate_break_slide_content(session_name, duration, return_time):
         emoji = '☕'
         title = 'Tea Break'
 
-    return f"""---
-
+    # Note: No leading --- since previous slide ends with ---
+    return f"""
 # {emoji} {title}
 
 **{duration} minutes**
@@ -642,8 +666,10 @@ def extract_unified_schedule(config):
                 'day': day_num,
                 'session': session.get('session', ''),
                 'module': session.get('module'),
+                'topics': session.get('topics'),  # List of specific topic IDs like [m3_1, m3_2]
                 'slides': session.get('slides'),
                 'is_break': session.get('type') == 'break',
+                'is_section': session.get('type') == 'section',
                 'duration': session.get('duration', 0),
                 'time': session.get('time', ''),
             }
@@ -1549,6 +1575,7 @@ paginate: true
     # ═══════════════════════════════════════════════════════════════════════
     print(f"\nAdding slides in order:")
     current_day = 0
+    current_section = None  # Track current section for session title slides
 
     if is_unified:
         # ═══════════════════════════════════════════════════════════════════
@@ -1560,14 +1587,31 @@ paginate: true
                 current_day = item['day']
                 if num_days > 1:
                     print(f"\n   DAY {current_day}:")
+                    # Generate day title slide (skip Day 1 which has title slide already)
+                    if current_day > 1:
+                        day_title_content = f"\n# Day {current_day}\n\n---\n"
+                        deck_content += day_title_content
 
             session_name = item['session']
 
+            # Track section headers (for session title slides)
+            if item.get('is_section'):
+                current_section = session_name
+                continue  # Section headers are only for agenda, not content
+
             # Handle breaks
             if item['is_break']:
-                # Extract return time from time field (e.g., "10:30 AM - 10:45 AM" -> "10:45 AM")
-                time_parts = item['time'].split(' - ')
-                return_time = time_parts[1] if len(time_parts) > 1 else ''
+                # Extract return time from time field
+                # Handles both "10:30 AM - 10:45 AM" and "12:30-14:00" formats
+                time_str = item['time']
+                if ' - ' in time_str:
+                    time_parts = time_str.split(' - ')
+                    return_time = time_parts[1] if len(time_parts) > 1 else ''
+                elif '-' in time_str:
+                    time_parts = time_str.split('-')
+                    return_time = time_parts[1] if len(time_parts) > 1 else ''
+                else:
+                    return_time = ''
                 break_content = generate_break_slide_content(session_name, item['duration'], return_time)
                 deck_content += break_content + "\n"
                 # Determine emoji
@@ -1583,6 +1627,11 @@ paginate: true
                 files, name, is_valid = resolve_module_prefix(module_id, exclude=exclude_list)
 
                 if is_valid and files:
+                    # Generate session title slide if we have a section header
+                    if current_section:
+                        session_title = f"\n# {current_section}\n\n---\n"
+                        deck_content += session_title
+                        current_section = None  # Reset after using
                     module_overrides = []
                     for filename in files:
                         filepath = os.path.join(core_content_dir, filename)
@@ -1599,6 +1648,32 @@ paginate: true
                         print(f"      📊 {len(module_overrides)} custom asset(s)")
                 else:
                     print(f"   Warning: Unknown module '{module_id}'")
+
+            # Handle topics (list of specific topic IDs like [m3_1, m3_2])
+            if item.get('topics'):
+                # Generate session title slide if we have a section header
+                if current_section:
+                    session_title = f"\n# {current_section}\n\n---\n"
+                    deck_content += session_title
+                    current_section = None  # Reset after using
+                topics_overrides = []
+                for topic_id in item['topics']:
+                    files, name, is_valid = resolve_module_prefix(topic_id, exclude=exclude_list)
+                    if is_valid and files:
+                        for filename in files:
+                            filepath = os.path.join(core_content_dir, filename)
+                            content = read_markdown_file(filepath)
+                            if content:
+                                content = strip_frontmatter(content)
+                                content = substitute_variables(content, config)
+                                content, overrides = resolve_asset_overrides(content, workshop_id, base_dir)
+                                topics_overrides.extend(overrides)
+                                deck_content += "\n" + ensure_slide_break(content) + "\n"
+                    else:
+                        print(f"   Warning: Unknown topic '{topic_id}'")
+                print(f"   {session_name}: {item['topics']}")
+                if topics_overrides:
+                    print(f"      📊 {len(topics_overrides)} custom asset(s)")
 
             # Handle custom slides
             if item['slides']:

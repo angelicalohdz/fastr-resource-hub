@@ -44,90 +44,104 @@ This section will cover the complete process of working with the FASTR analytics
 -->
 
 <!-- SLIDE:m3_1 -->
-## Overview of the platform
+## Introduction to the FASTR Analytics Platform
 
-The FASTR analytics platform is a web-based tool designed to support data quality assessment, adjustment, and analysis for routine health data.
+The FASTR analytics platform is a web-based tool for data quality assessment, adjustment, and analysis of routine health data.
 
-It allows users to upload and analyze data from various sources, including DHIS2, with built-in statistical methods to generate an adjusted dataset and run priority analyses on selected indicators.
+**Key features:**
 
-The platform provides a user-friendly interface for running analyses and offers flexible options for visualizing and exporting results.
+- Upload and analyze data from DHIS2 and other sources
+- Built-in statistical methods for data quality adjustment
+- User-friendly interface for running analyses
+- Flexible visualization and export options
+
+**In this session, we will provide a conceptual walkthrough of the platform and its capabilities.**
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_2 -->
-## Accessing the platform
+## Live Demo: Platform Access & Roles
 
-*Content to be developed*
+**In this demo, we will:**
 
-This section will cover:
-- Creating accounts
-- Signing in
-- User permissions and roles
+- Navigate to the FASTR platform
+- Explore user roles: Administrator, Editor, Viewer
+- Review user management and permissions
+- Understand the workflow for uploading data and making analytical decisions
+
+*Facilitator will demonstrate in the live platform*
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_3 -->
-## Setting up the structure
+## Activity: Setting Up Admin Areas
 
-*Content to be developed*
+**In this hands-on session, we will configure:**
 
-This section will cover:
-- Configuring admin areas (regions, districts)
-- Setting up facilities
-- Defining indicators
+- Admin areas (regions, districts)
+- Facility structure
+- Indicator definitions
+
+*Participants will work directly in the platform*
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_4 -->
-## Importing a dataset
+## Activity: Importing Data
 
-*Content to be developed*
+**In this hands-on session, we will:**
 
-This section will cover:
-- Data format requirements
-- Import process
-- Validation and error handling
+- Review data format requirements
+- Walk through the import process
+- Handle validation and error checking
+
+*Participants will import their country's data*
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_5 -->
-## Installing and running modules
+## Activity: Installing and Running Modules
 
-*Content to be developed*
+**In this hands-on session, we will:**
 
-This section will cover:
-- Available analysis modules
-- Module installation
-- Running analyses
+- Review available analysis modules
+- Install required modules
+- Run initial analyses
+
+*Participants will configure and run modules on their data*
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_6 -->
-## Creating a new project
+## Activity: Creating a Project
 
-*Content to be developed*
+**In this hands-on session, we will:**
 
-This section will cover:
-- Project setup workflow
-- Configuration options
-- Best practices
+- Set up a new project
+- Configure project settings
+- Select indicators and time periods
+- Apply best practices for project organization
+
+*Participants will create their first project*
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_7 -->
-## Creating visualizations
+## Activity: Creating Visualizations
 
-*Content to be developed*
+**In this hands-on session, we will:**
 
-This section will cover:
-- Available chart types
-- Customization options
-- Exporting visualizations
+- Explore available chart types
+- Create and customize visualizations
+- Export charts for use in reports
+
+*Participants will build visualizations from their analysis*
 <!-- /SLIDE -->
 
 <!-- SLIDE:m3_8 -->
-## Creating reports
+## Activity: Creating Reports
 
-*Content to be developed*
+**In this hands-on session, we will:**
 
-This section will cover:
-- Report templates
-- Automated report generation
-- Customizing reports
+- Use report templates
+- Generate automated reports
+- Customize report content and layout
+
+*Participants will create their first quarterly report draft*
 <!-- /SLIDE -->
 
 ---

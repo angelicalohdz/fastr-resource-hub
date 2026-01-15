@@ -4,11 +4,12 @@ theme: fastr
 paginate: true
 ---
 
-## Importing a dataset
+## Activity: Importing Data
 
-*Content to be developed*
+**In this hands-on session, we will:**
 
-This section will cover:
-- Data format requirements
-- Import process
-- Validation and error handling
+- Review data format requirements
+- Walk through the import process
+- Handle validation and error checking
+
+*Participants will import their country's data*

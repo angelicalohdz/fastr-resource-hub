@@ -90,7 +90,8 @@
       "WebFetch(domain:ultrabug.github.io)",
       "WebFetch(domain:squidfunk.github.io)",
       "Bash(.venv/bin/pip3 install:*)",
-      "Bash(.venv/bin/pip install:*)"
+      "Bash(.venv/bin/pip install:*)",
+      "Bash(unzip:*)"
     ]
   }
 }

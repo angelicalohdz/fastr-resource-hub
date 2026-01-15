@@ -1,0 +1,311 @@
+# ═══════════════════════════════════════════════════════════════════════
+# FASTR WORKING SESSION - ZAMBIA
+# ═══════════════════════════════════════════════════════════════════════
+# Based on ToR: FASTR Working Session, Lusaka, January 27-30, 2026
+# ═══════════════════════════════════════════════════════════════════════
+
+workshop:
+  name: "In-Country Working Session: FASTR Implementation & RMNCAH-N Service Monitoring Analysis"
+  country: Zambia
+  location: Lusaka
+  venue: Protea Hotel by Marriott Lusaka Safari Lodge
+  date: "January 27-30, 2026"
+  facilitators: "GFF FASTR Team"
+
+schedule:
+  days: 4
+
+  day_titles:
+    1: "Laying the Foundation: Introducing FASTR and Configuring the Analytics Platform"
+    2: "Building the Analysis: Applying FASTR Methods and Generating Outputs"
+    3: "From Analysis to Action: Interpreting Results and Using FASTR for Decision-Making"
+    4: "Designing the Health Facility Assessment"
+
+  # ═══════════════════════════════════════════════════════════════════════
+  # DAY 1: Laying the Foundation
+  # ═══════════════════════════════════════════════════════════════════════
+  day1:
+    - type: section
+      session: "Opening Session"
+
+    - time: "08:30-09:00"
+      session: "Participant registration"
+      speaker: "MoH team"
+      duration: 30
+
+    - time: "09:00-09:10"
+      session: "Welcome and opening remarks"
+      speaker: "MoH team"
+      duration: 10
+
+    - time: "09:10-09:20"
+      session: "Icebreakers/Introductions"
+      speaker: "MoH team"
+      duration: 10
+
+    - time: "09:20-09:35"
+      session: "Overview of agenda, workshop objectives"
+      slides: [agenda, 01_objectives.md, 02_scope-of-work.md, 03_expected-outputs.md]
+      speaker: "GFF FASTR team"
+      duration: 15
+
+    - type: section
+      session: "Session 1: Overview of the FASTR approach"
+
+    - time: "09:35-10:30"
+      session: "Overview: FASTR Approaches"
+      module: m0
+      speaker: "GFF FASTR team"
+      duration: 55
+
+    - type: section
+      session: "Session 2: HMIS data extraction"
+
+    - time: "10:30-11:30"
+      session: "Data extraction: Rationale and methods"
+      module: m2
+      speaker: "GFF FASTR team"
+      duration: 60
+
+    - type: section
+      session: "Session 3: Introduction to the FASTR analytics platform"
+
+    - time: "11:30-12:30"
+      session: "Introduction to the FASTR analytics platform"
+      topics: [m3_1, m3_2]
+      speaker: "GFF FASTR team"
+      duration: 60
+
+    - time: "12:30-14:00"
+      session: "Lunch Break"
+      type: break
+      duration: 90
+
+    - time: "14:00-14:30"
+      session: "Getting participants into the platform"
+      speaker: "GFF FASTR team"
+      duration: 30
+
+    - type: section
+      session: "Session 4: Configuring the FASTR analytics platform"
+
+    - time: "14:30-16:30"
+      session: "Configuring the analysis platform"
+      topics: [m3_3, m3_4, m3_5]
+      speaker: "GFF FASTR team"
+      duration: 120
+
+    - time: "16:30-17:00"
+      session: "Key messages and wrap-up"
+      slides: [day1_wrapup.md]
+      speaker: ""
+      duration: 30
+
+  # ═══════════════════════════════════════════════════════════════════════
+  # DAY 2: Building the Analysis
+  # ═══════════════════════════════════════════════════════════════════════
+  day2:
+    - time: "09:00-09:15"
+      session: "Overview of Day 2 agenda"
+      slides: [day2_recap.md]
+      speaker: "GFF FASTR team"
+      duration: 15
+
+    - type: section
+      session: "Session 5: Overview of FASTR methods and analytical outputs"
+
+    - time: "09:15-10:15"
+      session: "Data quality, service utilization, coverage"
+      topics: [m4_1, m5_1, m6_1]
+      speaker: "GFF FASTR team"
+      duration: 60
+
+    - type: section
+      session: "Session 6: Creating a project"
+
+    - time: "10:15-11:15"
+      session: "Project creation and settings"
+      topics: [m3_6]
+      speaker: "GFF FASTR team"
+      duration: 60
+
+    - type: section
+      session: "Session 7: Creating visualizations"
+
+    - time: "11:15-12:30"
+      session: "Creating and editing visualizations"
+      topics: [m3_7]
+      speaker: "GFF FASTR team"
+      duration: 75
+
+    - time: "12:30-14:00"
+      session: "Lunch Break"
+      type: break
+      duration: 90
+
+    - type: section
+      session: "Session 8: Creating reports"
+
+    - time: "14:30-16:30"
+      session: "Practice creating and editing reports"
+      topics: [m3_8]
+      speaker: "GFF FASTR team"
+      duration: 120
+
+    - time: "16:30-17:00"
+      session: "Key messages and wrap-up"
+      slides: [day2_wrapup.md]
+      speaker: ""
+      duration: 30
+
+  # ═══════════════════════════════════════════════════════════════════════
+  # DAY 3: From Analysis to Action
+  # ═══════════════════════════════════════════════════════════════════════
+  day3:
+    - time: "09:00-09:15"
+      session: "Overview of Day 3 agenda"
+      slides: [day3_recap.md]
+      speaker: "GFF FASTR team"
+      duration: 15
+
+    - type: section
+      session: "Session 8: Interpretation of visualizations"
+
+    - time: "09:15-10:15"
+      session: "Approaches to support interpretation"
+      topics: [m7_1]
+      speaker: "GFF FASTR team"
+      duration: 60
+
+    - type: section
+      session: "Session 9: Creating a Q4 2025 report"
+
+    - time: "10:15-12:30"
+      session: "Creating short and long reports with country context"
+      topics: [m7_5]
+      speaker: "GFF FASTR team"
+      duration: 135
+
+    - time: "12:30-14:00"
+      session: "Lunch Break"
+      type: break
+      duration: 90
+
+    - type: section
+      session: "Session 9 (cont'd): Creating a Q4 2025 report"
+
+    - time: "14:00-15:00"
+      session: "Continue report creation with country context"
+      speaker: "GFF FASTR team"
+      duration: 60
+
+    - type: section
+      session: "Session 10: Presenting reports"
+
+    - time: "14:30-15:30"
+      session: "Present reports, group feedback"
+      topics: [m7_4]
+      speaker: "GFF FASTR team"
+      duration: 60
+
+    - type: section
+      session: "Session 11: Action planning"
+
+    - time: "15:30-16:30"
+      session: "Activity: Action planning"
+      slides: [99_next-steps.md]
+      speaker: "GFF FASTR team"
+      duration: 60
+
+    - time: "16:30-17:00"
+      session: "Key messages and wrap-up"
+      slides: [day3_wrapup.md]
+      speaker: ""
+      duration: 30
+
+  # ═══════════════════════════════════════════════════════════════════════
+  # DAY 4: Designing the Health Facility Assessment
+  # ═══════════════════════════════════════════════════════════════════════
+  day4:
+    - time: "09:00-09:15"
+      session: "Overview of Day 4 agenda"
+      slides: [day4_recap.md]
+      speaker: "GFF FASTR team"
+      duration: 15
+
+    - type: section
+      session: "Session 12: Overview of FASTR HFA phone survey"
+
+    - time: "09:15-10:15"
+      session: "HFA overview and questionnaire adaptation guidelines"
+      topics: [m8_1, m8_2]
+      speaker: "GFF FASTR team"
+      duration: 60
+
+    - type: section
+      session: "Session 13: Questionnaire adaptation to the Zambian context"
+
+    - time: "10:15-12:30"
+      session: "Review questionnaire + hands-on adaptation"
+      topics: [m8_3, m8_4]
+      speaker: "GFF FASTR team"
+      duration: 135
+
+    - time: "12:30-14:00"
+      session: "Lunch Break"
+      type: break
+      duration: 90
+
+    - type: section
+      session: "Session 14: Questionnaire adaptation (cont'd)"
+
+    - time: "14:00-15:00"
+      session: "Continue questionnaire adaptation (in groups)"
+      speaker: "GFF FASTR team"
+      duration: 60
+
+    - type: section
+      session: "Session 15: Discussion: HFA adapted questionnaire"
+
+    - time: "14:30-15:30"
+      session: "Discuss adapted questionnaire in plenary"
+      speaker: "GFF FASTR team"
+      duration: 60
+
+    - type: section
+      session: "Session 16: Discussion: HFA priorities and data use"
+
+    - time: "15:30-16:30"
+      session: "HFA priorities and data use case in Zambia"
+      topics: [m8_5]
+      speaker: "GFF FASTR team"
+      duration: 60
+
+    - time: "16:30-17:00"
+      session: "Key messages and wrap-up"
+      slides: [99_next-steps.md, closing.md]
+      speaker: ""
+      duration: 30
+
+# ═══════════════════════════════════════════════════════════════════════
+# CONTENT CONFIGURATION
+# ═══════════════════════════════════════════════════════════════════════
+
+content:
+  modules: [0, 2, 3, 4, 5, 6, 7, 8]
+  custom_slides:
+    - 01_objectives.md
+    - 02_scope-of-work.md
+    - 03_expected-outputs.md
+    - 99_next-steps.md
+
+# ═══════════════════════════════════════════════════════════════════════
+# COUNTRY DATA
+# ═══════════════════════════════════════════════════════════════════════
+
+country_data:
+  LOCATION: "Lusaka"
+  COUNTRY: "Zambia"
+  WORKSHOP_NAME: "In-Country Working Session: FASTR Implementation & RMNCAH-N Service Monitoring Analysis"
+  DATE: "January 27-30, 2026"
+  FACILITATORS: "GFF FASTR Team"

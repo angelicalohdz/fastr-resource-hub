@@ -4,11 +4,12 @@ theme: fastr
 paginate: true
 ---
 
-## Creating visualizations
+## Activity: Creating Visualizations
 
-*Content to be developed*
+**In this hands-on session, we will:**
 
-This section will cover:
-- Available chart types
-- Customization options
-- Exporting visualizations
+- Explore available chart types
+- Create and customize visualizations
+- Export charts for use in reports
+
+*Participants will build visualizations from their analysis*

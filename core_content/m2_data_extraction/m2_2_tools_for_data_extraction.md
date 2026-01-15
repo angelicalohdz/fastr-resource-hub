@@ -4,12 +4,16 @@ theme: fastr
 paginate: true
 ---
 
-## Tools for data extraction
+## Data extraction tools
 
-*Content to be developed*
+We offer two tools for bulk DHIS2 data extraction:
 
-This section will cover:
-- DHIS2 data export options
-- API-based extraction methods
-- Data transformation requirements
-- Quality checks on extracted data
+**API Script** (Google Colab)
+- Input login credentials, specify timeframes, indicators, and administrative levels
+- Download data as a .csv file
+
+**Data Downloader**
+- More intuitive, streamlined interface
+- Recommended for most users
+
+Both tools enable efficient data extraction, and we provide training resources to support their use.
