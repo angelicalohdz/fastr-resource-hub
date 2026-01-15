@@ -6,6 +6,8 @@ paginate: true
 
 ## HFA priorities and data use
 
+*Note: Content generated with AI - human review needed*
+
 ---
 
 ## Using survey results

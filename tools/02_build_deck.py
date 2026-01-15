@@ -611,21 +611,22 @@ def load_yaml_config(yaml_path):
 
 def generate_break_slide_content(session_name, duration, return_time):
     """Generate markdown content for a break slide."""
-    # Determine emoji based on session name
+    # Determine title and icon based on session name
     name_lower = session_name.lower()
     if 'lunch' in name_lower:
-        emoji = '🍽️'
         title = 'Lunch Break'
+        icon = '../resources/icons/lunch.png'
     elif 'afternoon' in name_lower:
-        emoji = '☕'
         title = 'Afternoon Tea'
+        icon = '../resources/icons/coffee.png'
     else:
-        emoji = '☕'
         title = 'Tea Break'
+        icon = '../resources/icons/coffee.png'
 
     # Note: No leading --- since previous slide ends with ---
+    # Use HTML img tag for icon with transparent background
     return f"""
-# {emoji} {title}
+# <img src="{icon}" class="icon" style="height: 1.2em; vertical-align: middle; margin-right: 0.3em;"> {title}
 
 **{duration} minutes**
 

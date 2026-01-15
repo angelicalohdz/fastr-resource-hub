@@ -442,7 +442,7 @@ The FASTR analytics platform is a web-based tool for data quality assessment, ad
 ---
 
 
-# 🍽️ Lunch Break
+# <img src="../resources/icons/lunch.png" class="icon" style="height: 1.2em; vertical-align: middle; margin-right: 0.3em;"> Lunch Break
 
 **90 minutes**
 
@@ -680,7 +680,7 @@ The Service Utilization module (Module 3 in the FASTR analytics platform) analyz
 ---
 
 
-# 🍽️ Lunch Break
+# <img src="../resources/icons/lunch.png" class="icon" style="height: 1.2em; vertical-align: middle; margin-right: 0.3em;"> Lunch Break
 
 **90 minutes**
 
@@ -795,7 +795,7 @@ This section will cover:
 ---
 
 
-# 🍽️ Lunch Break
+# <img src="../resources/icons/lunch.png" class="icon" style="height: 1.2em; vertical-align: middle; margin-right: 0.3em;"> Lunch Break
 
 **90 minutes**
 
@@ -1030,27 +1030,33 @@ The standard FASTR questionnaire is a **starting point**, not a final product.
 
 ## Questionnaire structure and review
 
+*Note: Content generated with AI - human review needed*
+
 ---
 
-## Standard questionnaire sections
+<!-- _class: compact -->
+## Survey blocks
 
-| Section | Content | Duration |
-|---------|---------|----------|
-| **A. Facility ID** | Verify facility details | 2 min |
-| **B. Operational status** | Current functioning, closures | 3 min |
-| **C. Service availability** | Services currently offered | 5 min |
-| **D. Staffing** | Staff presence by cadre | 3 min |
-| **E. Essential supplies** | Stock status | 5 min |
-| **F. Infrastructure** | Water, electricity | 2 min |
-| **G. Challenges** | Current issues (open-ended) | 5 min |
-
-**Total: ~25 minutes**
+| Block | Content |
+|-------|---------|
+| **A** | Health Facility and Respondent Information |
+| **B** | Shocks |
+| **B.1** | Resilience to Shocks |
+| **B.2** | Challenges in Past Three Months |
+| **C** | Services |
+| **D** | Infrastructure |
+| **E** | Financing |
+| **F** | Workforce and Staffing |
+| **G** | Supplies |
+| **H** | Leadership and Coordination |
+| **I** | Community Engagement |
+| **J** | Quality Improvement Processes |
 
 ---
 
 ## Review process
 
-**For each section, ask:**
+**For each block, ask:**
 
 1. Is this question relevant for our context?
 2. Is the wording clear in local language?
@@ -1066,6 +1072,8 @@ The standard FASTR questionnaire is a **starting point**, not a final product.
 
 ## Hands-on questionnaire adaptation
 
+*Note: Content generated with AI - human review needed*
+
 ---
 
 ## Activity overview
@@ -1074,16 +1082,16 @@ The standard FASTR questionnaire is a **starting point**, not a final product.
 Work in groups to adapt the standard FASTR questionnaire to our country context.
 
 **Groups:**
-- Group 1: Sections A-B (Facility ID, Operational status)
-- Group 2: Section C (Service availability)
-- Group 3: Section D-E (Staffing, Essential supplies)
-- Group 4: Sections F-G (Infrastructure, Challenges)
+- Group 1: Blocks A-B (Facility info, Shocks, Resilience, Challenges)
+- Group 2: Blocks C-D (Services, Infrastructure)
+- Group 3: Blocks E-F (Financing, Workforce)
+- Group 4: Blocks G-J (Supplies, Leadership, Community, QI)
 
 ---
 
 ## Adaptation checklist
 
-For each question in your section:
+For each question in your block:
 
 - [ ] Is the question clear in local language?
 - [ ] Are response options appropriate?
@@ -1107,7 +1115,7 @@ After working in groups, we'll:
 ---
 
 
-# 🍽️ Lunch Break
+# <img src="../resources/icons/lunch.png" class="icon" style="height: 1.2em; vertical-align: middle; margin-right: 0.3em;"> Lunch Break
 
 **90 minutes**
 
@@ -1122,6 +1130,8 @@ Back at 14:00
 
 
 ## HFA priorities and data use
+
+*Note: Content generated with AI - human review needed*
 
 ---
 
@@ -1240,18 +1250,13 @@ Lusaka
 ---
 
 
-# Thank You!
-
-## Questions & Discussion
-
----
-
 # Contact Information
 
 **FASTR Team**
 
-**Email:** 
-**Website:** https://fastr.org
+<img src="../resources/icons/email.png" class="icon" style="height: 1em; vertical-align: middle;"> **Email:** 
+
+<img src="../resources/icons/globe.png" class="icon" style="height: 1em; vertical-align: middle;"> **Website:** https://fastr.org
 
 ---
 

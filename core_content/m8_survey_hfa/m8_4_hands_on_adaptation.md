@@ -6,6 +6,8 @@ paginate: true
 
 ## Hands-on questionnaire adaptation
 
+*Note: Content generated with AI - human review needed*
+
 ---
 
 ## Activity overview
@@ -14,16 +16,16 @@ paginate: true
 Work in groups to adapt the standard FASTR questionnaire to our country context.
 
 **Groups:**
-- Group 1: Sections A-B (Facility ID, Operational status)
-- Group 2: Section C (Service availability)
-- Group 3: Section D-E (Staffing, Essential supplies)
-- Group 4: Sections F-G (Infrastructure, Challenges)
+- Group 1: Blocks A-B (Facility info, Shocks, Resilience, Challenges)
+- Group 2: Blocks C-D (Services, Infrastructure)
+- Group 3: Blocks E-F (Financing, Workforce)
+- Group 4: Blocks G-J (Supplies, Leadership, Community, QI)
 
 ---
 
 ## Adaptation checklist
 
-For each question in your section:
+For each question in your block:
 
 - [ ] Is the question clear in local language?
 - [ ] Are response options appropriate?
