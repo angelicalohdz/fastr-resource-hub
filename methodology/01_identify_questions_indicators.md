@@ -177,17 +177,19 @@ This step includes a pre-extraction checklist, review of the DHIS2 configuration
 
 <!-- SLIDE:m1_1 -->
 ## Introduction to FASTR: gaps and challenges
-
-
 ### Overview
 This section outlines the process for identifying priority policy and programmatic questions and selecting appropriate indicators for FASTR analysis. 
 
-It provides a structured approach to ensuring that FASTR analyses are demand-driven, analytically feasible, and aligned with national priorities.
+It provides a structured approach to ensuring that FASTR analyses are:
+- demand-driven
+- analytically feasible
+- aligned with national priorities
 
 This section will cover:
 - Identifying gaps and challenges that FASTR is well suited to support
-- How FASTR serves as an entry point to reduce fragmentation
-- Starting the conversation with government stakeholders
+- Development of a data use case
+- Defininf priority questions and selecting indicators
+- Preparing for data extraction
 <!-- /SLIDE -->
 
 <!-- SLIDE:m1_2 -->
