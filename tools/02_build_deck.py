@@ -263,6 +263,17 @@ MODULES = {
             ('m7_5', 'm7_5_practice_quarterly_reporting.md'),
         ],
     },
+    8: {
+        'name': 'Survey & HFA',
+        'folder': 'm8_survey_hfa',
+        'topics': [
+            ('m8_1', 'm8_1_overview_hfa_phone_survey.md'),
+            ('m8_2', 'm8_2_questionnaire_adaptation_guidelines.md'),
+            ('m8_3', 'm8_3_questionnaire_structure_review.md'),
+            ('m8_4', 'm8_4_hands_on_adaptation.md'),
+            ('m8_5', 'm8_5_hfa_priorities_data_use.md'),
+        ],
+    },
 }
 
 

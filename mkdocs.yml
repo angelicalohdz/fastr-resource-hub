@@ -6,9 +6,9 @@ repo_url: https://github.com/FASTR-Analytics/fastr-resource-hub
 repo_name: FASTR-Analytics/fastr-resource-hub
 
 # Navigation
+# Note: Executive Summary, Module 7, and Module 8 are hidden but still available for workshops
 nav:
   - Overview: index.md
-  - Executive Summary: executive_summary.md
   - Module 0 · Introduction: 00_introduction.md
   - Module 1 · Identify Questions & Indicators: 01_identify_questions_indicators.md
   - Module 2 · Data Extraction: 02_data_extraction.md
@@ -17,7 +17,6 @@ nav:
   - Module 5 · Data Quality Adjustments: 05_data_quality_adjustment.md
   - Module 6a · Service Utilization: 06a_service_utilization.md
   - Module 6b · Coverage Estimates: 06b_coverage_estimates.md
-  - Module 7 · Results Communication: 07_results_communication.md
   - Disclaimer: disclaimer.md
 
 # Theme Configuration

@@ -67,6 +67,7 @@ MODULE_FOLDERS = {
     5: 'm5_data_quality_adjustment',
     6: 'm6_data_analysis',
     7: 'm7_results_communication',
+    8: 'm8_survey_hfa',
 }
 
 # Topic names for generating filenames
@@ -126,6 +127,13 @@ TOPIC_NAMES = {
     'm7_3': 'using_data_for_decision_making',
     'm7_4': 'stakeholder_engagement_advocacy',
     'm7_5': 'practice_quarterly_reporting',
+
+    # m8 - Survey & HFA (from 08_survey_hfa.md)
+    'm8_1': 'overview_hfa_phone_survey',
+    'm8_2': 'questionnaire_adaptation_guidelines',
+    'm8_3': 'questionnaire_structure_review',
+    'm8_4': 'hands_on_adaptation',
+    'm8_5': 'hfa_priorities_data_use',
 }
 
 # Marp frontmatter to add to extracted slides

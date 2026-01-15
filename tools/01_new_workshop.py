@@ -739,21 +739,36 @@ def main():
     # STEP 5: Country Data
     # ─────────────────────────────────────────────────────────────────────────
     print("\n" + "─" * 70)
-    print("STEP 5: Country Data (optional)")
+    print("STEP 5: Country Overview Slides (optional)")
     print("─" * 70 + "\n")
 
-    print("   Fill in country statistics for your slides.")
-    print("   Press Enter to skip - you can add these later in workshop.yaml\n")
+    include_country_overview = get_input(
+        "   Include country overview slides with population stats? [y/N]", "n"
+    ).lower().startswith('y')
 
-    total_population = get_input("   Total population", "")
-    total_facilities = get_input("   Total health facilities", "")
-    facilities_reporting = get_input("   Facilities reporting to DHIS2", "")
-    reporting_rate = get_input("   DHIS2 reporting rate", "")
-    women_reproductive_age = get_input("   Women of reproductive age", "")
-    under5_population = get_input("   Children under 5", "")
-    expected_pregnancies = get_input("   Expected pregnancies/year", "")
-    expected_births = get_input("   Expected live births/year", "")
-    last_survey = get_input("   Last survey (e.g., DHS 2022)", "")
+    total_population = ""
+    total_facilities = ""
+    facilities_reporting = ""
+    reporting_rate = ""
+    women_reproductive_age = ""
+    under5_population = ""
+    expected_pregnancies = ""
+    expected_births = ""
+    last_survey = ""
+
+    if include_country_overview:
+        print("\n   Fill in country statistics for your slides.")
+        print("   Press Enter to skip - you can add these later in workshop.yaml\n")
+
+        total_population = get_input("   Total population", "")
+        total_facilities = get_input("   Total health facilities", "")
+        facilities_reporting = get_input("   Facilities reporting to DHIS2", "")
+        reporting_rate = get_input("   DHIS2 reporting rate", "")
+        women_reproductive_age = get_input("   Women of reproductive age", "")
+        under5_population = get_input("   Children under 5", "")
+        expected_pregnancies = get_input("   Expected pregnancies/year", "")
+        expected_births = get_input("   Expected live births/year", "")
+        last_survey = get_input("   Last survey (e.g., DHS 2022)", "")
 
     # ─────────────────────────────────────────────────────────────────────────
     # STEP 6: Workshop Content
@@ -852,7 +867,7 @@ def main():
             'modules': selected_modules,
             'custom_slides': [
                 '01_objectives.md',
-                '02_country-overview.md',
+            ] + (['02_country-overview.md'] if include_country_overview else []) + [
                 '03_health-priorities.md',
                 '99_next-steps.md',
             ]
@@ -1086,7 +1101,7 @@ content:
   modules: {selected_modules}
   custom_slides:
     - 01_objectives.md
-    - 02_country-overview.md
+{"    - 02_country-overview.md" if include_country_overview else ""}
     - 03_health-priorities.md
     - 04_coverage-results.md
     - 05_disruption-local.md
